@@ -1,4 +1,4 @@
-# NovaTech — Independent Website
+# HeBei Telaosi Integrated House Co.LTD — Independent Website
 
 English international marketing site powered by **Astro SSG** + **Halo Headless CMS**.
 

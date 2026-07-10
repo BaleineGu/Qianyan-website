@@ -1,12 +1,14 @@
 import type { FeatureBlock, HeroSlide, ProductItem } from '@/types/halo';
 
 export const siteConfig = {
-  name: 'NovaTech',
+  name: 'QIANYAN JINSHU',
+  shortName: 'QIANYAN',
   tagline: 'Engineering excellence for the modern world',
   description:
-    'NovaTech delivers precision-engineered products and solutions trusted by teams worldwide.',
-  email: 'hello@novatech.com',
+    'QIANYAN JINSHU delivers precision-engineered products and solutions trusted by teams worldwide.',
+  email: 'hello@qianyanjinshu.com',
   phone: '+1 (800) 555-0199',
+  logo: '/images/brand/logo-icon-white.png',
 };
 
 export const navLinks = [
@@ -37,7 +39,7 @@ export const heroSlides: HeroSlide[] = [
   {
     id: 'slide-3',
     title: 'Trusted Worldwide',
-    subtitle: 'Over 2,000 organizations rely on NovaTech to power their critical operations.',
+    subtitle: 'Over 2,000 organizations rely on Telaosi to power their critical operations.',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80',
     primaryCta: { label: 'Explore Products', href: '/products' },
     secondaryCta: { label: 'Read Our Blog', href: '/blog' },
@@ -54,7 +56,7 @@ export const productStory = {
   title: 'Products That Define Industries',
   subtitle: 'Engineered for performance. Built to last.',
   description:
-    'Our flagship product line has redefined what teams expect from industrial equipment. With patented thermal management, modular architecture, and a 99.97% uptime record across 40 countries, NovaTech products don\'t just meet standards — they set them.',
+    'Our flagship product line has redefined what teams expect from industrial equipment. With patented thermal management, modular architecture, and a 99.97% uptime record across 40 countries, Telaosi products don\'t just meet standards — they set them.',
   image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=1920&q=80',
 };
 
@@ -71,7 +73,7 @@ export const featureBlocks: FeatureBlock[] = [
     id: 'feature-2',
     title: 'Built for Harsh Environments',
     description:
-      'IP68-rated enclosures, -40°C to 85°C operating range, and MIL-STD-810G shock resistance. NovaTech products thrive where others fail.',
+      'IP68-rated enclosures, -40°C to 85°C operating range, and MIL-STD-810G shock resistance. Telaosi products thrive where others fail.',
     image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80',
     imagePosition: 'left',
   },
