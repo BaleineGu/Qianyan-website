@@ -83,7 +83,7 @@ export const products: ProductItem[] = [
     name: 'NovaCore X1',
     tagline: 'Flagship compute platform',
     description: 'High-performance edge computing with redundant failover and sub-millisecond latency.',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80',
+    image: '/images/products/novacore-x1.jpg',
     href: '/products',
   },
   {
@@ -91,7 +91,7 @@ export const products: ProductItem[] = [
     name: 'NovaSense Pro',
     tagline: 'Industrial IoT sensor suite',
     description: 'Real-time environmental monitoring with wireless mesh networking built in.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80',
+    image: '/images/products/novasense-pro.jpg',
     href: '/products',
   },
   {
@@ -99,7 +99,7 @@ export const products: ProductItem[] = [
     name: 'NovaGrid',
     tagline: 'Power distribution system',
     description: 'Intelligent load balancing and energy recovery for mission-critical facilities.',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80',
+    image: '/images/products/novagrid.jpg',
     href: '/products',
   },
   {
@@ -107,7 +107,7 @@ export const products: ProductItem[] = [
     name: 'NovaLink',
     tagline: 'Secure connectivity hub',
     description: 'End-to-end encrypted communication gateway for distributed teams.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80',
+    image: '/images/products/novalink.jpg',
     href: '/products',
   },
 ];
