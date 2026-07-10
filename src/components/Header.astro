@@ -1,15 +1,28 @@
 ---
 import { navLinks, siteConfig } from '@/data/site';
 
+interface Props {
+  /** Overlay mode: header sits on top of hero at page top */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 bg-brand-900/95 backdrop-blur border-b border-white/10">
+<header
+  class:list={[
+    'z-50 border-b border-white/10',
+    overlay
+      ? 'absolute top-0 left-0 right-0 bg-gradient-to-b from-black/50 to-transparent border-transparent'
+      : 'sticky top-0 bg-brand-900/95 backdrop-blur',
+  ]}
+>
   <div class="section-container">
     <div class="flex items-center justify-between h-16 lg:h-20">
       <a href="/" class="flex items-center gap-3 group min-w-0">
         <img
-          src="/images/brand/logo-icon-white.png"
+          src={siteConfig.logo}
           alt=""
           class="h-9 w-auto shrink-0 lg:h-11"
           width="44"

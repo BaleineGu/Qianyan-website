@@ -24,7 +24,7 @@ export const heroSlides: HeroSlide[] = [
     id: 'slide-1',
     title: 'Build What Matters',
     subtitle: 'Industrial-grade solutions designed for scale, reliability, and lasting impact.',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80',
+    image: '/images/hero/slide-1.jpg',
     primaryCta: { label: 'Explore Products', href: '/products' },
     secondaryCta: { label: 'Read Our Blog', href: '/blog' },
   },
@@ -39,7 +39,7 @@ export const heroSlides: HeroSlide[] = [
   {
     id: 'slide-3',
     title: 'Trusted Worldwide',
-    subtitle: 'Over 2,000 organizations rely on Telaosi to power their critical operations.',
+    subtitle: 'Over 2,000 organizations rely on QIANYAN JINSHU to power their critical operations.',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80',
     primaryCta: { label: 'Explore Products', href: '/products' },
     secondaryCta: { label: 'Read Our Blog', href: '/blog' },

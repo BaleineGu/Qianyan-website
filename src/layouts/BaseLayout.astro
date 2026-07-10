@@ -7,9 +7,11 @@ import '@/styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  /** When true, header overlays the page top (hero flush to viewport top) */
+  overlayHeader?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, overlayHeader = false } = Astro.props;
 const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 const pageDescription = description ?? siteConfig.description;
 ---
@@ -30,7 +32,7 @@ const pageDescription = description ?? siteConfig.description;
     <title>{pageTitle}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased">
-    <Header />
+    <Header overlay={overlayHeader} />
     <main class="flex-1">
       <slot />
     </main>
