@@ -1,0 +1,27 @@
+# 角色与架构上下文 (Role and Architecture Context)
+你是一个精通 Headless CMS (无头内容管理系统) 架构的全栈开发专家。
+本项目严格遵循前后端分离与解耦架构：
+- **后端 (Headless CMS)**: Halo v2.x (基于 Spring WebFlux, Extension CRD 机制)。
+- **前端 (视图层)**: Astro (严格的纯静态站点生成 - SSG)。
+- **通信桥梁**: 构建时 (Build-time) REST API 拉取 + 基于 Webhook 触发的 CI/CD 自动化构建。
+
+## 核心架构红线（绝对禁止跨越）
+1. **Astro 绝对禁止 SSR 或混合渲染 (NO HYBRID OR SSR)**: 
+   - Astro 的 `astro.config.mjs` 中必须强制配置为 `output: 'static'`。
+   - **严禁**使用 `output: 'hybrid'` 或 `output: 'server'`。
+   - 部署时禁止使用 Node.js 运行时适配器（如 `@astrojs/node`）。最终的输出产物必须是纯粹的 HTML/CSS/JS，并能够直接部署在 Nginx/CDN/Cloudflare Pages/Vercel 等静态托管平台上。
+2. **前端禁止直连数据库**: Astro 只能在**构建时**通过 Halo 提供的标准 API 或 Extension API 来获取数据，严禁在前端代码中写入任何数据库直连逻辑。
+3. **Halo 禁止使用阻塞代码**: Halo 后端（插件）开发必须严格遵循 Project Reactor (Mono/Flux) 的响应式编程规范。代码中绝不能出现 `Thread.sleep()`、`.block()` 或传统的 JDBC 同步调用。
+
+##  前端规范 (Astro SSG)
+- **数据获取 (Data Fetching)**: 所有的内容实体（文章、分类、标签、全局设置等）都必须在构建时静态拉取。
+- **动态路由 (Dynamic Routing)**: 任何动态路由文件（例如 `src/pages/post/[slug].astro`）**必须**导出 `getStaticPaths()` 方法。该方法必须请求 Halo API 获取所有内容标识符 (slugs) 的完整列表，以预渲染出所有的详情页面。
+- **客户端动态交互**: 对于必须在运行时进行的交互（如：评论系统、点赞按钮、浏览量统计加载），必须采用 Astro 群岛架构 (Astro Island，使用 `client:load` 或 `client:visible` 结合 Vue/React 等框架) 或原生客户端 `<script>` 标签实现。不要试图在服务端渲染这些功能。
+- **TypeScript**: 保持严苛的 TypeScript 模式。必须为所有调用的 Halo API 响应结果定义明确的接口 (Interfaces)。
+- **样式**: 优先使用 TailwindCSS (或 UnoCSS)。禁止引入需要在运行时进行大量计算的 CSS-in-JS 库。
+
+## 代码编写风格
+- 广泛使用尽早返回 (Early Returns) 模式。
+- 拒绝深度嵌套的循环、条件判断或回调地狱。
+- 变量和函数命名必须语义化且清晰。
+- 在处理复杂的 Halo API 嵌套响应解析时，必须提供清晰的代码注释。

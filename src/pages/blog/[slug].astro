@@ -1,0 +1,110 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { fetchPublishedPosts, fetchPostBySlug } from '@/lib/halo';
+
+export async function getStaticPaths() {
+  const posts = await fetchPublishedPosts();
+
+  if (posts.length === 0) {
+    const fallbackSlugs = [
+      'future-of-edge-computing',
+      'sustainable-manufacturing',
+      'iot-security-best-practices',
+    ];
+    return fallbackSlugs.map((slug) => ({ params: { slug } }));
+  }
+
+  return posts.map((post) => ({
+    params: { slug: post.spec.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const haloPost = await fetchPostBySlug(slug!);
+
+const fallbackContent: Record<
+  string,
+  { title: string; date: string; excerpt: string; body: string }
+> = {
+  'future-of-edge-computing': {
+    title: 'The Future of Edge Computing in Industrial Settings',
+    date: '2026-06-15',
+    excerpt:
+      'How distributed compute architectures are transforming factory floors and remote operations.',
+    body: 'Edge computing is no longer a buzzword — it is the backbone of modern industrial operations. By processing data closer to the source, teams reduce latency, improve reliability, and gain real-time insights that were previously impossible.\n\nAt NovaTech, our NovaCore X1 platform brings enterprise-grade edge compute to environments that demand 99.99% availability. From predictive maintenance to autonomous quality control, the applications are limitless.',
+  },
+  'sustainable-manufacturing': {
+    title: 'Sustainable Manufacturing: A Practical Guide',
+    date: '2026-05-28',
+    excerpt:
+      'Real-world strategies for reducing energy consumption without sacrificing throughput.',
+    body: 'Sustainability and productivity are not opposing forces. With the right instrumentation and intelligent power management, manufacturers can cut energy costs by up to 30% while maintaining or even improving output.\n\nOur NovaGrid system enables real-time energy monitoring and automated load balancing, helping facilities meet both operational and environmental targets.',
+  },
+  'iot-security-best-practices': {
+    title: 'IoT Security Best Practices for 2026',
+    date: '2026-05-10',
+    excerpt:
+      'Essential security measures every industrial IoT deployment should implement from day one.',
+    body: 'As IoT deployments scale, so does the attack surface. A defense-in-depth strategy — combining network segmentation, encrypted communication, and regular firmware updates — is essential for any industrial deployment.\n\nNovaLink ships with hardware-backed encryption and supports zero-trust network policies out of the box.',
+  },
+};
+
+const post = haloPost
+  ? {
+      title: haloPost.spec.title,
+      date: haloPost.spec.publishTime?.split('T')[0] || '',
+      excerpt: haloPost.spec.excerpt || '',
+      cover: haloPost.spec.cover || '',
+      body: '',
+    }
+  : fallbackContent[slug!] ?? {
+      title: 'Post Not Found',
+      date: '',
+      excerpt: '',
+      body: 'This post could not be found.',
+    };
+---
+
+<BaseLayout title={post.title} description={post.excerpt}>
+  <article>
+    <section class="bg-brand-900 text-white py-20">
+      <div class="section-container max-w-3xl">
+        {post.date && (
+          <time class="text-sm text-brand-500 font-medium" datetime={post.date}>
+            {post.date}
+          </time>
+        )}
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4">{post.title}</h1>
+        {post.excerpt && <p class="text-lg text-gray-300">{post.excerpt}</p>}
+      </div>
+    </section>
+
+    {'cover' in post && post.cover && (
+      <div class="section-container max-w-4xl -mt-8">
+        <img
+          src={post.cover}
+          alt=""
+          class="w-full rounded-2xl shadow-lg aspect-[16/9] object-cover"
+        />
+      </div>
+    )}
+
+    <section class="py-16">
+      <div class="section-container max-w-3xl">
+        <div class="prose prose-lg text-gray-600 leading-relaxed whitespace-pre-line">
+          {post.body}
+        </div>
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 mt-10 text-brand-600 font-semibold hover:text-brand-700 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

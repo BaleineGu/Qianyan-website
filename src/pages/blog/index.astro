@@ -1,0 +1,91 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { fetchPublishedPosts } from '@/lib/halo';
+
+const posts = await fetchPublishedPosts();
+
+const fallbackPosts = [
+  {
+    slug: 'future-of-edge-computing',
+    title: 'The Future of Edge Computing in Industrial Settings',
+    excerpt:
+      'How distributed compute architectures are transforming factory floors and remote operations.',
+    cover: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    date: '2026-06-15',
+  },
+  {
+    slug: 'sustainable-manufacturing',
+    title: 'Sustainable Manufacturing: A Practical Guide',
+    excerpt:
+      'Real-world strategies for reducing energy consumption without sacrificing throughput.',
+    cover: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80',
+    date: '2026-05-28',
+  },
+  {
+    slug: 'iot-security-best-practices',
+    title: 'IoT Security Best Practices for 2026',
+    excerpt:
+      'Essential security measures every industrial IoT deployment should implement from day one.',
+    cover: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    date: '2026-05-10',
+  },
+];
+
+const displayPosts =
+  posts.length > 0
+    ? posts.map((post) => ({
+        slug: post.spec.slug,
+        title: post.spec.title,
+        excerpt: post.spec.excerpt || '',
+        cover: post.spec.cover || '',
+        date: post.spec.publishTime?.split('T')[0] || '',
+      }))
+    : fallbackPosts;
+---
+
+<BaseLayout title="Blog" description="Insights, updates, and engineering stories from NovaTech.">
+  <section class="bg-brand-900 text-white py-20">
+    <div class="section-container text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Blog</h1>
+      <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+        Insights and stories from our engineering team.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="section-container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          displayPosts.map((post) => (
+            <article class="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden border border-gray-100">
+              <a href={`/blog/${post.slug}`}>
+                {post.cover && (
+                  <div class="aspect-[16/10] overflow-hidden">
+                    <img
+                      src={post.cover}
+                      alt=""
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="p-6">
+                  {post.date && (
+                    <time class="text-xs text-gray-400 font-medium" datetime={post.date}>
+                      {post.date}
+                    </time>
+                  )}
+                  <h2 class="text-xl font-bold text-brand-900 mt-2 mb-2 group-hover:text-brand-600 transition-colors">
+                    {post.title}
+                  </h2>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">{post.excerpt}</p>
+                </div>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

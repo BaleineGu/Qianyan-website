@@ -1,0 +1,148 @@
+---
+import type { HeroSlide } from '@/types/halo';
+
+interface Props {
+  slides: HeroSlide[];
+}
+
+const { slides } = Astro.props;
+---
+
+<section class="relative w-full overflow-hidden" aria-label="Hero carousel">
+  <div id="hero-carousel" class="relative">
+    {
+      slides.map((slide, index) => (
+        <div
+          class:list={[
+            'hero-slide absolute inset-0 transition-opacity duration-700',
+            index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0',
+          ]}
+          data-index={index}
+        >
+          <div class="relative w-full h-[70vh] min-h-[480px] max-h-[720px]">
+            <img
+              src={slide.image}
+              alt=""
+              class="absolute inset-0 w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-900/80 via-brand-900/50 to-transparent" />
+            <div class="relative z-10 h-full section-container flex items-center">
+              <div class="max-w-2xl">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
+                  {slide.title}
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-200 mb-8 leading-relaxed">
+                  {slide.subtitle}
+                </p>
+                <div class="flex flex-wrap gap-4">
+                  <a href={slide.primaryCta.href} class="btn-primary">
+                    {slide.primaryCta.label}
+                  </a>
+                  <a href={slide.secondaryCta.href} class="btn-outline">
+                    {slide.secondaryCta.label}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Spacer to maintain layout height -->
+  <div class="h-[70vh] min-h-[480px] max-h-[720px] invisible" aria-hidden="true"></div>
+
+  <!-- Controls -->
+  <div class="absolute bottom-8 left-0 right-0 z-20 section-container">
+    <div class="flex items-center gap-4">
+      <button
+        id="hero-prev"
+        class="w-10 h-10 rounded-full bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-colors flex items-center justify-center"
+        aria-label="Previous slide"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+          ></path>
+        </svg>
+      </button>
+
+      <div id="hero-dots" class="flex gap-2">
+        {
+          slides.map((_, index) => (
+            <button
+              class:list={[
+                'hero-dot w-2.5 h-2.5 rounded-full transition-all duration-300',
+                index === 0 ? 'bg-white w-8' : 'bg-white/40 hover:bg-white/60',
+              ]}
+              data-index={index}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))
+        }
+      </div>
+
+      <button
+        id="hero-next"
+        class="w-10 h-10 rounded-full bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-colors flex items-center justify-center"
+        aria-label="Next slide"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ totalSlides: slides.length }}>
+  let current = 0;
+  let timer = null;
+
+  const slideEls = document.querySelectorAll('.hero-slide');
+  const dotEls = document.querySelectorAll('.hero-dot');
+
+  function goTo(index) {
+    slideEls[current]?.classList.replace('opacity-100', 'opacity-0');
+    slideEls[current]?.classList.replace('z-10', 'z-0');
+    dotEls[current]?.classList.remove('bg-white', 'w-8');
+    dotEls[current]?.classList.add('bg-white/40');
+
+    current = (index + totalSlides) % totalSlides;
+
+    slideEls[current]?.classList.replace('opacity-0', 'opacity-100');
+    slideEls[current]?.classList.replace('z-0', 'z-10');
+    dotEls[current]?.classList.remove('bg-white/40');
+    dotEls[current]?.classList.add('bg-white', 'w-8');
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    timer = setInterval(() => goTo(current + 1), 6000);
+  }
+
+  function stopAutoPlay() {
+    if (timer) clearInterval(timer);
+  }
+
+  document.getElementById('hero-prev')?.addEventListener('click', () => {
+    goTo(current - 1);
+    startAutoPlay();
+  });
+
+  document.getElementById('hero-next')?.addEventListener('click', () => {
+    goTo(current + 1);
+    startAutoPlay();
+  });
+
+  dotEls.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      goTo(Number(dot.dataset.index));
+      startAutoPlay();
+    });
+  });
+
+  startAutoPlay();
+</script>

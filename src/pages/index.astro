@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroCarousel from '@/components/HeroCarousel.astro';
+import IntroSection from '@/components/IntroSection.astro';
+import ProductStory from '@/components/ProductStory.astro';
+import FeatureBlock from '@/components/FeatureBlock.astro';
+import ProductCarousel from '@/components/ProductCarousel.astro';
+import {
+  heroSlides,
+  introSection,
+  productStory,
+  featureBlocks,
+  products,
+} from '@/data/site';
+---
+
+<BaseLayout>
+  <HeroCarousel slides={heroSlides} />
+  <IntroSection theme={introSection.theme} explanation={introSection.explanation} />
+  <ProductStory
+    title={productStory.title}
+    subtitle={productStory.subtitle}
+    description={productStory.description}
+    image={productStory.image}
+  />
+  {
+    featureBlocks.map((block) => (
+      <FeatureBlock block={block} />
+    ))
+  }
+  <ProductCarousel products={products} />
+</BaseLayout>

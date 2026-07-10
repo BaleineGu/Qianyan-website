@@ -1,0 +1,57 @@
+name: Deploy Static Site
+
+on:
+  # Triggered by Halo webhook (repository_dispatch)
+  repository_dispatch:
+    types: [halo-content-updated]
+
+  # Manual rebuild
+  workflow_dispatch:
+
+  # Fallback: scheduled daily rebuild
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        env:
+          HALO_API_URL: ${{ secrets.HALO_API_URL }}
+          HALO_API_TOKEN: ${{ secrets.HALO_API_TOKEN }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
