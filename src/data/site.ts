@@ -11,23 +11,24 @@ export const siteConfig = {
   shortName: 'QIANYAN',
   tagline: 'Heavy-duty prefab modular housing for global B2B markets.',
   description:
-    'Factory-direct customizable container homes, space capsules, and modular buildings with export-ready certification for North America, Australia, Europe, and worldwide.',
+    'Factory-direct expandable container homes, space capsule houses, flat pack buildings, folding houses, and container swimming pools with export-ready delivery support.',
   email: 'sales@qianyanjinshu.com',
   phone: '+86 138 0000 0000',
-  /** Replace with real sales WhatsApp number (country code, no +) */
   whatsapp: '8613800000000',
   logo: '/images/brand/logo-icon-white.png',
 };
 
 export const whatsappUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
-  'Hello, I would like to request a factory quote for container housing.',
+  'Hello, I would like to request a factory quote for modular container housing.',
 )}`;
 
 export const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Expandable Homes', href: '/expandable-homes' },
-  { label: 'Space Capsule', href: '/space-capsule' },
-  { label: 'Flat Pack', href: '/flat-pack' },
+  { label: 'Expandable Homes', href: '/expandable-container-homes' },
+  { label: 'Space Capsule', href: '/space-capsule-house' },
+  { label: 'Flat Pack', href: '/flat-pack-container-house' },
+  { label: 'Folding House', href: '/folding-house' },
+  { label: 'Container Pool', href: '/container-swimming-pool' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ] as const;
@@ -35,27 +36,27 @@ export const navLinks = [
 export const heroSlides: HeroSlide[] = [
   {
     id: 'slide-1',
-    title: 'Heavy-Duty Prefab Modular Housing Built for Global Markets.',
+    title: 'Heavy-Duty Prefab Modular Housing Built for Global Markets',
     subtitle:
-      'Factory-direct customizable container homes, space capsules, and modular buildings with complete export-ready certification. Engineered to comply with international standards and delivered to North America, Australia, Europe, and worldwide.',
+      'Factory-direct expandable container homes, space capsule houses, flat pack buildings, folding houses, and container swimming pools — engineered for export, customization, and project delivery worldwide.',
     image: '/images/hero/slide-1.jpg',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
   {
     id: 'slide-2',
-    title: 'Expandable Container Homes Ready for Fast Deployment.',
+    title: 'Expandable Container Homes for Fast Project Deployment',
     subtitle:
-      '20ft and 40ft fold-out modular living spaces designed for developers and building contractors who need reliable onsite setup.',
+      '20ft and 40ft fold-out modular living spaces designed for developers and contractors who need reliable onsite setup.',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
   {
     id: 'slide-3',
-    title: 'Export-Ready Modular Buildings with Certified Components.',
+    title: 'Export-Ready Modular Buildings with Certified Components',
     subtitle:
-      'UL, SAA, and CE-ready electrical and plumbing options, complete cargo documentation, and logistics support for customs clearance.',
+      'UL, SAA, and CE-ready electrical and plumbing options, plus documentation support for customs clearance in key markets.',
     image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
@@ -67,41 +68,41 @@ export const productCategories: ProductCategory[] = [
     id: 'expandable',
     name: 'Expandable Container Homes',
     description:
-      '20ft & 40ft fold-out modular living spaces designed for fast onsite setup. Best for developers and building contractors.',
+      '20ft & 40ft fold-out modular living spaces for fast onsite setup. Best for developers and building contractors.',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
-    href: '/expandable-homes',
+    href: '/expandable-container-homes',
   },
   {
     id: 'capsule',
     name: 'Space Capsule Houses',
     description:
-      'Futuristic turnkey glamping accommodation with panoramic smart glass. Factory-finished and 100% plug-and-play for resort investors.',
+      'Turnkey glamping units with panoramic glass. Built for resort and hospitality investors.',
     image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80',
-    href: '/space-capsule',
+    href: '/space-capsule-house',
   },
   {
     id: 'flat-pack',
     name: 'Flat Pack Container Houses',
     description:
-      'Cost-effective, stackable structural units for modular offices and worker accommodation camps.',
+      'Stackable modular offices and worker camps with freight-efficient packing.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
-    href: '/flat-pack',
+    href: '/flat-pack-container-house',
   },
   {
     id: 'folding',
     name: 'Folding Houses',
     description:
-      'Rapid-assembly collapsible shelters optimized for temporary housing and regional dealers.',
+      'Rapid-assembly shelters for temporary housing and regional dealers.',
     image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cd00?w=800&q=80',
-    href: '/contact',
+    href: '/folding-house',
   },
   {
     id: 'pools',
     name: 'Container Swimming Pools',
     description:
-      'Above-ground customized cargo pool systems featuring premium filtration for hotels and modern landscape contractors.',
+      'Above-ground cargo pool systems for hotels, resorts, and landscape contractors.',
     image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80',
-    href: '/contact',
+    href: '/container-swimming-pool',
   },
 ];
 
@@ -116,86 +117,97 @@ export const trustItems: TrustItem[] = [
     id: 'customization',
     title: 'Flexible Customization',
     description:
-      'Tailored floor plans, custom glass facades, and localized plumbing/electrical components (UL, SAA, CE).',
+      'Tailored floor plans, custom facades, and localized plumbing/electrical options (UL, SAA, CE).',
   },
   {
     id: 'logistics',
     title: 'Export-Ready Logistics',
     description:
-      'Full cargo securing, container freight optimization, and complete documentation support for customs clearance.',
+      'Cargo securing, freight optimization, and documentation support for customs clearance.',
   },
 ];
 
+export const targetMarkets = [
+  'United States / Canada',
+  'Australia / New Zealand',
+  'Middle East',
+  'Southeast Asia',
+  'Europe',
+];
+
 export const expandableBanner = {
-  heading: 'Customizable Expandable Container Homes & Tiny Houses.',
+  heading: 'Expandable Container Homes & Tiny Houses for Global Projects',
   description:
-    'Highly adaptable, expandable modular living spaces designed for fast deployment. Pre-fitted with turnkey kitchens and bathrooms to meet international building regulations.',
+    'Customizable expandable modular living spaces designed for fast deployment. Pre-fitted kitchen and bathroom options help meet international project requirements for developers and contractors.',
 };
 
-export const expandableSpecHeaders = ['Specifications', '20ft Expandable Tiny Home', '40ft Luxury Expandable House'];
+export const expandableSpecHeaders = [
+  'Specifications',
+  '20ft Expandable Tiny Home',
+  '40ft Luxury Expandable House',
+];
 
 export const expandableSpecs: SpecRow[] = [
-  {
-    label: 'Dimensions (Expanded)',
-    values: ['5.9m x 6.3m x 2.5m', '11.8m x 6.3m x 2.5m'],
-  },
-  {
-    label: 'Total Floor Area',
-    values: ['~37 m² (398 sq ft)', '~74 m² (796 sq ft)'],
-  },
-  {
-    label: 'Layout Options',
-    values: ['1 or 2 Bedrooms, 1 Bathroom', '2 to 4 Bedrooms, 1 or 2 Bathrooms'],
-  },
-  {
-    label: 'Setup Time',
-    values: ['2 Hours (2-3 workers)', '4 Hours (3-4 workers + Crane)'],
-  },
-  {
-    label: 'Shipping Method',
-    values: ['2 units fit into 1x 40ft HQ', '1 unit fits into 1x 40ft HQ / Flat Rack'],
-  },
+  { label: 'Dimensions (Expanded)', values: ['5.9m × 6.3m × 2.5m', '11.8m × 6.3m × 2.5m'] },
+  { label: 'Total Floor Area', values: ['~37 m² (398 sq ft)', '~74 m² (796 sq ft)'] },
+  { label: 'Layout Options', values: ['1–2 bedrooms, 1 bathroom', '2–4 bedrooms, 1–2 bathrooms'] },
+  { label: 'Setup Time', values: ['About 2 hours (2–3 workers)', 'About 4 hours (3–4 workers + crane)'] },
+  { label: 'Shipping Method', values: ['2 units / 1× 40ft HQ', '1 unit / 1× 40ft HQ or flat rack'] },
 ];
 
 export const expandableEngineering = [
   {
     title: 'Wall Panels',
-    description:
-      '50mm / 75mm Polyurethane (PU) or fireproof Rockwool sandwich panels for extreme thermal insulation.',
+    description: '50mm / 75mm PU or fireproof Rockwool sandwich panels for thermal insulation.',
   },
   {
     title: 'Floor Frame',
     description:
-      'Heavy galvanized steel sub-structure covered with marine-grade magnesium oxide board and luxury vinyl flooring.',
+      'Heavy galvanized steel sub-structure with marine-grade board and vinyl flooring options.',
   },
   {
     title: 'Electrical / Plumbing',
     description:
-      'Hidden pre-wired circuits matching US NEC, Canadian CEC, or Australian AS/NZS codes.',
+      'Pre-wired circuits configurable for US NEC, Canadian CEC, or AS/NZS requirements.',
+  },
+];
+
+export const expandableFaqs = [
+  {
+    q: 'How long does installation take?',
+    a: 'Most 20ft units set up in about two hours with a small crew; 40ft units typically need a crane and about four hours.',
+  },
+  {
+    q: 'Can layouts be customized?',
+    a: 'Yes. Bedroom count, bathroom count, facade, and finishes can be adapted to project plans.',
+  },
+  {
+    q: 'Do you support US / Australia electrical standards?',
+    a: 'Yes. Localized UL / SAA component options are available by market.',
   },
 ];
 
 export const capsuleBanner = {
-  heading: 'Space Capsule House: Futuristic Turnkey Glamping Accommodation.',
+  heading: 'Space Capsule House: Turnkey Glamping Accommodation for Resort Projects',
   description:
-    'Aircraft-grade aluminum modular units with panoramic smart privacy glass. Factory-assembled and 100% plug-and-play for high-ROI hospitality setups.',
+    'Aircraft-grade aluminum modular units with panoramic privacy glass. Factory-assembled and plug-and-play for hospitality setups that need fast launch and premium guest appeal.',
 };
 
 export const capsuleRoi = [
   {
-    title: 'Zero Site Construction',
+    title: 'Zero Site Construction Delay',
     description:
-      'Arrives fully finished. Connect water and power to the pre-installed external utilities, and it is instantly ready for rental.',
+      'Connect water and power to pre-installed external utilities and open for rental.',
   },
   {
-    title: 'Premium Appeal',
+    title: 'Premium Guest Pricing Potential',
     description:
-      'High-end modern styling commands premium pricing on platforms like Airbnb, shortening the payback period for resort investors.',
+      'Modern design supports higher nightly rates on Airbnb and resort packages.',
   },
   {
     title: 'All-Weather Durability',
     description:
-      'Built with structural anti-corrosion marine coatings, structural thermal barriers, and specialized aerodynamic wind resistance.',
+      'Anti-corrosion coatings, thermal barriers, and aerodynamic wind-resistant structure.',
   },
 ];
 
@@ -203,36 +215,35 @@ export const capsuleModels = [
   {
     name: 'Model S-20 (Compact Studio)',
     description:
-      '6.0m Length x 3.3m Width. Includes integrated double bedroom, smart bathroom, centralized climate controls. Perfect for remote eco-resorts.',
+      '6.0m × 3.3m. Integrated double bedroom, smart bathroom, climate control. Suited for eco-resorts and compact glamping sites.',
   },
   {
     name: 'Model S-40 (Luxury Suite)',
     description:
-      '11.5m Length x 3.3m Width. Features master bedroom, separate lounge/living zone, integrated projection system, and viewing balcony.',
+      '11.5m × 3.3m. Master bedroom, lounge zone, projection system, and viewing balcony options for premium suites.',
   },
 ];
 
 export const flatPackBanner = {
-  heading: 'Heavy-Duty Flat Pack Container Houses for Project Sites.',
+  heading: 'Heavy-Duty Flat Pack Container Houses for Project Sites',
   description:
-    'Cost-effective, robust, and highly scalable modular systems designed for temporary offices, commercial worker camps, and remote site headquarters.',
+    'Cost-effective, robust, and scalable modular systems for temporary offices, worker camps, and remote site headquarters.',
 };
 
 export const flatPackAdvantages = [
   {
     title: 'Freight Optimization',
     description:
-      'Four individual flat-packed units bundle securely into the precise footprint of a single 20ft ISO shipping container, cutting ocean logistics fees by 75%.',
+      'Multiple flat-packed units can share one ISO container footprint, reducing ocean logistics cost.',
   },
   {
     title: 'Modular Scalability',
-    description:
-      'Built to stack vertically up to 3 floors and link endlessly horizontally to engineer extensive commercial compounds.',
+    description: 'Stack up to 3 floors and link horizontally for larger compounds.',
   },
   {
     title: 'Rapid Assembly',
     description:
-      'Corner columns bolt directly into heavy roof and floor sub-assemblies. A standard unit structure takes four crew members less than 30 minutes to lock.',
+      'Corner columns bolt into roof and floor assemblies; a standard unit structure can lock in under 30 minutes with a four-person crew.',
   },
 ];
 
@@ -240,23 +251,68 @@ export const flatPackMaterials = [
   {
     title: 'Main Frame',
     description:
-      '3.0mm to 4.0mm Hot-dip galvanized and powder-coated steel profiles with structural drainage pathways inside corner columns.',
+      '3.0–4.0mm hot-dip galvanized and powder-coated steel with drainage pathways in corner columns.',
   },
   {
     title: 'Insulation Core',
     description: '50mm / 75mm high-density fire-retardant Rockwool sandwich panels.',
   },
   {
-    title: 'Window / Door Systems',
+    title: 'Windows / Doors',
     description:
-      'Double-glazed sliding aluminum alloy windows with integral security shutters. Steel security external doors.',
+      'Double-glazed aluminum sliding windows with security shutters; steel security external doors.',
+  },
+];
+
+export const foldingBanner = {
+  heading: 'Folding Houses for Fast Temporary and Commercial Housing',
+  description:
+    'Collapsible modular shelters designed for rapid assembly, compact transport, and dealer-ready inventory programs.',
+};
+
+export const foldingBenefits = [
+  {
+    title: 'Fast Deployment',
+    description: 'Practical for temporary camps and short-term project housing.',
+  },
+  {
+    title: 'Compact Freight',
+    description: 'Folded size helps reduce transport volume versus fully assembled units.',
+  },
+  {
+    title: 'Dealer Ready',
+    description: 'Suitable for regional dealers building stock and rental fleets.',
+  },
+];
+
+export const poolBanner = {
+  heading: 'Container Swimming Pools for Hotels, Resorts, and Landscape Projects',
+  description:
+    'Above-ground customized cargo pool systems with filtration options for commercial leisure and modern outdoor spaces.',
+};
+
+export const poolFeatures = [
+  {
+    title: 'Commercial Use Cases',
+    description:
+      'Hotel decks, boutique homestays, glamping compounds, and landscape contractor projects.',
+  },
+  {
+    title: 'System Features',
+    description:
+      'Container structural shell, filtration packages, custom finishes, lighting, and deck interfaces.',
+  },
+  {
+    title: 'Export Delivery',
+    description:
+      'Packaging and documentation support for international project shipment.',
   },
 ];
 
 export const faqBanner = {
-  heading: 'Technical Guidance & Export FAQ.',
+  heading: 'Technical Guidance & Export FAQ',
   description:
-    'Transparent and practical answers regarding international compliance, site installation, foundations, and custom modular engineering.',
+    'Practical answers on international shipping, compliance, foundations, and custom modular engineering.',
 };
 
 export const faqItems: FaqItem[] = [
@@ -264,45 +320,45 @@ export const faqItems: FaqItem[] = [
     id: 'shipping',
     question: 'How are the container houses packed and shipped internationally?',
     answer:
-      'We secure and pack our modular houses according to strict international maritime shipping standards. Expandable homes and capsule houses are loaded via 40ft HC (High Cube) containers or flat racks. Flat packs are bundled together. We provide comprehensive export-ready documentation to ensure smooth customs clearance in the US, Canada, Australia, and other regions.',
+      'We pack modular houses to maritime shipping standards. Expandable homes and capsule houses typically ship in 40ft HC containers or on flat racks. Flat packs are bundled for freight efficiency. Export documentation is prepared for customs clearance in the US, Canada, Australia, and other markets.',
   },
   {
     id: 'codes',
-    question: 'Do your prefab structures comply with our local country building codes?',
+    question: 'Do your prefab structures comply with local building codes?',
     answer:
-      'Yes. We install internationally certified components (including UL-listed and SAA-certified electrical wiring, breakers, and plumbing valves). We adapt structural load points and insulation profiles (PU or Rockwool) based on your regional weather data and blueprint plans. We recommend validating local zoning laws with your local municipality before finalizing delivery schedules.',
+      'We install internationally certified components where required, including UL-listed and SAA-certified electrical options. Structural load and insulation profiles can be adapted to regional weather and project drawings. Local zoning should still be validated with your municipality before delivery.',
   },
   {
     id: 'foundation',
-    question: 'What foundation preparation must be completed before delivery?',
+    question: 'What foundation is required before delivery?',
     answer:
-      'Our modular structures can sit securely on basic concrete pads, structural concrete piers, or industrial screw piles placed under the structural corner points. We dispatch complete engineering foundation plans and weight distribution blueprints directly to your project team once an order contract is established.',
+      'Units can sit on concrete pads, structural piers, or screw piles under corner load points. Foundation drawings and weight distribution plans are provided after contract confirmation.',
   },
   {
     id: 'custom',
     question: 'Can we order custom layouts for commercial or brand applications?',
     answer:
-      'Absolutely. As a direct manufacturing facility, we offer comprehensive solution-oriented custom engineering. Clients can easily alter exterior cladding colors, specify distinct flooring grades, adjust door/window configurations, and append structural additions like customized container swimming pools to align directly with commercial compound identities.',
+      'Yes. As a manufacturing facility, we support cladding colors, flooring grades, door/window configurations, and add-ons such as container swimming pools for compound projects.',
   },
 ];
 
 export const footerLinks = {
   products: [
-    { label: 'Expandable Homes', href: '/expandable-homes' },
-    { label: 'Space Capsule', href: '/space-capsule' },
-    { label: 'Flat Pack', href: '/flat-pack' },
-    { label: 'Folding Houses', href: '/contact' },
+    { label: 'Expandable Homes', href: '/expandable-container-homes' },
+    { label: 'Space Capsule', href: '/space-capsule-house' },
+    { label: 'Flat Pack', href: '/flat-pack-container-house' },
+    { label: 'Folding House', href: '/folding-house' },
+    { label: 'Container Pool', href: '/container-swimming-pool' },
   ],
   support: [
     { label: 'FAQ', href: '/faq' },
     { label: 'Get a Factory Quote', href: '/contact' },
     { label: 'WhatsApp Sales', href: whatsappUrl },
-    { label: 'Catalog Request', href: '/contact' },
+    { label: 'About Us', href: '/about' },
   ],
   contact: [
     { label: 'Contact Us', href: '/contact' },
     { label: 'Sales Inquiry', href: '/contact' },
-    { label: 'Export Support', href: '/faq' },
-    { label: 'Partnerships', href: '/contact' },
+    { label: 'Catalog Request', href: '/contact' },
   ],
 };

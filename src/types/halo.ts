@@ -1,4 +1,4 @@
-/** Halo API metadata block shared across extensions */
+/** Halo API metadata */
 export interface HaloMetadata {
   name: string;
   generateName?: string;
@@ -7,7 +7,6 @@ export interface HaloMetadata {
   annotations?: Record<string, string>;
 }
 
-/** Halo list response wrapper */
 export interface HaloListResponse<T> {
   items: T[];
   total: number;
@@ -20,7 +19,6 @@ export interface HaloListResponse<T> {
   totalPages: number;
 }
 
-/** Published post from Halo content API */
 export interface HaloPost {
   metadata: HaloMetadata;
   spec: {
@@ -36,7 +34,6 @@ export interface HaloPost {
   };
 }
 
-/** Homepage hero slide */
 export interface HeroSlide {
   id: string;
   title: string;
@@ -46,7 +43,6 @@ export interface HeroSlide {
   secondaryCta: { label: string; action: 'whatsapp' | 'link'; href?: string };
 }
 
-/** Product category card */
 export interface ProductCategory {
   id: string;
   name: string;
@@ -55,20 +51,17 @@ export interface ProductCategory {
   href: string;
 }
 
-/** Trust / capability item */
 export interface TrustItem {
   id: string;
   title: string;
   description: string;
 }
 
-/** Spec table row */
 export interface SpecRow {
   label: string;
   values: string[];
 }
 
-/** FAQ item */
 export interface FaqItem {
   id: string;
   question: string;

@@ -2,152 +2,74 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig, whatsappUrl } from '@/data/site';
 ---
-
-<BaseLayout
-  title="Contact Us"
-  description="Request a factory quote, catalog, or WhatsApp support for modular container housing."
->
+<BaseLayout title="Contact Us" description="Request a factory quote, WhatsApp consultation, or catalog for your modular housing project.">
   <section class="bg-brand-900 text-white py-20">
     <div class="section-container text-center max-w-3xl">
-      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Contact Us</h1>
-      <p class="text-lg text-gray-300">
-        Inquiry first. Then WhatsApp, contact form, or catalog request — built for B2B export buyers.
-      </p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Contact Export Sales</h1>
+      <p class="text-lg text-gray-300">Request a factory quote, WhatsApp consultation, or catalog for your modular housing project.</p>
     </div>
   </section>
-
   <section class="py-20">
-    <div class="section-container">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <div class="section-container grid lg:grid-cols-2 gap-16">
+      <div class="space-y-6">
+        <h2 class="text-2xl font-bold text-brand-900">Contact Channels</h2>
+        <p class="text-gray-600">Inquiry first, then WhatsApp, form, or catalog — built for B2B export buyers in US/Canada, Australia/NZ, Middle East, Southeast Asia, and Europe.</p>
         <div>
-          <h2 class="text-2xl font-bold text-brand-900 mb-6">Talk to Export Sales</h2>
-          <div class="space-y-6">
-            <div>
-              <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Email</h3>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                class="text-lg text-brand-600 hover:text-brand-700 transition-colors"
-              >
-                {siteConfig.email}
-              </a>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Phone</h3>
-              <a
-                href={`tel:${siteConfig.phone}`}
-                class="text-lg text-brand-600 hover:text-brand-700 transition-colors"
-              >
-                {siteConfig.phone}
-              </a>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                WhatsApp
-              </h3>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-lg text-brand-600 hover:text-brand-700 transition-colors"
-              >
-                Chat with Sales
-              </a>
-            </div>
-            <div class="flex flex-wrap gap-3 pt-2">
-              <button type="button" data-inquiry-open class="btn-primary">Get a Factory Quote</button>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-500 text-brand-600 font-semibold text-sm hover:bg-brand-50 transition-colors"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
-          </div>
+          <h3 class="text-sm font-semibold text-gray-500 uppercase mb-1">Email</h3>
+          <a href={`mailto:${siteConfig.email}`} class="text-lg text-brand-600">{siteConfig.email}</a>
         </div>
-
-        <form class="bg-gray-50 p-8 space-y-5" id="contact-form">
-          <h2 class="text-xl font-bold text-brand-900">Project Inquiry Form</h2>
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
-            />
-          </div>
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
-            />
-          </div>
-          <div>
-            <label for="country" class="block text-sm font-medium text-gray-700 mb-1"
-              >Destination Country / Zip</label
-            >
-            <input
-              type="text"
-              id="country"
-              name="country"
-              required
-              class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
-            />
-          </div>
-          <div>
-            <label for="product" class="block text-sm font-medium text-gray-700 mb-1"
-              >Product Interest</label
-            >
-            <select
-              id="product"
-              name="product"
-              class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
-            >
-              <option>Expandable Container Homes</option>
-              <option>Space Capsule Houses</option>
-              <option>Flat Pack Container Houses</option>
-              <option>Folding Houses</option>
-              <option>Container Swimming Pools</option>
-              <option>Catalog Download</option>
-            </select>
-          </div>
-          <div>
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1"
-              >Project Details</label
-            >
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              required
-              class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none resize-none"
-            ></textarea>
-          </div>
-          <button type="submit" class="btn-primary w-full">Submit Inquiry</button>
-          <p id="form-status" class="text-sm text-center hidden"></p>
-        </form>
+        <div>
+          <h3 class="text-sm font-semibold text-gray-500 uppercase mb-1">Phone</h3>
+          <a href={`tel:${siteConfig.phone}`} class="text-lg text-brand-600">{siteConfig.phone}</a>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button type="button" data-inquiry-open class="btn-primary">Get a Factory Quote</button>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-brand-500 text-brand-600 font-semibold text-sm">Chat on WhatsApp</a>
+        </div>
       </div>
+      <form id="contact-form" class="bg-gray-50 p-8 space-y-5">
+        <h2 class="text-xl font-bold text-brand-900">Project Inquiry Form</h2>
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input id="email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div>
+          <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Destination Country / Zip</label>
+          <input id="country" name="country" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div>
+          <label for="product" class="block text-sm font-medium text-gray-700 mb-1">Product Interest</label>
+          <select id="product" name="product" class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500">
+            <option>Expandable Container Homes</option>
+            <option>Space Capsule Houses</option>
+            <option>Flat Pack Container Houses</option>
+            <option>Folding Houses</option>
+            <option>Container Swimming Pools</option>
+            <option>Catalog Download</option>
+          </select>
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Project Details</label>
+          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full">Submit Inquiry</button>
+        <p id="form-status" class="text-sm text-center hidden"></p>
+      </form>
     </div>
   </section>
 </BaseLayout>
-
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
-
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!status) return;
-    status.textContent =
-      'Thank you. Your inquiry has been received. We will get back to you shortly.';
-    status.classList.remove('hidden', 'text-red-500');
+    status.textContent = 'Thank you. Your inquiry has been received. For faster response, continue on WhatsApp.';
+    status.classList.remove('hidden');
     status.classList.add('text-brand-600');
     form.reset();
   });

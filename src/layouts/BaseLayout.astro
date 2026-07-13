@@ -8,7 +8,6 @@ import '@/styles/global.css';
 interface Props {
   title?: string;
   description?: string;
-  /** When true, header overlays the page top (hero flush to viewport top) */
   overlayHeader?: boolean;
 }
 
@@ -26,17 +25,12 @@ const pageDescription = description ?? siteConfig.description;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{pageTitle}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased">
     <Header overlay={overlayHeader} />
-    <main class="flex-1">
-      <slot />
-    </main>
+    <main class="flex-1"><slot /></main>
     <Footer />
     <InquiryModal />
   </body>
