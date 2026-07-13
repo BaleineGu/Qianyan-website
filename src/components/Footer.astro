@@ -1,5 +1,5 @@
 ---
-import { footerLinks, siteConfig } from '@/data/site';
+import { footerLinks, siteConfig, whatsappUrl } from '@/data/site';
 
 const year = new Date().getFullYear();
 ---
@@ -7,11 +7,10 @@ const year = new Date().getFullYear();
 <footer class="bg-brand-900 text-gray-300">
   <div class="section-container py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-      <!-- Brand -->
       <div class="lg:col-span-1">
         <div class="flex items-center gap-3 mb-4">
           <img
-            src="/images/brand/logo-icon-white.png"
+            src={siteConfig.logo}
             alt=""
             class="h-10 w-auto shrink-0"
             width="40"
@@ -21,17 +20,14 @@ const year = new Date().getFullYear();
             {siteConfig.name}
           </span>
         </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          {siteConfig.tagline}
-        </p>
+        <p class="text-sm leading-relaxed text-gray-400">{siteConfig.tagline}</p>
       </div>
 
-      <!-- About -->
       <div>
-        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">About</h3>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Products</h3>
         <ul class="space-y-2.5">
           {
-            footerLinks.company.map((link) => (
+            footerLinks.products.map((link) => (
               <li>
                 <a href={link.href} class="text-sm hover:text-brand-500 transition-colors">
                   {link.label}
@@ -42,14 +38,18 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Support -->
       <div>
         <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Support</h3>
         <ul class="space-y-2.5">
           {
             footerLinks.support.map((link) => (
               <li>
-                <a href={link.href} class="text-sm hover:text-brand-500 transition-colors">
+                <a
+                  href={link.href}
+                  class="text-sm hover:text-brand-500 transition-colors"
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
                   {link.label}
                 </a>
               </li>
@@ -58,7 +58,6 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Contact -->
       <div>
         <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h3>
         <ul class="space-y-2.5">
@@ -75,6 +74,14 @@ const year = new Date().getFullYear();
         <div class="mt-4 space-y-1 text-sm text-gray-400">
           <p>{siteConfig.email}</p>
           <p>{siteConfig.phone}</p>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-2 text-brand-500 hover:text-brand-600"
+          >
+            WhatsApp Sales
+          </a>
         </div>
       </div>
     </div>
@@ -86,8 +93,8 @@ const year = new Date().getFullYear();
         &copy; {year} {siteConfig.name}. All rights reserved.
       </p>
       <div class="flex gap-6 text-sm">
-        <a href="/about" class="hover:text-brand-500 transition-colors">Privacy Policy</a>
-        <a href="/about" class="hover:text-brand-500 transition-colors">Terms of Service</a>
+        <a href="/faq" class="hover:text-brand-500 transition-colors">Export FAQ</a>
+        <a href="/contact" class="hover:text-brand-500 transition-colors">Request Catalog</a>
       </div>
     </div>
   </div>

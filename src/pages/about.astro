@@ -1,52 +1,44 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { siteConfig } from '@/data/site';
+import { siteConfig, whatsappUrl } from '@/data/site';
 ---
 
-<BaseLayout title="About Us" description="Learn about HeBei Telaosi Integrated House Co.LTD — our mission, values, and team.">
+<BaseLayout
+  title="About Us"
+  description="QIANYAN JINSHU manufactures export-ready prefab modular housing for global B2B markets."
+>
   <section class="bg-brand-900 text-white py-20">
-    <div class="section-container text-center">
+    <div class="section-container text-center max-w-3xl">
       <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">About Us</h1>
-      <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-        Engineering the future, one product at a time.
+      <p class="text-lg text-gray-300">
+        Professional, practical, and export-ready modular housing manufacturing.
       </p>
     </div>
   </section>
 
   <section class="py-20">
     <div class="section-container max-w-3xl">
-      <h2 class="text-3xl font-extrabold text-brand-900 mb-6">Our Mission</h2>
-      <p class="text-lg text-gray-600 leading-relaxed mb-8">
-        At {siteConfig.name}, we believe that exceptional engineering should be accessible to every
-        team — from startups to global enterprises. Founded in 2010, we have spent over a decade
-        refining our craft, pushing the boundaries of what industrial technology can achieve.
+      <h2 class="text-3xl font-extrabold text-brand-900 mb-6">Factory-Direct B2B Supplier</h2>
+      <p class="text-lg text-gray-600 leading-relaxed mb-6">
+        {siteConfig.name} produces heavy-duty prefab modular housing for international buyers across
+        the United States, Canada, Australia, New Zealand, the Middle East, Southeast Asia, and
+        Europe.
       </p>
       <p class="text-lg text-gray-600 leading-relaxed mb-8">
-        Our products are deployed in 40+ countries, powering everything from smart factories to
-        renewable energy grids. We hold 28 patents and maintain a 99.97% uptime record across our
-        installed base.
+        Our product line covers expandable container homes, space capsule houses, flat pack units,
+        folding houses, and container swimming pools — with customization for local electrical codes
+        and complete export documentation.
       </p>
-
-      <h2 class="text-3xl font-extrabold text-brand-900 mb-6 mt-16">Our Values</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div>
-          <h3 class="text-lg font-bold text-brand-900 mb-2">Precision</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Every component is tested to exceed industry standards.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold text-brand-900 mb-2">Reliability</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Products designed for 24/7 operation in the harshest conditions.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold text-brand-900 mb-2">Innovation</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Continuous R&D keeps us ahead of evolving industry needs.
-          </p>
-        </div>
+      <div class="flex flex-wrap gap-4">
+        <button type="button" data-inquiry-open class="btn-primary">Get a Factory Quote</button>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-500 text-brand-600 font-semibold text-sm hover:bg-brand-50 transition-colors"
+        >
+          Chat on WhatsApp
+        </a>
       </div>
     </div>
   </section>

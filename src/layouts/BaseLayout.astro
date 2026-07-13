@@ -2,6 +2,7 @@
 import { siteConfig } from '@/data/site';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import InquiryModal from '@/components/InquiryModal.astro';
 import '@/styles/global.css';
 
 interface Props {
@@ -37,5 +38,6 @@ const pageDescription = description ?? siteConfig.description;
       <slot />
     </main>
     <Footer />
+    <InquiryModal />
   </body>
 </html>

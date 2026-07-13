@@ -1,5 +1,6 @@
 ---
 import type { HeroSlide } from '@/types/halo';
+import { whatsappUrl } from '@/data/site';
 
 interface Props {
   slides: HeroSlide[];
@@ -26,22 +27,40 @@ const { slides } = Astro.props;
               class="absolute inset-0 w-full h-full object-cover object-center"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-900/70 via-brand-900/40 to-transparent" />
-            <div class="relative z-10 h-full section-container flex items-center pt-16 lg:pt-20">
-              <div class="max-w-2xl">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-900/75 via-brand-900/45 to-transparent" />
+            <div class="relative z-10 h-full section-container flex items-center pt-16 sm:pt-20 lg:pt-24">
+              <div class="max-w-4xl">
+                <h1 class="text-[43px] sm:text-[58px] lg:text-[72px] font-extrabold text-white leading-tight mb-4">
                   {slide.title}
                 </h1>
-                <p class="text-lg sm:text-xl text-gray-200 mb-8 leading-relaxed">
+                <p class="text-[22px] sm:text-[24px] text-gray-200 mb-8 leading-relaxed">
                   {slide.subtitle}
                 </p>
                 <div class="flex flex-wrap gap-4">
-                  <a href={slide.primaryCta.href} class="btn-primary">
-                    {slide.primaryCta.label}
-                  </a>
-                  <a href={slide.secondaryCta.href} class="btn-outline">
-                    {slide.secondaryCta.label}
-                  </a>
+                  {slide.primaryCta.action === 'inquiry' ? (
+                    <button type="button" data-inquiry-open class="btn-primary text-[17px] px-7 py-3.5">
+                      {slide.primaryCta.label}
+                    </button>
+                  ) : (
+                    <a href={slide.primaryCta.href} class="btn-primary text-[17px] px-7 py-3.5">
+                      {slide.primaryCta.label}
+                    </a>
+                  )}
+
+                  {slide.secondaryCta.action === 'whatsapp' ? (
+                    <a
+                      href={slide.secondaryCta.href || whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-outline text-[17px] px-7 py-3.5"
+                    >
+                      {slide.secondaryCta.label}
+                    </a>
+                  ) : (
+                    <a href={slide.secondaryCta.href} class="btn-outline text-[17px] px-7 py-3.5">
+                      {slide.secondaryCta.label}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -51,10 +70,8 @@ const { slides } = Astro.props;
     }
   </div>
 
-  <!-- Spacer to maintain layout height (matches slide viewport height) -->
   <div class="h-[100vh] min-h-[560px] invisible" aria-hidden="true"></div>
 
-  <!-- Controls -->
   <div class="absolute bottom-8 left-0 right-0 z-20 section-container">
     <div class="flex items-center gap-4">
       <button

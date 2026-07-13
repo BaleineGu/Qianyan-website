@@ -36,47 +36,41 @@ export interface HaloPost {
   };
 }
 
-/** Site setting group from Halo */
-export interface HaloSetting {
-  metadata: HaloMetadata;
-  spec: {
-    forms: Array<{
-      group: string;
-      label: string;
-      formSchema: Array<{
-        name: string;
-        label: string;
-        value?: string;
-      }>;
-    }>;
-  };
-}
-
-/** Homepage hero slide (static or CMS-driven) */
+/** Homepage hero slide */
 export interface HeroSlide {
   id: string;
   title: string;
   subtitle: string;
   image: string;
-  primaryCta: { label: string; href: string };
-  secondaryCta: { label: string; href: string };
+  primaryCta: { label: string; action: 'inquiry' | 'link'; href?: string };
+  secondaryCta: { label: string; action: 'whatsapp' | 'link'; href?: string };
 }
 
-/** Product showcase item */
-export interface ProductItem {
+/** Product category card */
+export interface ProductCategory {
   id: string;
   name: string;
-  tagline: string;
   description: string;
   image: string;
   href: string;
 }
 
-/** Feature block for alternating image/text sections */
-export interface FeatureBlock {
+/** Trust / capability item */
+export interface TrustItem {
   id: string;
   title: string;
   description: string;
-  image: string;
-  imagePosition: 'left' | 'right';
+}
+
+/** Spec table row */
+export interface SpecRow {
+  label: string;
+  values: string[];
+}
+
+/** FAQ item */
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
 }
