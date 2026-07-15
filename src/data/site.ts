@@ -23,36 +23,37 @@ export const whatsappUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeUR
 )}`;
 
 export const navLinks = [
-  { label: '关于我们', href: '/about' },
-  { label: '产品', href: '/products' },
-  { label: '博客', href: '/blog' },
-  { label: '联系我们', href: '/contact' },
+  { label: 'HOME', href: '/' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'PRODUCT', href: '/products' },
+  { label: 'BLOG', href: '/blog' },
+  { label: 'TOUCH', href: '/contact' },
 ] as const;
 
 export const heroSlides: HeroSlide[] = [
   {
     id: 'slide-1',
-    title: 'Container house manufacturer from China',
+    title: 'Container houses manufacturer from China',
     subtitle:
-      'Factory-direct expandable container homes, space capsule houses, flat pack buildings, folding houses, and container swimming pools — engineered for export, customization, and project delivery worldwide.',
+      'The company primarily deals in expandable container homes, space capsule houses, flat-pack container houses, folding houses, and container swimming pools.',
     image: '/images/hero/slide-1.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
   {
     id: 'slide-2',
-    title: 'Container house manufacturer from China',
+    title: 'Container houses manufacturer from China',
     subtitle:
-      '20ft and 40ft fold-out modular living spaces designed for developers and contractors who need reliable onsite setup.',
+      'The company primarily deals in expandable container homes, space capsule houses, flat-pack container houses, folding houses, and container swimming pools.',
     image: '/images/hero/slide-2.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
   {
     id: 'slide-3',
-    title: 'Container house manufacturer from China',
+    title: 'Container houses manufacturer from China',
     subtitle:
-      'UL, SAA, and CE-ready electrical and plumbing options, plus documentation support for customs clearance in key markets.',
+      'The company primarily deals in expandable container homes, space capsule houses, flat-pack container houses, folding houses, and container swimming pools.',
     image: '/images/hero/slide-3.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
