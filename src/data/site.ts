@@ -23,41 +23,37 @@ export const whatsappUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeUR
 )}`;
 
 export const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Expandable Homes', href: '/expandable-container-homes' },
-  { label: 'Space Capsule', href: '/space-capsule-house' },
-  { label: 'Flat Pack', href: '/flat-pack-container-house' },
-  { label: 'Folding House', href: '/folding-house' },
-  { label: 'Container Pool', href: '/container-swimming-pool' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
+  { label: '关于我们', href: '/about' },
+  { label: '产品', href: '/products' },
+  { label: '博客', href: '/blog' },
+  { label: '联系我们', href: '/contact' },
 ] as const;
 
 export const heroSlides: HeroSlide[] = [
   {
     id: 'slide-1',
-    title: 'Heavy-Duty Prefab Modular Housing Built for Global Markets',
+    title: 'Container house manufacturer from China',
     subtitle:
       'Factory-direct expandable container homes, space capsule houses, flat pack buildings, folding houses, and container swimming pools — engineered for export, customization, and project delivery worldwide.',
-    image: '/images/hero/slide-1.jpg',
+    image: '/images/hero/slide-1.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
   {
     id: 'slide-2',
-    title: 'Expandable Container Homes for Fast Project Deployment',
+    title: 'Container house manufacturer from China',
     subtitle:
       '20ft and 40ft fold-out modular living spaces designed for developers and contractors who need reliable onsite setup.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80',
+    image: '/images/hero/slide-2.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
   {
     id: 'slide-3',
-    title: 'Export-Ready Modular Buildings with Certified Components',
+    title: 'Container house manufacturer from China',
     subtitle:
       'UL, SAA, and CE-ready electrical and plumbing options, plus documentation support for customs clearance in key markets.',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80',
+    image: '/images/hero/slide-3.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
