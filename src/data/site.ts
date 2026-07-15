@@ -86,7 +86,7 @@ export const productCategories: ProductCategory[] = [
     name: 'Space Capsule Houses',
     description:
       'Turnkey glamping units with panoramic glass. Built for resort and hospitality investors.',
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80',
+    image: '/images/products/space-capsule-house.png',
     href: '/space-capsule-house',
   },
   {
