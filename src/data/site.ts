@@ -22,10 +22,22 @@ export const whatsappUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeUR
   'Hello, I would like to request a factory quote for modular container housing.',
 )}`;
 
+export const productNavLinks = [
+  { label: 'Flat Pack Container House', href: '/flat-pack-container-house' },
+  { label: 'Folding House', href: '/folding-house' },
+  { label: 'Space capsule house', href: '/space-capsule-house' },
+  { label: 'Container swimming pool', href: '/container-swimming-pool' },
+  { label: 'Supporting container/prefab terms', href: '/expandable-container-homes' },
+] as const;
+
 export const navLinks = [
   { label: 'HOME', href: '/' },
   { label: 'ABOUT', href: '/about' },
-  { label: 'PRODUCT', href: '/products' },
+  {
+    label: 'PRODUCT',
+    href: '/products',
+    children: productNavLinks,
+  },
   { label: 'BLOG', href: '/blog' },
   { label: 'TOUCH', href: '/contact' },
 ] as const;
@@ -66,7 +78,7 @@ export const productCategories: ProductCategory[] = [
     name: 'Expandable Container Homes',
     description:
       '20ft & 40ft fold-out modular living spaces for fast onsite setup. Best for developers and building contractors.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    image: '/images/products/expandable-container-home.png',
     href: '/expandable-container-homes',
   },
   {
