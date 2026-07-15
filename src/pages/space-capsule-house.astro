@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageBanner from '@/components/PageBanner.astro';
+import ConversionCta from '@/components/ConversionCta.astro';
+import { capsuleBanner, capsuleModels, capsuleRoi, whatsappUrl } from '@/data/site';
+---
+<BaseLayout title="Space Capsule House" description={capsuleBanner.description}>
+  <PageBanner heading={capsuleBanner.heading} description={capsuleBanner.description} />
+  <section class="py-16">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">B2B Investment & ROI Factors</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {capsuleRoi.map((item) => (
+          <div class="border-t-2 border-brand-500 pt-6">
+            <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3>
+            <p class="text-gray-600">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-gray-50">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Product Specification Tiers</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {capsuleModels.map((m) => (
+          <article class="bg-white border border-gray-200 p-8">
+            <h3 class="text-xl font-bold text-brand-900 mb-3">{m.name}</h3>
+            <p class="text-gray-600">{m.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <ConversionCta primaryLabel="Request Commercial Pricing & Shipping Estimates" secondaryLabel="Chat on WhatsApp" secondaryHref={whatsappUrl} />
+</BaseLayout>

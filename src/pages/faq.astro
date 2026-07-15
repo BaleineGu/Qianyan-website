@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageBanner from '@/components/PageBanner.astro';
+import ConversionCta from '@/components/ConversionCta.astro';
+import { faqBanner, faqItems, whatsappUrl } from '@/data/site';
+---
+<BaseLayout title="FAQ" description={faqBanner.description}>
+  <PageBanner heading={faqBanner.heading} description={faqBanner.description} />
+  <section class="py-20">
+    <div class="section-container max-w-4xl space-y-6">
+      {faqItems.map((item) => (
+        <details class="group border border-gray-200 bg-white open:border-brand-500/40">
+          <summary class="cursor-pointer list-none px-6 py-5 flex justify-between gap-4">
+            <h2 class="text-lg font-bold text-brand-900">{item.question}</h2>
+            <span class="text-brand-500 text-xl group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">{item.answer}</div>
+        </details>
+      ))}
+    </div>
+  </section>
+  <ConversionCta
+    title="Still Have Questions?"
+    primaryLabel="Speak with an Export Engineer on WhatsApp"
+    primaryHref={whatsappUrl}
+    primaryIsInquiry={false}
+    secondaryLabel="Get a Factory Quote"
+    secondaryHref="/contact"
+    secondaryIsInquiry={true}
+  />
+</BaseLayout>

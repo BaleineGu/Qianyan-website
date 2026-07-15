@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageBanner from '@/components/PageBanner.astro';
+import ConversionCta from '@/components/ConversionCta.astro';
+import { foldingBanner, foldingBenefits, whatsappUrl } from '@/data/site';
+---
+<BaseLayout title="Folding House" description={foldingBanner.description}>
+  <PageBanner heading={foldingBanner.heading} description={foldingBanner.description} />
+  <section class="py-16">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Why Buyers Choose Folding Houses</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {foldingBenefits.map((item) => (
+          <div class="border-t-2 border-brand-500 pt-6">
+            <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3>
+            <p class="text-gray-600">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-gray-50">
+    <div class="section-container max-w-3xl">
+      <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Application Scenarios</h2>
+      <ul class="list-disc pl-5 space-y-2 text-gray-600">
+        <li>Temporary worker housing</li>
+        <li>Emergency / disaster response camps</li>
+        <li>Dealer showroom and rental fleets</li>
+        <li>Short-term event or project accommodation</li>
+      </ul>
+    </div>
+  </section>
+  <ConversionCta primaryLabel="Get a Factory Quote for Folding Houses" secondaryLabel="Request Dealer Pricing on WhatsApp" secondaryHref={whatsappUrl} />
+</BaseLayout>

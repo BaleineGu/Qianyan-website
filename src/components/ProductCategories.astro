@@ -1,0 +1,26 @@
+---
+import type { ProductCategory } from '@/types/halo';
+interface Props { categories: ProductCategory[] }
+const { categories } = Astro.props;
+---
+<section class="py-20 lg:py-28 bg-gray-50">
+  <div class="section-container">
+    <div class="max-w-3xl mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mb-3">Product Categories</h2>
+      <p class="text-lg text-gray-600">Factory-direct modular solutions ordered by B2B product priority.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {categories.map((c) => (
+        <a href={c.href} class="group block bg-white border border-gray-100 hover:border-brand-500/40 transition-colors">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src={c.image} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-brand-900 mb-2 group-hover:text-brand-600">{c.name}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{c.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

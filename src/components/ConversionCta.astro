@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string;
+  primaryLabel: string;
+  primaryHref?: string;
+  primaryIsInquiry?: boolean;
+  secondaryLabel: string;
+  secondaryHref: string;
+  secondaryIsInquiry?: boolean;
+}
+const {
+  title = 'Ready to move your project forward?',
+  primaryLabel,
+  primaryHref,
+  primaryIsInquiry = true,
+  secondaryLabel,
+  secondaryHref,
+  secondaryIsInquiry = false,
+} = Astro.props;
+---
+<section class="py-16 bg-brand-900 text-white">
+  <div class="section-container flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+    <h2 class="text-2xl sm:text-3xl font-bold max-w-xl">{title}</h2>
+    <div class="flex flex-wrap gap-4">
+      {primaryIsInquiry ? (
+        <button type="button" data-inquiry-open class="btn-primary">{primaryLabel}</button>
+      ) : (
+        <a href={primaryHref} target={primaryHref?.startsWith('http') ? '_blank' : undefined} rel={primaryHref?.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-primary">{primaryLabel}</a>
+      )}
+      {secondaryIsInquiry ? (
+        <button type="button" data-inquiry-open class="btn-outline">{secondaryLabel}</button>
+      ) : (
+        <a href={secondaryHref} target={secondaryHref.startsWith('http') ? '_blank' : undefined} rel={secondaryHref.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-outline">{secondaryLabel}</a>
+      )}
+    </div>
+  </div>
+</section>

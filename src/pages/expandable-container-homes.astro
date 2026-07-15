@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageBanner from '@/components/PageBanner.astro';
+import ConversionCta from '@/components/ConversionCta.astro';
+import {
+  expandableBanner,
+  expandableEngineering,
+  expandableFaqs,
+  expandableSpecHeaders,
+  expandableSpecs,
+  whatsappUrl,
+} from '@/data/site';
+---
+<BaseLayout title="Expandable Container Homes" description={expandableBanner.description}>
+  <PageBanner heading={expandableBanner.heading} description={expandableBanner.description} />
+  <section class="py-16">
+    <div class="section-container max-w-4xl">
+      <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Who This Product Is For</h2>
+      <ul class="list-disc pl-5 space-y-2 text-gray-600">
+        <li>Fast onsite setup with limited crew</li>
+        <li>Expandable living area from a compact shipping footprint</li>
+        <li>Factory customization for bedrooms, bathrooms, and finishes</li>
+        <li>Export packaging for US, Canada, Australia, and other markets</li>
+      </ul>
+    </div>
+  </section>
+  <section class="py-16 bg-gray-50">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">20ft vs 40ft Selection Matrix</h2>
+      <div class="overflow-x-auto border border-gray-200">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-brand-900 text-white"><tr>{expandableSpecHeaders.map((h) => <th class="px-4 py-3">{h}</th>)}</tr></thead>
+          <tbody>
+            {expandableSpecs.map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-4 py-3 font-medium text-brand-900">{row.label}</td>
+                {row.values.map((v) => <td class="px-4 py-3 text-gray-600">{v}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="py-16">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Engineering Details & Customization</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {expandableEngineering.map((item) => (
+          <div><h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3><p class="text-gray-600">{item.description}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-gray-50">
+    <div class="section-container max-w-4xl space-y-4">
+      <h2 class="text-2xl font-extrabold text-brand-900 mb-6">FAQ</h2>
+      {expandableFaqs.map((item) => (
+        <details class="border border-gray-200 bg-white">
+          <summary class="px-5 py-4 font-bold text-brand-900 cursor-pointer">{item.q}</summary>
+          <p class="px-5 pb-4 text-gray-600 border-t border-gray-100 pt-3">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+  <ConversionCta primaryLabel="Download Layout Plans & Blueprints" secondaryLabel="Get Shipping Quote / WhatsApp" secondaryHref={whatsappUrl} secondaryIsInquiry={true} />
+</BaseLayout>

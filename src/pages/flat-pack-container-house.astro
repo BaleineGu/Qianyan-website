@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageBanner from '@/components/PageBanner.astro';
+import ConversionCta from '@/components/ConversionCta.astro';
+import { flatPackAdvantages, flatPackBanner, flatPackMaterials, whatsappUrl } from '@/data/site';
+---
+<BaseLayout title="Flat Pack Container House" description={flatPackBanner.description}>
+  <PageBanner heading={flatPackBanner.heading} description={flatPackBanner.description} />
+  <section class="py-16">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Key B2B Procurement Advantages</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {flatPackAdvantages.map((item) => (
+          <div class="border-t-2 border-brand-500 pt-6">
+            <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3>
+            <p class="text-gray-600">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-gray-50">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Material Specifications</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {flatPackMaterials.map((item) => (
+          <div>
+            <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3>
+            <p class="text-gray-600">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <ConversionCta primaryLabel="Request Bulk Order Quotation & Wholesale Pricing" secondaryLabel="Chat on WhatsApp" secondaryHref={whatsappUrl} />
+</BaseLayout>
