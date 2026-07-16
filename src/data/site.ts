@@ -102,7 +102,7 @@ export const productCategories: ProductCategory[] = [
     name: 'Folding Houses',
     description:
       'Rapid-assembly shelters for temporary housing and regional dealers.',
-    image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cd00?w=800&q=80',
+    image: '/images/products/folding-house.png',
     href: '/folding-house',
   },
   {
