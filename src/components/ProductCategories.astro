@@ -9,18 +9,36 @@ const { categories } = Astro.props;
       <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mb-3">Product Categories</h2>
       <p class="text-lg text-gray-600">Factory-direct modular solutions ordered by B2B product priority.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      {categories.map((c) => (
-        <a href={c.href} class="group block bg-white border border-gray-100 hover:border-brand-500/40 transition-colors">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img src={c.image} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-brand-900 mb-2 group-hover:text-brand-600">{c.name}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{c.description}</p>
-          </div>
-        </a>
-      ))}
+    <div class="flex flex-col gap-10 lg:gap-14">
+      {categories.map((c, index) => {
+        const imageLeft = index % 2 === 0;
+        return (
+          <a
+            href={c.href}
+            class:list={[
+              'group flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10 bg-white border border-gray-100 hover:border-brand-500/40 transition-colors overflow-hidden',
+              !imageLeft && 'lg:flex-row-reverse',
+            ]}
+          >
+            <div class="lg:w-1/2 aspect-[16/10] overflow-hidden shrink-0">
+              <img
+                src={c.image}
+                alt=""
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.2]"
+                loading="lazy"
+              />
+            </div>
+            <div class="lg:w-1/2 px-6 pb-6 lg:py-8 lg:px-10">
+              <h3 class="text-2xl sm:text-3xl font-bold text-brand-900 mb-3 group-hover:text-brand-600 transition-colors">
+                {c.name}
+              </h3>
+              <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+                {c.description}
+              </p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>
