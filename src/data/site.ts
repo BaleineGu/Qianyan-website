@@ -156,15 +156,6 @@ export const containerLayoutSizes = [
     layout: '2 Bedrooms + Living Room + 1 Bathroom',
     floorPlan: '/images/layouts/40ft-floorplan.png',
   },
-  {
-    id: '40ft-2',
-    label: '40FT',
-    length: '12192mm',
-    width: '2438mm',
-    height: '2896mm',
-    area: '≈ 29.7m²',
-    layout: '3 Bedrooms + 1 Bathroom',
-  },
 ] as const;
 
 export const trustItems: TrustItem[] = [
