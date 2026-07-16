@@ -126,8 +126,8 @@ export const containerLayoutSizes = [
     layout: '1 Bedroom + 1 Bathroom',
   },
   {
-    id: '20ft-hc',
-    label: '20FT HC',
+    id: '20ft',
+    label: '20FT',
     length: '6058mm',
     width: '2438mm',
     height: '2896mm',
@@ -153,8 +153,8 @@ export const containerLayoutSizes = [
     layout: '2 Bedrooms + Living Room + 1 Bathroom',
   },
   {
-    id: '40ft-hc',
-    label: '40FT HC',
+    id: '40ft-2',
+    label: '40FT',
     length: '12192mm',
     width: '2438mm',
     height: '2896mm',
