@@ -1,0 +1,62 @@
+---
+import type { ContainerLayoutSize } from '@/types/halo';
+
+interface Props {
+  sizes: ContainerLayoutSize[];
+}
+
+const { sizes } = Astro.props;
+---
+
+<section class="py-20 lg:py-28 bg-white">
+  <div class="section-container">
+    <div class="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-brand-900 tracking-wide uppercase mb-3">
+        Container House – Various Sizes &amp; Real Layouts
+      </h2>
+      <p class="text-lg text-gray-600">
+        Real project cases · Practical layouts · Customizable solutions
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-8 lg:gap-10">
+      {
+        sizes.map((size) => (
+          <div class="flex flex-col xl:flex-row xl:items-stretch gap-5 lg:gap-6 border border-gray-100 bg-gray-50/60 p-4 sm:p-5">
+            {/* Spec block */}
+            <div class="xl:w-[180px] shrink-0 flex flex-col">
+              <div class="bg-brand-900 text-white px-4 py-3 text-center font-extrabold text-xl tracking-wide">
+                {size.label}
+              </div>
+              <div
+                class="mt-3 flex-1 min-h-[100px] bg-white border-2 border-dashed border-gray-300"
+                aria-hidden="true"
+              />
+            </div>
+
+            {/* Floor plan placeholder */}
+            <div class="xl:w-[280px] shrink-0 flex flex-col">
+              <div
+                class="flex-1 min-h-[160px] bg-white border-2 border-dashed border-gray-300"
+                aria-hidden="true"
+              />
+              <p class="mt-3 text-sm sm:text-base font-semibold text-brand-900 text-center xl:text-left">
+                {size.layout}
+              </p>
+            </div>
+
+            {/* Interior photo placeholders */}
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              {[0, 1, 2].map(() => (
+                <div
+                  class="aspect-[4/3] bg-white border-2 border-dashed border-gray-300"
+                  aria-hidden="true"
+                />
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
