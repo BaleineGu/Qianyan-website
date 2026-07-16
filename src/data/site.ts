@@ -117,8 +117,8 @@ export const productCategories: ProductCategory[] = [
 
 export const containerLayoutSizes = [
   {
-    id: '20ft',
-    label: '20FT',
+    id: '10ft',
+    label: '10FT',
     length: '6058mm',
     width: '2438mm',
     height: '2591mm',
