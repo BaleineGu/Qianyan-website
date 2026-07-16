@@ -115,6 +115,54 @@ export const productCategories: ProductCategory[] = [
   },
 ];
 
+export const containerLayoutSizes = [
+  {
+    id: '20ft',
+    label: '20FT',
+    length: '6058mm',
+    width: '2438mm',
+    height: '2591mm',
+    area: '≈ 14.7m²',
+    layout: '1 Bedroom + 1 Bathroom',
+  },
+  {
+    id: '20ft-hc',
+    label: '20FT HC',
+    length: '6058mm',
+    width: '2438mm',
+    height: '2896mm',
+    area: '≈ 14.7m²',
+    layout: '2 Bedrooms + 1 Bathroom',
+  },
+  {
+    id: '30ft',
+    label: '30FT',
+    length: '9000mm',
+    width: '2438mm',
+    height: '2591mm',
+    area: '≈ 21.9m²',
+    layout: '1 Bedroom + Living Room + 1 Bathroom',
+  },
+  {
+    id: '40ft',
+    label: '40FT',
+    length: '12192mm',
+    width: '2438mm',
+    height: '2591mm',
+    area: '≈ 29.7m²',
+    layout: '2 Bedrooms + Living Room + 1 Bathroom',
+  },
+  {
+    id: '40ft-hc',
+    label: '40FT HC',
+    length: '12192mm',
+    width: '2438mm',
+    height: '2896mm',
+    area: '≈ 29.7m²',
+    layout: '3 Bedrooms + 1 Bathroom',
+  },
+] as const;
+
 export const trustItems: TrustItem[] = [
   {
     id: 'engineering',

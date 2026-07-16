@@ -2,13 +2,22 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroCarousel from '@/components/HeroCarousel.astro';
 import ProductCategories from '@/components/ProductCategories.astro';
+import ContainerLayouts from '@/components/ContainerLayouts.astro';
 import TrustCapabilities from '@/components/TrustCapabilities.astro';
 import ConversionCta from '@/components/ConversionCta.astro';
-import { heroSlides, productCategories, trustItems, targetMarkets, whatsappUrl } from '@/data/site';
+import {
+  heroSlides,
+  productCategories,
+  containerLayoutSizes,
+  trustItems,
+  targetMarkets,
+  whatsappUrl,
+} from '@/data/site';
 ---
 <BaseLayout overlayHeader>
   <HeroCarousel slides={heroSlides} />
   <ProductCategories categories={productCategories} />
+  <ContainerLayouts sizes={[...containerLayoutSizes]} />
   <TrustCapabilities items={trustItems} markets={targetMarkets} />
   <ConversionCta
     title="Need specs, layouts, or a shipping estimate for your project site?"

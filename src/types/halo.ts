@@ -67,3 +67,13 @@ export interface FaqItem {
   question: string;
   answer: string;
 }
+
+export interface ContainerLayoutSize {
+  id: string;
+  label: string;
+  length: string;
+  width: string;
+  height: string;
+  area: string;
+  layout: string;
+}
