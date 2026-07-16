@@ -110,7 +110,7 @@ export const productCategories: ProductCategory[] = [
     name: 'Container Swimming Pools',
     description:
       'Above-ground cargo pool systems for hotels, resorts, and landscape contractors.',
-    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80',
+    image: '/images/products/container-swimming-pool.png',
     href: '/container-swimming-pool',
   },
 ];
