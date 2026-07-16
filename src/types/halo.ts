@@ -76,4 +76,5 @@ export interface ContainerLayoutSize {
   height: string;
   area: string;
   layout: string;
+  floorPlan?: string;
 }

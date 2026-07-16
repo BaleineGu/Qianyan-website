@@ -124,6 +124,7 @@ export const containerLayoutSizes = [
     height: '2591mm',
     area: '≈ 14.7m²',
     layout: '1 Bedroom + 1 Bathroom',
+    floorPlan: '/images/layouts/10ft-floorplan.png',
   },
   {
     id: '20ft',
@@ -133,6 +134,7 @@ export const containerLayoutSizes = [
     height: '2896mm',
     area: '≈ 14.7m²',
     layout: '2 Bedrooms + 1 Bathroom',
+    floorPlan: '/images/layouts/20ft-floorplan.png',
   },
   {
     id: '30ft',
@@ -142,6 +144,7 @@ export const containerLayoutSizes = [
     height: '2591mm',
     area: '≈ 21.9m²',
     layout: '1 Bedroom + Living Room + 1 Bathroom',
+    floorPlan: '/images/layouts/30ft-floorplan.png',
   },
   {
     id: '40ft',
@@ -151,6 +154,7 @@ export const containerLayoutSizes = [
     height: '2591mm',
     area: '≈ 29.7m²',
     layout: '2 Bedrooms + Living Room + 1 Bathroom',
+    floorPlan: '/images/layouts/40ft-floorplan.png',
   },
   {
     id: '40ft-2',
