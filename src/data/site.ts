@@ -94,7 +94,7 @@ export const productCategories: ProductCategory[] = [
     name: 'Flat Pack Container Houses',
     description:
       'Stackable modular offices and worker camps with freight-efficient packing.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
+    image: '/images/products/flat-pack-container-house.png',
     href: '/flat-pack-container-house',
   },
   {
