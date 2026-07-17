@@ -1,12 +1,14 @@
 ---
 const items = [
   {
-    image: '/images/features/global-logistics.png',
-    text: 'Streamline logistics costs, empower global trade.',
-  },
-  {
     image: '/images/features/folding-assembly.png',
     text: 'Easy to assemble—transform your space in just hours instead of months.',
+    imageFit: 'cover' as const,
+  },
+  {
+    image: '/images/features/global-logistics.png',
+    text: 'Streamline logistics costs, empower global trade.',
+    imageFit: 'contain' as const,
   },
 ];
 ---
@@ -17,11 +19,14 @@ const items = [
       {
         items.map((item) => (
           <div class="flex flex-col gap-4">
-            <div class="aspect-[16/10] w-full overflow-hidden bg-white border border-gray-200">
+            <div class="aspect-[16/10] w-full overflow-hidden bg-white border border-gray-200 flex items-center justify-center p-2 sm:p-3">
               <img
                 src={item.image}
                 alt=""
-                class="w-full h-full object-cover"
+                class:list={[
+                  'w-full h-full',
+                  item.imageFit === 'contain' ? 'object-contain' : 'object-cover',
+                ]}
                 loading="lazy"
               />
             </div>
