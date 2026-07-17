@@ -155,6 +155,11 @@ export const containerLayoutSizes = [
     area: '≈ 21.9m²',
     layout: '1 Bedroom + Living Room + 1 Bathroom',
     floorPlan: '/images/layouts/30ft-floorplan.png',
+    interiorPhotos: [
+      '/images/layouts/30ft-interior-1.png',
+      '/images/layouts/30ft-interior-2.png',
+      '/images/layouts/30ft-interior-3.png',
+    ],
   },
   {
     id: '40ft',
