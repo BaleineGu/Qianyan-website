@@ -24,11 +24,11 @@ const highlights = [
       {
         highlights.map((item) => (
           <div class="flex flex-col gap-4">
-            <div class="aspect-[4/3] w-full overflow-hidden bg-gray-50 border border-gray-200">
+            <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
               <img
                 src={item.image}
                 alt={item.alt}
-                class="w-full h-full object-cover"
+                class="w-full h-auto object-contain"
                 loading="lazy"
               />
             </div>
