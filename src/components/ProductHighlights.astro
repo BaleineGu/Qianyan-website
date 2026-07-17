@@ -1,0 +1,41 @@
+---
+const highlights = [
+  {
+    image: '/images/features/factory-prefab.png',
+    alt: 'Factory-prefabricated modular units ready for transport',
+    text: 'Strictly adhering to eco-friendly building principles, the structure is 100% factory-prefabricated. On-site assembly requires no complex foundation work, achieving "zero construction waste." It not only allows for non-destructive reuse but also perfectly preserves the natural landscape of ecologically sensitive areas, such as forests and lakeside environments.',
+  },
+  {
+    image: '/images/features/modular-assembly.png',
+    alt: 'Multi-layer modular building assembled on site',
+    text: 'The folding and multi-layer modular design significantly reduces volume during transport, saving you substantial international shipping costs. Upon arrival at the site, the product can be quickly assembled from its modular components, resulting in significant savings in time and labor costs.',
+  },
+  {
+    image: '/images/features/capsule-aesthetic.png',
+    alt: 'Sleek capsule cabin with panoramic windows',
+    text: 'Say goodbye to the cheap look of traditional temporary structures! This design features a sleek, high-tech aesthetic, panoramic floor-to-ceiling windows, and premium, fully finished interiors. Its stylish, visually striking design is inherently "Instagrammable," significantly boosting both the premium value of the accommodation and its appeal on social media.',
+  },
+];
+---
+
+<section class="py-14 lg:py-20 bg-white">
+  <div class="section-container">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+      {
+        highlights.map((item) => (
+          <div class="flex flex-col gap-4">
+            <div class="aspect-[4/3] w-full overflow-hidden bg-gray-50 border border-gray-200">
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
