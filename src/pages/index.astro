@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroCarousel from '@/components/HeroCarousel.astro';
 import ProductCategories from '@/components/ProductCategories.astro';
 import ContainerLayouts from '@/components/ContainerLayouts.astro';
+import DualMediaPlaceholders from '@/components/DualMediaPlaceholders.astro';
 import TrustCapabilities from '@/components/TrustCapabilities.astro';
 import ConversionCta from '@/components/ConversionCta.astro';
 import {
@@ -18,6 +19,7 @@ import {
   <HeroCarousel slides={heroSlides} />
   <ProductCategories categories={productCategories} />
   <ContainerLayouts sizes={[...containerLayoutSizes]} />
+  <DualMediaPlaceholders />
   <TrustCapabilities items={trustItems} markets={targetMarkets} />
   <ConversionCta
     title="Need specs, layouts, or a shipping estimate for your project site?"
