@@ -1,0 +1,36 @@
+---
+const items = [
+  {
+    image: '/images/features/global-logistics.png',
+    text: 'Streamline logistics costs, empower global trade.',
+  },
+  {
+    image: '/images/features/folding-assembly.png',
+    text: 'Easy to assemble—transform your space in just hours instead of months.',
+  },
+];
+---
+
+<section class="py-16 lg:py-20 bg-gray-50">
+  <div class="section-container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      {
+        items.map((item) => (
+          <div class="flex flex-col gap-4">
+            <div class="aspect-[16/10] w-full overflow-hidden bg-white border border-gray-200">
+              <img
+                src={item.image}
+                alt=""
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <p class="text-base sm:text-lg text-brand-900 font-medium leading-relaxed px-1">
+              {item.text}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
