@@ -4,6 +4,7 @@ import HeroCarousel from '@/components/HeroCarousel.astro';
 import ProductCategories from '@/components/ProductCategories.astro';
 import ContainerLayouts from '@/components/ContainerLayouts.astro';
 import CertificateMarquee from '@/components/CertificateMarquee.astro';
+import ProductHighlights from '@/components/ProductHighlights.astro';
 import TrustCapabilities from '@/components/TrustCapabilities.astro';
 import ConversionCta from '@/components/ConversionCta.astro';
 import {
@@ -20,6 +21,7 @@ import {
   <ProductCategories categories={productCategories} />
   <ContainerLayouts sizes={[...containerLayoutSizes]} />
   <CertificateMarquee />
+  <ProductHighlights />
   <TrustCapabilities items={trustItems} markets={targetMarkets} />
   <ConversionCta
     title="Need specs, layouts, or a shipping estimate for your project site?"
