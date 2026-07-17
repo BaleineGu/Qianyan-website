@@ -1,8 +1,5 @@
 ---
-const certificates = Array.from(
-  { length: 23 },
-  (_, index) => `/images/certificates/certificate-${String(index + 1).padStart(2, '0')}.png`,
-);
+const placeholderCount = 6;
 ---
 
 <section class="py-14 lg:py-20 bg-white" aria-labelledby="certificate-heading">
@@ -11,23 +8,11 @@ const certificates = Array.from(
       Certifications
     </h2>
 
-    <div class="certificate-viewport mx-auto overflow-hidden">
+    <div class="certificate-viewport mx-auto">
       <div class="certificate-track">
         {
-          [0, 1].map((groupIndex) => (
-            <div class="certificate-group" aria-hidden={groupIndex === 1 ? 'true' : undefined}>
-              {certificates.map((certificate, index) => (
-                <div class="certificate-card">
-                  <img
-                    src={certificate}
-                    alt={groupIndex === 0 ? `Certificate ${index + 1}` : ''}
-                    class="w-full h-full object-contain"
-                    loading="lazy"
-                    draggable="false"
-                  />
-                </div>
-              ))}
-            </div>
+          Array.from({ length: placeholderCount }).map(() => (
+            <div class="certificate-card" aria-hidden="true" />
           ))
         }
       </div>
@@ -46,14 +31,7 @@ const certificates = Array.from(
 
   .certificate-track {
     display: flex;
-    width: max-content;
-    gap: var(--cert-gap);
-    animation: certificate-scroll 55s linear infinite;
-    will-change: transform;
-  }
-
-  .certificate-group {
-    display: flex;
+    width: 100%;
     gap: var(--cert-gap);
   }
 
@@ -65,21 +43,5 @@ const certificates = Array.from(
     overflow: hidden;
     border: 1px solid rgb(209 213 219);
     background: white;
-    padding: 0.35rem;
-  }
-
-  @keyframes certificate-scroll {
-    from {
-      transform: translateX(calc(-50% - var(--cert-gap) / 2));
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .certificate-track {
-      animation-play-state: paused;
-    }
   }
 </style>
