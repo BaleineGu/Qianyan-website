@@ -46,7 +46,10 @@ const { sizes } = Astro.props;
             <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {size.interiorPhotos?.length
                 ? size.interiorPhotos.map((photo) => (
-                    <div class="aspect-[4/3] overflow-hidden bg-white border border-gray-200">
+                    <div
+                      class="interior-photo aspect-[4/3] overflow-hidden bg-white border border-gray-200 cursor-zoom-in"
+                      data-preview-src={photo}
+                    >
                       <img
                         src={photo}
                         alt={`${size.label} interior`}
@@ -68,3 +71,67 @@ const { sizes } = Astro.props;
     </div>
   </div>
 </section>
+
+<div
+  id="interior-photo-preview"
+  class="hidden fixed z-[100] pointer-events-none bg-white border border-gray-200 shadow-2xl p-1"
+  aria-hidden="true"
+>
+  <img id="interior-photo-preview-img" src="" alt="" class="block max-w-full max-h-full object-contain" />
+</div>
+
+<script>
+  const preview = document.getElementById('interior-photo-preview');
+  const previewImg = document.getElementById('interior-photo-preview-img') as HTMLImageElement | null;
+  const MARGIN = 16;
+
+  function positionPreview(target: HTMLElement) {
+    if (!preview) return;
+    const rect = target.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const maxW = Math.min(720, vw * 0.5);
+    const maxH = vh * 0.8;
+    preview.style.maxWidth = `${maxW}px`;
+    preview.style.maxHeight = `${maxH}px`;
+    if (previewImg) {
+      previewImg.style.maxWidth = `${maxW - 8}px`;
+      previewImg.style.maxHeight = `${maxH - 8}px`;
+    }
+
+    const pw = preview.offsetWidth;
+    const ph = preview.offsetHeight;
+
+    // Prefer right side of the hovered photo; fall back to left.
+    let left = rect.right + MARGIN;
+    if (left + pw > vw - MARGIN) {
+      left = rect.left - MARGIN - pw;
+    }
+    if (left < MARGIN) {
+      left = Math.max(MARGIN, Math.min(vw - pw - MARGIN, rect.right + MARGIN));
+    }
+
+    let top = rect.top + rect.height / 2 - ph / 2;
+    top = Math.max(MARGIN, Math.min(vh - ph - MARGIN, top));
+
+    preview.style.left = `${left}px`;
+    preview.style.top = `${top}px`;
+  }
+
+  document.querySelectorAll<HTMLElement>('.interior-photo').forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      const src = el.dataset.previewSrc;
+      if (!src || !preview || !previewImg) return;
+      previewImg.src = src;
+      preview.classList.remove('hidden');
+      if (previewImg.complete) {
+        positionPreview(el);
+      } else {
+        previewImg.onload = () => positionPreview(el);
+      }
+    });
+    el.addEventListener('mouseleave', () => {
+      preview?.classList.add('hidden');
+    });
+  });
+</script>
