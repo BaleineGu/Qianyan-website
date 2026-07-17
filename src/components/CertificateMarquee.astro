@@ -1,0 +1,184 @@
+---
+const certificates = Array.from(
+  { length: 23 },
+  (_, index) => `/images/certificates/certificate-${String(index + 1).padStart(2, '0')}.png`,
+);
+---
+
+<section class="py-14 lg:py-20 bg-white" aria-labelledby="certificate-heading">
+  <div class="section-container">
+    <h2 id="certificate-heading" class="text-3xl sm:text-4xl font-extrabold text-brand-900 mb-8">
+      Certifications
+    </h2>
+
+    <div class="certificate-viewport mx-auto overflow-hidden">
+      <div id="certificate-track" class="certificate-track">
+        {
+          [0, 1].map((groupIndex) => (
+            <div class="certificate-group" aria-hidden={groupIndex === 1 ? 'true' : undefined}>
+              {certificates.map((certificate, index) => (
+                <button
+                  type="button"
+                  class="certificate-card"
+                  data-certificate-src={certificate}
+                  aria-label={`Preview certificate ${index + 1}`}
+                  tabindex={groupIndex === 1 ? -1 : 0}
+                >
+                  <img
+                    src={certificate}
+                    alt={groupIndex === 0 ? `Certificate ${index + 1}` : ''}
+                    class="w-full h-full object-contain"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </button>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="certificate-preview" class="certificate-preview hidden" aria-hidden="true">
+  <img id="certificate-preview-image" src="" alt="" />
+</div>
+
+<style>
+  .certificate-viewport {
+    width: 100%;
+    container-type: inline-size;
+    container-name: cert-viewport;
+    --cert-gap: clamp(0.5rem, 1.2cqi, 1rem);
+    --cert-visible: 6;
+  }
+
+  .certificate-track {
+    display: flex;
+    width: max-content;
+    gap: var(--cert-gap);
+    animation: certificate-scroll 55s linear infinite;
+    will-change: transform;
+  }
+
+  .certificate-track.is-paused {
+    animation-play-state: paused;
+  }
+
+  .certificate-group {
+    display: flex;
+    gap: var(--cert-gap);
+  }
+
+  .certificate-card {
+    width: calc((100cqi - (var(--cert-visible) - 1) * var(--cert-gap)) / var(--cert-visible));
+    aspect-ratio: 16 / 20;
+    height: auto;
+    flex: none;
+    overflow: hidden;
+    border: 1px solid rgb(209 213 219);
+    background: white;
+    padding: 0.35rem;
+    cursor: zoom-in;
+  }
+
+  .certificate-card:focus-visible {
+    outline: 2px solid rgb(14 165 233);
+    outline-offset: 2px;
+  }
+
+  .certificate-preview {
+    position: fixed;
+    z-index: 120;
+    max-width: min(72vw, 720px);
+    max-height: 86vh;
+    padding: 6px;
+    border: 1px solid rgb(209 213 219);
+    background: white;
+    box-shadow: 0 24px 60px rgb(15 23 42 / 28%);
+    pointer-events: none;
+  }
+
+  .certificate-preview img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(72vw, 708px);
+    max-height: calc(86vh - 12px);
+    object-fit: contain;
+  }
+
+  @keyframes certificate-scroll {
+    to {
+      transform: translateX(calc(-50% - var(--cert-gap) / 2));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .certificate-track {
+      animation-play-state: paused;
+    }
+  }
+</style>
+
+<script>
+  const track = document.getElementById('certificate-track');
+  const preview = document.getElementById('certificate-preview');
+  const previewImage = document.getElementById('certificate-preview-image') as HTMLImageElement | null;
+  const viewportMargin = 16;
+
+  function positionPreview(card: HTMLElement) {
+    if (!preview || !previewImage) return;
+
+    const cardRect = card.getBoundingClientRect();
+    const previewRect = preview.getBoundingClientRect();
+    let left = cardRect.right + viewportMargin;
+
+    if (left + previewRect.width > window.innerWidth - viewportMargin) {
+      left = cardRect.left - previewRect.width - viewportMargin;
+    }
+
+    left = Math.max(
+      viewportMargin,
+      Math.min(left, window.innerWidth - previewRect.width - viewportMargin),
+    );
+
+    let top = cardRect.top + cardRect.height / 2 - previewRect.height / 2;
+    top = Math.max(
+      viewportMargin,
+      Math.min(top, window.innerHeight - previewRect.height - viewportMargin),
+    );
+
+    preview.style.left = `${left}px`;
+    preview.style.top = `${top}px`;
+  }
+
+  function showPreview(card: HTMLElement) {
+    const source = card.dataset.certificateSrc;
+    if (!source || !preview || !previewImage) return;
+
+    track?.classList.add('is-paused');
+    previewImage.src = source;
+    preview.classList.remove('hidden');
+
+    const placePreview = () => requestAnimationFrame(() => positionPreview(card));
+    if (previewImage.complete) {
+      placePreview();
+    } else {
+      previewImage.addEventListener('load', placePreview, { once: true });
+    }
+  }
+
+  function hidePreview() {
+    track?.classList.remove('is-paused');
+    preview?.classList.add('hidden');
+  }
+
+  document.querySelectorAll<HTMLElement>('.certificate-card').forEach((card) => {
+    card.addEventListener('mouseenter', () => showPreview(card));
+    card.addEventListener('mouseleave', hidePreview);
+    card.addEventListener('focus', () => showPreview(card));
+    card.addEventListener('blur', hidePreview);
+  });
+</script>
