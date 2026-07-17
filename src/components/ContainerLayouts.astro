@@ -74,11 +74,40 @@ const { sizes } = Astro.props;
 
 <div
   id="interior-photo-preview"
-  class="hidden fixed z-[100] pointer-events-none bg-white border border-gray-200 shadow-2xl p-1"
+  class="interior-photo-preview fixed z-[100] pointer-events-none bg-white border border-gray-200 shadow-2xl p-1"
   aria-hidden="true"
 >
   <img id="interior-photo-preview-img" src="" alt="" class="block max-w-full max-h-full object-contain" />
 </div>
+
+<style>
+  .interior-photo-preview {
+    opacity: 0;
+    transform: scale(0.72);
+    transform-origin: center center;
+    visibility: hidden;
+    transition:
+      opacity 0.28s ease,
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.28s;
+  }
+
+  .interior-photo-preview.is-visible {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+    transition:
+      opacity 0.28s ease,
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .interior-photo-preview {
+      transition: none;
+    }
+  }
+</style>
 
 <script>
   const preview = document.getElementById('interior-photo-preview');
@@ -118,20 +147,38 @@ const { sizes } = Astro.props;
     preview.style.top = `${top}px`;
   }
 
-  document.querySelectorAll<HTMLElement>('.interior-photo').forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      const src = el.dataset.previewSrc;
-      if (!src || !preview || !previewImg) return;
-      previewImg.src = src;
-      preview.classList.remove('hidden');
-      if (previewImg.complete) {
+  function showPreview(el: HTMLElement) {
+    const src = el.dataset.previewSrc;
+    if (!src || !preview || !previewImg) return;
+
+    previewImg.src = src;
+    preview.setAttribute('aria-hidden', 'false');
+
+    const placeAndReveal = () => {
+      requestAnimationFrame(() => {
         positionPreview(el);
-      } else {
-        previewImg.onload = () => positionPreview(el);
-      }
-    });
-    el.addEventListener('mouseleave', () => {
-      preview?.classList.add('hidden');
-    });
+        requestAnimationFrame(() => {
+          preview.classList.add('is-visible');
+        });
+      });
+    };
+
+    if (previewImg.complete) {
+      placeAndReveal();
+    } else {
+      previewImg.onload = placeAndReveal;
+    }
+  }
+
+  function hidePreview() {
+    if (!preview) return;
+    preview.classList.remove('is-visible');
+    preview.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll<HTMLElement>('.interior-photo').forEach((el) => {
+    el.addEventListener('mouseenter', () => showPreview(el));
+    el.addEventListener('mouseleave', hidePreview);
   });
 </script>
+
