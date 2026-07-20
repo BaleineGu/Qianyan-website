@@ -1,8 +1,8 @@
 ---
 const highlights = [
   {
-    image: '/images/features/factory-prefab.png',
-    alt: 'Double-wing container house folding process',
+    image: null as string | null,
+    alt: '',
     text: 'Strictly adhering to eco-friendly building principles, the structure is 100% factory-prefabricated. On-site assembly requires no complex foundation work, achieving "zero construction waste." It not only allows for non-destructive reuse but also perfectly preserves the natural landscape of ecologically sensitive areas, such as forests and lakeside environments.',
   },
   {
@@ -24,13 +24,15 @@ const highlights = [
       {
         highlights.map((item) => (
           <div class="flex flex-col gap-4">
-            <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
-              <img
-                src={item.image}
-                alt={item.alt}
-                class="w-full h-auto object-contain"
-                loading="lazy"
-              />
+            <div class="aspect-[4/3] w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              ) : null}
             </div>
             <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
           </div>
