@@ -10,7 +10,7 @@ const secondary = [
     image: '/images/features/modular-assembly.png',
     hoverImage: '/images/features/modular-assembly-hover.png',
     alt: 'Prefabricated modular units being assembled outdoors',
-    hoverAlt: 'Multi-layer modular building assembled on site',
+    hoverAlt: 'Factory-prefabricated modular units ready for transport',
     text: 'The folding and multi-layer modular design significantly reduces volume during transport, saving you substantial international shipping costs. Upon arrival at the site, the product can be quickly assembled from its modular components, resulting in significant savings in time and labor costs.',
   },
   {
@@ -47,7 +47,7 @@ const secondary = [
               <div
                 class:list={[
                   'w-full overflow-hidden bg-gray-50 border border-gray-200',
-                  item.hoverImage ? 'highlight-swap group' : 'flex items-center justify-center',
+                  item.hoverImage ? 'highlight-swap group aspect-[4/3]' : 'flex items-center justify-center',
                 ]}
               >
                 {item.hoverImage ? (
@@ -55,13 +55,13 @@ const secondary = [
                     <img
                       src={item.image}
                       alt={item.alt}
-                      class="highlight-swap__base w-full h-auto object-contain transition-opacity duration-300 group-hover:opacity-0"
+                      class="highlight-swap__image transition-opacity duration-300 group-hover:opacity-0"
                       loading="lazy"
                     />
                     <img
                       src={item.hoverImage}
                       alt={item.hoverAlt}
-                      class="highlight-swap__hover absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      class="highlight-swap__image opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       loading="lazy"
                     />
                   </>
@@ -86,5 +86,13 @@ const secondary = [
 <style>
   .highlight-swap {
     position: relative;
+  }
+
+  .highlight-swap__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>
