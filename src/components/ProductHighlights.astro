@@ -2,9 +2,7 @@
 const highlights = [
   {
     image: '/images/features/factory-prefab.png',
-    hoverImage: '/images/features/factory-prefab-hover.png',
-    alt: 'Double-wing container house folding process',
-    hoverAlt: 'Prefabricated modular house in natural landscape',
+    alt: 'Factory-prefabricated modular units ready for transport',
     text: 'Strictly adhering to eco-friendly building principles, the structure is 100% factory-prefabricated. On-site assembly requires no complex foundation work, achieving "zero construction waste." It not only allows for non-destructive reuse but also perfectly preserves the natural landscape of ecologically sensitive areas, such as forests and lakeside environments.',
   },
   {
@@ -26,35 +24,13 @@ const highlights = [
       {
         highlights.map((item) => (
           <div class="flex flex-col gap-4">
-            <div
-              class:list={[
-                'w-full overflow-hidden bg-gray-50 border border-gray-200',
-                item.hoverImage ? 'highlight-swap group' : 'flex items-center justify-center',
-              ]}
-            >
-              {item.hoverImage ? (
-                <>
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    class="highlight-swap__base w-full h-auto object-contain transition-opacity duration-300 group-hover:opacity-0"
-                    loading="lazy"
-                  />
-                  <img
-                    src={item.hoverImage}
-                    alt={item.hoverAlt}
-                    class="highlight-swap__hover absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    loading="lazy"
-                  />
-                </>
-              ) : (
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  class="w-full h-auto object-contain"
-                  loading="lazy"
-                />
-              )}
+            <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="w-full h-auto object-contain"
+                loading="lazy"
+              />
             </div>
             <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
           </div>
@@ -63,9 +39,3 @@ const highlights = [
     </div>
   </div>
 </section>
-
-<style>
-  .highlight-swap {
-    position: relative;
-  }
-</style>
