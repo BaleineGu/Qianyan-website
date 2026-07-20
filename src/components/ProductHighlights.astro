@@ -8,7 +8,9 @@ const primary = {
 const secondary = [
   {
     image: '/images/features/modular-assembly.png',
+    hoverImage: '/images/features/modular-assembly-hover.png',
     alt: 'Multi-layer modular building assembled on site',
+    hoverAlt: 'Prefabricated modular units being assembled outdoors',
     text: 'The folding and multi-layer modular design significantly reduces volume during transport, saving you substantial international shipping costs. Upon arrival at the site, the product can be quickly assembled from its modular components, resulting in significant savings in time and labor costs.',
   },
   {
@@ -40,13 +42,35 @@ const secondary = [
         {
           secondary.map((item) => (
             <div class="flex flex-col gap-4">
-              <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  class="w-full h-auto object-contain"
-                  loading="lazy"
-                />
+              <div
+                class:list={[
+                  'w-full overflow-hidden bg-gray-50 border border-gray-200',
+                  item.hoverImage ? 'highlight-swap group' : 'flex items-center justify-center',
+                ]}
+              >
+                {item.hoverImage ? (
+                  <>
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      class="highlight-swap__base w-full h-auto object-contain transition-opacity duration-300 group-hover:opacity-0"
+                      loading="lazy"
+                    />
+                    <img
+                      src={item.hoverImage}
+                      alt={item.hoverAlt}
+                      class="highlight-swap__hover absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      loading="lazy"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    class="w-full h-auto object-contain"
+                    loading="lazy"
+                  />
+                )}
               </div>
               <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
             </div>
@@ -56,3 +80,9 @@ const secondary = [
     </div>
   </div>
 </section>
+
+<style>
+  .highlight-swap {
+    position: relative;
+  }
+</style>
