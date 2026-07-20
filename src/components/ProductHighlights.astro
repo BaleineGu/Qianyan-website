@@ -1,10 +1,11 @@
 ---
-const highlights = [
-  {
-    image: '/images/features/factory-prefab.png',
-    alt: 'Double-wing container house folding process',
-    text: 'Strictly adhering to eco-friendly building principles, the structure is 100% factory-prefabricated. On-site assembly requires no complex foundation work, achieving "zero construction waste." It not only allows for non-destructive reuse but also perfectly preserves the natural landscape of ecologically sensitive areas, such as forests and lakeside environments.',
-  },
+const primary = {
+  image: '/images/features/factory-prefab.png',
+  alt: 'Double-wing container house folding process',
+  text: 'Strictly adhering to eco-friendly building principles, the structure is 100% factory-prefabricated. On-site assembly requires no complex foundation work, achieving "zero construction waste." It not only allows for non-destructive reuse but also perfectly preserves the natural landscape of ecologically sensitive areas, such as forests and lakeside environments.',
+};
+
+const secondary = [
   {
     image: '/images/features/modular-assembly.png',
     alt: 'Multi-layer modular building assembled on site',
@@ -20,24 +21,38 @@ const highlights = [
 
 <section class="py-14 lg:py-20 bg-white">
   <div class="section-container">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-      {
-        highlights.map((item) => (
-          <div class="flex flex-col gap-4">
-            <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
-              {item.image ? (
+    <div class="flex flex-col gap-10 lg:gap-14">
+      <div class="flex flex-col gap-4 w-full">
+        <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
+          <img
+            src={primary.image}
+            alt={primary.alt}
+            class="w-full h-auto object-contain"
+            loading="lazy"
+          />
+        </div>
+        <p class="w-full text-sm sm:text-base text-gray-600 leading-relaxed">
+          {primary.text}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        {
+          secondary.map((item) => (
+            <div class="flex flex-col gap-4">
+              <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
                 <img
                   src={item.image}
                   alt={item.alt}
                   class="w-full h-auto object-contain"
                   loading="lazy"
                 />
-              ) : null}
+              </div>
+              <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
             </div>
-            <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
