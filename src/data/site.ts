@@ -109,7 +109,7 @@ export const productCategories: ProductCategory[] = [
     id: 'pools',
     name: 'Container Swimming Pools',
     description:
-      'Above-ground cargo pool systems for hotels, resorts, and landscape contractors.',
+      'Unlike permanent in-ground structures, container pools are fully relocatable. If a resort relocates, changes its site layout, or a tenant\'s lease expires, the entire pool can be easily lifted, transported, and re-installed at a new location. Engineered with a self-supporting structural steel frame, it can be installed fully above-ground, semi-inground, or on sloped and difficult terrains where traditional pool digging is impossible or restricted by permits. Ready to design your own custom swimming pool? Contact our engineering team today to receive layout specifications and an export shipping quote',
     image: '/images/products/container-swimming-pool.png',
     href: '/container-swimming-pool',
   },
