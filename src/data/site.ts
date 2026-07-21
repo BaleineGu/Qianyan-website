@@ -77,7 +77,7 @@ export const productCategories: ProductCategory[] = [
     id: 'expandable',
     name: 'Expandable Container Homes',
     description:
-      '20ft & 40ft fold-out modular living spaces for fast onsite setup. Best for developers and building contractors.',
+      'These expandable container homes—ranging from 10 to 40 feet—offer exceptional spatial flexibility; they utilize an expandable structure to increase usable area while remaining easy to transport and relocate thanks to their foldable design. Combining unique aesthetics with practicality, they feature customizable dimensions and interior layouts. As an innovative type of modular housing, they deliver extraordinary space-use efficiency through advanced technology and design. Built from high-strength, eco-friendly materials, they are both refined in appearance and ruggedly durable, capable of withstanding diverse and challenging environmental conditions. Their folding mechanism allows for effortless expansion and contraction, creating a significantly more spacious and comfortable living or working environment.',
     image: '/images/products/expandable-container-home.png',
     href: '/expandable-container-homes',
   },
