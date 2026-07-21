@@ -93,7 +93,7 @@ export const productCategories: ProductCategory[] = [
     id: 'flat-pack',
     name: 'Flat Pack Container Houses',
     description:
-      'Stackable modular offices and worker camps with freight-efficient packing.',
+      'As an efficient, flexible and economical temporary building solution. thanks to its modular design, rapid construction, flexible combination, environmental protection and energy conservation, excellent thermal insulation and heat preservation performance.in construction sites, temporary offices, commercial exhibitions, and disaster relief emergencies.This shows that the quick-assembly packing box house has great practical value and market potential.',
     image: '/images/products/flat-pack-container-house.png',
     href: '/flat-pack-container-house',
   },
