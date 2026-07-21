@@ -56,7 +56,7 @@ export const heroSlides: HeroSlide[] = [
     id: 'slide-2',
     title: 'Container houses manufacturer from China',
     subtitle:
-      'The company primarily deals in expandable container homes, space capsule houses, flat-pack container houses, folding houses, and container swimming pools.',
+      'Make space construction efficient.\nEnsure a comfortable living experience.',
     image: '/images/hero/slide-2.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
