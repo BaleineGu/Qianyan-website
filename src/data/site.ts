@@ -101,7 +101,7 @@ export const productCategories: ProductCategory[] = [
     id: 'folding',
     name: 'Folding Houses',
     description:
-      'Rapid-assembly shelters for temporary housing and regional dealers.',
+      'It does not require a floor for on-site installation and only takes 3 to 5 minutes. It is easy to disassemble and assemble, and the transportation cost is relatively low. Compared with traditional color steel houses, it can save two-thirds of the parts cost. It is quick and convenient to disassemble and assemble, does not require professional construction teams, generates no construction waste, shortens disassembly and assembly time, and can be reused without damage, saving transportation and disassembly and assembly costs. It can be used for medical disaster relief, military barracks, post-earthquake resettlement, highways railways, emergency response to dilapidated houses, etc.',
     image: '/images/products/folding-house.png',
     href: '/folding-house',
   },
