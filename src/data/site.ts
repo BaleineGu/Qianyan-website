@@ -54,9 +54,9 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 'slide-2',
-    title: 'Build Anywhere. Live Unbound. Custom Container Solutions',
+    title: 'Sustainable Structures, Endless Possibilities',
     subtitle:
-      'Make space construction efficient.\nEnsure a comfortable living experience.',
+      'Transform your commercial vision into reality. Our eco-friendly modular solutions minimize construction time and maximize ROI for forward-thinking developers',
     image: '/images/hero/slide-2.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
