@@ -63,9 +63,9 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 'slide-3',
-    title: 'Container houses manufacturer from China',
+    title: 'Build Anywhere. Live Unbound. Custom Container Solutions',
     subtitle:
-      'The company primarily deals in expandable container homes, space capsule houses, flat-pack container houses, folding houses, and container swimming pools.',
+      'From eco-friendly modular homes to luxury backyard pools. We design, build, and ship globally to match your vision.',
     image: '/images/hero/slide-3.png',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
