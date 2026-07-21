@@ -30,6 +30,17 @@ const year = new Date().getFullYear();
         </div>
       </div>
     </div>
-    <div class="mt-12 pt-8 border-t border-gray-700 text-sm text-gray-500">&copy; {year} {siteConfig.name}. All rights reserved.</div>
+    <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <p class="text-sm text-gray-500">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded transition-colors"
+      >
+        TOUCH — Get in Touch
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
   </div>
 </footer>
