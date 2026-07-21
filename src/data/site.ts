@@ -85,7 +85,7 @@ export const productCategories: ProductCategory[] = [
     id: 'capsule',
     name: 'Space Capsule Houses',
     description:
-      'Turnkey glamping units with panoramic glass. Built for resort and hospitality investors.',
+      'Designed with large floor-to-ceiling windows and skylights, maximizing the connection with nature and significantly increasing the property\'s social media appeal. Adhering to sustainable building standards, the factory-prefabricated modular process generates zero construction waste on-site. The temporary installation footprint requires minimal ground prep. The assembly process is super simple and efficient, protecting the local ecology and making it ideal for environmentally sensitive destinations.',
     image: '/images/products/space-capsule-house.png',
     href: '/space-capsule-house',
   },
