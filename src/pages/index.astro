@@ -5,14 +5,11 @@ import ProductCategories from '@/components/ProductCategories.astro';
 import ContainerLayouts from '@/components/ContainerLayouts.astro';
 import CertificateMarquee from '@/components/CertificateMarquee.astro';
 import ProductHighlights from '@/components/ProductHighlights.astro';
-import TrustCapabilities from '@/components/TrustCapabilities.astro';
 import ConversionCta from '@/components/ConversionCta.astro';
 import {
   heroSlides,
   productCategories,
   containerLayoutSizes,
-  trustItems,
-  targetMarkets,
   whatsappUrl,
 } from '@/data/site';
 ---
@@ -22,7 +19,6 @@ import {
   <ContainerLayouts sizes={[...containerLayoutSizes]} />
   <CertificateMarquee />
   <ProductHighlights />
-  <TrustCapabilities items={trustItems} markets={targetMarkets} />
   <ConversionCta
     title="Need specs, layouts, or a shipping estimate for your project site?"
     primaryLabel="Get a Factory Quote"
