@@ -54,7 +54,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 'slide-2',
-    title: 'Container houses manufacturer from China',
+    title: 'Build Anywhere. Live Unbound. Custom Container Solutions',
     subtitle:
       'Make space construction efficient.\nEnsure a comfortable living experience.',
     image: '/images/hero/slide-2.png',
