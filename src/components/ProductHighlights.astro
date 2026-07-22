@@ -1,81 +1,98 @@
 ---
-const primary = {
-  image: '/images/features/factory-prefab.png',
-  alt: 'Double-wing container house folding process',
-  text: 'Strictly adhering to eco-friendly building principles, the structure is 100% factory-prefabricated. On-site assembly requires no complex foundation work, achieving "zero construction waste." It not only allows for non-destructive reuse but also perfectly preserves the natural landscape of ecologically sensitive areas, such as forests and lakeside environments.',
-};
-
-const secondary = [
+const slides = [
   {
-    image: '/images/features/modular-assembly.png',
-    hoverImage: '/images/features/modular-assembly-hover.png',
-    alt: 'Prefabricated modular units being assembled outdoors',
-    hoverAlt: 'Factory-prefabricated modular units ready for transport',
-    text: 'The folding and multi-layer modular design significantly reduces volume during transport, saving you substantial international shipping costs. Upon arrival at the site, the product can be quickly assembled from its modular components, resulting in significant savings in time and labor costs.',
+    image: '/images/features/folding-process/step-1.png',
+    alt: 'Double-wing container house in flat pack state',
   },
   {
-    image: '/images/features/capsule-aesthetic.png',
-    hoverImage: '/images/features/capsule-aesthetic-hover.png',
-    alt: 'Sleek capsule cabin with panoramic windows',
-    hoverAlt: 'Capsule cabin interior with panoramic views',
-    text: 'Say goodbye to the cheap look of traditional temporary structures! This design features a sleek, high-tech aesthetic, panoramic floor-to-ceiling windows, and premium, fully finished interiors. Its stylish, visually striking design is inherently "Instagrammable," significantly boosting both the premium value of the accommodation and its appeal on social media.',
+    image: '/images/features/folding-process/step-2.png',
+    alt: 'Workers folding the side panel of the container house',
+  },
+  {
+    image: '/images/features/folding-process/step-3.png',
+    alt: 'Workers lifting the wall panel during assembly',
+  },
+  {
+    image: '/images/features/folding-process/step-4.png',
+    alt: 'Double-wing container house side wing being positioned',
+  },
+  {
+    image: '/images/features/folding-process/step-5.png',
+    alt: 'Finished expandable double-wing container house',
   },
 ];
 ---
 
-<section class="py-section-sm lg:py-section-md bg-surface-3" data-header-theme="light">
+<section
+  class="py-section-sm lg:py-section-md bg-surface-3"
+  data-header-theme="light"
+  aria-label="Double-wing container house folding process"
+>
   <div class="section-container">
-    <div class="flex flex-col gap-10 lg:gap-14">
-      <div class="flex flex-col gap-4 w-full">
-        <div class="w-full overflow-hidden bg-surface-2 rounded-helios-md border border-ink-hairline flex items-center justify-center">
-          <img
-            src={primary.image}
-            alt={primary.alt}
-            class="w-full h-auto object-contain"
-            loading="lazy"
-          />
-        </div>
-        <p class="w-full text-body text-ink-soft">
-          {primary.text}
-        </p>
+    <div class="text-center max-w-[912px] mx-auto mb-6 sm:mb-8">
+      <h2 class="text-[clamp(1rem,2.2vw,1.75rem)] font-medium tracking-[0.06em] uppercase text-ink">
+        Double-Wing Container House Folding Process
+      </h2>
+    </div>
+
+    <div
+      id="folding-carousel"
+      class="relative overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline"
+    >
+      <div class="relative w-full aspect-[16/9] sm:aspect-[2/1]">
+        {
+          slides.map((slide, index) => (
+            <div
+              class:list={[
+                'folding-slide absolute inset-0 transition-opacity duration-500',
+                index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0',
+              ]}
+              data-index={index}
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                class="w-full h-full object-contain object-center bg-surface-2"
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+          ))
+        }
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+      <button
+        id="folding-prev"
+        type="button"
+        class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/80 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        aria-label="Previous photo"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <button
+        id="folding-next"
+        type="button"
+        class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/80 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        aria-label="Next photo"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
+      <div class="absolute bottom-3 sm:bottom-4 left-0 right-0 z-20 flex justify-center gap-2" aria-hidden="true">
         {
-          secondary.map((item) => (
-            <div class="flex flex-col gap-4">
-              <div
-                class:list={[
-                  'w-full overflow-hidden bg-surface-2 rounded-helios-md border border-ink-hairline',
-                  item.hoverImage ? 'highlight-swap group aspect-[4/3]' : 'flex items-center justify-center',
-                ]}
-              >
-                {item.hoverImage ? (
-                  <>
-                    <img
-                      src={item.image}
-                      alt={item.alt}
-                      class="highlight-swap__image transition-opacity duration-helios group-hover:opacity-0"
-                      loading="lazy"
-                    />
-                    <img
-                      src={item.hoverImage}
-                      alt={item.hoverAlt}
-                      class="highlight-swap__image opacity-0 transition-opacity duration-helios group-hover:opacity-100"
-                      loading="lazy"
-                    />
-                  </>
-                ) : (
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    class="w-full h-auto object-contain"
-                    loading="lazy"
-                  />
-                )}
-              </div>
-              <p class="text-body text-ink-soft">{item.text}</p>
-            </div>
+          slides.map((_, index) => (
+            <button
+              type="button"
+              class:list={[
+                'folding-dot h-2 rounded-full transition-all duration-helios',
+                index === 0 ? 'bg-surface-dark w-6' : 'bg-surface-dark/35 w-2',
+              ]}
+              data-index={index}
+              aria-label={`Go to photo ${index + 1}`}
+            />
           ))
         }
       </div>
@@ -83,16 +100,28 @@ const secondary = [
   </div>
 </section>
 
-<style>
-  .highlight-swap {
-    position: relative;
+<script define:vars={{ totalSlides: slides.length }}>
+  let current = 0;
+  const slideEls = document.querySelectorAll('.folding-slide');
+  const dotEls = document.querySelectorAll('.folding-dot');
+
+  function goTo(index) {
+    slideEls[current]?.classList.replace('opacity-100', 'opacity-0');
+    slideEls[current]?.classList.replace('z-10', 'z-0');
+    dotEls[current]?.classList.remove('bg-surface-dark', 'w-6');
+    dotEls[current]?.classList.add('bg-surface-dark/35', 'w-2');
+
+    current = (index + totalSlides) % totalSlides;
+
+    slideEls[current]?.classList.replace('opacity-0', 'opacity-100');
+    slideEls[current]?.classList.replace('z-0', 'z-10');
+    dotEls[current]?.classList.remove('bg-surface-dark/35', 'w-2');
+    dotEls[current]?.classList.add('bg-surface-dark', 'w-6');
   }
 
-  .highlight-swap__image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-</style>
+  document.getElementById('folding-prev')?.addEventListener('click', () => goTo(current - 1));
+  document.getElementById('folding-next')?.addEventListener('click', () => goTo(current + 1));
+  dotEls.forEach((dot) => {
+    dot.addEventListener('click', () => goTo(Number(dot.dataset.index)));
+  });
+</script>
