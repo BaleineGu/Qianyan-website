@@ -1,0 +1,101 @@
+---
+import { fetchPublishedPosts } from '@/lib/halo';
+
+interface DisplayPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  cover: string;
+  date: string;
+}
+
+const posts = await fetchPublishedPosts();
+
+const fallbackPosts: DisplayPost[] = [
+  {
+    slug: 'future-of-edge-computing',
+    title: 'The Future of Edge Computing in Industrial Settings',
+    excerpt:
+      'How distributed compute architectures are transforming factory floors and remote operations.',
+    cover: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    date: '2026-06-15',
+  },
+  {
+    slug: 'sustainable-manufacturing',
+    title: 'Sustainable Manufacturing: A Practical Guide',
+    excerpt:
+      'Real-world strategies for reducing energy consumption without sacrificing throughput.',
+    cover: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80',
+    date: '2026-05-28',
+  },
+  {
+    slug: 'iot-security-best-practices',
+    title: 'IoT Security Best Practices for 2026',
+    excerpt:
+      'Essential security measures every industrial IoT deployment should implement from day one.',
+    cover: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    date: '2026-05-10',
+  },
+];
+
+const displayPosts: DisplayPost[] =
+  posts.length > 0
+    ? posts.slice(0, 3).map((post) => ({
+        slug: post.spec.slug,
+        title: post.spec.title,
+        excerpt: post.spec.excerpt || '',
+        cover: post.spec.cover || '',
+        date: post.spec.publishTime?.split('T')[0] || '',
+      }))
+    : fallbackPosts.slice(0, 3);
+---
+
+<section class="py-section-sm lg:py-section-md bg-surface-1" data-header-theme="light" aria-label="Latest blog posts">
+  <div class="section-container">
+    <div class="flex items-end justify-between gap-4 mb-8 lg:mb-10">
+      <h2 class="section-heading">Blog</h2>
+      <a
+        href="/blog"
+        class="shrink-0 text-body font-medium text-ink hover:opacity-70 transition-opacity duration-helios"
+      >
+        View all
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        displayPosts.map((post) => (
+          <article class="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden border border-gray-100">
+            <a href={`/blog/${post.slug}`}>
+              {post.cover ? (
+                <div class="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={post.cover}
+                    alt=""
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div class="aspect-[16/10] bg-surface-2" aria-hidden="true" />
+              )}
+              <div class="p-6">
+                {post.date && (
+                  <time class="text-xs text-gray-400 font-medium" datetime={post.date}>
+                    {post.date}
+                  </time>
+                )}
+                <h3 class="text-xl font-bold text-brand-900 mt-2 mb-2 group-hover:text-brand-600 transition-colors">
+                  {post.title}
+                </h3>
+                {post.excerpt && (
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">{post.excerpt}</p>
+                )}
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
