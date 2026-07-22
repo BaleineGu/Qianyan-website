@@ -393,14 +393,14 @@ function isLinkActive(href: string) {
     if (!header) return;
 
     const hideZones = document.querySelectorAll<HTMLElement>('[data-header-hide]');
-    const probeY = Math.min(window.innerHeight - 1, (shell?.getBoundingClientRect().bottom ?? 96) + 8);
+    const headerBottom = Math.max(80, shell?.getBoundingClientRect().bottom ?? 96);
     let shouldHide = false;
 
     hideZones.forEach((zone) => {
       const rect = zone.getBoundingClientRect();
-      if (rect.top < probeY && rect.bottom > 0) {
-        shouldHide = true;
-      }
+      // Hide while the tab section overlaps the header band / top of viewport
+      const overlapsTop = rect.top <= headerBottom && rect.bottom > headerBottom * 0.35;
+      if (overlapsTop) shouldHide = true;
     });
 
     header.classList.toggle('is-hidden', shouldHide);
@@ -426,6 +426,18 @@ function isLinkActive(href: string) {
   window.addEventListener('resize', onScrollOrResize);
 
   if (typeof ResizeObserver !== 'undefined' && shell) {
-    new ResizeObserver(() => fitHeaderScale()).observe(shell);
+    new ResizeObserver(() => {
+      fitHeaderScale();
+      updateHeaderVisibility();
+    }).observe(shell);
+  }
+
+  if (typeof IntersectionObserver !== 'undefined') {
+    const hideZones = document.querySelectorAll('[data-header-hide]');
+    const io = new IntersectionObserver(() => updateHeaderVisibility(), {
+      root: null,
+      threshold: [0, 0.05, 0.1, 0.25, 0.5, 0.75, 1],
+    });
+    hideZones.forEach((zone) => io.observe(zone));
   }
 </script>
