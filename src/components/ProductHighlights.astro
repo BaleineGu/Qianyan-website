@@ -106,7 +106,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
   .folding-track {
     gap: 1rem;
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: none;
   }
 
   .folding-slide {
@@ -114,9 +114,6 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
   }
 
   .folding-slide__frame {
-    transition:
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.55s ease;
     opacity: 0.5;
     transform: scale(0.94);
   }
@@ -124,13 +121,6 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
   .folding-slide.is-active .folding-slide__frame {
     opacity: 1;
     transform: scale(1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .folding-track,
-    .folding-slide__frame {
-      transition: none;
-    }
   }
 </style>
 
@@ -140,7 +130,6 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
   const dots = Array.from(document.querySelectorAll('.folding-dot'));
   // Track indices: 0 = clone(last), 1..N = real, N+1 = clone(first)
   let index = 1;
-  let animating = false;
 
   function gapPx() {
     if (!track) return 16;
@@ -177,42 +166,25 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
     });
   }
 
-  function setTransform(animate = true) {
+  function setTransform() {
     if (!track) return;
-    track.style.transition = animate ? '' : 'none';
+    track.style.transition = 'none';
     track.style.transform = `translate3d(${-index * step()}px, 0, 0)`;
-    if (!animate) {
-      void track.offsetWidth;
-      track.style.transition = '';
-    }
   }
 
   function goTo(nextIndex) {
-    if (!track || animating) return;
-    animating = true;
+    if (!track) return;
     index = nextIndex;
+
+    if (index === 0) {
+      index = totalSlides;
+    } else if (index === totalSlides + 1) {
+      index = 1;
+    }
+
     updateActive();
     updateDots();
-    setTransform(true);
-
-    const onEnd = (event) => {
-      if (event.target !== track || event.propertyName !== 'transform') return;
-      track.removeEventListener('transitionend', onEnd);
-
-      if (index === 0) {
-        index = totalSlides;
-        setTransform(false);
-      } else if (index === totalSlides + 1) {
-        index = 1;
-        setTransform(false);
-      }
-
-      updateActive();
-      updateDots();
-      animating = false;
-    };
-
-    track.addEventListener('transitionend', onEnd);
+    setTransform();
   }
 
   document.getElementById('folding-prev')?.addEventListener('click', () => goTo(index - 1));
@@ -221,14 +193,14 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       const targetReal = Number(dot.dataset.index);
-      if (targetReal === realIndex() || animating) return;
+      if (targetReal === realIndex()) return;
       goTo(targetReal + 1);
     });
   });
 
-  window.addEventListener('resize', () => setTransform(false));
+  window.addEventListener('resize', () => setTransform());
 
   updateActive();
   updateDots();
-  setTransform(false);
+  setTransform();
 </script>
