@@ -18,7 +18,7 @@ const tabLabels: Record<string, string> = {
 ---
 
 <section
-  class="product-tabs-section h-dvh max-h-dvh flex flex-col bg-surface-1 overflow-hidden"
+  class="product-tabs-section h-[90dvh] max-h-[90dvh] flex flex-col bg-surface-1 overflow-hidden"
   data-header-theme="light"
   data-header-hide="true"
 >
@@ -72,11 +72,14 @@ const tabLabels: Record<string, string> = {
               href={c.href}
               class="group flex flex-col md:flex-row md:items-stretch h-full min-h-0 overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
             >
-              <div class="h-[42%] md:h-auto md:w-[70%] min-h-0 overflow-hidden shrink-0">
+              <div class="h-[42%] md:h-auto md:w-[70%] min-h-0 overflow-hidden shrink-0 bg-surface-2 flex items-center justify-center">
                 <img
                   src={c.image}
                   alt=""
-                  class="w-full h-full object-cover"
+                  class:list={[
+                    'w-full h-full',
+                    index < 2 ? 'object-contain object-center' : 'object-cover object-center',
+                  ]}
                   loading="lazy"
                 />
               </div>
