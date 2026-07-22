@@ -3,22 +3,27 @@ const slides = [
   {
     image: '/images/features/folding-process/step-1.png',
     alt: 'Double-wing container house in flat pack state',
+    caption: 'Closed Compact Container',
   },
   {
     image: '/images/features/folding-process/step-2.png',
     alt: 'Workers folding the side panel of the container house',
+    caption: 'Both wings open upwards',
   },
   {
     image: '/images/features/folding-process/step-3.png',
     alt: 'Workers lifting the wall panel during assembly',
+    caption: 'The inner double wings lay down flat',
   },
   {
     image: '/images/features/folding-process/step-4.png',
     alt: 'Double-wing container house side wing being positioned',
+    caption: 'Interior Alignment & Installation',
   },
   {
     image: '/images/features/folding-process/step-5.png',
     alt: 'Finished expandable double-wing container house',
+    caption: 'Fully Expanded & Ready',
   },
 ];
 
@@ -94,6 +99,14 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
           ))
         }
       </div>
+
+      <p
+        id="folding-caption"
+        class="mt-4 text-center text-[clamp(0.9375rem,1.2vw,1.125rem)] font-medium text-ink tracking-tight"
+        aria-live="polite"
+      >
+        {slides[0].caption}
+      </p>
     </div>
   </div>
 </section>
@@ -130,10 +143,11 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
   }
 </style>
 
-<script define:vars={{ totalSlides: slides.length }}>
+<script define:vars={{ totalSlides: slides.length, captions: slides.map((s) => s.caption) }}>
   const track = document.getElementById('folding-track');
   const slideEls = Array.from(document.querySelectorAll('.folding-slide'));
   const dots = Array.from(document.querySelectorAll('.folding-dot'));
+  const captionEl = document.getElementById('folding-caption');
   let index = 1;
 
   function gapPx() {
@@ -165,6 +179,11 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
     });
   }
 
+  function updateCaption() {
+    if (!captionEl) return;
+    captionEl.textContent = captions[realIndex()] ?? '';
+  }
+
   function updateActive() {
     slideEls.forEach((el, i) => {
       el.classList.toggle('is-active', i === index);
@@ -186,6 +205,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
     updateActive();
     updateDots();
+    updateCaption();
     setTransform();
   }
 
@@ -204,5 +224,6 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
   updateActive();
   updateDots();
+  updateCaption();
   setTransform();
 </script>
