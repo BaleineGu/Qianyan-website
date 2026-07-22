@@ -18,19 +18,19 @@ const tabLabels: Record<string, string> = {
 ---
 
 <section
-  class="product-tabs-section h-svh max-h-svh flex flex-col bg-surface-1 overflow-hidden"
+  class="product-tabs-section h-dvh max-h-dvh flex flex-col bg-surface-1 overflow-hidden"
   data-header-theme="light"
   data-header-hide="true"
 >
-  <div class="section-container flex flex-col flex-1 min-h-0 py-5 sm:py-6 lg:py-8">
-    <div class="shrink-0 text-center max-w-[680px] mx-auto mb-4 sm:mb-5">
-      <h2 class="text-[clamp(1.25rem,2.4vw,2.25rem)] leading-tight font-medium tracking-tight text-ink">
+  <div class="section-container flex flex-col flex-1 min-h-0 py-3 sm:py-4 lg:py-5">
+    <div class="shrink-0 text-center max-w-[680px] mx-auto mb-2.5 sm:mb-3">
+      <h2 class="text-[clamp(1.125rem,2vw,1.75rem)] leading-tight font-medium tracking-tight text-ink">
         Next, you will see our products
       </h2>
     </div>
 
     <div
-      class="product-tabs shrink-0 flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-4 sm:mb-5"
+      class="product-tabs shrink-0 flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-2.5 sm:mb-3"
       role="tablist"
       aria-label="Product categories"
     >
@@ -41,7 +41,7 @@ const tabLabels: Record<string, string> = {
             role="tab"
             id={`product-tab-${c.id}`}
             class:list={[
-              'product-tab px-3 sm:px-4 py-1.5 sm:py-2 rounded-helios-sm text-xs sm:text-sm font-medium transition-colors whitespace-nowrap',
+              'product-tab px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-helios-sm text-[11px] sm:text-sm font-medium transition-colors whitespace-nowrap',
               index === 0
                 ? 'bg-surface-dark text-ink-on-dark is-active'
                 : 'bg-surface-2 text-ink border border-ink-hairline hover:border-ink-faint',
@@ -70,9 +70,9 @@ const tabLabels: Record<string, string> = {
           >
             <a
               href={c.href}
-              class="group flex flex-col lg:flex-row lg:items-stretch h-full min-h-0 overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
+              class="group flex flex-col md:flex-row md:items-stretch h-full min-h-0 overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
             >
-              <div class="lg:w-1/2 min-h-0 flex-1 overflow-hidden shrink-0">
+              <div class="h-[42%] md:h-auto md:w-[70%] min-h-0 overflow-hidden shrink-0">
                 <img
                   src={c.image}
                   alt=""
@@ -80,11 +80,11 @@ const tabLabels: Record<string, string> = {
                   loading="lazy"
                 />
               </div>
-              <div class="lg:w-1/2 min-h-0 flex-1 px-5 py-4 sm:px-8 sm:py-6 lg:px-10 lg:py-8 flex flex-col justify-center overflow-auto">
-                <h3 class="text-[clamp(1.05rem,1.8vw,1.5rem)] font-medium text-ink mb-2 sm:mb-3">
+              <div class="flex-1 md:w-[30%] min-h-0 px-4 py-3 sm:px-5 sm:py-4 lg:px-6 lg:py-5 flex flex-col justify-center overflow-hidden">
+                <h3 class="text-[clamp(0.95rem,1.4vw,1.25rem)] font-medium text-ink mb-1.5 sm:mb-2 shrink-0">
                   {c.name}
                 </h3>
-                <p class="text-[clamp(0.8125rem,1.05vw,1rem)] leading-relaxed text-ink-soft">
+                <p class="text-[clamp(0.75rem,0.95vw,0.9375rem)] leading-snug text-ink-soft overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:12] md:[-webkit-line-clamp:18]">
                   {c.description}
                 </p>
               </div>
