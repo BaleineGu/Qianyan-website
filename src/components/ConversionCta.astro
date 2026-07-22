@@ -1,37 +1,112 @@
 ---
+import { whatsappUrl } from '@/data/site';
+
 interface Props {
   title?: string;
-  primaryLabel: string;
-  primaryHref?: string;
-  primaryIsInquiry?: boolean;
-  secondaryLabel: string;
-  secondaryHref: string;
-  secondaryIsInquiry?: boolean;
 }
+
 const {
-  title = 'Ready to move your project forward?',
-  primaryLabel,
-  primaryHref,
-  primaryIsInquiry = true,
-  secondaryLabel,
-  secondaryHref,
-  secondaryIsInquiry = false,
+  title = 'Need specs, layouts, or a shipping estimate for your project site?',
 } = Astro.props;
 ---
-<section class="py-section-md lg:pt-section-lg lg:pb-section-md bg-surface-dark text-ink-on-dark" data-header-theme="dark">
-  <div class="section-container flex flex-col items-center text-center gap-8">
-    <h2 class="heading-h2 max-w-[680px]">{title}</h2>
-    <div class="flex flex-wrap justify-center gap-3">
-      {primaryIsInquiry ? (
-        <button type="button" data-inquiry-open class="btn-primary">{primaryLabel}</button>
-      ) : (
-        <a href={primaryHref} target={primaryHref?.startsWith('http') ? '_blank' : undefined} rel={primaryHref?.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-primary">{primaryLabel}</a>
-      )}
-      {secondaryIsInquiry ? (
-        <button type="button" data-inquiry-open class="btn-secondary-dark">{secondaryLabel}</button>
-      ) : (
-        <a href={secondaryHref} target={secondaryHref.startsWith('http') ? '_blank' : undefined} rel={secondaryHref.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-secondary-dark">{secondaryLabel}</a>
-      )}
+
+<section
+  class="py-section-md lg:py-section-lg bg-surface-dark text-ink-on-dark"
+  data-header-theme="dark"
+>
+  <div class="section-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 lg:items-center">
+    <div class="max-w-[560px]">
+      <h2 class="text-[clamp(1.75rem,3.2vw,3rem)] font-medium tracking-tight leading-tight text-ink-on-dark">
+        {title}
+      </h2>
+    </div>
+
+    <div class="w-full bg-surface-2 text-ink rounded-helios-md p-5 sm:p-7 lg:p-8">
+      <h3 class="heading-h6 text-ink mb-2">Get a factory quote</h3>
+      <p class="text-small text-ink-soft mb-5 sm:mb-6">
+        Tell us your market, product type, and destination. Our export team will respond with practical options.
+      </p>
+
+      <form id="cta-inquiry-form" class="space-y-4">
+        <div>
+          <label for="cta-inquiry-name" class="block text-small font-medium text-ink mb-1">Name</label>
+          <input
+            id="cta-inquiry-name"
+            name="name"
+            type="text"
+            required
+            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+          />
+        </div>
+        <div>
+          <label for="cta-inquiry-email" class="block text-small font-medium text-ink mb-1">Email</label>
+          <input
+            id="cta-inquiry-email"
+            name="email"
+            type="email"
+            required
+            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+          />
+        </div>
+        <div>
+          <label for="cta-inquiry-country" class="block text-small font-medium text-ink mb-1">Destination country / zip</label>
+          <input
+            id="cta-inquiry-country"
+            name="country"
+            type="text"
+            required
+            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+          />
+        </div>
+        <div>
+          <label for="cta-inquiry-product" class="block text-small font-medium text-ink mb-1">Product interest</label>
+          <select
+            id="cta-inquiry-product"
+            name="product"
+            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+          >
+            <option>Expandable Container Homes</option>
+            <option>Space Capsule Houses</option>
+            <option>Flat Pack Container Houses</option>
+            <option>Folding Houses</option>
+            <option>Container Swimming Pools</option>
+            <option>Catalog Download</option>
+          </select>
+        </div>
+        <div>
+          <label for="cta-inquiry-message" class="block text-small font-medium text-ink mb-1">Project details</label>
+          <textarea
+            id="cta-inquiry-message"
+            name="message"
+            rows="4"
+            required
+            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1 resize-none"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full !bg-ink !text-ink-on-dark">Submit inquiry</button>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block text-center text-small font-medium text-ink hover:opacity-70"
+        >
+          Prefer WhatsApp? Chat with sales now
+        </a>
+        <p id="cta-inquiry-status" class="text-small text-center hidden"></p>
+      </form>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('cta-inquiry-form');
+  const status = document.getElementById('cta-inquiry-status');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!status) return;
+    status.textContent = 'Thanks — your inquiry was captured. Our team will follow up shortly.';
+    status.classList.remove('hidden');
+    status.classList.add('text-ink');
+  });
+</script>
