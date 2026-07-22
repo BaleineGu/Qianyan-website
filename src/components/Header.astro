@@ -16,7 +16,13 @@ function isLinkActive(href: string) {
   <div class="section-container">
     <div class="flex items-center gap-3 sm:gap-4 h-16 sm:h-20 lg:h-24">
       <a href="/" class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 lg:flex-none lg:max-w-[36%]">
-        <img src={siteConfig.logo} alt="" class="h-10 w-auto shrink-0 sm:h-[54px] lg:h-[66px]" width="66" height="66" />
+        <img
+          src={siteConfig.logo}
+          alt=""
+          class="site-header__logo h-10 w-auto shrink-0 sm:h-[54px] lg:h-[66px] transition-[filter] duration-300"
+          width="66"
+          height="66"
+        />
         <span class="site-header__brand font-bold tracking-[0.08em] uppercase leading-tight truncate text-base sm:text-[21px] lg:text-[24px]">{siteConfig.name}</span>
       </a>
       <nav class="hidden xl:flex items-center justify-center gap-4 flex-1 min-w-0" aria-label="Main navigation">
@@ -115,6 +121,10 @@ function isLinkActive(href: string) {
     border-color: rgb(255 255 255 / 0.15);
   }
 
+  .site-header[data-theme='dark'] .site-header__logo {
+    filter: none;
+  }
+
   .site-header[data-theme='dark'] .site-header__brand,
   .site-header[data-theme='dark'] .site-header__icon {
     color: white;
@@ -178,6 +188,11 @@ function isLinkActive(href: string) {
     background-color: rgb(255 255 255 / 0.92);
     border-color: rgb(229 231 235);
     box-shadow: 0 1px 12px rgb(15 23 42 / 0.08);
+  }
+
+  .site-header[data-theme='light'] .site-header__logo {
+    /* White PNG → dark slate to match brand text */
+    filter: brightness(0) saturate(100%);
   }
 
   .site-header[data-theme='light'] .site-header__brand,
