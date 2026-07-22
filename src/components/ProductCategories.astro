@@ -57,22 +57,22 @@ const tabLabels: Record<string, string> = {
       }
     </div>
 
-    <div id="product-panels" class="product-panels">
+    <div id="product-panels" class="product-panels relative">
       {
         categories.map((c, index) => (
           <div
             id={`product-panel-${c.id}`}
             role="tabpanel"
             aria-labelledby={`product-tab-${c.id}`}
-            class:list={[index !== 0 && 'hidden']}
+            class:list={['product-panel h-full', index !== 0 && 'hidden']}
             data-product-panel={c.id}
             hidden={index !== 0}
           >
             <a
               href={c.href}
-              class="group grid grid-cols-1 md:grid-cols-2 items-stretch overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 transition-opacity duration-helios hover:opacity-95"
+              class="group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
             >
-              <div class="product-panel__media relative isolate min-h-[220px] md:min-h-[320px] overflow-hidden bg-surface-3">
+              <div class="product-panel__media relative min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-2 min-w-0">
                 <img
                   src={c.image}
                   alt=""
@@ -80,14 +80,15 @@ const tabLabels: Record<string, string> = {
                     'absolute inset-0 w-full h-full',
                     index < 2 ? 'object-contain object-center' : 'object-cover object-center',
                   ]}
+                  data-master-image={index === 0 ? 'true' : undefined}
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
               </div>
-              <div class="product-panel__copy relative z-10 isolate min-w-0 bg-surface-1 px-5 py-6 sm:px-7 sm:py-8 lg:px-9 lg:py-10 flex flex-col justify-center gap-4 sm:gap-5">
-                <h3 class="text-[clamp(1.25rem,2.1vw,1.875rem)] font-medium text-ink leading-tight">
+              <div class="product-panel__copy min-w-0 min-h-0 md:h-full px-5 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7 flex flex-col justify-center gap-4 sm:gap-5 overflow-hidden">
+                <h3 class="text-[clamp(1.25rem,2.1vw,1.875rem)] font-medium text-ink leading-tight shrink-0">
                   {c.name}
                 </h3>
-                <p class="text-[clamp(0.9375rem,1.35vw,1.1875rem)] leading-[1.75] text-ink-soft">
+                <p class="text-[clamp(0.9375rem,1.35vw,1.1875rem)] leading-[1.7] text-ink-soft overflow-hidden">
                   {c.description}
                 </p>
               </div>
@@ -102,6 +103,27 @@ const tabLabels: Record<string, string> = {
 <script define:vars={{ defaultId }}>
   const tabs = Array.from(document.querySelectorAll('[data-product-tab]'));
   const panels = Array.from(document.querySelectorAll('[data-product-panel]'));
+  const panelsRoot = document.getElementById('product-panels');
+  const masterImage = document.querySelector('[data-master-image="true"]');
+
+  function syncPanelHeight() {
+    if (!panelsRoot || !masterImage) return;
+
+    if (window.innerWidth < 768) {
+      panelsRoot.style.height = '';
+      return;
+    }
+
+    const naturalW = masterImage.naturalWidth;
+    const naturalH = masterImage.naturalHeight;
+    if (!naturalW || !naturalH) return;
+
+    // Content width is 55% image + 45% text; height = imageWidth × ratio
+    const totalWidth = panelsRoot.getBoundingClientRect().width;
+    const imageWidth = totalWidth * 0.55;
+    const height = Math.round(imageWidth * (naturalH / naturalW));
+    panelsRoot.style.height = `${height}px`;
+  }
 
   function activate(id) {
     tabs.forEach((tab) => {
@@ -133,4 +155,11 @@ const tabLabels: Record<string, string> = {
   });
 
   if (defaultId) activate(defaultId);
+
+  if (masterImage) {
+    if (masterImage.complete) syncPanelHeight();
+    else masterImage.addEventListener('load', syncPanelHeight);
+  }
+
+  window.addEventListener('resize', syncPanelHeight);
 </script>
