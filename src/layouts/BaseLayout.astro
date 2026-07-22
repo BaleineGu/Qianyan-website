@@ -25,10 +25,27 @@ const pageDescription = description ?? siteConfig.description;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@600&display=swap"
+      rel="stylesheet"
+    />
     <title>{pageTitle}</title>
+    <style is:global>
+      /* Switzer is not bundled locally; Inter is the documented fallback */
+      :root {
+        --font-display: Inter, 'Helvetica Neue', Arial, sans-serif;
+        --font-mono: 'IBM Plex Mono', 'Geist Mono', SFMono-Regular, Consolas, monospace;
+      }
+      body {
+        font-family: var(--font-display);
+      }
+      .label-small,
+      .font-mono {
+        font-family: var(--font-mono);
+      }
+    </style>
   </head>
-  <body class="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased">
+  <body class="min-h-screen flex flex-col bg-surface-1 text-ink antialiased">
     <Header overlay={overlayHeader} />
     <main class="flex-1"><slot /></main>
     <Footer />

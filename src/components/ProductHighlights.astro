@@ -23,11 +23,11 @@ const secondary = [
 ];
 ---
 
-<section class="py-14 lg:py-20 bg-white">
+<section class="py-section-sm lg:py-section-md bg-surface-3" data-header-theme="light">
   <div class="section-container">
     <div class="flex flex-col gap-10 lg:gap-14">
       <div class="flex flex-col gap-4 w-full">
-        <div class="w-full overflow-hidden bg-gray-50 border border-gray-200 flex items-center justify-center">
+        <div class="w-full overflow-hidden bg-surface-2 rounded-helios-md border border-ink-hairline flex items-center justify-center">
           <img
             src={primary.image}
             alt={primary.alt}
@@ -35,7 +35,7 @@ const secondary = [
             loading="lazy"
           />
         </div>
-        <p class="w-full text-sm sm:text-base text-gray-600 leading-relaxed">
+        <p class="w-full text-body text-ink-soft">
           {primary.text}
         </p>
       </div>
@@ -46,7 +46,7 @@ const secondary = [
             <div class="flex flex-col gap-4">
               <div
                 class:list={[
-                  'w-full overflow-hidden bg-gray-50 border border-gray-200',
+                  'w-full overflow-hidden bg-surface-2 rounded-helios-md border border-ink-hairline',
                   item.hoverImage ? 'highlight-swap group aspect-[4/3]' : 'flex items-center justify-center',
                 ]}
               >
@@ -55,13 +55,13 @@ const secondary = [
                     <img
                       src={item.image}
                       alt={item.alt}
-                      class="highlight-swap__image transition-opacity duration-300 group-hover:opacity-0"
+                      class="highlight-swap__image transition-opacity duration-helios group-hover:opacity-0"
                       loading="lazy"
                     />
                     <img
                       src={item.hoverImage}
                       alt={item.hoverAlt}
-                      class="highlight-swap__image opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      class="highlight-swap__image opacity-0 transition-opacity duration-helios group-hover:opacity-100"
                       loading="lazy"
                     />
                   </>
@@ -74,7 +74,7 @@ const secondary = [
                   />
                 )}
               </div>
-              <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{item.text}</p>
+              <p class="text-body text-ink-soft">{item.text}</p>
             </div>
           ))
         }

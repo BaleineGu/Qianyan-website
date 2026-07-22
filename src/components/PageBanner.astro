@@ -4,13 +4,13 @@ interface Props {
   description: string;
   image?: string;
 }
-const { heading, description, image = '/images/hero/slide-1.jpg' } = Astro.props;
+const { heading, description, image = '/images/hero/slide-1.png' } = Astro.props;
 ---
-<section class="relative bg-brand-900 text-white overflow-hidden">
-  <img src={image} alt="" class="absolute inset-0 w-full h-full object-cover opacity-30" />
-  <div class="absolute inset-0 bg-brand-900/70"></div>
-  <div class="relative section-container py-24 lg:py-32 max-w-4xl">
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">{heading}</h1>
-    <p class="text-lg text-gray-200 leading-relaxed">{description}</p>
+<section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
+  <img src={image} alt="" class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
+  <div class="relative section-container py-24 lg:py-32 max-w-[912px]">
+    <h1 class="heading-h1 mb-5">{heading}</h1>
+    <p class="text-large text-ink-on-dark-soft">{description}</p>
   </div>
 </section>

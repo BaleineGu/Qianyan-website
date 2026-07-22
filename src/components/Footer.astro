@@ -2,44 +2,76 @@
 import { footerLinks, siteConfig, whatsappUrl } from '@/data/site';
 const year = new Date().getFullYear();
 ---
-<footer class="bg-brand-900 text-gray-300" data-header-theme="dark">
-  <div class="section-container py-16">
+<footer class="bg-surface-1 text-ink-soft rounded-t-helios-xl mt-0" data-header-theme="light">
+  <div class="section-container pt-10 pb-9 px-4 sm:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <img src={siteConfig.logo} alt="" class="h-10 w-auto" width="40" height="40" />
-          <span class="text-sm font-bold text-white tracking-[0.12em] uppercase">{siteConfig.name}</span>
+          <img
+            src={siteConfig.logo}
+            alt=""
+            class="h-10 w-auto brightness-0"
+            width="40"
+            height="40"
+          />
+          <span class="text-body-lg font-medium text-ink tracking-tight">{siteConfig.name}</span>
         </div>
-        <p class="text-sm text-gray-400 leading-relaxed">{siteConfig.tagline}</p>
+        <p class="text-small text-ink-soft leading-relaxed max-w-xs">{siteConfig.tagline}</p>
       </div>
       <div>
-        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Products</h3>
-        <ul class="space-y-2.5">{footerLinks.products.map((l) => <li><a href={l.href} class="text-sm hover:text-brand-500">{l.label}</a></li>)}</ul>
+        <h3 class="label-small text-ink-faint mb-4">Products</h3>
+        <ul class="space-y-3">
+          {footerLinks.products.map((l) => (
+            <li>
+              <a href={l.href} class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
       <div>
-        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Support</h3>
-        <ul class="space-y-2.5">{footerLinks.support.map((l) => <li><a href={l.href} class="text-sm hover:text-brand-500" target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{l.label}</a></li>)}</ul>
+        <h3 class="label-small text-ink-faint mb-4">Support</h3>
+        <ul class="space-y-3">
+          {footerLinks.support.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios"
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
       <div>
-        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h3>
-        <ul class="space-y-2.5">{footerLinks.contact.map((l) => <li><a href={l.href} class="text-sm hover:text-brand-500">{l.label}</a></li>)}</ul>
-        <div class="mt-4 text-sm text-gray-400 space-y-1">
+        <h3 class="label-small text-ink-faint mb-4">Contact</h3>
+        <ul class="space-y-3">
+          {footerLinks.contact.map((l) => (
+            <li>
+              <a href={l.href} class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-5 text-small text-ink-soft space-y-1">
           <p>{siteConfig.email}</p>
           <p>{siteConfig.phone}</p>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-brand-500">WhatsApp Sales</a>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-ink font-medium hover:opacity-70">
+            WhatsApp sales
+          </a>
         </div>
       </div>
     </div>
-    <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <p class="text-sm text-gray-500">&copy; {year} {siteConfig.name}. All rights reserved.</p>
-      <a
-        href="/contact"
-        class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded transition-colors"
-      >
-        TOUCH — Get in Touch
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
+
+    <div class="mt-10 pt-8 border-t border-ink-hairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <p class="text-small text-ink-faint">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+      <a href="/contact" class="btn-secondary-light !h-10 !px-4 !text-body-sm">
+        Get in touch
       </a>
     </div>
   </div>

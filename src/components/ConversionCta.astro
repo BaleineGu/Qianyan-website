@@ -18,19 +18,19 @@ const {
   secondaryIsInquiry = false,
 } = Astro.props;
 ---
-<section class="py-16 bg-brand-900 text-white" data-header-theme="dark">
-  <div class="section-container flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-    <h2 class="text-2xl sm:text-3xl font-bold max-w-xl">{title}</h2>
-    <div class="flex flex-wrap gap-4">
+<section class="py-section-md lg:pt-section-lg lg:pb-section-md bg-surface-dark text-ink-on-dark" data-header-theme="dark">
+  <div class="section-container flex flex-col items-center text-center gap-8">
+    <h2 class="heading-h2 max-w-[680px]">{title}</h2>
+    <div class="flex flex-wrap justify-center gap-3">
       {primaryIsInquiry ? (
         <button type="button" data-inquiry-open class="btn-primary">{primaryLabel}</button>
       ) : (
         <a href={primaryHref} target={primaryHref?.startsWith('http') ? '_blank' : undefined} rel={primaryHref?.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-primary">{primaryLabel}</a>
       )}
       {secondaryIsInquiry ? (
-        <button type="button" data-inquiry-open class="btn-outline">{secondaryLabel}</button>
+        <button type="button" data-inquiry-open class="btn-secondary-dark">{secondaryLabel}</button>
       ) : (
-        <a href={secondaryHref} target={secondaryHref.startsWith('http') ? '_blank' : undefined} rel={secondaryHref.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-outline">{secondaryLabel}</a>
+        <a href={secondaryHref} target={secondaryHref.startsWith('http') ? '_blank' : undefined} rel={secondaryHref.startsWith('http') ? 'noopener noreferrer' : undefined} class="btn-secondary-dark">{secondaryLabel}</a>
       )}
     </div>
   </div>

@@ -2,27 +2,27 @@
 import { whatsappUrl } from '@/data/site';
 ---
 <div id="inquiry-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="inquiry-title">
-  <div class="absolute inset-0 bg-black/60" data-inquiry-close></div>
-  <div class="relative w-full max-w-lg bg-white shadow-xl p-6 sm:p-8">
-    <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700" data-inquiry-close aria-label="Close">×</button>
-    <h2 id="inquiry-title" class="text-2xl font-bold text-brand-900 mb-2">Get a Factory Quote</h2>
-    <p class="text-sm text-gray-600 mb-6">Tell us your market, product type, and destination. Our export team will respond with practical options.</p>
+  <div class="absolute inset-0 bg-overlay-3" data-inquiry-close></div>
+  <div class="relative w-full max-w-lg bg-surface-2 rounded-helios-md p-6 sm:p-8">
+    <button type="button" class="absolute top-4 right-4 text-ink-faint hover:text-ink text-2xl leading-none" data-inquiry-close aria-label="Close">×</button>
+    <h2 id="inquiry-title" class="heading-h6 text-ink mb-2">Get a factory quote</h2>
+    <p class="text-small text-ink-soft mb-6">Tell us your market, product type, and destination. Our export team will respond with practical options.</p>
     <form id="inquiry-form" class="space-y-4">
       <div>
-        <label for="inquiry-name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-        <input id="inquiry-name" name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500" />
+        <label for="inquiry-name" class="block text-small font-medium text-ink mb-1">Name</label>
+        <input id="inquiry-name" name="name" type="text" required class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1" />
       </div>
       <div>
-        <label for="inquiry-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-        <input id="inquiry-email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500" />
+        <label for="inquiry-email" class="block text-small font-medium text-ink mb-1">Email</label>
+        <input id="inquiry-email" name="email" type="email" required class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1" />
       </div>
       <div>
-        <label for="inquiry-country" class="block text-sm font-medium text-gray-700 mb-1">Destination Country / Zip</label>
-        <input id="inquiry-country" name="country" type="text" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500" />
+        <label for="inquiry-country" class="block text-small font-medium text-ink mb-1">Destination country / zip</label>
+        <input id="inquiry-country" name="country" type="text" required class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1" />
       </div>
       <div>
-        <label for="inquiry-product" class="block text-sm font-medium text-gray-700 mb-1">Product Interest</label>
-        <select id="inquiry-product" name="product" class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500">
+        <label for="inquiry-product" class="block text-small font-medium text-ink mb-1">Product interest</label>
+        <select id="inquiry-product" name="product" class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1">
           <option>Expandable Container Homes</option>
           <option>Space Capsule Houses</option>
           <option>Flat Pack Container Houses</option>
@@ -32,12 +32,12 @@ import { whatsappUrl } from '@/data/site';
         </select>
       </div>
       <div>
-        <label for="inquiry-message" class="block text-sm font-medium text-gray-700 mb-1">Project Details</label>
-        <textarea id="inquiry-message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea>
+        <label for="inquiry-message" class="block text-small font-medium text-ink mb-1">Project details</label>
+        <textarea id="inquiry-message" name="message" rows="4" required class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1 resize-none"></textarea>
       </div>
-      <button type="submit" class="btn-primary w-full">Submit Inquiry</button>
-      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="block text-center text-sm text-brand-600 font-medium">Prefer WhatsApp? Chat with sales now</a>
-      <p id="inquiry-status" class="text-sm text-center hidden"></p>
+      <button type="submit" class="btn-primary w-full !bg-ink !text-ink-on-dark">Submit inquiry</button>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="block text-center text-small font-medium text-ink hover:opacity-70">Prefer WhatsApp? Chat with sales now</a>
+      <p id="inquiry-status" class="text-small text-center hidden"></p>
     </form>
   </div>
 </div>
@@ -61,9 +61,8 @@ import { whatsappUrl } from '@/data/site';
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!status) return;
-    status.textContent = 'Thank you. Your inquiry has been received. Our export team will contact you shortly.';
+    status.textContent = 'Thanks — your inquiry was captured. Our team will follow up shortly.';
     status.classList.remove('hidden');
-    status.classList.add('text-brand-600');
-    form.reset();
+    status.classList.add('text-ink');
   });
 </script>

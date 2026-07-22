@@ -290,8 +290,12 @@ function isLinkActive(href: string) {
         if (node.matches('img, video, canvas, picture')) return 'dark';
 
         const cls = typeof node.className === 'string' ? node.className : '';
-        if (/\bbg-brand-9|\bbg-black\b|\bbg-gray-9|\bfrom-brand-9/.test(cls)) return 'dark';
-        if (/\bbg-white\b|\bbg-gray-50\b|\bbg-gray-100\b/.test(cls)) return 'light';
+        if (/\bsurface-dark\b|\bbg-surface-dark\b|\bbg-brand-9|\bbg-black\b|\bfrom-surface-dark|\bfrom-brand-9/.test(cls)) {
+          return 'dark';
+        }
+        if (/\bsurface-light\b|\bbg-surface-1\b|\bbg-surface-2\b|\bbg-surface-3\b|\bbg-white\b|\bbg-gray-50\b|\bbg-gray-100\b/.test(cls)) {
+          return 'light';
+        }
       }
 
       const bg = getComputedStyle(node).backgroundColor;

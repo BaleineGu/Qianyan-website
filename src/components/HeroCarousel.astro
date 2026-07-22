@@ -20,29 +20,29 @@ const { slides } = Astro.props;
           ]}
           data-index={index}
         >
-          <div class="relative w-full h-[100vh] min-h-[560px]">
+          <div class="relative w-full min-h-[100vh] lg:min-h-[1120px]">
             <img
               src={slide.image}
               alt=""
               class="absolute inset-0 w-full h-full object-cover object-center"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-900/75 via-brand-900/45 to-transparent" />
-            <div class="relative z-10 h-full section-container flex items-center pt-16 sm:pt-20 lg:pt-24">
-              <div class="max-w-4xl">
-                <h1 class="text-[43px] sm:text-[58px] lg:text-[72px] font-extrabold text-white leading-tight mb-4">
+            <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.32);" />
+            <div class="relative z-10 h-full section-container flex items-center pt-24 sm:pt-28 lg:pt-32 pb-20">
+              <div class="max-w-[912px]">
+                <h1 class="heading-h1 text-ink-on-dark mb-5">
                   {slide.title}
                 </h1>
-                <p class="text-[22px] sm:text-[24px] text-gray-200 mb-8 leading-relaxed whitespace-pre-line">
+                <p class="text-large text-ink-on-dark-soft mb-8 max-w-[680px] whitespace-pre-line">
                   {slide.subtitle}
                 </p>
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap gap-3">
                   {slide.primaryCta.action === 'inquiry' ? (
-                    <button type="button" data-inquiry-open class="btn-primary text-[17px] px-7 py-3.5">
+                    <button type="button" data-inquiry-open class="btn-primary">
                       {slide.primaryCta.label}
                     </button>
                   ) : (
-                    <a href={slide.primaryCta.href} class="btn-primary text-[17px] px-7 py-3.5">
+                    <a href={slide.primaryCta.href} class="btn-primary">
                       {slide.primaryCta.label}
                     </a>
                   )}
@@ -50,7 +50,7 @@ const { slides } = Astro.props;
                     href={slide.secondaryCta.href || whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="btn-outline text-[17px] px-7 py-3.5"
+                    class="btn-secondary-dark"
                   >
                     {slide.secondaryCta.label}
                   </a>
@@ -62,20 +62,20 @@ const { slides } = Astro.props;
       ))
     }
   </div>
-  <div class="h-[100vh] min-h-[560px] invisible" aria-hidden="true"></div>
+  <div class="min-h-[100vh] lg:min-h-[1120px] invisible" aria-hidden="true"></div>
   <div class="absolute bottom-8 left-0 right-0 z-20 section-container">
-    <div class="flex items-center gap-4">
-      <button id="hero-prev" class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center" aria-label="Previous slide">‹</button>
+    <div class="flex items-center gap-3">
+      <button id="hero-prev" class="w-10 h-10 rounded-full bg-overlay-glass text-ink-on-dark backdrop-blur-[8px] flex items-center justify-center" aria-label="Previous slide">‹</button>
       <div id="hero-dots" class="flex gap-2">
         {slides.map((_, index) => (
           <button
-            class:list={['hero-dot w-2.5 h-2.5 rounded-full', index === 0 ? 'bg-white w-8' : 'bg-white/40']}
+            class:list={['hero-dot h-2.5 rounded-full transition-all duration-helios', index === 0 ? 'bg-ink-on-dark w-8' : 'bg-ink-on-dark-faint w-2.5']}
             data-index={index}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-      <button id="hero-next" class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center" aria-label="Next slide">›</button>
+      <button id="hero-next" class="w-10 h-10 rounded-full bg-overlay-glass text-ink-on-dark backdrop-blur-[8px] flex items-center justify-center" aria-label="Next slide">›</button>
     </div>
   </div>
 </section>
@@ -88,13 +88,13 @@ const { slides } = Astro.props;
   function goTo(index) {
     slideEls[current]?.classList.replace('opacity-100', 'opacity-0');
     slideEls[current]?.classList.replace('z-10', 'z-0');
-    dotEls[current]?.classList.remove('bg-white', 'w-8');
-    dotEls[current]?.classList.add('bg-white/40');
+    dotEls[current]?.classList.remove('bg-ink-on-dark', 'w-8');
+    dotEls[current]?.classList.add('bg-ink-on-dark-faint', 'w-2.5');
     current = (index + totalSlides) % totalSlides;
     slideEls[current]?.classList.replace('opacity-0', 'opacity-100');
     slideEls[current]?.classList.replace('z-0', 'z-10');
-    dotEls[current]?.classList.remove('bg-white/40');
-    dotEls[current]?.classList.add('bg-white', 'w-8');
+    dotEls[current]?.classList.remove('bg-ink-on-dark-faint', 'w-2.5');
+    dotEls[current]?.classList.add('bg-ink-on-dark', 'w-8');
   }
   function startAutoPlay() {
     if (timer) clearInterval(timer);
