@@ -1,13 +1,60 @@
 ---
+const profileText =
+  'Hebei Qianyan Metal Products Co., LTD is located in Fucheng County, Hengshui City, Hebei Province. It is a modern enterprise specializing in the design, research and development, production and export of integrated houses. Main products include double-wing expandable houses, folding houses and flat pack prefab houses. The products are widely used in engineering construction, temporary office setups, camp dormitories, tourism vacation projects and emergency rescue projects. Customized solutions are available according to project requirements.';
+
+const images = [
+  {
+    src: '/images/company/profile-1.png',
+    alt: 'Hebei Qianyan Metal Products factory entrance',
+  },
+  {
+    src: '/images/company/profile-2.png',
+    alt: 'Two-story modular container building',
+  },
+  {
+    src: '/images/company/profile-3.png',
+    alt: 'Company manufacturing facility',
+  },
+];
 ---
 
-<section class="py-section-sm bg-surface-1" aria-label="Company profile" data-header-theme="light">
+<section class="py-section-sm lg:py-section-md bg-surface-1" aria-label="Company profile" data-header-theme="light">
   <div class="section-container">
-    <img
-      src="/images/features/company-profile.png"
-      alt="Hebei Qianyan Metal Products Co., LTD company profile"
-      class="block w-full h-auto object-contain rounded-helios-md"
-      loading="lazy"
-    />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-center">
+      <div class="order-2 lg:order-1">
+        <h2 class="heading-h5 text-ink mb-4">Company Profile</h2>
+        <p class="text-body text-ink-soft leading-relaxed whitespace-pre-line">
+          {profileText}
+        </p>
+      </div>
+
+      {/* 品字形：上 1，下 2 — 右半区 */}
+      <div class="order-1 lg:order-2 grid grid-cols-2 gap-3 sm:gap-4">
+        <div class="col-span-2 overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/9]">
+          <img
+            src={images[0].src}
+            alt={images[0].alt}
+            class="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
+        </div>
+        <div class="overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[4/3]">
+          <img
+            src={images[1].src}
+            alt={images[1].alt}
+            class="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
+        </div>
+        <div class="overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[4/3]">
+          <img
+            src={images[2].src}
+            alt={images[2].alt}
+            class="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </section>
