@@ -18,19 +18,19 @@ const tabLabels: Record<string, string> = {
 ---
 
 <section
-  class="product-tabs-section h-[90dvh] max-h-[90dvh] flex flex-col bg-surface-1 overflow-hidden"
+  class="product-tabs-section bg-surface-1"
   data-header-theme="light"
   data-header-hide="true"
 >
-  <div class="section-container flex flex-col flex-1 min-h-0 py-3 sm:py-4 lg:py-5">
-    <div class="shrink-0 text-center max-w-[680px] mx-auto mb-2.5 sm:mb-3">
+  <div class="section-container py-6 sm:py-8 lg:py-10">
+    <div class="text-center max-w-[680px] mx-auto mb-3 sm:mb-4">
       <h2 class="text-[clamp(1.125rem,2vw,1.75rem)] leading-tight font-medium tracking-tight text-ink">
         Next, you will see our products
       </h2>
     </div>
 
     <div
-      class="product-tabs shrink-0 flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-2.5 sm:mb-3"
+      class="product-tabs flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-3 sm:mb-4"
       role="tablist"
       aria-label="Product categories"
     >
@@ -57,37 +57,38 @@ const tabLabels: Record<string, string> = {
       }
     </div>
 
-    <div class="product-panels flex-1 min-h-0">
+    <div id="product-panels" class="product-panels relative">
       {
         categories.map((c, index) => (
           <div
             id={`product-panel-${c.id}`}
             role="tabpanel"
             aria-labelledby={`product-tab-${c.id}`}
-            class:list={['product-panel h-full min-h-0', index !== 0 && 'hidden']}
+            class:list={['product-panel h-full', index !== 0 && 'hidden']}
             data-product-panel={c.id}
             hidden={index !== 0}
           >
             <a
               href={c.href}
-              class="group flex flex-col md:flex-row md:items-stretch h-full min-h-0 overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
+              class="group grid grid-cols-1 md:grid-cols-[7fr_3fr] md:h-full overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
             >
-              <div class="h-[42%] md:h-auto md:w-[70%] min-h-0 overflow-hidden shrink-0 bg-surface-2 flex items-center justify-center">
+              <div class="product-panel__media relative min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-2">
                 <img
                   src={c.image}
                   alt=""
                   class:list={[
-                    'w-full h-full',
+                    'absolute inset-0 w-full h-full',
                     index < 2 ? 'object-contain object-center' : 'object-cover object-center',
                   ]}
-                  loading="lazy"
+                  data-master-image={index === 0 ? 'true' : undefined}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                 />
               </div>
-              <div class="flex-1 md:w-[30%] min-h-0 px-4 py-3 sm:px-5 sm:py-4 lg:px-6 lg:py-5 flex flex-col justify-center overflow-hidden">
+              <div class="min-h-0 md:h-full px-4 py-3 sm:px-5 sm:py-4 lg:px-6 flex flex-col justify-center overflow-hidden">
                 <h3 class="text-[clamp(0.95rem,1.4vw,1.25rem)] font-medium text-ink mb-1.5 sm:mb-2 shrink-0">
                   {c.name}
                 </h3>
-                <p class="text-[clamp(0.75rem,0.95vw,0.9375rem)] leading-snug text-ink-soft overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:12] md:[-webkit-line-clamp:18]">
+                <p class="text-[clamp(0.75rem,0.95vw,0.875rem)] leading-snug text-ink-soft overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:8] md:[-webkit-line-clamp:12]">
                   {c.description}
                 </p>
               </div>
@@ -102,6 +103,27 @@ const tabLabels: Record<string, string> = {
 <script define:vars={{ defaultId }}>
   const tabs = Array.from(document.querySelectorAll('[data-product-tab]'));
   const panels = Array.from(document.querySelectorAll('[data-product-panel]'));
+  const panelsRoot = document.getElementById('product-panels');
+  const masterImage = document.querySelector('[data-master-image="true"]');
+
+  function syncPanelHeight() {
+    if (!panelsRoot || !masterImage) return;
+
+    if (window.innerWidth < 768) {
+      panelsRoot.style.height = '';
+      return;
+    }
+
+    const naturalW = masterImage.naturalWidth;
+    const naturalH = masterImage.naturalHeight;
+    if (!naturalW || !naturalH) return;
+
+    // Content width is 70% image + 30% text; image height = imageWidth × ratio
+    const totalWidth = panelsRoot.getBoundingClientRect().width;
+    const imageWidth = totalWidth * 0.7;
+    const height = Math.round(imageWidth * (naturalH / naturalW));
+    panelsRoot.style.height = `${height}px`;
+  }
 
   function activate(id) {
     tabs.forEach((tab) => {
@@ -133,4 +155,11 @@ const tabLabels: Record<string, string> = {
   });
 
   if (defaultId) activate(defaultId);
+
+  if (masterImage) {
+    if (masterImage.complete) syncPanelHeight();
+    else masterImage.addEventListener('load', syncPanelHeight);
+  }
+
+  window.addEventListener('resize', syncPanelHeight);
 </script>
