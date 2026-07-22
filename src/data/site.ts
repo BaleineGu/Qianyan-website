@@ -9,7 +9,7 @@ import type {
 export const siteConfig = {
   name: 'QIANYAN JINSHU',
   shortName: 'QIANYAN',
-  tagline: 'Heavy-duty prefab modular housing for global B2B markets.',
+  tagline: 'Connecting with the World\nMutual Benefit for All',
   description:
     'Factory-direct expandable container homes, space capsule houses, flat pack buildings, folding houses, and container swimming pools with export-ready delivery support.',
   email: 'sales@qianyanjinshu.com',
