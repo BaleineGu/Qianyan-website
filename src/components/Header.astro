@@ -8,12 +8,16 @@ function isLinkActive(href: string) {
   return href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 }
 ---
-<header class:list={['z-50 w-full border-b border-white/15 bg-black/60 backdrop-blur-md', overlay ? 'absolute top-0 left-0 right-0' : 'sticky top-0']}>
+<header
+  id="site-header"
+  data-theme="dark"
+  class="site-header fixed top-0 left-0 right-0 z-50 w-full border-b backdrop-blur-md transition-colors duration-300"
+>
   <div class="section-container">
     <div class="flex items-center gap-3 sm:gap-4 h-16 sm:h-20 lg:h-24">
       <a href="/" class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 lg:flex-none lg:max-w-[36%]">
         <img src={siteConfig.logo} alt="" class="h-10 w-auto shrink-0 sm:h-[54px] lg:h-[66px]" width="66" height="66" />
-        <span class="text-white font-bold tracking-[0.08em] uppercase leading-tight truncate text-base sm:text-[21px] lg:text-[24px]">{siteConfig.name}</span>
+        <span class="site-header__brand font-bold tracking-[0.08em] uppercase leading-tight truncate text-base sm:text-[21px] lg:text-[24px]">{siteConfig.name}</span>
       </a>
       <nav class="hidden xl:flex items-center justify-center gap-4 flex-1 min-w-0" aria-label="Main navigation">
         {navLinks.map((link) => {
@@ -28,8 +32,8 @@ function isLinkActive(href: string) {
                 <a
                   href={link.href}
                   class:list={[
-                    'inline-flex items-center gap-1 text-[15px] 2xl:text-[17px] font-medium whitespace-nowrap transition-colors',
-                    isActive ? 'text-brand-500' : 'text-white/85 hover:text-white',
+                    'site-header__link inline-flex items-center gap-1 text-[15px] 2xl:text-[17px] font-medium whitespace-nowrap transition-colors',
+                    isActive && 'is-active',
                   ]}
                   aria-current={isActive ? 'page' : undefined}
                   aria-haspopup="true"
@@ -40,13 +44,13 @@ function isLinkActive(href: string) {
                   </svg>
                 </a>
                 <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-3 min-w-[280px] z-50">
-                  <div class="rounded-lg border border-white/10 bg-black/95 shadow-xl py-2">
+                  <div class="site-header__dropdown rounded-lg border shadow-xl py-2">
                     {children.map((child) => (
                       <a
                         href={child.href}
                         class:list={[
-                          'block px-4 py-2.5 text-[14px] 2xl:text-[15px] whitespace-nowrap transition-colors',
-                          isLinkActive(child.href) ? 'text-brand-500 bg-white/5' : 'text-white/85 hover:text-white hover:bg-white/10',
+                          'site-header__dropdown-link block px-4 py-2.5 text-[14px] 2xl:text-[15px] whitespace-nowrap transition-colors',
+                          isLinkActive(child.href) && 'is-active',
                         ]}
                         aria-current={isLinkActive(child.href) ? 'page' : undefined}
                       >
@@ -63,8 +67,8 @@ function isLinkActive(href: string) {
             <a
               href={link.href}
               class:list={[
-                'shrink-0 text-[15px] 2xl:text-[17px] font-medium whitespace-nowrap transition-colors',
-                isActive ? 'text-brand-500' : 'text-white/85 hover:text-white',
+                'site-header__link shrink-0 text-[15px] 2xl:text-[17px] font-medium whitespace-nowrap transition-colors',
+                isActive && 'is-active',
               ]}
               aria-current={isActive ? 'page' : undefined}
             >
@@ -74,28 +78,28 @@ function isLinkActive(href: string) {
         })}
       </nav>
       <button type="button" data-inquiry-open class="hidden lg:inline-flex btn-primary shrink-0 text-[16px] py-2.5 px-5">Get a Factory Quote</button>
-      <button id="mobile-menu-btn" class="xl:hidden ml-auto p-2 rounded-lg text-white hover:bg-white/10 shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+      <button id="mobile-menu-btn" class="site-header__icon xl:hidden ml-auto p-2 rounded-lg shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
     </div>
-    <nav id="mobile-menu" class="hidden xl:hidden pb-4 border-t border-white/15 bg-black/70 -mx-4 px-4 sm:-mx-6 sm:px-6" aria-label="Mobile navigation">
+    <nav id="mobile-menu" class="site-header__mobile hidden xl:hidden pb-4 border-t -mx-4 px-4 sm:-mx-6 sm:px-6" aria-label="Mobile navigation">
       <div class="flex flex-col gap-1 pt-3">
         {navLinks.map((link) => {
           const children = 'children' in link ? link.children : undefined;
           if (children) {
             return (
               <div class="flex flex-col">
-                <a href={link.href} class="px-3 py-2.5 rounded-lg text-[18px] font-medium text-white/85 hover:bg-white/10 hover:text-white">{link.label}</a>
-                <div class="ml-3 border-l border-white/15 pl-2 flex flex-col">
+                <a href={link.href} class="site-header__mobile-link px-3 py-2.5 rounded-lg text-[18px] font-medium">{link.label}</a>
+                <div class="ml-3 border-l site-header__mobile-divider pl-2 flex flex-col">
                   {children.map((child) => (
-                    <a href={child.href} class="px-3 py-2 rounded-lg text-[16px] text-white/75 hover:bg-white/10 hover:text-white">{child.label}</a>
+                    <a href={child.href} class="site-header__mobile-link px-3 py-2 rounded-lg text-[16px]">{child.label}</a>
                   ))}
                 </div>
               </div>
             );
           }
           return (
-            <a href={link.href} class="px-3 py-2.5 rounded-lg text-[18px] font-medium text-white/85 hover:bg-white/10 hover:text-white">{link.label}</a>
+            <a href={link.href} class="site-header__mobile-link px-3 py-2.5 rounded-lg text-[18px] font-medium">{link.label}</a>
           );
         })}
         <button type="button" data-inquiry-open class="mt-2 btn-primary text-center text-[18px] w-full">Get a Factory Quote</button>
@@ -103,13 +107,148 @@ function isLinkActive(href: string) {
     </nav>
   </div>
 </header>
+{!overlay && <div id="site-header-spacer" class="h-16 sm:h-20 lg:h-24" aria-hidden="true" />}
+
+<style>
+  .site-header[data-theme='dark'] {
+    background-color: rgb(0 0 0 / 0.6);
+    border-color: rgb(255 255 255 / 0.15);
+  }
+
+  .site-header[data-theme='dark'] .site-header__brand,
+  .site-header[data-theme='dark'] .site-header__icon {
+    color: white;
+  }
+
+  .site-header[data-theme='dark'] .site-header__link {
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .site-header[data-theme='dark'] .site-header__link:hover {
+    color: white;
+  }
+
+  .site-header[data-theme='dark'] .site-header__link.is-active {
+    color: rgb(14 165 233);
+  }
+
+  .site-header[data-theme='dark'] .site-header__dropdown {
+    background-color: rgb(0 0 0 / 0.95);
+    border-color: rgb(255 255 255 / 0.1);
+  }
+
+  .site-header[data-theme='dark'] .site-header__dropdown-link {
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .site-header[data-theme='dark'] .site-header__dropdown-link:hover {
+    color: white;
+    background-color: rgb(255 255 255 / 0.1);
+  }
+
+  .site-header[data-theme='dark'] .site-header__dropdown-link.is-active {
+    color: rgb(14 165 233);
+    background-color: rgb(255 255 255 / 0.05);
+  }
+
+  .site-header[data-theme='dark'] .site-header__mobile {
+    border-color: rgb(255 255 255 / 0.15);
+    background-color: rgb(0 0 0 / 0.7);
+  }
+
+  .site-header[data-theme='dark'] .site-header__mobile-divider {
+    border-color: rgb(255 255 255 / 0.15);
+  }
+
+  .site-header[data-theme='dark'] .site-header__mobile-link {
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .site-header[data-theme='dark'] .site-header__mobile-link:hover {
+    color: white;
+    background-color: rgb(255 255 255 / 0.1);
+  }
+
+  .site-header[data-theme='dark'] .site-header__icon:hover {
+    background-color: rgb(255 255 255 / 0.1);
+  }
+
+  /* Light background → dark text for contrast */
+  .site-header[data-theme='light'] {
+    background-color: rgb(255 255 255 / 0.92);
+    border-color: rgb(229 231 235);
+    box-shadow: 0 1px 12px rgb(15 23 42 / 0.08);
+  }
+
+  .site-header[data-theme='light'] .site-header__brand,
+  .site-header[data-theme='light'] .site-header__icon {
+    color: rgb(15 23 42);
+  }
+
+  .site-header[data-theme='light'] .site-header__link {
+    color: rgb(51 65 85);
+  }
+
+  .site-header[data-theme='light'] .site-header__link:hover {
+    color: rgb(15 23 42);
+  }
+
+  .site-header[data-theme='light'] .site-header__link.is-active {
+    color: rgb(2 132 199);
+  }
+
+  .site-header[data-theme='light'] .site-header__dropdown {
+    background-color: white;
+    border-color: rgb(229 231 235);
+  }
+
+  .site-header[data-theme='light'] .site-header__dropdown-link {
+    color: rgb(51 65 85);
+  }
+
+  .site-header[data-theme='light'] .site-header__dropdown-link:hover {
+    color: rgb(15 23 42);
+    background-color: rgb(241 245 249);
+  }
+
+  .site-header[data-theme='light'] .site-header__dropdown-link.is-active {
+    color: rgb(2 132 199);
+    background-color: rgb(240 249 255);
+  }
+
+  .site-header[data-theme='light'] .site-header__mobile {
+    border-color: rgb(229 231 235);
+    background-color: rgb(255 255 255 / 0.98);
+  }
+
+  .site-header[data-theme='light'] .site-header__mobile-divider {
+    border-color: rgb(229 231 235);
+  }
+
+  .site-header[data-theme='light'] .site-header__mobile-link {
+    color: rgb(51 65 85);
+  }
+
+  .site-header[data-theme='light'] .site-header__mobile-link:hover {
+    color: rgb(15 23 42);
+    background-color: rgb(241 245 249);
+  }
+
+  .site-header[data-theme='light'] .site-header__icon:hover {
+    background-color: rgb(241 245 249);
+  }
+</style>
+
 <script>
+  const header = document.getElementById('site-header');
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
+
   btn?.addEventListener('click', () => {
     if (!menu || !btn) return;
     btn.setAttribute('aria-expanded', String(menu.classList.toggle('hidden') === false));
   });
+
   window.addEventListener('resize', () => {
     if (!menu || !btn) return;
     if (window.innerWidth >= 1280 && !menu.classList.contains('hidden')) {
@@ -117,4 +256,83 @@ function isLinkActive(href: string) {
       btn.setAttribute('aria-expanded', 'false');
     }
   });
+
+  function parseRgb(color: string): [number, number, number] | null {
+    const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+    if (!match) return null;
+    return [Number(match[1]), Number(match[2]), Number(match[3])];
+  }
+
+  function luminance(r: number, g: number, b: number) {
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  }
+
+  function detectThemeFromElement(el: Element | null): 'light' | 'dark' | null {
+    let node: Element | null = el;
+    while (node && node !== document.documentElement) {
+      if (node instanceof HTMLElement) {
+        const marked = node.dataset.headerTheme;
+        if (marked === 'dark' || marked === 'light') return marked;
+
+        if (node.matches('img, video, canvas, picture')) return 'dark';
+
+        const cls = typeof node.className === 'string' ? node.className : '';
+        if (/\bbg-brand-9|\bbg-black\b|\bbg-gray-9|\bfrom-brand-9/.test(cls)) return 'dark';
+        if (/\bbg-white\b|\bbg-gray-50\b|\bbg-gray-100\b/.test(cls)) return 'light';
+      }
+
+      const bg = getComputedStyle(node).backgroundColor;
+      const rgb = parseRgb(bg);
+      if (rgb) {
+        const alphaMatch = bg.match(/rgba?\([^)]*,\s*([0-9.]+)\s*\)/i);
+        const alpha = alphaMatch ? Number(alphaMatch[1]) : 1;
+        if (alpha >= 0.45) {
+          return luminance(...rgb) >= 0.58 ? 'light' : 'dark';
+        }
+      }
+
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function updateHeaderTheme() {
+    if (!header) return;
+
+    const rect = header.getBoundingClientRect();
+    const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 4);
+    const sampleXs = [0.2, 0.5, 0.8].map((ratio) => rect.left + rect.width * ratio);
+
+    header.style.pointerEvents = 'none';
+    let lightVotes = 0;
+    let darkVotes = 0;
+
+    for (const x of sampleXs) {
+      const el = document.elementFromPoint(x, sampleY);
+      const theme = detectThemeFromElement(el);
+      if (theme === 'light') lightVotes += 1;
+      else if (theme === 'dark') darkVotes += 1;
+    }
+
+    header.style.pointerEvents = '';
+
+    const nextTheme = lightVotes >= darkVotes ? 'light' : 'dark';
+    if (header.dataset.theme !== nextTheme) {
+      header.dataset.theme = nextTheme;
+    }
+  }
+
+  let ticking = false;
+  function onScrollOrResize() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateHeaderTheme();
+      ticking = false;
+    });
+  }
+
+  updateHeaderTheme();
+  window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  window.addEventListener('resize', onScrollOrResize);
 </script>
