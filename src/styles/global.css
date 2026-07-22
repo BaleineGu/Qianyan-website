@@ -138,6 +138,15 @@
     font-weight: 500;
   }
 
+  /* Homepage / section titles — keep sizes consistent across modules */
+  .section-heading {
+    font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--color-ink, #161514);
+  }
+
   .heading-h3 {
     font-size: clamp(28px, 3vw, 40px);
     line-height: 1.1;
