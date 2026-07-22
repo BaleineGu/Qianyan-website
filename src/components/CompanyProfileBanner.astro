@@ -20,16 +20,23 @@ const images = [
 
 <section class="py-section-sm lg:py-section-md bg-surface-1" aria-label="Company profile" data-header-theme="light">
   <div class="section-container">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-center">
-      <div class="order-2 lg:order-1">
-        <h2 class="heading-h5 text-ink mb-4">Company Profile</h2>
-        <p class="text-body text-ink-soft leading-relaxed whitespace-pre-line">
-          {profileText}
-        </p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-stretch">
+      <div
+        id="company-profile-copy"
+        class="order-2 lg:order-1 flex flex-col justify-center min-h-0 lg:h-full origin-left"
+      >
+        <div id="company-profile-copy-inner">
+          <h2 class="text-[clamp(1.75rem,3.2vw,2.75rem)] font-medium tracking-tight text-ink mb-5 sm:mb-6 lg:mb-8 leading-tight">
+            Company Profile
+          </h2>
+          <p class="text-[clamp(1.0625rem,1.65vw,1.375rem)] text-ink-soft leading-[1.75] lg:leading-[1.85]">
+            {profileText}
+          </p>
+        </div>
       </div>
 
       {/* 品字形：上 1，下 2 — 右半区 */}
-      <div class="order-1 lg:order-2 grid grid-cols-2 gap-3 sm:gap-4">
+      <div id="company-profile-media" class="order-1 lg:order-2 grid grid-cols-2 gap-3 sm:gap-4 h-full">
         <div class="col-span-2 overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/9]">
           <img
             src={images[0].src}
@@ -58,3 +65,32 @@ const images = [
     </div>
   </div>
 </section>
+
+<script>
+  const copy = document.getElementById('company-profile-copy');
+  const inner = document.getElementById('company-profile-copy-inner');
+  const media = document.getElementById('company-profile-media');
+
+  function fitCopy() {
+    if (!copy || !inner || !media) return;
+    if (window.innerWidth < 1024) {
+      inner.style.transform = '';
+      return;
+    }
+
+    inner.style.transform = 'scale(1)';
+    const available = media.getBoundingClientRect().height;
+    const needed = inner.getBoundingClientRect().height;
+    if (!available || !needed) return;
+
+    const scale = Math.min(1.45, Math.max(1, (available * 0.96) / needed));
+    inner.style.transformOrigin = 'left center';
+    inner.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener('resize', fitCopy);
+  if (typeof ResizeObserver !== 'undefined' && media) {
+    new ResizeObserver(fitCopy).observe(media);
+  }
+  fitCopy();
+</script>
