@@ -11,7 +11,7 @@ function isLinkActive(href: string) {
 <header
   id="site-header"
   data-theme="dark"
-  class="site-header fixed top-0 left-0 right-0 z-50 w-full pointer-events-none"
+  class="site-header fixed top-0 left-0 right-0 z-50 w-full pointer-events-none transition-[transform,opacity] duration-300 ease-out"
 >
   <div class="section-container pt-3 sm:pt-4">
     <div
@@ -126,6 +126,12 @@ function isLinkActive(href: string) {
 {!overlay && <div id="site-header-spacer" class="h-[63px] sm:h-[80px] lg:h-[93px]" aria-hidden="true" />}
 
 <style>
+  .site-header.is-hidden {
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .site-header__shell {
     border-radius: 9999px;
   }
@@ -346,7 +352,7 @@ function isLinkActive(href: string) {
   }
 
   function updateHeaderTheme() {
-    if (!header || !shell) return;
+    if (!header || !shell || header.classList.contains('is-hidden')) return;
 
     const rect = shell.getBoundingClientRect();
     const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 4);
@@ -371,18 +377,38 @@ function isLinkActive(href: string) {
     }
   }
 
+  function updateHeaderVisibility() {
+    if (!header) return;
+
+    const hideZones = document.querySelectorAll<HTMLElement>('[data-header-hide]');
+    const probeY = Math.min(window.innerHeight - 1, (shell?.getBoundingClientRect().bottom ?? 96) + 8);
+    let shouldHide = false;
+
+    hideZones.forEach((zone) => {
+      const rect = zone.getBoundingClientRect();
+      if (rect.top < probeY && rect.bottom > 0) {
+        shouldHide = true;
+      }
+    });
+
+    header.classList.toggle('is-hidden', shouldHide);
+    header.setAttribute('aria-hidden', shouldHide ? 'true' : 'false');
+  }
+
   let ticking = false;
   function onScrollOrResize() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
       fitHeaderScale();
+      updateHeaderVisibility();
       updateHeaderTheme();
       ticking = false;
     });
   }
 
   fitHeaderScale();
+  updateHeaderVisibility();
   updateHeaderTheme();
   window.addEventListener('scroll', onScrollOrResize, { passive: true });
   window.addEventListener('resize', onScrollOrResize);
