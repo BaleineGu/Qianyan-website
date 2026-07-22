@@ -21,6 +21,8 @@ const slides = [
     alt: 'Finished expandable double-wing container house',
   },
 ];
+
+const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 ---
 
 <section
@@ -35,35 +37,31 @@ const slides = [
       </h2>
     </div>
 
-    <div
-      id="folding-carousel"
-      class="relative overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline"
-    >
-      <div class="relative w-full">
-        {
-          slides.map((slide, index) => (
-            <div
-              class:list={[
-                'folding-slide',
-                index === 0 ? 'relative z-10' : 'absolute inset-0 z-0 opacity-0',
-              ]}
-              data-index={index}
-            >
-              <img
-                src={slide.image}
-                alt={slide.alt}
-                class="w-full h-auto block object-contain object-center"
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
-            </div>
-          ))
-        }
+    <div id="folding-carousel" class="folding-carousel relative">
+      <div class="folding-viewport relative overflow-hidden">
+        <div id="folding-track" class="folding-track flex items-center will-change-transform">
+          {
+            trackSlides.map((slide, index) => (
+              <div class="folding-slide shrink-0" data-track-index={index}>
+                <div class="folding-slide__frame overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline">
+                  <img
+                    src={slide.image}
+                    alt={slide.alt}
+                    class="w-full h-full object-cover object-center"
+                    loading={index <= 1 ? 'eager' : 'lazy'}
+                    draggable="false"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </div>
 
       <button
         id="folding-prev"
         type="button"
-        class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/80 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        class="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
         aria-label="Previous photo"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -73,7 +71,7 @@ const slides = [
       <button
         id="folding-next"
         type="button"
-        class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/80 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
         aria-label="Next photo"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -81,14 +79,14 @@ const slides = [
         </svg>
       </button>
 
-      <div class="absolute bottom-3 sm:bottom-4 left-0 right-0 z-20 flex justify-center gap-2">
+      <div class="mt-5 flex justify-center gap-2">
         {
           slides.map((_, index) => (
             <button
               type="button"
               class:list={[
                 'folding-dot h-2 rounded-full transition-all duration-helios',
-                index === 0 ? 'bg-surface-dark w-6' : 'bg-surface-dark/35 w-2',
+                index === 0 ? 'is-active bg-surface-dark w-6' : 'bg-ink-faint w-2',
               ]}
               data-index={index}
               aria-label={`Go to photo ${index + 1}`}
@@ -100,30 +98,111 @@ const slides = [
   </div>
 </section>
 
-<script define:vars={{ totalSlides: slides.length }}>
-  let current = 0;
-  const slideEls = document.querySelectorAll('.folding-slide');
-  const dotEls = document.querySelectorAll('.folding-dot');
-
-  function goTo(index) {
-    const prev = current;
-    current = (index + totalSlides) % totalSlides;
-
-    slideEls[prev]?.classList.add('absolute', 'inset-0', 'z-0', 'opacity-0');
-    slideEls[prev]?.classList.remove('relative', 'z-10');
-
-    slideEls[current]?.classList.remove('absolute', 'inset-0', 'z-0', 'opacity-0');
-    slideEls[current]?.classList.add('relative', 'z-10');
-
-    dotEls[prev]?.classList.remove('bg-surface-dark', 'w-6');
-    dotEls[prev]?.classList.add('bg-surface-dark/35', 'w-2');
-    dotEls[current]?.classList.remove('bg-surface-dark/35', 'w-2');
-    dotEls[current]?.classList.add('bg-surface-dark', 'w-6');
+<style>
+  .folding-viewport {
+    /* Side peek of adjacent slides */
+    padding-inline: 8%;
   }
 
-  document.getElementById('folding-prev')?.addEventListener('click', () => goTo(current - 1));
-  document.getElementById('folding-next')?.addEventListener('click', () => goTo(current + 1));
-  dotEls.forEach((dot) => {
-    dot.addEventListener('click', () => goTo(Number(dot.dataset.index)));
+  .folding-track {
+    gap: 0.85rem;
+    transition: none;
+  }
+
+  .folding-slide {
+    width: 100%;
+  }
+
+  /* Height shortened by 7% vs full natural 16/9 / 2/1 frames */
+  .folding-slide__frame {
+    aspect-ratio: 16 / (9 * 0.93);
+    opacity: 0.55;
+  }
+
+  @media (min-width: 640px) {
+    .folding-slide__frame {
+      aspect-ratio: 2 / (1 * 0.93);
+    }
+  }
+
+  .folding-slide.is-active .folding-slide__frame {
+    opacity: 1;
+  }
+</style>
+
+<script define:vars={{ totalSlides: slides.length }}>
+  const track = document.getElementById('folding-track');
+  const slideEls = Array.from(document.querySelectorAll('.folding-slide'));
+  const dots = Array.from(document.querySelectorAll('.folding-dot'));
+  let index = 1;
+
+  function gapPx() {
+    if (!track) return 14;
+    const styles = getComputedStyle(track);
+    return Number.parseFloat(styles.columnGap || styles.gap) || 14;
+  }
+
+  function step() {
+    if (!slideEls[0]) return 0;
+    return slideEls[0].getBoundingClientRect().width + gapPx();
+  }
+
+  function realIndex() {
+    if (index === 0) return totalSlides - 1;
+    if (index === totalSlides + 1) return 0;
+    return index - 1;
+  }
+
+  function updateDots() {
+    const real = realIndex();
+    dots.forEach((dot, i) => {
+      const active = i === real;
+      dot.classList.toggle('is-active', active);
+      dot.classList.toggle('bg-surface-dark', active);
+      dot.classList.toggle('w-6', active);
+      dot.classList.toggle('bg-ink-faint', !active);
+      dot.classList.toggle('w-2', !active);
+    });
+  }
+
+  function updateActive() {
+    slideEls.forEach((el, i) => {
+      el.classList.toggle('is-active', i === index);
+    });
+  }
+
+  function setTransform() {
+    if (!track) return;
+    track.style.transition = 'none';
+    track.style.transform = `translate3d(${-index * step()}px, 0, 0)`;
+  }
+
+  function goTo(nextIndex) {
+    if (!track) return;
+    index = nextIndex;
+
+    if (index === 0) index = totalSlides;
+    else if (index === totalSlides + 1) index = 1;
+
+    updateActive();
+    updateDots();
+    setTransform();
+  }
+
+  document.getElementById('folding-prev')?.addEventListener('click', () => goTo(index - 1));
+  document.getElementById('folding-next')?.addEventListener('click', () => goTo(index + 1));
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const targetReal = Number(dot.dataset.index);
+      if (targetReal === realIndex()) return;
+      goTo(targetReal + 1);
+    });
   });
+
+  window.addEventListener('resize', () => setTransform());
+
+  updateActive();
+  updateDots();
+  setTransform();
 </script>
