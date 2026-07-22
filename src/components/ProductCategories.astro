@@ -70,9 +70,9 @@ const tabLabels: Record<string, string> = {
           >
             <a
               href={c.href}
-              class="group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md bg-surface-2 transition-opacity duration-helios hover:opacity-95"
+              class="group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 transition-opacity duration-helios hover:opacity-95"
             >
-              <div class="product-panel__media relative min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-2 min-w-0">
+              <div class="product-panel__media relative isolate min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-3 min-w-0">
                 <img
                   src={c.image}
                   alt=""
@@ -84,13 +84,15 @@ const tabLabels: Record<string, string> = {
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
               </div>
-              <div class="product-panel__copy min-w-0 min-h-0 md:h-full px-5 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7 flex flex-col justify-center gap-4 sm:gap-5 overflow-hidden">
-                <h3 class="text-[clamp(1.25rem,2.1vw,1.875rem)] font-medium text-ink leading-tight shrink-0">
-                  {c.name}
-                </h3>
-                <p class="text-[clamp(0.9375rem,1.35vw,1.1875rem)] leading-[1.7] text-ink-soft overflow-hidden">
-                  {c.description}
-                </p>
+              <div class="product-panel__copy relative z-10 isolate min-w-0 min-h-0 md:h-full bg-surface-1 px-5 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7 flex flex-col justify-center overflow-hidden">
+                <div class="product-panel__copy-inner w-full" data-fit-copy>
+                  <h3 class="product-panel__title font-medium text-ink leading-tight mb-[0.55em]">
+                    {c.name}
+                  </h3>
+                  <p class="product-panel__body leading-[1.65] text-ink-soft">
+                    {c.description}
+                  </p>
+                </div>
               </div>
             </a>
           </div>
@@ -99,6 +101,20 @@ const tabLabels: Record<string, string> = {
     </div>
   </div>
 </section>
+
+<style>
+  .product-panel__title {
+    font-size: 1.45em;
+  }
+
+  .product-panel__body {
+    font-size: 1em;
+  }
+
+  .product-panel__copy-inner {
+    font-size: 16px;
+  }
+</style>
 
 <script define:vars={{ defaultId }}>
   const tabs = Array.from(document.querySelectorAll('[data-product-tab]'));
@@ -118,11 +134,55 @@ const tabLabels: Record<string, string> = {
     const naturalH = masterImage.naturalHeight;
     if (!naturalW || !naturalH) return;
 
-    // Content width is 55% image + 45% text; height = imageWidth × ratio
     const totalWidth = panelsRoot.getBoundingClientRect().width;
     const imageWidth = totalWidth * 0.55;
     const height = Math.round(imageWidth * (naturalH / naturalW));
     panelsRoot.style.height = `${height}px`;
+  }
+
+  function fitCopy(root = document) {
+    const boxes = root.querySelectorAll('.product-panel__copy');
+    boxes.forEach((copy) => {
+      const panel = copy.closest('[data-product-panel]');
+      if (panel?.classList.contains('hidden') || panel?.hasAttribute('hidden')) return;
+
+      const inner = copy.querySelector('[data-fit-copy]');
+      if (!(inner instanceof HTMLElement) || !(copy instanceof HTMLElement)) return;
+
+      if (window.innerWidth < 768) {
+        inner.style.fontSize = '';
+        return;
+      }
+
+      const available = (() => {
+        const styles = getComputedStyle(copy);
+        const padY = Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom);
+        return Math.max(0, copy.clientHeight - padY);
+      })();
+      if (available < 40) return;
+
+      let low = 11;
+      let high = 30;
+      let best = low;
+
+      for (let i = 0; i < 16; i += 1) {
+        const mid = (low + high) / 2;
+        inner.style.fontSize = `${mid}px`;
+        if (inner.scrollHeight <= available) {
+          best = mid;
+          low = mid;
+        } else {
+          high = mid;
+        }
+      }
+
+      inner.style.fontSize = `${best.toFixed(2)}px`;
+    });
+  }
+
+  function layout() {
+    syncPanelHeight();
+    requestAnimationFrame(() => fitCopy());
   }
 
   function activate(id) {
@@ -145,6 +205,8 @@ const tabLabels: Record<string, string> = {
       if (active) panel.removeAttribute('hidden');
       else panel.setAttribute('hidden', '');
     });
+
+    requestAnimationFrame(() => fitCopy());
   }
 
   tabs.forEach((tab) => {
@@ -157,9 +219,11 @@ const tabLabels: Record<string, string> = {
   if (defaultId) activate(defaultId);
 
   if (masterImage) {
-    if (masterImage.complete) syncPanelHeight();
-    else masterImage.addEventListener('load', syncPanelHeight);
+    if (masterImage.complete) layout();
+    else masterImage.addEventListener('load', layout);
+  } else {
+    layout();
   }
 
-  window.addEventListener('resize', syncPanelHeight);
+  window.addEventListener('resize', layout);
 </script>
