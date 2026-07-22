@@ -35,23 +35,27 @@ const slides = [
       </h2>
     </div>
 
-    <div id="folding-carousel" class="folding-stack relative mx-auto max-w-[980px] px-2 sm:px-6 pb-4 sm:pb-8">
-      <div class="folding-stack__stage relative w-full aspect-[16/10] sm:aspect-[2/1] pr-[12%] pb-[10%]">
+    <div
+      id="folding-carousel"
+      class="relative overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline"
+    >
+      <div class="relative w-full aspect-[16/9] sm:aspect-[2/1]">
         {
           slides.map((slide, index) => (
-            <article
-              class="folding-card absolute inset-0 overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline shadow-[0_12px_40px_rgb(22_21_20_/_0.12)]"
+            <div
+              class:list={[
+                'folding-slide absolute inset-0 transition-opacity duration-500',
+                index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0',
+              ]}
               data-index={index}
-              style={`--i: ${index}`}
             >
               <img
                 src={slide.image}
                 alt={slide.alt}
-                class="w-full h-full object-cover object-center"
+                class="w-full h-full object-contain object-center bg-surface-2"
                 loading={index === 0 ? 'eager' : 'lazy'}
-                draggable="false"
               />
-            </article>
+            </div>
           ))
         }
       </div>
@@ -59,7 +63,7 @@ const slides = [
       <button
         id="folding-prev"
         type="button"
-        class="absolute left-0 sm:-left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/80 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
         aria-label="Previous photo"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -69,7 +73,7 @@ const slides = [
       <button
         id="folding-next"
         type="button"
-        class="absolute right-0 sm:-right-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/80 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
         aria-label="Next photo"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -77,14 +81,14 @@ const slides = [
         </svg>
       </button>
 
-      <div class="mt-5 flex justify-center gap-2">
+      <div class="absolute bottom-3 sm:bottom-4 left-0 right-0 z-20 flex justify-center gap-2" aria-hidden="true">
         {
           slides.map((_, index) => (
             <button
               type="button"
               class:list={[
                 'folding-dot h-2 rounded-full transition-all duration-helios',
-                index === 0 ? 'is-active bg-surface-dark w-6' : 'bg-ink-faint w-2',
+                index === 0 ? 'bg-surface-dark w-6' : 'bg-surface-dark/35 w-2',
               ]}
               data-index={index}
               aria-label={`Go to photo ${index + 1}`}
@@ -96,106 +100,28 @@ const slides = [
   </div>
 </section>
 
-<style>
-  .folding-stack__stage {
-    perspective: 1200px;
-  }
-
-  .folding-card {
-    transform-origin: center center;
-    transition:
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.45s ease,
-      filter 0.45s ease,
-      box-shadow 0.45s ease;
-    will-change: transform, opacity;
-  }
-
-  .folding-card[data-pos='0'] {
-    z-index: 5;
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: none;
-    box-shadow: 0 16px 48px rgb(22 21 20 / 0.16);
-    pointer-events: auto;
-  }
-
-  .folding-card[data-pos='1'] {
-    z-index: 4;
-    opacity: 1;
-    transform: translate3d(4.5%, 3.5%, -40px) scale(0.94);
-    filter: brightness(0.96);
-    pointer-events: none;
-  }
-
-  .folding-card[data-pos='2'] {
-    z-index: 3;
-    opacity: 1;
-    transform: translate3d(9%, 7%, -80px) scale(0.88);
-    filter: brightness(0.92);
-    pointer-events: none;
-  }
-
-  .folding-card[data-pos='3'] {
-    z-index: 2;
-    opacity: 0.92;
-    transform: translate3d(13.5%, 10.5%, -120px) scale(0.82);
-    filter: brightness(0.88);
-    pointer-events: none;
-  }
-
-  .folding-card[data-pos='4'],
-  .folding-card[data-pos='-1'] {
-    z-index: 1;
-    opacity: 0;
-    transform: translate3d(-8%, 2%, -20px) scale(0.96);
-    pointer-events: none;
-  }
-
-  .folding-dot.is-active {
-    background-color: var(--color-surface-dark, #161514);
-    width: 1.5rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .folding-card {
-      transition: none;
-    }
-  }
-</style>
-
 <script define:vars={{ totalSlides: slides.length }}>
   let current = 0;
-  const cards = Array.from(document.querySelectorAll('.folding-card'));
-  const dots = Array.from(document.querySelectorAll('.folding-dot'));
-
-  function render() {
-    cards.forEach((card, index) => {
-      let pos = (index - current + totalSlides) % totalSlides;
-      if (pos > 3) pos = -1;
-      card.setAttribute('data-pos', String(pos));
-    });
-
-    dots.forEach((dot, index) => {
-      const active = index === current;
-      dot.classList.toggle('is-active', active);
-      dot.classList.toggle('bg-surface-dark', active);
-      dot.classList.toggle('w-6', active);
-      dot.classList.toggle('bg-ink-faint', !active);
-      dot.classList.toggle('w-2', !active);
-    });
-  }
+  const slideEls = document.querySelectorAll('.folding-slide');
+  const dotEls = document.querySelectorAll('.folding-dot');
 
   function goTo(index) {
+    slideEls[current]?.classList.replace('opacity-100', 'opacity-0');
+    slideEls[current]?.classList.replace('z-10', 'z-0');
+    dotEls[current]?.classList.remove('bg-surface-dark', 'w-6');
+    dotEls[current]?.classList.add('bg-surface-dark/35', 'w-2');
+
     current = (index + totalSlides) % totalSlides;
-    render();
+
+    slideEls[current]?.classList.replace('opacity-0', 'opacity-100');
+    slideEls[current]?.classList.replace('z-0', 'z-10');
+    dotEls[current]?.classList.remove('bg-surface-dark/35', 'w-2');
+    dotEls[current]?.classList.add('bg-surface-dark', 'w-6');
   }
 
   document.getElementById('folding-prev')?.addEventListener('click', () => goTo(current - 1));
   document.getElementById('folding-next')?.addEventListener('click', () => goTo(current + 1));
-  dots.forEach((dot) => {
+  dotEls.forEach((dot) => {
     dot.addEventListener('click', () => goTo(Number(dot.dataset.index)));
   });
-
-  render();
 </script>
