@@ -27,7 +27,7 @@ const {
         Tell us your market, product type, and destination. Our export team will respond with practical options.
       </p>
 
-      <form id="cta-inquiry-form" class="space-y-4">
+      <form id="cta-inquiry-form" class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label for="cta-inquiry-name" class="block text-small font-medium text-ink mb-1">Name</label>
           <input
@@ -35,7 +35,7 @@ const {
             name="name"
             type="text"
             required
-            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+            class="w-full px-4 py-2.5 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
           />
         </div>
         <div>
@@ -45,7 +45,7 @@ const {
             name="email"
             type="email"
             required
-            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+            class="w-full px-4 py-2.5 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
           />
         </div>
         <div>
@@ -55,7 +55,7 @@ const {
             name="country"
             type="text"
             required
-            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+            class="w-full px-4 py-2.5 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
           />
         </div>
         <div>
@@ -63,7 +63,7 @@ const {
           <select
             id="cta-inquiry-product"
             name="product"
-            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
+            class="w-full px-4 py-2.5 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1"
           >
             <option>Expandable Container Homes</option>
             <option>Space Capsule Houses</option>
@@ -73,26 +73,28 @@ const {
             <option>Catalog Download</option>
           </select>
         </div>
-        <div>
+        <div class="sm:col-span-2">
           <label for="cta-inquiry-message" class="block text-small font-medium text-ink mb-1">Project details</label>
           <textarea
             id="cta-inquiry-message"
             name="message"
-            rows="4"
+            rows="3"
             required
-            class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1 resize-none"
+            class="w-full px-4 py-2.5 rounded-helios-sm border border-ink-hairline bg-surface-1 outline-none focus:ring-2 focus:ring-accent-1 resize-none"
           ></textarea>
         </div>
-        <button type="submit" class="btn-primary w-full !bg-ink !text-ink-on-dark">Submit inquiry</button>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block text-center text-small font-medium text-ink hover:opacity-70"
-        >
-          Prefer WhatsApp? Chat with sales now
-        </a>
-        <p id="cta-inquiry-status" class="text-small text-center hidden"></p>
+        <div class="sm:col-span-2 space-y-3">
+          <button type="submit" class="btn-primary w-full !bg-ink !text-ink-on-dark">Submit inquiry</button>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block text-center text-small font-medium text-ink hover:opacity-70"
+          >
+            Prefer WhatsApp? Chat with sales now
+          </a>
+          <p id="cta-inquiry-status" class="text-small text-center hidden"></p>
+        </div>
       </form>
     </div>
   </div>
