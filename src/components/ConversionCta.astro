@@ -14,11 +14,20 @@ const {
   class="py-6 sm:py-8 lg:py-10 bg-surface-dark text-ink-on-dark"
   data-header-theme="dark"
 >
-  <div class="section-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 lg:items-center">
+  <div class="section-container grid grid-cols-1 lg:grid-cols-[1fr_auto_minmax(0,1.1fr)] gap-8 lg:gap-10 xl:gap-14 lg:items-center">
     <div class="max-w-[560px]">
       <h2 class="text-[clamp(1.75rem,3.2vw,3rem)] font-medium tracking-tight leading-tight text-ink-on-dark">
         {title}
       </h2>
+    </div>
+
+    <div class="flex justify-center lg:px-2">
+      <a
+        href="/blog"
+        class="inline-flex items-center justify-center min-w-[140px] px-6 py-3 rounded-full border border-white/35 text-ink-on-dark text-[clamp(1rem,1.4vw,1.25rem)] font-medium hover:bg-white/10 transition-colors"
+      >
+        Blog
+      </a>
     </div>
 
     <div class="w-full bg-surface-2 text-ink rounded-helios-md p-5 sm:p-7 lg:p-8">
