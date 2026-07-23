@@ -84,18 +84,20 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
         </svg>
       </button>
 
-      <div class="mt-5 flex justify-center gap-2">
+      <div class="mt-5 flex justify-center items-center gap-3 sm:gap-4">
         {
           slides.map((_, index) => (
             <button
               type="button"
               class:list={[
-                'folding-dot h-2 rounded-full transition-all duration-helios',
-                index === 0 ? 'is-active bg-surface-dark w-6' : 'bg-ink-faint w-2',
+                'folding-dot text-[15px] sm:text-base font-medium transition-colors tabular-nums',
+                index === 0 ? 'is-active text-ink' : 'text-ink-faint',
               ]}
               data-index={index}
               aria-label={`Go to photo ${index + 1}`}
-            />
+            >
+              {index + 1}.
+            </button>
           ))
         }
       </div>
@@ -172,10 +174,8 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
     dots.forEach((dot, i) => {
       const active = i === real;
       dot.classList.toggle('is-active', active);
-      dot.classList.toggle('bg-surface-dark', active);
-      dot.classList.toggle('w-6', active);
-      dot.classList.toggle('bg-ink-faint', !active);
-      dot.classList.toggle('w-2', !active);
+      dot.classList.toggle('text-ink', active);
+      dot.classList.toggle('text-ink-faint', !active);
     });
   }
 
