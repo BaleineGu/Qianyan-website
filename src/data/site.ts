@@ -7,7 +7,7 @@ import type {
 } from '@/types/halo';
 
 export const siteConfig = {
-  name: 'QIANYAN JINSHU',
+  name: 'QIANYAN Metal',
   shortName: 'QIANYAN',
   tagline: 'Connecting with the World\nMutual Benefit for All',
   description:
