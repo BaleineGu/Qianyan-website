@@ -70,16 +70,13 @@ const tabLabels: Record<string, string> = {
           >
             <a
               href={c.href}
-              class="group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 transition-opacity duration-helios hover:opacity-95"
+              class="group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2"
             >
               <div class="product-panel__media relative isolate min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-3 min-w-0">
                 <img
                   src={c.image}
                   alt=""
-                  class:list={[
-                    'absolute inset-0 w-full h-full',
-                    index < 2 ? 'object-contain object-center' : 'object-cover object-center',
-                  ]}
+                  class="product-panel__image absolute inset-0 w-full h-full object-cover object-center"
                   data-master-image={index === 0 ? 'true' : undefined}
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
@@ -113,6 +110,27 @@ const tabLabels: Record<string, string> = {
 
   .product-panel__copy-inner {
     font-size: 16px;
+  }
+
+  .product-panel__image {
+    transform: scale(1);
+    transform-origin: center center;
+    transition: transform 0.45s ease-out;
+    will-change: transform;
+  }
+
+  .product-panel__media:hover .product-panel__image {
+    transform: scale(1.2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-panel__image {
+      transition: none;
+    }
+
+    .product-panel__media:hover .product-panel__image {
+      transform: none;
+    }
   }
 </style>
 
