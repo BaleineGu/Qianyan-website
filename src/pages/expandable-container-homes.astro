@@ -34,13 +34,15 @@ import {
             <tr class="bg-white border-b border-gray-200">
               <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">Photo</td>
               {[
-                '/images/products/expandable-20ft.png',
-                '/images/products/expandable-20ft-720.png',
-                '/images/products/expandable-30ft.png',
-                '/images/products/expandable-40ft.png',
-              ].map((src) => (
+                { src: '/images/products/expandable-20ft.png', label: '20ft Double-Wing' },
+                { src: '/images/products/expandable-20ft-720.png', label: '20ft 720 Twin Wings' },
+                { src: '/images/products/expandable-30ft.png', label: '30ft Double-Wing' },
+                { src: '/images/products/expandable-40ft.png', label: '40ft Double-Wing' },
+              ].map(({ src, label }) => (
                 <td class="px-4 py-3">
-                  <img src={src} alt="" class="w-full max-w-[220px] h-[140px] object-cover rounded" loading="lazy" />
+                  <button class="lightbox-trigger block w-full" data-src={src} data-label={label} aria-label={`View ${label} full screen`}>
+                    <img src={src} alt={label} class="w-full max-w-[220px] h-[140px] object-cover rounded hover:opacity-90 transition-opacity cursor-zoom-in" loading="lazy" />
+                  </button>
                 </td>
               ))}
             </tr>
@@ -76,5 +78,119 @@ import {
       ))}
     </div>
   </section>
+  <!-- Quote Request Section -->
+  <section class="py-20 bg-white">
+    <div class="section-container max-w-3xl">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-3">Get a Free Quote</h2>
+        <p class="text-gray-500">Tell us your requirements and we'll respond within 24 hours with pricing and availability.</p>
+      </div>
+      <form id="quote-form" class="grid sm:grid-cols-2 gap-5">
+        <div class="flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-name">Full Name <span class="text-red-500">*</span></label>
+          <input id="qf-name" name="name" type="text" required placeholder="John Smith" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-email">Email <span class="text-red-500">*</span></label>
+          <input id="qf-email" name="email" type="email" required placeholder="you@company.com" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-phone">Phone / WhatsApp</label>
+          <input id="qf-phone" name="phone" type="tel" placeholder="+1 234 567 8900" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-model">Product Model</label>
+          <select id="qf-model" name="model" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+            <option value="">-- Select Model --</option>
+            <option>20ft Double-Wing</option>
+            <option>20ft 720 Twin Wings</option>
+            <option>30ft Double-Wing</option>
+            <option>40ft Double-Wing</option>
+            <option>Other / Not sure</option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-qty">Quantity</label>
+          <input id="qf-qty" name="quantity" type="number" min="1" placeholder="e.g. 5" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-country">Destination Country</label>
+          <input id="qf-country" name="country" type="text" placeholder="e.g. United States" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div class="sm:col-span-2 flex flex-col gap-1">
+          <label class="text-sm font-semibold text-brand-900" for="qf-message">Additional Requirements</label>
+          <textarea id="qf-message" name="message" rows="4" placeholder="Describe customization needs, delivery timeline, use case, etc." class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <button type="submit" class="w-full bg-brand-900 hover:bg-brand-800 text-white font-bold py-3 rounded transition-colors text-sm tracking-wide">
+            Send Quote Request
+          </button>
+          <p id="qf-success" class="hidden text-center text-green-600 font-semibold mt-4">Thank you! We'll get back to you within 24 hours.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 hidden items-center justify-center" role="dialog" aria-modal="true">
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-gray-300" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Previous">&#8249;</button>
+    <button id="lightbox-next" class="absolute right-14 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Next">&#8250;</button>
+    <div class="flex flex-col items-center gap-4 max-w-[90vw] max-h-[90vh]">
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded" />
+      <p id="lightbox-label" class="text-white text-sm font-semibold"></p>
+    </div>
+  </div>
+
   <ConversionCta primaryLabel="Download Layout Plans & Blueprints" secondaryLabel="Get Shipping Quote / WhatsApp" secondaryHref={whatsappUrl} secondaryIsInquiry={true} />
 </BaseLayout>
+
+<script>
+  // Lightbox
+  const images = Array.from(document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger')).map((btn) => ({
+    src: btn.dataset.src ?? '',
+    label: btn.dataset.label ?? '',
+  }));
+  let current = 0;
+  const lb = document.getElementById('lightbox') as HTMLDivElement;
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbLabel = document.getElementById('lightbox-label') as HTMLParagraphElement;
+
+  function openLightbox(index: number) {
+    current = (index + images.length) % images.length;
+    lbImg.src = images[current].src;
+    lbLabel.textContent = images[current].label;
+    lb.classList.remove('hidden');
+    lb.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn, i) => {
+    btn.addEventListener('click', () => openLightbox(i));
+  });
+  document.getElementById('lightbox-close')!.addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev')!.addEventListener('click', () => openLightbox(current - 1));
+  document.getElementById('lightbox-next')!.addEventListener('click', () => openLightbox(current + 1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') openLightbox(current - 1);
+      if (e.key === 'ArrowRight') openLightbox(current + 1);
+    }
+  });
+
+  // Quote form mock submit
+  const form = document.getElementById('quote-form') as HTMLFormElement;
+  const success = document.getElementById('qf-success') as HTMLParagraphElement;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    form.querySelectorAll('input,select,textarea,button[type=submit]').forEach((el) => ((el as HTMLInputElement).disabled = true));
+    success.classList.remove('hidden');
+  });
+</script>
