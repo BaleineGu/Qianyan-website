@@ -262,16 +262,6 @@ export const expandableSpecs: SpecRow[] = [
     values: ['18.5 m²', '37 m² (≈398 sq ft)', '27.5 m² (≈296 sq ft)', '56 m² (≈603 sq ft)', '73 m² (≈786 sq ft)'],
   },
   {
-    label: 'Loading Quantity',
-    values: [
-      '4 sets per 40ft HC container',
-      '—',
-      '—',
-      '—',
-      '—',
-    ],
-  },
-  {
     label: 'Power Consumption',
     values: ['12 kW', '12 kW', '12 kW', '12 kW', '12 kW'],
   },
