@@ -215,6 +215,7 @@ export const expandableBanner = {
 
 export const expandableSpecHeaders = [
   'Specifications',
+  '10ft Double-Wing',
   '20ft Double-Wing',
   '20ft 720 Twin Wings',
   '30ft Double-Wing',
@@ -224,11 +225,12 @@ export const expandableSpecHeaders = [
 export const expandableSpecs: SpecRow[] = [
   {
     label: 'Product Model',
-    values: ['20-foot double-wing', '720 Twin Wings', '30-foot double-wing', '40-foot double-wing'],
+    values: ['10-foot double-wing', '20-foot double-wing', '720 Twin Wings', '30-foot double-wing', '40-foot double-wing'],
   },
   {
     label: 'Dimensions (Expanded)',
     values: [
+      'L2900 × W6300 × H2480 mm',
       'L5900 × W6300 × H2480 mm',
       'L5900 × W4920 × H2480 mm',
       'L9000 × W6300 × H2480 mm',
@@ -238,6 +240,7 @@ export const expandableSpecs: SpecRow[] = [
   {
     label: 'Internal Dimensions',
     values: [
+      'L2640 × W6140 × H2240 mm',
       'L5640 × W6140 × H2240 mm',
       'L5460 × W4760 × H2240 mm',
       'L8740 × W6140 × H2200 mm',
@@ -247,6 +250,7 @@ export const expandableSpecs: SpecRow[] = [
   {
     label: 'Folded Dimensions',
     values: [
+      'L2900 × W2200 × H2480 mm',
       'L5900 × W2200 × H2480 mm',
       'L5900 × W720 × H2480 mm',
       'L9000 × W2200 × H2480 mm',
@@ -255,15 +259,26 @@ export const expandableSpecs: SpecRow[] = [
   },
   {
     label: 'Total Floor Area',
-    values: ['37 m² (≈398 sq ft)', '27.5 m² (≈296 sq ft)', '56 m² (≈603 sq ft)', '73 m² (≈786 sq ft)'],
+    values: ['18.5 m²', '37 m² (≈398 sq ft)', '27.5 m² (≈296 sq ft)', '56 m² (≈603 sq ft)', '73 m² (≈786 sq ft)'],
+  },
+  {
+    label: 'Loading Quantity',
+    values: [
+      '4 sets per 40ft HC container',
+      '—',
+      '—',
+      '—',
+      '—',
+    ],
   },
   {
     label: 'Power Consumption',
-    values: ['12 kW', '12 kW', '12 kW', '12 kW'],
+    values: ['12 kW', '12 kW', '12 kW', '12 kW', '12 kW'],
   },
   {
     label: 'Windows (Standard)',
     values: [
+      '—',
       'PVC sliding 930×930 × 6 units',
       'PVC sliding 930×930 × 4 units',
       'PVC sliding 930×930 × 7 units',
@@ -273,6 +288,7 @@ export const expandableSpecs: SpecRow[] = [
   {
     label: 'Main Frame (Upper Beam)',
     values: [
+      '80×100×2.75 mm square tube',
       '80×100×2.75 mm square tube',
       '80×100×2.75 mm square tube',
       '80×140×3.0 mm square tube',
@@ -286,11 +302,13 @@ export const expandableSpecs: SpecRow[] = [
       '65 mm EPS sandwich / 0.35 mm color steel',
       '65 mm EPS sandwich / 0.35 mm color steel',
       '65 mm EPS sandwich / 0.35 mm color steel',
+      '65 mm EPS sandwich / 0.35 mm color steel',
     ],
   },
   {
     label: 'Flooring',
     values: [
+      '18 mm MgO + 2.0 mm PVC',
       '18 mm MgO + 2.0 mm PVC',
       '18 mm MgO + 2.0 mm PVC',
       '18 mm MgO + 2.0 mm PVC',
