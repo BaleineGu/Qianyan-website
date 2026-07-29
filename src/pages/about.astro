@@ -1,6 +1,31 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
+
+const parallaxSlides = [
+  {
+    src: '/images/about/parallax-1.png',
+    alt: 'Integrated House Manufacturing Base exterior',
+    paragraphs: [
+      'Our products are widely used in various fields such as engineering construction, temporary office setups, camp dormitories, tourism vacation. We can provide customized solutions according to customer needs. Adhering to the principle of "Quality First, Customer Supreme", we strictly control the production process to ensure that our products are safe, environmentally friendly, and durable.',
+      'We undertake large-scale infrastructure, cultural tourism development, and emergency rescue projects, offering a full range of products including dual-wing expandable house, quick-assembly Flat pack prefab house, and folding house. Our standardized production combined with localized installation ensures efficient and hassle-free space setup.',
+    ],
+  },
+  {
+    src: '/images/about/parallax-2.png',
+    alt: 'Container houses lined up inside the factory',
+    paragraphs: [
+      'Welcome to our core production base for container homes. These products embody our commitment to quality and design; their modern style and exceptional flexibility perfectly align with contemporary trends, while enabling both standardized manufacturing and personalized customization. Backed by rigorous craftsmanship and efficient processes, we are dedicated to delivering high-quality, mobile housing solutions with rapid turnaround times.',
+    ],
+  },
+  {
+    src: '/images/about/parallax-3.png',
+    alt: 'Steel frames for modular container houses',
+    paragraphs: [
+      'Manufacturing craftsmanship determines quality. The structure utilizes galvanized square tubing throughout; even critical connection points feature specialized galvanized hinges, ensuring exceptional stability, smooth operation, and fatigue resistance. To further enhance corrosion and rust resistance, the entire welded frame is finished with an electrostatic powder coating—a process that ensures strong adhesion and results in a highly durable, robust protective layer.',
+    ],
+  },
+];
 ---
 <BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
   <section class="relative bg-surface-dark text-white overflow-hidden" data-header-theme="dark">
@@ -25,12 +50,11 @@ import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         <div class="lg:col-span-2 flex flex-col gap-4 sm:gap-5 lg:gap-6">
           {
-            [
-              { src: '/images/about/parallax-1.png', alt: 'Integrated House Manufacturing Base exterior' },
-              { src: '/images/about/parallax-2.png', alt: 'Container houses lined up inside the factory' },
-              { src: '/images/about/parallax-3.png', alt: 'Steel frames for modular container houses' },
-            ].map((item, index) => (
-              <div class="about-parallax__panel relative overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/10] lg:aspect-auto lg:h-[72vh]">
+            parallaxSlides.map((item, index) => (
+              <div
+                class="about-parallax__panel relative overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/10] lg:aspect-auto lg:h-[72vh]"
+                data-parallax-panel={index}
+              >
                 <img
                   src={item.src}
                   alt={item.alt}
@@ -43,13 +67,27 @@ import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
           }
         </div>
 
-        <aside class="lg:col-span-1 min-h-[12rem] lg:min-h-0">
+        <aside class="lg:col-span-1">
           <div
-            class="about-parallax__copy sticky top-28 lg:top-32 rounded-helios-md border border-dashed border-ink-hairline bg-surface-2/60 px-5 py-6 lg:min-h-[72vh] flex items-start"
+            class="about-parallax__copy sticky top-28 lg:top-32 rounded-helios-md border border-ink-hairline bg-surface-2 px-5 py-6 sm:px-6 sm:py-7 lg:min-h-[72vh] flex"
             data-parallax-copy
           >
-            {/* Text content will be added here */}
-            <span class="sr-only">Text content placeholder</span>
+            {
+              parallaxSlides.map((item, index) => (
+                <div
+                  class:list={[
+                    'about-parallax__text space-y-4 text-[clamp(0.9375rem,1.15vw,1.0625rem)] leading-[1.75] text-ink-soft',
+                    index === 0 ? 'is-active' : '',
+                  ]}
+                  data-parallax-text={index}
+                  aria-hidden={index === 0 ? 'false' : 'true'}
+                >
+                  {item.paragraphs.map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </div>
+              ))
+            }
           </div>
         </aside>
       </div>
@@ -91,11 +129,43 @@ import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
     transform: translate3d(0, 0, 0);
   }
 
+  .about-parallax__copy {
+    position: relative;
+  }
+
+  .about-parallax__text {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+
+  .about-parallax__text.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .about-parallax__text:not(.is-active) {
+    position: absolute;
+    inset: 1.5rem 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .about-parallax__text:not(.is-active) {
+      inset: 1.75rem 1.5rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .about-parallax__image {
       transform: none !important;
       top: 0 !important;
       height: 100% !important;
+    }
+
+    .about-parallax__text {
+      transition: none;
     }
   }
 </style>
@@ -103,8 +173,36 @@ import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const images = Array.from(document.querySelectorAll('[data-parallax-image]'));
+  const panels = Array.from(document.querySelectorAll('[data-parallax-panel]'));
+  const texts = Array.from(document.querySelectorAll('[data-parallax-text]'));
+  let activeIndex = 0;
+
+  function setActiveText(index) {
+    if (index === activeIndex) return;
+    activeIndex = index;
+    texts.forEach((el, i) => {
+      const active = i === index;
+      el.classList.toggle('is-active', active);
+      el.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+  }
 
   function updateParallax() {
+    let bestIndex = 0;
+    let bestScore = -Infinity;
+    const viewMid = (window.innerHeight || 0) * 0.42;
+
+    panels.forEach((panel, index) => {
+      const rect = panel.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const score = -Math.abs(center - viewMid);
+      if (score > bestScore) {
+        bestScore = score;
+        bestIndex = index;
+      }
+    });
+    setActiveText(bestIndex);
+
     if (reduceMotion) return;
 
     images.forEach((img) => {
