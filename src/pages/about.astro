@@ -58,7 +58,7 @@ const parallaxSlides = [
                 <img
                   src={item.src}
                   alt={item.alt}
-                  class="about-parallax__image absolute inset-0 w-full h-[120%] max-w-none object-cover object-center will-change-transform"
+                  class="about-parallax__image absolute inset-0 w-full h-full object-cover object-center will-change-transform"
                   data-parallax-image
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
@@ -159,9 +159,7 @@ const parallaxSlides = [
 
   @media (prefers-reduced-motion: reduce) {
     .about-parallax__image {
-      transform: none !important;
-      top: 0 !important;
-      height: 100% !important;
+      transition: none;
     }
 
     .about-parallax__text {
