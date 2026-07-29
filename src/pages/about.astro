@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
+import { whatsappUrl, productCategories } from '@/data/site';
 
 const parallaxSlides = [
   {
@@ -42,56 +42,36 @@ const parallaxSlides = [
   </section>
 
   <section
-    class="about-parallax bg-surface-1"
+    class="about-stack bg-surface-1"
     data-header-theme="light"
     aria-label="Factory gallery"
   >
-    <div class="section-container py-10 sm:py-14 lg:py-16">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
-        <div class="lg:col-span-2 flex flex-col gap-4 sm:gap-5 lg:gap-6">
-          {
-            parallaxSlides.map((item, index) => (
-              <div
-                class="about-parallax__panel relative overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/10] lg:aspect-auto lg:h-[72vh]"
-                data-parallax-panel={index}
-              >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  class="about-parallax__image absolute inset-0 w-full h-full object-cover object-center will-change-transform"
-                  data-parallax-image
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
-              </div>
-            ))
-          }
-        </div>
-
-        <aside class="lg:col-span-1">
-          <div
-            class="about-parallax__copy sticky top-28 lg:top-32 rounded-helios-md border border-ink-hairline bg-surface-2 px-5 py-6 sm:px-6 sm:py-7 lg:min-h-[72vh] flex relative"
-            data-parallax-copy
-          >
-            {
-              parallaxSlides.map((item, index) => (
-                <div
-                  class:list={[
-                    'about-parallax__text space-y-4 text-[clamp(0.9375rem,1.15vw,1.0625rem)] leading-[1.75] text-ink-soft',
-                    index === 0 ? 'is-active' : '',
-                  ]}
-                  data-parallax-text={index}
-                  aria-hidden={index === 0 ? 'false' : 'true'}
-                >
-                  {item.paragraphs.map((p) => (
-                    <p>{p}</p>
-                  ))}
-                </div>
-              ))
-            }
+    {
+      parallaxSlides.map((item, index) => (
+        <article
+          class="about-stack__card sticky top-0 grid h-svh min-h-[640px] grid-rows-[58%_42%] overflow-hidden bg-surface-2 lg:grid-cols-[2fr_1fr] lg:grid-rows-1"
+          data-stack-card
+          style={`z-index: ${index + 1}`}
+        >
+          <div class="about-stack__media relative min-h-0 overflow-hidden bg-surface-3">
+            <img
+              src={item.src}
+              alt={item.alt}
+              class="absolute inset-0 h-full w-full object-cover object-center"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
           </div>
-        </aside>
-      </div>
-    </div>
+
+          <div class="about-stack__copy relative flex min-h-0 items-center bg-surface-2 px-6 py-7 sm:px-10 lg:px-[clamp(2rem,4vw,5rem)] lg:py-16">
+            <div class="max-h-full space-y-4 overflow-y-auto text-[clamp(0.9375rem,1.15vw,1.0625rem)] leading-[1.75] text-ink-soft">
+              {item.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))
+    }
   </section>
 
   <section class="py-20">
@@ -125,44 +105,32 @@ const parallaxSlides = [
 </BaseLayout>
 
 <style>
-  .about-parallax__image {
-    transform: translate3d(0, 0, 0);
+  .about-stack__card {
+    transform-origin: center top;
+    will-change: transform, filter;
+    box-shadow: 0 -1px 0 rgb(22 21 20 / 0.08);
   }
 
-  .about-parallax__copy {
-    position: relative;
+  .about-stack__media img {
+    transform: scale(1.035);
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .about-parallax__text {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
+  .about-stack__card.is-current .about-stack__media img {
+    transform: scale(1);
   }
 
-  .about-parallax__text.is-active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .about-parallax__text:not(.is-active) {
-    position: absolute;
-    inset: 1.5rem 1.25rem;
-  }
-
-  @media (min-width: 640px) {
-    .about-parallax__text:not(.is-active) {
-      inset: 1.75rem 1.5rem;
+  @media (max-width: 1023px) {
+    .about-stack__card {
+      min-height: 100svh;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .about-parallax__image {
-      transition: none;
-    }
-
-    .about-parallax__text {
+    .about-stack__card,
+    .about-stack__media img {
+      transform: none !important;
+      filter: none !important;
       transition: none;
     }
   }
@@ -170,53 +138,38 @@ const parallaxSlides = [
 
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const images = Array.from(document.querySelectorAll('[data-parallax-image]'));
-  const panels = Array.from(document.querySelectorAll('[data-parallax-panel]'));
-  const texts = Array.from(document.querySelectorAll('[data-parallax-text]'));
-  let activeIndex = 0;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-stack-card]'));
+  let ticking = false;
 
-  function setActiveText(index) {
-    if (index === activeIndex) return;
-    activeIndex = index;
-    texts.forEach((el, i) => {
-      const active = i === index;
-      el.classList.toggle('is-active', active);
-      el.setAttribute('aria-hidden', active ? 'false' : 'true');
-    });
-  }
+  function updateStack() {
+    const viewportHeight = window.innerHeight || 1;
 
-  function updateParallax() {
-    let bestIndex = 0;
-    let bestScore = -Infinity;
-    const viewMid = (window.innerHeight || 0) * 0.42;
+    cards.forEach((card, index) => {
+      const nextCard = cards[index + 1];
+      const nextTop = nextCard?.getBoundingClientRect().top ?? viewportHeight;
+      const coverProgress = Math.max(0, Math.min(1, (viewportHeight - nextTop) / viewportHeight));
 
-    panels.forEach((panel, index) => {
-      const rect = panel.getBoundingClientRect();
-      const center = rect.top + rect.height / 2;
-      const score = -Math.abs(center - viewMid);
-      if (score > bestScore) {
-        bestScore = score;
-        bestIndex = index;
+      card.classList.toggle('is-current', nextTop > viewportHeight * 0.5);
+
+      if (!reduceMotion) {
+        const scale = 1 - coverProgress * 0.045;
+        const brightness = 1 - coverProgress * 0.16;
+        card.style.transform = `scale(${scale.toFixed(4)})`;
+        card.style.filter = `brightness(${brightness.toFixed(3)})`;
       }
     });
-    setActiveText(bestIndex);
+  }
 
-    if (reduceMotion) return;
-
-    images.forEach((img) => {
-      const panel = img.parentElement;
-      if (!panel) return;
-
-      const rect = panel.getBoundingClientRect();
-      const viewH = window.innerHeight || 1;
-      const progress = (viewH - rect.top) / (viewH + rect.height);
-      const clamped = Math.max(0, Math.min(1, progress));
-      const offset = (clamped - 0.5) * -48;
-      img.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateStack();
+      ticking = false;
     });
   }
 
-  updateParallax();
-  window.addEventListener('scroll', updateParallax, { passive: true });
-  window.addEventListener('resize', updateParallax);
+  updateStack();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
 </script>
