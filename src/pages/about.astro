@@ -3,8 +3,14 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
 ---
 <BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
-  <section class="bg-brand-900 text-white py-20">
-    <div class="section-container text-center max-w-3xl">
+  <section class="relative bg-surface-dark text-white overflow-hidden" data-header-theme="dark">
+    <img
+      src="/images/backgrounds/about-hero.png"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
+    <div class="relative section-container text-center max-w-3xl py-20">
       <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">About {siteConfig.name}</h1>
       <p class="text-lg text-gray-300">Factory-direct prefab modular housing for international B2B buyers.</p>
     </div>
