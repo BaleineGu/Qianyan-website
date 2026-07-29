@@ -15,6 +15,47 @@ import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
       <p class="text-lg text-gray-300">We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services.</p>
     </div>
   </section>
+
+  <section
+    class="about-parallax bg-surface-1"
+    data-header-theme="light"
+    aria-label="Factory gallery"
+  >
+    <div class="section-container py-10 sm:py-14 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+        <div class="lg:col-span-2 flex flex-col gap-4 sm:gap-5 lg:gap-6">
+          {
+            [
+              { src: '/images/about/parallax-1.png', alt: 'Integrated House Manufacturing Base exterior' },
+              { src: '/images/about/parallax-2.png', alt: 'Container houses lined up inside the factory' },
+              { src: '/images/about/parallax-3.png', alt: 'Steel frames for modular container houses' },
+            ].map((item, index) => (
+              <div class="about-parallax__panel relative overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/10] lg:aspect-auto lg:h-[72vh]">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  class="about-parallax__image absolute inset-0 w-full h-[120%] max-w-none object-cover object-center will-change-transform"
+                  data-parallax-image
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <aside class="lg:col-span-1 min-h-[12rem] lg:min-h-0">
+          <div
+            class="about-parallax__copy sticky top-28 lg:top-32 rounded-helios-md border border-dashed border-ink-hairline bg-surface-2/60 px-5 py-6 lg:min-h-[72vh] flex items-start"
+            data-parallax-copy
+          >
+            {/* Text content will be added here */}
+            <span class="sr-only">Text content placeholder</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <section class="py-20">
     <div class="section-container max-w-3xl space-y-8">
       <div>
@@ -44,3 +85,42 @@ import { siteConfig, whatsappUrl, productCategories } from '@/data/site';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .about-parallax__image {
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-parallax__image {
+      transform: none !important;
+      top: 0 !important;
+      height: 100% !important;
+    }
+  }
+</style>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const images = Array.from(document.querySelectorAll('[data-parallax-image]'));
+
+  function updateParallax() {
+    if (reduceMotion) return;
+
+    images.forEach((img) => {
+      const panel = img.parentElement;
+      if (!panel) return;
+
+      const rect = panel.getBoundingClientRect();
+      const viewH = window.innerHeight || 1;
+      const progress = (viewH - rect.top) / (viewH + rect.height);
+      const clamped = Math.max(0, Math.min(1, progress));
+      const offset = (clamped - 0.5) * -48;
+      img.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+    });
+  }
+
+  updateParallax();
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  window.addEventListener('resize', updateParallax);
+</script>
