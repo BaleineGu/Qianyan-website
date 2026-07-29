@@ -215,16 +215,88 @@ export const expandableBanner = {
 
 export const expandableSpecHeaders = [
   'Specifications',
-  '20ft Expandable Tiny Home',
-  '40ft Luxury Expandable House',
+  '20ft Double-Wing',
+  '20ft 720 Twin Wings',
+  '30ft Double-Wing',
+  '40ft Double-Wing',
 ];
 
 export const expandableSpecs: SpecRow[] = [
-  { label: 'Dimensions (Expanded)', values: ['5.9m × 6.3m × 2.5m', '11.8m × 6.3m × 2.5m'] },
-  { label: 'Total Floor Area', values: ['~37 m² (398 sq ft)', '~74 m² (796 sq ft)'] },
-  { label: 'Layout Options', values: ['1–2 bedrooms, 1 bathroom', '2–4 bedrooms, 1–2 bathrooms'] },
-  { label: 'Setup Time', values: ['About 2 hours (2–3 workers)', 'About 4 hours (3–4 workers + crane)'] },
-  { label: 'Shipping Method', values: ['2 units / 1× 40ft HQ', '1 unit / 1× 40ft HQ or flat rack'] },
+  {
+    label: 'Product Model',
+    values: ['20-foot double-wing', '720 Twin Wings', '30-foot double-wing', '40-foot double-wing'],
+  },
+  {
+    label: 'Dimensions (Expanded)',
+    values: [
+      'L5900 × W6300 × H2480 mm',
+      'L5900 × W4920 × H2480 mm',
+      'L9000 × W6300 × H2480 mm',
+      'L11800 × W6300 × H2480 mm',
+    ],
+  },
+  {
+    label: 'Internal Dimensions',
+    values: [
+      'L5640 × W6140 × H2240 mm',
+      'L5460 × W4760 × H2240 mm',
+      'L8740 × W6140 × H2200 mm',
+      'L11540 × W6140 × H2200 mm',
+    ],
+  },
+  {
+    label: 'Folded Dimensions',
+    values: [
+      'L5900 × W2200 × H2480 mm',
+      'L5900 × W720 × H2480 mm',
+      'L9000 × W2200 × H2480 mm',
+      'L11800 × W2200 × H2480 mm',
+    ],
+  },
+  {
+    label: 'Total Floor Area',
+    values: ['37 m² (≈398 sq ft)', '27.5 m² (≈296 sq ft)', '56 m² (≈603 sq ft)', '73 m² (≈786 sq ft)'],
+  },
+  {
+    label: 'Power Consumption',
+    values: ['12 kW', '12 kW', '12 kW', '12 kW'],
+  },
+  {
+    label: 'Windows (Standard)',
+    values: [
+      'PVC sliding 930×930 × 6 units',
+      'PVC sliding 930×930 × 4 units',
+      'PVC sliding 930×930 × 7 units',
+      'PVC sliding 930×930 × 8 units',
+    ],
+  },
+  {
+    label: 'Main Frame (Upper Beam)',
+    values: [
+      '80×100×2.75 mm square tube',
+      '80×100×2.75 mm square tube',
+      '80×140×3.0 mm square tube',
+      '80×140×3.0 mm square tube',
+    ],
+  },
+  {
+    label: 'External Wall Panels',
+    values: [
+      '65 mm EPS sandwich / 0.35 mm color steel',
+      '65 mm EPS sandwich / 0.35 mm color steel',
+      '65 mm EPS sandwich / 0.35 mm color steel',
+      '65 mm EPS sandwich / 0.35 mm color steel',
+    ],
+  },
+  {
+    label: 'Flooring',
+    values: [
+      '18 mm MgO + 2.0 mm PVC',
+      '18 mm MgO + 2.0 mm PVC',
+      '18 mm MgO + 2.0 mm PVC',
+      '18 mm MgO + 2.0 mm PVC',
+    ],
+  },
 ];
 
 export const expandableEngineering = [
