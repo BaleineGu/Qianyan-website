@@ -74,18 +74,46 @@ const parallaxSlides = [
     }
   </section>
 
-  <section class="py-20">
-    <div class="section-container max-w-3xl space-y-8">
+  <section class="py-20 bg-surface-1" data-header-theme="light">
+    <div class="section-container max-w-3xl space-y-8 mb-10 sm:mb-12">
       <div>
-        <h2 class="text-2xl font-extrabold text-brand-900 mb-3">Mission</h2>
+        <h2 class="text-2xl font-extrabold text-brand-900 mb-3">Trusted quality</h2>
         <p class="text-lg text-gray-600 leading-relaxed">We help developers, contractors, dealers, and hospitality investors source durable modular housing with clear specifications, customization options, and export-ready delivery support.</p>
       </div>
       <div>
         <h2 class="text-2xl font-extrabold text-brand-900 mb-3">What We Manufacture</h2>
-        <ol class="list-decimal pl-5 space-y-2 text-gray-600">
-          {productCategories.map((p) => <li><a href={p.href} class="text-brand-600 hover:text-brand-700">{p.name}</a></li>)}
-        </ol>
       </div>
+    </div>
+
+    <div
+      class="about-quality-grid grid grid-cols-3 grid-rows-2 w-full h-[min(100svh,920px)] min-h-[420px]"
+      aria-label="Manufacturing quality gallery"
+    >
+      {
+        [
+          { src: '/images/about/quality/grid-1.png', alt: 'Factory exterior warehouse' },
+          { src: '/images/about/quality/grid-2.png', alt: 'Workers welding steel frames' },
+          { src: '/images/about/quality/grid-3.png', alt: 'Modular units on factory floor' },
+          { src: '/images/about/quality/grid-4.png', alt: 'Production hall with overhead crane' },
+          { src: '/images/about/quality/grid-5.png', alt: 'Finished cabinetry ready for shipment' },
+          { src: '/images/about/quality/grid-6.png', alt: 'Workers assembling modular wall panels' },
+        ].map((item) => (
+          <div class="relative overflow-hidden bg-surface-3">
+            <img
+              src={item.src}
+              alt={item.alt}
+              class="absolute inset-0 h-full w-full object-cover object-center"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="section-container max-w-3xl space-y-8 mt-10 sm:mt-12">
+      <ol class="list-decimal pl-5 space-y-2 text-gray-600">
+        {productCategories.map((p) => <li><a href={p.href} class="text-brand-600 hover:text-brand-700">{p.name}</a></li>)}
+      </ol>
       <div>
         <h2 class="text-2xl font-extrabold text-brand-900 mb-3">Brand Values</h2>
         <ul class="list-disc pl-5 space-y-2 text-gray-600">
