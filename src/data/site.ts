@@ -302,17 +302,16 @@ export const expandableSpecs: SpecRow[] = [
 export const expandableEngineering = [
   {
     title: 'Wall Panels',
-    description: '50mm / 75mm PU or fireproof Rockwool sandwich panels for thermal insulation.',
+    description: 'Upgradeable to 75mm-100mm polyurethane insulation (PU board)',
   },
   {
     title: 'Floor Frame',
-    description:
-      'Heavy galvanized steel sub-structure with marine-grade board and vinyl flooring options.',
+    description: 'Upgradable to 4.0mm SPC flooring or graphene-based materials.',
   },
   {
     title: 'Electrical / Plumbing',
     description:
-      'Pre-wired circuits configurable for US NEC, Canadian CEC, or AS/NZS requirements.',
+      'The pre-wired circuitry can be configured to comply with US NEC, Canadian CEC, European CE, and ACC certification standards.',
   },
 ];
 
