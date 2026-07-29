@@ -4,8 +4,14 @@ import { productCategories } from '@/data/site';
 ---
 
 <BaseLayout title="Products" description="Explore our full modular housing product lineup.">
-  <section class="bg-surface-dark text-ink-on-dark py-section-sm lg:py-section-md" data-header-theme="dark">
-    <div class="section-container text-center max-w-[680px]">
+  <section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
+    <img
+      src="/images/backgrounds/products-hero.png"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
+    <div class="relative section-container text-center max-w-[680px] py-section-sm lg:py-section-md">
       <h1 class="heading-h1 mb-4">Our products</h1>
       <p class="text-large text-ink-on-dark-soft">
         Factory-direct modular solutions for campsites, hospitality, and project sites.
