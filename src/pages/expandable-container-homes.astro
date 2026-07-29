@@ -31,6 +31,19 @@ import {
         <table class="w-full min-w-[1080px] text-left text-sm">
           <thead class="bg-brand-900 text-white"><tr>{expandableSpecHeaders.map((h) => <th class="px-4 py-3 whitespace-nowrap">{h}</th>)}</tr></thead>
           <tbody>
+            <tr class="bg-white border-b border-gray-200">
+              <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">Photo</td>
+              {[
+                '/images/products/expandable-20ft.png',
+                '/images/products/expandable-20ft-720.png',
+                '/images/products/expandable-30ft.png',
+                '/images/products/expandable-40ft.png',
+              ].map((src) => (
+                <td class="px-4 py-3">
+                  <img src={src} alt="" class="w-full max-w-[220px] h-[140px] object-cover rounded" loading="lazy" />
+                </td>
+              ))}
+            </tr>
             {expandableSpecs.map((row, i) => (
               <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                 <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">{row.label}</td>
