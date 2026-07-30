@@ -1,14 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import ConversionCta from '@/components/ConversionCta.astro';
 import {
   expandableBanner,
   expandableEngineering,
   expandableFaqs,
   expandableSpecHeaders,
   expandableSpecs,
-  whatsappUrl,
 } from '@/data/site';
 
 const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
@@ -192,7 +190,6 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
     </div>
   </div>
 
-  <ConversionCta primaryLabel="Download Layout Plans & Blueprints" secondaryLabel="Get Shipping Quote / WhatsApp" secondaryHref={whatsappUrl} secondaryIsInquiry={true} />
 </BaseLayout>
 
 <script>

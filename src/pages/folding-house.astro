@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import ConversionCta from '@/components/ConversionCta.astro';
-import { foldingBanner, foldingBenefits, whatsappUrl } from '@/data/site';
+import { foldingBanner, foldingBenefits } from '@/data/site';
 ---
 <BaseLayout title="Folding House" description={foldingBanner.description}>
   <PageBanner heading={foldingBanner.heading} description={foldingBanner.description} />
@@ -30,5 +29,4 @@ import { foldingBanner, foldingBenefits, whatsappUrl } from '@/data/site';
       </ul>
     </div>
   </section>
-  <ConversionCta primaryLabel="Get a Factory Quote for Folding Houses" secondaryLabel="Request Dealer Pricing on WhatsApp" secondaryHref={whatsappUrl} />
 </BaseLayout>

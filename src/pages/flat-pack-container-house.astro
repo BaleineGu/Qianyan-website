@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import ConversionCta from '@/components/ConversionCta.astro';
-import { flatPackAdvantages, flatPackBanner, flatPackMaterials, whatsappUrl } from '@/data/site';
+import { flatPackAdvantages, flatPackBanner, flatPackMaterials } from '@/data/site';
 ---
 <BaseLayout title="Flat Pack Container House" description={flatPackBanner.description}>
   <PageBanner heading={flatPackBanner.heading} description={flatPackBanner.description} />
@@ -32,5 +31,4 @@ import { flatPackAdvantages, flatPackBanner, flatPackMaterials, whatsappUrl } fr
       </div>
     </div>
   </section>
-  <ConversionCta primaryLabel="Request Bulk Order Quotation & Wholesale Pricing" secondaryLabel="Chat on WhatsApp" secondaryHref={whatsappUrl} />
 </BaseLayout>
