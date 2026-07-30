@@ -268,7 +268,7 @@ export const expandableSpecs: SpecRow[] = [
   {
     label: 'Windows (Standard)',
     values: [
-      '—',
+      'PVC sliding 930×930 × 4 units',
       'PVC sliding 930×930 × 6 units',
       'PVC sliding 930×930 × 4 units',
       'PVC sliding 930×930 × 7 units',
