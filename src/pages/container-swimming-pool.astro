@@ -44,6 +44,34 @@ import { poolBanner, poolConfigHeaders, poolConfigRows, poolFeatures } from '@/d
     </div>
   </section>
   <section class="py-16 bg-gray-50">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-10 text-center">Use Cases</h2>
+      <div class="pool-usecase-stack grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto md:pb-12">
+        {[
+          { src: '/images/products/pool-usecases/01.png', label: 'Rooftop hotel terrace' },
+          { src: '/images/products/pool-usecases/02.png', label: 'Garden leisure pool' },
+          { src: '/images/products/pool-usecases/03.png', label: 'Villa courtyard pool' },
+          { src: '/images/products/pool-usecases/04.png', label: 'Backyard spa pool' },
+        ].map((item, i) => (
+          <article
+            class:list={[
+              'pool-usecase-card relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg',
+              i % 2 === 1 && 'md:translate-y-12',
+              i >= 2 && 'md:-mt-6',
+            ]}
+          >
+            <img
+              src={item.src}
+              alt={item.label}
+              class="w-full aspect-[16/10] object-cover"
+              loading="lazy"
+            />
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-white">
     <div class="section-container max-w-3xl">
       <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Planning Notes for Buyers</h2>
       <ul class="list-disc pl-5 space-y-2 text-gray-600">
