@@ -460,6 +460,101 @@ export const poolFeatures = [
   },
 ];
 
+export const poolConfigHeaders = ['Category', 'Component', 'Specification'] as const;
+
+export const poolConfigRows: { category: string; component: string; specification: string }[] = [
+  {
+    category: 'Structure',
+    component: 'Main Profiles',
+    specification: 'Main beam 80*100*2.75mm galvanized square tube',
+  },
+  {
+    category: '',
+    component: '',
+    specification: 'Side beam 50*70*2.75mm galvanized square tube',
+  },
+  {
+    category: '',
+    component: '',
+    specification: 'Secondary beam 40*60*2.0mm galvanized square tube',
+  },
+  {
+    category: '',
+    component: '',
+    specification: 'Column 80*100*2.75mm galvanized square tube',
+  },
+  {
+    category: '',
+    component: 'Hoisting',
+    specification: 'D-ring welded connection',
+  },
+  {
+    category: 'Inner Liner',
+    component: 'Fiberglass',
+    specification: 'Fiberglass thickness 8mm',
+  },
+  {
+    category: '',
+    component: '',
+    specification: 'Resin gel coat + fiberglass cloth',
+  },
+  {
+    category: '',
+    component: '',
+    specification: '12+12 thick tempered glass (optional)',
+  },
+  {
+    category: 'Exterior Decoration',
+    component: 'Exterior Finish',
+    specification: '2nd generation co-extruded Great Wall panel 219*26',
+  },
+  {
+    category: '',
+    component: 'Insulation Layer',
+    specification: 'Flame-retardant thermal insulation rubber foam / NBR',
+  },
+  {
+    category: '',
+    component: 'Corner Guards',
+    specification: 'Rubber corner guard / WPC (Wood-Plastic Composite) corner guard',
+  },
+  {
+    category: 'Water Circulation System',
+    component: 'Water Pump',
+    specification: 'CDLF20-10/WQ20-15-2.2',
+  },
+  {
+    category: '',
+    component: 'Skimmer',
+    specification: 'B500Slim',
+  },
+  {
+    category: '',
+    component: 'Pipe Fittings',
+    specification: 'PPR/PVC',
+  },
+  {
+    category: '',
+    component: 'Salt Chlorinator',
+    specification: 'QSS-60 (≤40-120m³)',
+  },
+  {
+    category: 'Other',
+    component: 'Lighting',
+    specification: 'Pool wall light / IP68 (optional)',
+  },
+  {
+    category: '',
+    component: 'Adhesive',
+    specification: 'Polyurethane epoxy structural adhesive',
+  },
+  {
+    category: '',
+    component: 'Optional',
+    specification: 'Great Wall panels, carved metal panels, heaters, window openings.',
+  },
+];
+
 export const faqBanner = {
   heading: 'Technical Guidance & Export FAQ',
   description:
