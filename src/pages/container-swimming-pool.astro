@@ -72,14 +72,77 @@ import { poolBanner, poolConfigHeaders, poolConfigRows, poolFeatures } from '@/d
     </div>
   </section>
   <section class="py-16 bg-white">
-    <div class="section-container max-w-3xl">
-      <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Planning Notes for Buyers</h2>
-      <ul class="list-disc pl-5 space-y-2 text-gray-600">
-        <li>Pool size and depth options</li>
-        <li>Filtration and maintenance requirements</li>
-        <li>Installation interface with decks and landscaping</li>
-        <li>Shipping cost to destination port / site</li>
-      </ul>
+    <div class="section-container">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <div>
+          <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Planning Notes for Buyers</h2>
+          <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>Pool size and depth options</li>
+            <li>Filtration and maintenance requirements</li>
+            <li>Installation interface with decks and landscaping</li>
+            <li>Shipping cost to destination port / site</li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 sm:p-8">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl font-extrabold text-brand-900 mb-2">Get a Free Quote</h2>
+            <p class="text-sm text-gray-500">Tell us your requirements and we'll respond within 24 hours with pricing and availability.</p>
+          </div>
+          <form id="pool-quote-form" class="grid sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-name">Full Name <span class="text-red-500">*</span></label>
+              <input id="pqf-name" name="name" type="text" required placeholder="John Smith" class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-email">Email <span class="text-red-500">*</span></label>
+              <input id="pqf-email" name="email" type="email" required placeholder="you@company.com" class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-phone">Phone / WhatsApp</label>
+              <input id="pqf-phone" name="phone" type="tel" placeholder="+1 234 567 8900" class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-model">Product Model</label>
+              <select id="pqf-model" name="model" class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                <option value="">-- Select Model --</option>
+                <option>Container Swimming Pool</option>
+                <option>Custom Pool Size</option>
+                <option>Other / Not sure</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-qty">Quantity</label>
+              <input id="pqf-qty" name="quantity" type="number" min="1" placeholder="e.g. 5" class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-country">Destination Country</label>
+              <input id="pqf-country" name="country" type="text" placeholder="e.g. United States" class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white" />
+            </div>
+            <div class="sm:col-span-2 flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="pqf-message">Additional Requirements</label>
+              <textarea id="pqf-message" name="message" rows="3" placeholder="Describe customization needs, delivery timeline, use case, etc." class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none bg-white"></textarea>
+            </div>
+            <div class="sm:col-span-2">
+              <button type="submit" class="w-full bg-brand-900 hover:bg-brand-800 text-white font-bold py-3 rounded transition-colors text-sm tracking-wide">
+                Send Quote Request
+              </button>
+              <p id="pqf-success" class="hidden text-center text-green-600 font-semibold mt-3 text-sm">Thank you! We'll get back to you within 24 hours.</p>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById('pool-quote-form') as HTMLFormElement | null;
+  const success = document.getElementById('pqf-success') as HTMLParagraphElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    form.querySelectorAll('input,select,textarea,button[type=submit]').forEach((el) => {
+      (el as HTMLInputElement).disabled = true;
+    });
+    success?.classList.remove('hidden');
+  });
+</script>
