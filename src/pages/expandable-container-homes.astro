@@ -10,6 +10,11 @@ import {
   expandableSpecs,
   whatsappUrl,
 } from '@/data/site';
+
+const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
+  src: `/images/products/actual/${String(i + 1).padStart(2, '0')}.png`,
+  label: `Actual product photo ${i + 1}`,
+}));
 ---
 <BaseLayout title="Expandable Container Homes" description={expandableBanner.description}>
   <PageBanner heading={expandableBanner.heading} description={expandableBanner.description} />
@@ -40,7 +45,7 @@ import {
                 { src: '/images/products/expandable-40ft.png', label: '40ft Double-Wing' },
               ].map(({ src, label }) => (
                 <td class="px-4 py-3">
-                  <button class="lightbox-trigger block w-full" data-src={src} data-label={label} aria-label={`View ${label} full screen`}>
+                  <button class="lightbox-trigger block w-full" data-lightbox-group="specs" data-src={src} data-label={label} aria-label={`View ${label} full screen`}>
                     <img src={src} alt={label} class="w-full max-w-[220px] h-[140px] object-cover rounded hover:opacity-90 transition-opacity cursor-zoom-in" loading="lazy" />
                   </button>
                 </td>
@@ -57,8 +62,51 @@ import {
       </div>
     </div>
   </section>
+
+  <!-- Actual Product Photos Carousel -->
+  <section class="py-16 bg-white">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Actual Product Photos</h2>
+      <div class="relative">
+        <button
+          id="actual-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -ml-2 sm:ml-0"
+          aria-label="Previous photos"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <div id="actual-track" class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 px-1 scrollbar-hide" style="scrollbar-width: none;">
+          {actualProductPhotos.map(({ src, label }) => (
+            <button
+              type="button"
+              class="lightbox-trigger flex-shrink-0 snap-start w-[260px] sm:w-[300px]"
+              data-lightbox-group="actual"
+              data-src={src}
+              data-label={label}
+              aria-label={`View ${label} full screen`}
+            >
+              <img
+                src={src}
+                alt={label}
+                class="w-full h-[180px] sm:h-[200px] object-cover rounded-lg border border-gray-200 hover:opacity-90 transition-opacity cursor-zoom-in"
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+        <button
+          id="actual-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -mr-2 sm:mr-0"
+          aria-label="Next photos"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- Quote Request Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20 bg-gray-50">
     <div class="section-container max-w-3xl">
       <div class="text-center mb-10">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-3">Get a Free Quote</h2>
@@ -148,20 +196,19 @@ import {
 </BaseLayout>
 
 <script>
-  // Lightbox
-  const images = Array.from(document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger')).map((btn) => ({
-    src: btn.dataset.src ?? '',
-    label: btn.dataset.label ?? '',
-  }));
+  // Lightbox (grouped)
+  type LbItem = { src: string; label: string };
+  let groupImages: LbItem[] = [];
   let current = 0;
   const lb = document.getElementById('lightbox') as HTMLDivElement;
   const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const lbLabel = document.getElementById('lightbox-label') as HTMLParagraphElement;
 
   function openLightbox(index: number) {
-    current = (index + images.length) % images.length;
-    lbImg.src = images[current].src;
-    lbLabel.textContent = images[current].label;
+    if (!groupImages.length) return;
+    current = (index + groupImages.length) % groupImages.length;
+    lbImg.src = groupImages[current].src;
+    lbLabel.textContent = groupImages[current].label;
     lb.classList.remove('hidden');
     lb.classList.add('flex');
     document.body.style.overflow = 'hidden';
@@ -172,8 +219,15 @@ import {
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn, i) => {
-    btn.addEventListener('click', () => openLightbox(i));
+  document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.lightboxGroup ?? 'default';
+      const triggers = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(`.lightbox-trigger[data-lightbox-group="${group}"]`),
+      );
+      groupImages = triggers.map((t) => ({ src: t.dataset.src ?? '', label: t.dataset.label ?? '' }));
+      openLightbox(triggers.indexOf(btn));
+    });
   });
   document.getElementById('lightbox-close')!.addEventListener('click', closeLightbox);
   document.getElementById('lightbox-prev')!.addEventListener('click', () => openLightbox(current - 1));
@@ -185,6 +239,16 @@ import {
       if (e.key === 'ArrowLeft') openLightbox(current - 1);
       if (e.key === 'ArrowRight') openLightbox(current + 1);
     }
+  });
+
+  // Actual photos carousel scroll
+  const track = document.getElementById('actual-track') as HTMLDivElement;
+  const scrollBy = () => Math.min(track.clientWidth * 0.8, 320);
+  document.getElementById('actual-prev')!.addEventListener('click', () => {
+    track.scrollBy({ left: -scrollBy(), behavior: 'smooth' });
+  });
+  document.getElementById('actual-next')!.addEventListener('click', () => {
+    track.scrollBy({ left: scrollBy(), behavior: 'smooth' });
   });
 
   // Quote form mock submit
