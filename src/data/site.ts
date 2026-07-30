@@ -27,7 +27,7 @@ export const productNavLinks = [
   { label: 'Folding House', href: '/folding-house' },
   { label: 'Space capsule house', href: '/space-capsule-house' },
   { label: 'Container swimming pool', href: '/container-swimming-pool' },
-  { label: 'Supporting container', href: '/expandable-container-homes' },
+  { label: 'Expandable container homes', href: '/expandable-container-homes' },
 ] as const;
 
 export const navLinks = [
