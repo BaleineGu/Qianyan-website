@@ -426,14 +426,6 @@ export const foldingBenefits = [
     title: 'Fast Deployment',
     description: 'Practical for temporary camps and short-term project housing.',
   },
-  {
-    title: 'Compact Freight',
-    description: 'Folded size helps reduce transport volume versus fully assembled units.',
-  },
-  {
-    title: 'Dealer Ready',
-    description: 'Suitable for regional dealers building stock and rental fleets.',
-  },
 ];
 
 export const foldingSpecHeaders = [
