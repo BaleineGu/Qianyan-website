@@ -15,7 +15,11 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
 }));
 ---
 <BaseLayout title="Expandable Container Homes" description={expandableBanner.description}>
-  <PageBanner heading={expandableBanner.heading} description={expandableBanner.description} />
+  <PageBanner
+    heading={expandableBanner.heading}
+    description={expandableBanner.description}
+    image="/images/hero/expandable-banner.png"
+  />
   <section class="py-16">
     <div class="section-container max-w-4xl">
       <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Product Advantages</h2>
