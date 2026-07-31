@@ -1,23 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import { poolBanner, poolConfigHeaders, poolConfigRows, poolFeatures } from '@/data/site';
+import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
 ---
 <BaseLayout title="Container Swimming Pool" description={poolBanner.description}>
   <PageBanner heading={poolBanner.heading} description={poolBanner.description} />
-  <section class="py-16">
-    <div class="section-container">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Commercial Pool Systems</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        {poolFeatures.map((item) => (
-          <div class="border-t-2 border-brand-500 pt-6">
-            <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3>
-            <p class="text-gray-600">{item.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
   <section class="py-16 bg-gray-50">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-10 text-center">Use Cases</h2>
