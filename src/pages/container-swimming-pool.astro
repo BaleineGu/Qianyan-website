@@ -25,6 +25,7 @@ import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
             <button
               type="button"
               class="lightbox-trigger block w-full"
+              data-lightbox-group="usecases"
               data-src={item.src}
               data-label={item.label}
               aria-label={`View ${item.label} full screen`}
@@ -63,6 +64,43 @@ import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
             ))}
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-gray-50">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-10 text-center">Actual photos of the factory swimming pool</h2>
+      <div class="pool-factory-stack grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto md:pb-12">
+        {[
+          { src: '/images/products/pool-factory/01.png', label: 'Factory pool — orange panel finish' },
+          { src: '/images/products/pool-factory/02.png', label: 'Factory pool — black container with viewing window' },
+          { src: '/images/products/pool-factory/03.png', label: 'Factory pool — interior liner view' },
+          { src: '/images/products/pool-factory/04.png', label: 'Factory pool — black slat exterior' },
+        ].map((item, i) => (
+          <article
+            class:list={[
+              'pool-factory-card relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg',
+              i % 2 === 1 && 'md:translate-y-12',
+              i >= 2 && 'md:-mt-6',
+            ]}
+          >
+            <button
+              type="button"
+              class="lightbox-trigger block w-full"
+              data-lightbox-group="factory"
+              data-src={item.src}
+              data-label={item.label}
+              aria-label={`View ${item.label} full screen`}
+            >
+              <img
+                src={item.src}
+                alt={item.label}
+                class="w-full aspect-[16/10] object-cover hover:opacity-90 transition-opacity cursor-zoom-in"
+                loading="lazy"
+              />
+            </button>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -141,20 +179,18 @@ import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
 </BaseLayout>
 
 <script>
-  const images = Array.from(document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger')).map((btn) => ({
-    src: btn.dataset.src ?? '',
-    label: btn.dataset.label ?? '',
-  }));
+  type LbItem = { src: string; label: string };
+  let groupImages: LbItem[] = [];
   let current = 0;
   const lb = document.getElementById('lightbox') as HTMLDivElement;
   const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const lbLabel = document.getElementById('lightbox-label') as HTMLParagraphElement;
 
   function openLightbox(index: number) {
-    if (!images.length) return;
-    current = (index + images.length) % images.length;
-    lbImg.src = images[current].src;
-    lbLabel.textContent = images[current].label;
+    if (!groupImages.length) return;
+    current = (index + groupImages.length) % groupImages.length;
+    lbImg.src = groupImages[current].src;
+    lbLabel.textContent = groupImages[current].label;
     lb.classList.remove('hidden');
     lb.classList.add('flex');
     document.body.style.overflow = 'hidden';
@@ -165,8 +201,15 @@ import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn, i) => {
-    btn.addEventListener('click', () => openLightbox(i));
+  document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.lightboxGroup ?? 'default';
+      const triggers = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(`.lightbox-trigger[data-lightbox-group="${group}"]`),
+      );
+      groupImages = triggers.map((t) => ({ src: t.dataset.src ?? '', label: t.dataset.label ?? '' }));
+      openLightbox(triggers.indexOf(btn));
+    });
   });
   document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
   document.getElementById('lightbox-prev')?.addEventListener('click', () => openLightbox(current - 1));
