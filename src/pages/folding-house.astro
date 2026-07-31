@@ -33,6 +33,54 @@ import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from
       </div>
     </div>
   </section>
+  <section class="py-16 bg-white">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Actual product photo</h2>
+      <div class="relative">
+        <button
+          id="folding-actual-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -ml-2 sm:ml-0"
+          aria-label="Previous photos"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <div id="folding-actual-track" class="flex gap-4 overflow-x-hidden scroll-smooth pb-2 px-1">
+          {[
+            { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1' },
+            { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2' },
+            { src: '/images/products/folding-actual/03.png', label: 'Actual product photo 3' },
+            { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4' },
+            { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5' },
+            { src: '/images/products/folding-actual/06.png', label: 'Actual product photo 6' },
+            { src: '/images/products/folding-actual/07.png', label: 'Actual product photo 7' },
+          ].map(({ src, label }) => (
+            <button
+              type="button"
+              class="lightbox-trigger flex-shrink-0 w-[240px] sm:w-[280px]"
+              data-lightbox-group="folding-actual"
+              data-src={src}
+              data-label={label}
+              aria-label={`View ${label} full screen`}
+            >
+              <img
+                src={src}
+                alt={label}
+                class="w-full h-[180px] sm:h-[200px] object-cover rounded-lg border border-gray-200 hover:opacity-90 transition-opacity cursor-zoom-in"
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+        <button
+          id="folding-actual-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -mr-2 sm:mr-0"
+          aria-label="Next photos"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </section>
   <section class="py-16 bg-gray-50">
     <div class="section-container max-w-3xl">
       <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Application Scenarios</h2>
@@ -73,4 +121,100 @@ import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from
       </div>
     </div>
   </section>
+
+  <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 hidden items-center justify-center" role="dialog" aria-modal="true">
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-gray-300" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Previous">&#8249;</button>
+    <button id="lightbox-next" class="absolute right-14 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Next">&#8250;</button>
+    <div class="flex flex-col items-center gap-4 max-w-[90vw] max-h-[90vh]">
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded" />
+      <p id="lightbox-label" class="text-white text-sm font-semibold"></p>
+    </div>
+  </div>
 </BaseLayout>
+
+<script>
+  type LbItem = { src: string; label: string };
+  let groupImages: LbItem[] = [];
+  let current = 0;
+  const lb = document.getElementById('lightbox') as HTMLDivElement;
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbLabel = document.getElementById('lightbox-label') as HTMLParagraphElement;
+
+  function openLightbox(index: number) {
+    if (!groupImages.length) return;
+    current = ((index % groupImages.length) + groupImages.length) % groupImages.length;
+    lbImg.src = groupImages[current].src;
+    lbLabel.textContent = groupImages[current].label;
+    lb.classList.remove('hidden');
+    lb.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function bindLightbox(btn: HTMLButtonElement) {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.lightboxGroup ?? 'default';
+      const unique = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(`.lightbox-trigger[data-lightbox-group="${group}"]`),
+      ).filter((t, _, arr) => arr.findIndex((x) => x.dataset.src === t.dataset.src) === arr.indexOf(t));
+      groupImages = unique.map((t) => ({ src: t.dataset.src ?? '', label: t.dataset.label ?? '' }));
+      openLightbox(groupImages.findIndex((g) => g.src === btn.dataset.src));
+    });
+  }
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev')?.addEventListener('click', () => openLightbox(current - 1));
+  document.getElementById('lightbox-next')?.addEventListener('click', () => openLightbox(current + 1));
+  lb?.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb || lb.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') openLightbox(current - 1);
+    if (e.key === 'ArrowRight') openLightbox(current + 1);
+  });
+
+  const track = document.getElementById('folding-actual-track') as HTMLDivElement | null;
+  if (track) {
+    const originals = Array.from(track.children);
+    originals.forEach((node) => track.appendChild(node.cloneNode(true)));
+    track.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach(bindLightbox);
+
+    const step = () => {
+      const first = track.children[0] as HTMLElement | undefined;
+      if (!first) return 300;
+      const style = getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || '16') || 16;
+      return first.offsetWidth + gap;
+    };
+
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const startAuto = () => {
+      stopAuto();
+      timer = setInterval(() => go(1), 3500);
+    };
+    const stopAuto = () => {
+      if (timer) clearInterval(timer);
+      timer = null;
+    };
+
+    const go = (dir: number) => {
+      track.scrollBy({ left: step() * dir, behavior: 'smooth' });
+      window.setTimeout(() => {
+        const half = track.scrollWidth / 2;
+        if (track.scrollLeft >= half - 2) track.scrollLeft -= half;
+        else if (track.scrollLeft <= 1 && dir < 0) track.scrollLeft += half;
+      }, 360);
+    };
+
+    document.getElementById('folding-actual-prev')?.addEventListener('click', () => { go(-1); startAuto(); });
+    document.getElementById('folding-actual-next')?.addEventListener('click', () => { go(1); startAuto(); });
+    track.addEventListener('mouseenter', stopAuto);
+    track.addEventListener('mouseleave', startAuto);
+    startAuto();
+  }
+</script>
