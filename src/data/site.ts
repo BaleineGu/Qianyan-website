@@ -425,7 +425,7 @@ export const foldingBenefits = [
   {
     title: 'Fast Deployment',
     description:
-      'Installation is extremely simple, requiring just four steps to complete, which saves on labor costs. This product can be folded over 500 times and is reusable, resulting in savings on transportation, assembly, and disassembly costs.',
+      'Installation is extremely simple, requiring just four steps to complete, which saves on labor costs.',
   },
 ];
 
