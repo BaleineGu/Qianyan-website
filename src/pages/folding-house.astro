@@ -4,7 +4,11 @@ import PageBanner from '@/components/PageBanner.astro';
 import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from '@/data/site';
 ---
 <BaseLayout title="Folding House" description={foldingBanner.description}>
-  <PageBanner heading={foldingBanner.heading} description={foldingBanner.description} />
+  <PageBanner
+    heading={foldingBanner.heading}
+    description={foldingBanner.description}
+    image="/images/hero/folding-banner.png"
+  />
   <section class="py-16">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Why Buyers Choose Folding Houses</h2>
