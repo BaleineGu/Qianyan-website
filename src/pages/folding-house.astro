@@ -16,19 +16,17 @@ import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from
           </div>
         ))}
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {[
-          { src: '/images/products/folding-advantages/01.png', label: 'Compact Folded State' },
-          { src: '/images/products/folding-advantages/02.png', label: 'Unfold the Structure' },
-          { src: '/images/products/folding-advantages/03.png', label: 'Expand the Main Body' },
-          { src: '/images/products/folding-advantages/04.png', label: 'Interior & Base Ready' },
-          { src: '/images/products/folding-advantages/05.png', label: 'Install Doors & Windows' },
-          { src: '/images/products/folding-advantages/06.png', label: 'Final Assembled House' },
+          { src: '/images/products/folding-advantages/01.png', label: 'Folded panel' },
+          { src: '/images/products/folding-advantages/02.png', label: 'Unfolding structure' },
+          { src: '/images/products/folding-advantages/03.png', label: 'Expanding main body' },
+          { src: '/images/products/folding-advantages/04.png', label: 'Final assembled house' },
         ].map((item) => (
           <img
             src={item.src}
             alt={item.label}
-            class="w-full aspect-[4/3] object-contain rounded-lg border border-gray-200 bg-white"
+            class="w-full aspect-square object-contain rounded-lg border border-gray-200 bg-white"
             loading="lazy"
           />
         ))}
