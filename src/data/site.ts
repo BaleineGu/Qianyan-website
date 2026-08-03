@@ -397,6 +397,7 @@ export const flatPackAdvantages = [
     title: 'Flexible customization',
     description:
       'The modular housing structure allows for the easy replacement of exterior wall panels, offering greater flexibility for your specific application.',
+    image: '/images/products/flatpack-advantages/customization.png',
   },
 ];
 
