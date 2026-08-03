@@ -96,6 +96,80 @@ import {
     </div>
   </section>
 
+  <!-- Compact horizontal quote strip -->
+  <section class="py-8 bg-gray-50 border-t border-gray-200">
+    <div class="section-container">
+      <form id="flatpack-quote-form" class="flex flex-col gap-4">
+        <div class="flex flex-col lg:flex-row lg:items-end gap-4 lg:gap-3">
+          <div class="lg:w-44 shrink-0 lg:pb-0.5">
+            <h2 class="text-lg sm:text-xl font-extrabold text-brand-900 leading-tight">Get a Free Quote</h2>
+            <p class="text-xs text-gray-500 mt-0.5">Reply within 24h</p>
+          </div>
+          <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            <input
+              id="fpqf-name"
+              name="name"
+              type="text"
+              required
+              placeholder="Full Name *"
+              aria-label="Full Name"
+              class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="fpqf-email"
+              name="email"
+              type="email"
+              required
+              placeholder="Email *"
+              aria-label="Email"
+              class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="fpqf-phone"
+              name="phone"
+              type="tel"
+              placeholder="Phone / WhatsApp"
+              aria-label="Phone / WhatsApp"
+              class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="fpqf-qty"
+              name="quantity"
+              type="number"
+              min="1"
+              placeholder="Quantity"
+              aria-label="Quantity"
+              class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="fpqf-country"
+              name="country"
+              type="text"
+              placeholder="Destination Country"
+              aria-label="Destination Country"
+              class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+          </div>
+          <button
+            type="submit"
+            class="shrink-0 bg-brand-900 hover:bg-brand-800 text-white font-bold px-6 py-2.5 rounded transition-colors text-sm tracking-wide whitespace-nowrap"
+          >
+            Send Request
+          </button>
+        </div>
+        <input
+          id="fpqf-message"
+          name="message"
+          type="text"
+          placeholder="Additional requirements (optional)"
+          aria-label="Additional requirements"
+          class="border border-gray-300 rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white w-full"
+        />
+        <p id="fpqf-success" class="hidden text-center text-green-600 font-semibold text-sm">Thank you! We'll get back to you within 24 hours.</p>
+      </form>
+    </div>
+  </section>
+
   <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 hidden items-center justify-center" role="dialog" aria-modal="true">
     <button id="lightbox-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-gray-300" aria-label="Close">&times;</button>
     <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Previous">&#8249;</button>
@@ -151,5 +225,13 @@ import {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') openLightbox(current - 1);
     if (e.key === 'ArrowRight') openLightbox(current + 1);
+  });
+
+  const form = document.getElementById('flatpack-quote-form') as HTMLFormElement | null;
+  const success = document.getElementById('fpqf-success') as HTMLParagraphElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    form.querySelectorAll('input,button[type=submit]').forEach((el) => ((el as HTMLInputElement).disabled = true));
+    success?.classList.remove('hidden');
   });
 </script>
