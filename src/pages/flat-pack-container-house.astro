@@ -41,16 +41,82 @@ import {
         {flatPackAdvantageGallery.map((item) => (
           <div class="border-t-2 border-brand-500 pt-6">
             {item.title ? <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3> : null}
-            {item.description ? <p class="text-gray-600">{item.description}</p> : null}
-            <img
-              src={item.image}
-              alt={item.alt}
-              class={`w-full h-44 object-cover rounded-lg border border-gray-200 ${item.title || item.description ? 'mt-4' : ''}`}
-              loading="lazy"
-            />
+            {item.description ? <p class="text-gray-600 mb-4">{item.description}</p> : null}
+            <button
+              type="button"
+              class="lightbox-trigger block w-full text-left"
+              data-lightbox-group="cases"
+              data-src={item.image}
+              data-label={item.alt}
+              aria-label={`View ${item.alt} full screen`}
+            >
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="w-full h-auto object-contain rounded-lg border border-gray-200 bg-white hover:opacity-90 transition-opacity cursor-zoom-in"
+                loading="lazy"
+              />
+            </button>
           </div>
         ))}
       </div>
     </div>
   </section>
+
+  <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 hidden items-center justify-center" role="dialog" aria-modal="true">
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-gray-300" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Previous">&#8249;</button>
+    <button id="lightbox-next" class="absolute right-14 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Next">&#8250;</button>
+    <div class="flex flex-col items-center gap-4 max-w-[90vw] max-h-[90vh]">
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded" />
+      <p id="lightbox-label" class="text-white text-sm font-semibold"></p>
+    </div>
+  </div>
 </BaseLayout>
+
+<script>
+  type LbItem = { src: string; label: string };
+  let groupImages: LbItem[] = [];
+  let current = 0;
+  const lb = document.getElementById('lightbox') as HTMLDivElement;
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbLabel = document.getElementById('lightbox-label') as HTMLParagraphElement;
+
+  function openLightbox(index: number) {
+    if (!groupImages.length) return;
+    current = ((index % groupImages.length) + groupImages.length) % groupImages.length;
+    lbImg.src = groupImages[current].src;
+    lbImg.alt = groupImages[current].label;
+    lbLabel.textContent = groupImages[current].label;
+    lb.classList.remove('hidden');
+    lb.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.lightboxGroup ?? 'default';
+      const triggers = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(`.lightbox-trigger[data-lightbox-group="${group}"]`),
+      );
+      groupImages = triggers.map((t) => ({ src: t.dataset.src ?? '', label: t.dataset.label ?? '' }));
+      openLightbox(triggers.indexOf(btn));
+    });
+  });
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev')?.addEventListener('click', () => openLightbox(current - 1));
+  document.getElementById('lightbox-next')?.addEventListener('click', () => openLightbox(current + 1));
+  lb?.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb || lb.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') openLightbox(current - 1);
+    if (e.key === 'ArrowRight') openLightbox(current + 1);
+  });
+</script>
