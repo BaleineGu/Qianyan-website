@@ -390,13 +390,13 @@ export const flatPackAdvantages = [
   },
   {
     title: 'Modular Scalability',
-    description: 'Can be stacked in multiple layers.',
+    description: 'It can be stacked in multiple layers, maximizing the saving of land area.',
     image: '/images/products/flatpack-advantages/stacking.png',
   },
   {
-    title: 'Rapid Assembly',
+    title: 'Flexible customization',
     description:
-      'Corner columns bolt into roof and floor assemblies; a standard unit structure can lock in under 30 minutes with a four-person crew.',
+      'The modular housing structure allows for the easy replacement of exterior wall panels, offering greater flexibility for your specific application.',
   },
 ];
 
