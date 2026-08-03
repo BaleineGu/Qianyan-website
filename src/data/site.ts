@@ -386,10 +386,12 @@ export const flatPackAdvantages = [
     title: 'Freight Optimization',
     description:
       'Multiple flat-packed units can share one ISO container footprint, reducing ocean logistics cost.',
+    image: '/images/products/flatpack-advantages/freight.png',
   },
   {
     title: 'Modular Scalability',
-    description: 'Stack up to 3 floors and link horizontally for larger compounds.',
+    description: 'Can be stacked in multiple layers.',
+    image: '/images/products/flatpack-advantages/stacking.png',
   },
   {
     title: 'Rapid Assembly',
