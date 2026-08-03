@@ -5,6 +5,9 @@ import {
   flatPackAdvantageGallery,
   flatPackAdvantages,
   flatPackBanner,
+  flatPackProductRows,
+  flatPackProductTitle,
+  flatPackStandardBox,
 } from '@/data/site';
 ---
 <BaseLayout title="Flat Pack Container House" description={flatPackBanner.description}>
@@ -61,6 +64,36 @@ import {
             </button>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-3">Product Description</h2>
+      <p class="text-brand-900 font-semibold mb-1">{flatPackProductTitle}</p>
+      <p class="text-gray-600 text-sm mb-8">
+        <span class="font-semibold text-brand-900">Standard box — </span>{flatPackStandardBox}
+      </p>
+      <div class="overflow-x-auto border border-gray-200">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-brand-900 text-white">
+            <tr>
+              <th class="px-3 py-3 whitespace-nowrap">Category</th>
+              <th class="px-3 py-3 whitespace-nowrap">Item</th>
+              <th class="px-3 py-3">Specification</th>
+            </tr>
+          </thead>
+          <tbody>
+            {flatPackProductRows.map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-3 py-2.5 font-medium text-brand-900 whitespace-nowrap align-top">{row.category}</td>
+                <td class="px-3 py-2.5 text-gray-700 whitespace-nowrap align-top">{row.item}</td>
+                <td class="px-3 py-2.5 text-gray-600 align-top">{row.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   </section>

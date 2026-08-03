@@ -458,6 +458,130 @@ export const flatPackMaterials = [
   },
 ];
 
+/** From 打包箱出口参数.xlsx — Product Description */
+export const flatPackProductTitle = 'Specifications of a 50mm packing box (2.0mm)';
+export const flatPackStandardBox =
+  'External dimensions (L×W×H): 5900mm × 2480mm × 2896mm; Internal dimensions (L×W×H): 5690mm × 2270mm × 2540mm';
+
+export type FlatPackProductRow = {
+  category: string;
+  item: string;
+  detail: string;
+};
+
+export const flatPackProductRows: FlatPackProductRow[] = [
+  { category: 'Index', item: 'Thermal insulation performance', detail: 'λ=0.037W/m·K' },
+  { category: '', item: 'Wind resistance', detail: '0.37kN/m²' },
+  { category: '', item: 'Sound insulation performance', detail: 'Sound insulation ≥28dB' },
+  { category: '', item: 'Fire resistance', detail: 'Grade A' },
+  { category: '', item: 'Waterproof performance', detail: 'Level II' },
+  { category: '', item: 'Seismic performance', detail: 'Level 8' },
+  { category: '', item: 'Ground live load', detail: '1.8kN/㎡' },
+  { category: '', item: 'Roof live load', detail: '0.42kN/m²' },
+  {
+    category: 'Structure',
+    item: 'Main profiles',
+    detail:
+      'Galvanized ground frame beams: 5478mm × 2 pcs × 2.0mm, 2178mm × 2 pcs × 2.0mm; Galvanized roof frame beams: 5478mm × 2 pcs × 2.0mm, 2178mm × 2 pcs × 2.0mm; Galvanized columns: 2536mm × 2.0mm × 4 pcs; Galvanized content: 80g',
+  },
+  {
+    category: '',
+    item: 'Substructure',
+    detail: 'Top and secondary beams, 40×60×0.9 profile; 50×100×0.9mm square tubing for bottom secondary beams',
+  },
+  { category: '', item: 'Structural connection', detail: 'M12×40 high strength bolts' },
+  {
+    category: '',
+    item: 'Surface treatment',
+    detail: 'Polyethylene electrostatic powder coating and baking process (matte white)',
+  },
+  {
+    category: 'Box corner',
+    item: 'Lifting angle',
+    detail: 'Top: 210mm × 150mm × 200mm × 4 pcs; Bottom: 210mm × 150mm × 160mm × 4 pcs',
+  },
+  {
+    category: 'Wall panels',
+    item: 'Rock wool core material',
+    detail:
+      'V-950 type 50mm thick color steel composite panel, double-sided 0.22 color coated plate, flat, white, rock wool density 55Kg/m³ or EPS density 10kg/m³; single-sided film coating deviation',
+  },
+  {
+    category: 'Roof',
+    item: 'Roof waterproofing layer',
+    detail: 'Roofing tiles: 0.35mm thick, 360° interlocking color steel panels',
+  },
+  { category: '', item: 'Insulation layer', detail: 'Glass wool roll, 75mm thick, density 12kg/m³' },
+  { category: '', item: 'Moisture barrier', detail: 'PE resin film' },
+  { category: '', item: 'Decorative layer', detail: 'YX28-277-831 strip ceiling panel, 0.23mm thick' },
+  {
+    category: 'Ground',
+    item: 'Structural slab',
+    detail: 'Magnesium oxide board, 18mm thick, fire rating A',
+  },
+  { category: '', item: 'Ground treatment', detail: 'Floor covering, 1.0mm thick, light color' },
+  {
+    category: 'Window',
+    item: 'Burglar bars',
+    detail:
+      '60 Series PVC Sliding Window 3+9A+3, double-glazed, double-sliding; includes security bars and screen',
+  },
+  {
+    category: 'Door',
+    item: 'Front door',
+    detail:
+      'Steel door set, dimensions ≥ W970mm × H1970mm, including door lock, lock cylinder, and door stop [Special door for packing boxes]',
+  },
+  {
+    category: 'Decorate',
+    item: 'Inner decorative corner',
+    detail: 'Color-coated steel corner fittings, 0.5mm thick, white RAL9010',
+  },
+  {
+    category: 'Auxiliary parts',
+    item: 'Drain',
+    detail: 'φ50 PVC downpipe 2800mm × 4 pcs',
+  },
+  {
+    category: '',
+    item: 'Ceiling trim',
+    detail: 'The thickness of the “Z”-shaped color steel edge trim is 0.5mm',
+  },
+  {
+    category: '',
+    item: 'Bottom flooding channel',
+    detail: 'Custom-made pressed groove with drainage holes, 0.5mm thick',
+  },
+  {
+    category: '',
+    item: 'Preparation of auxiliary materials',
+    detail: 'Small parts, self-drilling screws, structural adhesive, connecting bolts',
+  },
+  {
+    category: 'Electrical (Delixi)',
+    item: 'Lamp',
+    detail: 'LED dustproof lights × 2 sets, 36W/set',
+  },
+  {
+    category: '',
+    item: 'Socket',
+    detail: 'Three 10A five-hole sockets and one 16A air conditioner socket',
+  },
+  { category: '', item: 'Switch', detail: 'One single-button switch' },
+  {
+    category: '',
+    item: 'Distribution box',
+    detail: 'One concealed electrical control box (including circuit breaker and residual current device)',
+  },
+  { category: '', item: 'Industrial plugs', detail: '220V, 50Hz, 3P32A × 1' },
+  {
+    category: '',
+    item: 'Wiring',
+    detail:
+      'Incoming power line: 3×6 sq mm; Air conditioner socket: 3×4 sq mm; Five-hole socket: 3×2.5 sq mm; Lighting: 3×1.5 sq mm',
+  },
+];
+
 export const foldingBanner = {
   heading: 'Folding Houses for Fast Temporary and Commercial Housing',
   description:
