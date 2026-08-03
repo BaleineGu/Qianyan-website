@@ -459,7 +459,6 @@ export const flatPackMaterials = [
 ];
 
 /** From 打包箱出口参数.xlsx — Product Description */
-export const flatPackProductTitle = 'Specifications of a 50mm packing box (2.0mm)';
 export const flatPackStandardBox =
   'External dimensions (L×W×H): 5900mm × 2480mm × 2896mm; Internal dimensions (L×W×H): 5690mm × 2270mm × 2540mm';
 
