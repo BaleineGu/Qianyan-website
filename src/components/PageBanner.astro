@@ -3,11 +3,22 @@ interface Props {
   heading: string;
   description: string;
   image?: string;
+  /** Tailwind classes for the background image (e.g. object-position) */
+  imageClass?: string;
 }
-const { heading, description, image = '/images/hero/slide-1.png' } = Astro.props;
+const {
+  heading,
+  description,
+  image = '/images/hero/slide-1.png',
+  imageClass = '',
+} = Astro.props;
 ---
 <section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
-  <img src={image} alt="" class="absolute inset-0 w-full h-full object-cover" />
+  <img
+    src={image}
+    alt=""
+    class:list={['absolute inset-0 w-full h-full object-cover', imageClass]}
+  />
   <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
   <div class="relative section-container py-24 lg:py-32 max-w-[912px]">
     <h1 class="heading-h1 mb-5">{heading}</h1>
