@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import { flatPackAdvantages, flatPackBanner, flatPackMaterials } from '@/data/site';
+import {
+  flatPackAdvantageGallery,
+  flatPackAdvantages,
+  flatPackBanner,
+  flatPackMaterials,
+} from '@/data/site';
 ---
 <BaseLayout title="Flat Pack Container House" description={flatPackBanner.description}>
   <PageBanner heading={flatPackBanner.heading} description={flatPackBanner.description} />
@@ -23,6 +28,20 @@ import { flatPackAdvantages, flatPackBanner, flatPackMaterials } from '@/data/si
                 loading="lazy"
               />
             )}
+          </div>
+        ))}
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 mt-8">
+        {flatPackAdvantageGallery.map((item) => (
+          <div class="border-t-2 border-brand-500 pt-6">
+            {item.title ? <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3> : null}
+            {item.description ? <p class="text-gray-600">{item.description}</p> : null}
+            <img
+              src={item.image}
+              alt={item.alt}
+              class={`w-full h-44 object-cover rounded-lg border border-gray-200 ${item.title || item.description ? 'mt-4' : ''}`}
+              loading="lazy"
+            />
           </div>
         ))}
       </div>

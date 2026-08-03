@@ -401,6 +401,28 @@ export const flatPackAdvantages = [
   },
 ];
 
+/** Second row: images only — titles/descriptions left blank for later copy */
+export const flatPackAdvantageGallery = [
+  {
+    title: '',
+    description: '',
+    image: '/images/products/flatpack-advantages/interior-01.png',
+    alt: 'Modular bedroom interior',
+  },
+  {
+    title: '',
+    description: '',
+    image: '/images/products/flatpack-advantages/interior-02.png',
+    alt: 'Modular office interior',
+  },
+  {
+    title: '',
+    description: '',
+    image: '/images/products/flatpack-advantages/interior-03.png',
+    alt: 'Modular conference room interior',
+  },
+];
+
 export const flatPackMaterials = [
   {
     title: 'Main Frame',
