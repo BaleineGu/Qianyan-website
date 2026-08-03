@@ -50,12 +50,14 @@ import {
               data-label={item.alt}
               aria-label={`View ${item.alt} full screen`}
             >
-              <img
-                src={item.image}
-                alt={item.alt}
-                class="w-full h-auto object-contain rounded-lg border border-gray-200 bg-white hover:opacity-90 transition-opacity cursor-zoom-in"
-                loading="lazy"
-              />
+              <span class="block w-full aspect-[4/3] overflow-hidden rounded-lg border border-gray-200 bg-white">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full h-full object-cover hover:opacity-90 transition-opacity cursor-zoom-in"
+                  loading="lazy"
+                />
+              </span>
             </button>
           </div>
         ))}
