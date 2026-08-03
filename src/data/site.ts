@@ -401,7 +401,7 @@ export const flatPackAdvantages = [
   },
 ];
 
-/** Second row: images only — titles/descriptions left blank for later copy */
+/** Practical application cases — images only; titles/descriptions left blank for later copy */
 export const flatPackAdvantageGallery = [
   {
     title: '',
@@ -420,6 +420,24 @@ export const flatPackAdvantageGallery = [
     description: '',
     image: '/images/products/flatpack-advantages/interior-03.png',
     alt: 'Modular conference room interior',
+  },
+  {
+    title: '',
+    description: '',
+    image: '/images/products/flatpack-advantages/cases-01.png',
+    alt: 'Modular dormitory bunk beds',
+  },
+  {
+    title: '',
+    description: '',
+    image: '/images/products/flatpack-advantages/cases-02.png',
+    alt: 'Two-story modular housing at mountain site',
+  },
+  {
+    title: '',
+    description: '',
+    image: '/images/products/flatpack-advantages/cases-03.png',
+    alt: 'Large modular housing camp at twilight',
   },
 ];
 
