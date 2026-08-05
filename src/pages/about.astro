@@ -44,18 +44,18 @@ const parallaxSlides = [
   </section>
 
   <section
-    class="about-stack bg-surface-1"
+    class="about-stack bg-surface-1 px-2 sm:px-3 lg:px-4"
     data-header-theme="light"
     aria-label="Factory gallery"
   >
     {
       parallaxSlides.map((item, index) => (
         <article
-          class="about-stack__card sticky top-0 grid h-svh min-h-[640px] grid-rows-[58%_42%] overflow-hidden bg-surface-2 lg:grid-cols-[2fr_1fr] lg:grid-rows-1"
+          class="about-stack__card sticky top-2 sm:top-3 lg:top-4 grid h-[calc(100svh-1rem)] sm:h-[calc(100svh-1.5rem)] lg:h-[calc(100svh-2rem)] min-h-[600px] grid-rows-[58%_42%] overflow-hidden rounded-helios-lg bg-surface-2 lg:grid-cols-[2fr_1fr] lg:grid-rows-1"
           data-stack-card
           style={`z-index: ${index + 1}`}
         >
-          <div class="about-stack__media relative min-h-0 overflow-hidden bg-surface-3">
+          <div class="about-stack__media relative min-h-0 overflow-hidden rounded-helios-md bg-surface-3 m-2 sm:m-3 lg:m-4">
             <img
               src={item.src}
               alt={item.alt}
@@ -121,12 +121,22 @@ const parallaxSlides = [
 <style>
   .about-stack__card {
     transform-origin: center top;
-    will-change: transform, filter;
-    box-shadow: 0 -1px 0 rgb(22 21 20 / 0.08);
+    will-change: transform, filter, border-radius;
+    box-shadow:
+      0 18px 48px rgb(22 21 20 / 0.12),
+      0 2px 0 rgb(22 21 20 / 0.04);
+    transition:
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-stack__media {
+    isolation: isolate;
   }
 
   .about-stack__media img {
-    transform: scale(1.035);
+    transform: scale(1.04);
     transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -136,7 +146,7 @@ const parallaxSlides = [
 
   @media (max-width: 1023px) {
     .about-stack__card {
-      min-height: 100svh;
+      min-height: calc(100svh - 1rem);
     }
   }
 
