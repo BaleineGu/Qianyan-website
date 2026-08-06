@@ -1,25 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { productCategories } from '@/data/site';
-
-const expandableGallery = [
-  {
-    src: '/images/products/expandable-container-home.png',
-    alt: 'Expandable Container Homes',
-  },
-  {
-    src: '/images/products/expandable-gallery/interior-02.png',
-    alt: 'Expandable container home dining and kitchen interior',
-  },
-  {
-    src: '/images/products/expandable-gallery/interior-03.png',
-    alt: 'Expandable container home empty modular room',
-  },
-  {
-    src: '/images/products/expandable-gallery/interior-04.png',
-    alt: 'Expandable container home bedroom interior',
-  },
-];
 ---
 
 <BaseLayout title="Products" description="Explore our full modular housing product lineup.">
@@ -38,45 +19,31 @@ const expandableGallery = [
     </div>
   </section>
 
-  <section class="bg-surface-1" data-header-theme="light" aria-label="Product lineup">
-    {
-      productCategories.map((product, index) => {
-        const isExpandable = product.id === 'expandable';
-        return (
-          <a
-            href={product.href}
-            aria-label={product.name}
-            class="group block min-h-[100svh] border-b border-ink-hairline last:border-b-0 bg-surface-2 p-3 sm:p-4 lg:p-5"
-          >
-            <div class="flex h-full min-h-[calc(100svh-1.5rem)] sm:min-h-[calc(100svh-2rem)] lg:min-h-[calc(100svh-2.5rem)] items-center justify-start overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline p-3 sm:p-4">
-              {isExpandable ? (
-                <div class="flex w-full h-full items-center justify-start gap-3 sm:gap-4 overflow-x-auto">
-                  {expandableGallery.map((img, i) => (
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      class:list={[
-                        'h-auto object-contain rounded-helios-sm shrink-0 transition-transform duration-700 group-hover:scale-[1.02]',
-                        i === 0
-                          ? 'max-h-[min(82svh,100%)] max-w-[min(58%,720px)] w-auto'
-                          : 'max-h-[min(42svh,48%)] max-w-[min(28%,320px)] w-auto',
-                      ]}
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                    />
-                  ))}
-                </div>
-              ) : (
+  <section class="py-section-sm lg:py-section-md bg-surface-1" data-header-theme="light">
+    <div class="section-container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {
+          productCategories.map((product) => (
+            <a
+              href={product.href}
+              class="group block overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline transition-opacity duration-helios hover:opacity-95"
+            >
+              <div class="aspect-[16/9] overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
-                  class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain object-left transition-transform duration-700 group-hover:scale-[1.02]"
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
                 />
-              )}
-            </div>
-          </a>
-        );
-      })
-    }
+              </div>
+              <div class="p-6 sm:p-8">
+                <h2 class="heading-h5 text-ink mb-3">{product.name}</h2>
+                <p class="text-body text-ink-soft">{product.description}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
   </section>
 </BaseLayout>
