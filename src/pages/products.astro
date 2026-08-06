@@ -26,31 +26,36 @@ import { productCategories } from '@/data/site';
         return (
           <a
             href={product.href}
-            class="group grid min-h-[100svh] lg:h-svh lg:grid-cols-2 overflow-hidden border-b border-ink-hairline last:border-b-0"
+            class:list={[
+              'group grid min-h-[100svh] border-b border-ink-hairline last:border-b-0 bg-surface-2',
+              imageLeft ? 'lg:grid-cols-[1.45fr_1fr]' : 'lg:grid-cols-[1fr_1.45fr]',
+            ]}
           >
+            {/* Image — full reveal; wider column so it can use text-side space */}
             <div
               class:list={[
-                'relative min-h-[42svh] lg:min-h-0 lg:h-full p-3 sm:p-4 lg:p-5',
+                'flex items-center justify-center p-3 sm:p-4 lg:p-5 min-h-[40svh] lg:min-h-[100svh]',
                 imageLeft ? 'order-1' : 'order-1 lg:order-2',
               ]}
             >
-              <div class="relative h-full min-h-[36svh] lg:min-h-0 overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
+              <div class="w-full h-full flex items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
                 <img
                   src={product.image}
                   alt={product.name}
-                  class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
+                  class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
               </div>
             </div>
 
+            {/* Text — always fully visible; row grows if needed */}
             <div
               class:list={[
-                'flex min-h-0 flex-col justify-center bg-surface-2 px-6 py-8 sm:px-10 lg:px-[clamp(2.5rem,5vw,5rem)] lg:py-12 overflow-hidden',
+                'flex flex-col justify-center px-6 py-8 sm:px-10 lg:px-[clamp(1.75rem,3.5vw,3.5rem)] lg:py-12',
                 imageLeft ? 'order-2' : 'order-2 lg:order-1',
               ]}
             >
-              <div class="product-split__copy max-w-xl w-full max-h-full overflow-y-auto overscroll-contain pr-1">
+              <div class="product-split__copy w-full">
                 <h2 class="product-split__title text-ink mb-3 sm:mb-4">{product.name}</h2>
                 <p class="product-split__desc text-ink-soft leading-relaxed">{product.description}</p>
                 <span class="mt-5 sm:mt-6 inline-flex items-center gap-2 text-base font-semibold text-brand-900 group-hover:gap-3 transition-all">
@@ -79,11 +84,5 @@ import { productCategories } from '@/data/site';
   .product-split__desc {
     font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
     line-height: 1.7;
-  }
-
-  @media (min-width: 1024px) {
-    .product-split__copy {
-      max-height: calc(100svh - 6rem);
-    }
   }
 </style>
