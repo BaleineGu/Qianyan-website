@@ -31,7 +31,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 ---
 
 <section
-  class="py-[calc(theme(spacing.section-sm)*0.92)] lg:py-[calc(theme(spacing.section-md)*0.92)] bg-surface-3"
+  class="py-[calc(theme(spacing.section-sm)*0.828)] lg:py-[calc(theme(spacing.section-md)*0.828)] bg-surface-3"
   data-header-theme="light"
   aria-label="Double-wing container house folding process"
 >
@@ -128,15 +128,15 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
     width: 100%;
   }
 
-  /* Height shortened ~15% total (prior 7% + extra 8% top/bottom) */
+  /* Height shortened further (~23% total vs natural frames) */
   .folding-slide__frame {
-    aspect-ratio: 16 / (9 * 0.8556);
+    aspect-ratio: 16 / (9 * 0.77004);
     opacity: 0.55;
   }
 
   @media (min-width: 640px) {
     .folding-slide__frame {
-      aspect-ratio: 2 / (1 * 0.8556);
+      aspect-ratio: 2 / (1 * 0.77004);
     }
   }
 
