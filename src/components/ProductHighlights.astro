@@ -90,7 +90,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
             <button
               type="button"
               class:list={[
-                'folding-dot text-[15px] sm:text-base font-medium transition-colors tabular-nums',
+                'folding-dot text-[18px] sm:text-[19px] font-medium transition-colors tabular-nums',
                 index === 0 ? 'is-active text-ink' : 'text-ink-faint',
               ]}
               data-index={index}
@@ -104,7 +104,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
       <p
         id="folding-caption"
-        class="mt-2 mb-0 text-center text-[clamp(0.9375rem,1.2vw,1.125rem)] font-medium text-ink tracking-tight"
+        class="mt-2 mb-0 text-center text-[clamp(1.125rem,1.4vw,1.3125rem)] font-medium text-ink tracking-tight"
         aria-live="polite"
       >
         {slides[0].caption}
