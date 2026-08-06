@@ -30,28 +30,30 @@ import { productCategories } from '@/data/site';
           >
             <div
               class:list={[
-                'relative min-h-[42svh] lg:min-h-0 lg:h-full overflow-hidden bg-surface-3',
+                'relative min-h-[42svh] lg:min-h-0 lg:h-full p-3 sm:p-4 lg:p-5',
                 imageLeft ? 'order-1' : 'order-1 lg:order-2',
               ]}
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
+              <div class="relative h-full min-h-[36svh] lg:min-h-0 overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
             </div>
 
             <div
               class:list={[
-                'flex flex-col justify-center bg-surface-2 px-6 py-10 sm:px-10 lg:px-[clamp(2.5rem,5vw,5rem)] lg:py-16',
+                'flex min-h-0 flex-col justify-center bg-surface-2 px-6 py-8 sm:px-10 lg:px-[clamp(2.5rem,5vw,5rem)] lg:py-12 overflow-hidden',
                 imageLeft ? 'order-2' : 'order-2 lg:order-1',
               ]}
             >
-              <div class="max-w-xl">
-                <h2 class="heading-h3 text-ink mb-4 sm:mb-5">{product.name}</h2>
-                <p class="text-body text-ink-soft leading-relaxed">{product.description}</p>
-                <span class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-900 group-hover:gap-3 transition-all">
+              <div class="product-split__copy max-w-xl w-full max-h-full overflow-y-auto overscroll-contain pr-1">
+                <h2 class="product-split__title text-ink mb-3 sm:mb-4">{product.name}</h2>
+                <p class="product-split__desc text-ink-soft leading-relaxed">{product.description}</p>
+                <span class="mt-5 sm:mt-6 inline-flex items-center gap-2 text-base font-semibold text-brand-900 group-hover:gap-3 transition-all">
                   View product
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -65,3 +67,23 @@ import { productCategories } from '@/data/site';
     }
   </section>
 </BaseLayout>
+
+<style>
+  .product-split__title {
+    font-size: clamp(1.75rem, 2.6vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  .product-split__desc {
+    font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 1024px) {
+    .product-split__copy {
+      max-height: calc(100svh - 6rem);
+    }
+  }
+</style>
