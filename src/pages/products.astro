@@ -21,68 +21,22 @@ import { productCategories } from '@/data/site';
 
   <section class="bg-surface-1" data-header-theme="light" aria-label="Product lineup">
     {
-      productCategories.map((product, index) => {
-        const imageLeft = index % 2 === 0;
-        return (
-          <a
-            href={product.href}
-            class:list={[
-              'group grid min-h-[100svh] border-b border-ink-hairline last:border-b-0 bg-surface-2',
-              imageLeft ? 'lg:grid-cols-[1.45fr_1fr]' : 'lg:grid-cols-[1fr_1.45fr]',
-            ]}
-          >
-            {/* Image — full reveal; wider column so it can use text-side space */}
-            <div
-              class:list={[
-                'flex items-center justify-center p-3 sm:p-4 lg:p-5 min-h-[40svh] lg:min-h-[100svh]',
-                imageLeft ? 'order-1' : 'order-1 lg:order-2',
-              ]}
-            >
-              <div class="w-full h-full flex items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
-              </div>
-            </div>
-
-            {/* Text — always fully visible; row grows if needed */}
-            <div
-              class:list={[
-                'flex flex-col justify-center px-6 py-8 sm:px-10 lg:px-[clamp(1.75rem,3.5vw,3.5rem)] lg:py-12',
-                imageLeft ? 'order-2' : 'order-2 lg:order-1',
-              ]}
-            >
-              <div class="product-split__copy w-full">
-                <h2 class="product-split__title text-ink mb-3 sm:mb-4">{product.name}</h2>
-                <p class="product-split__desc text-ink-soft leading-relaxed">{product.description}</p>
-                <span class="mt-5 sm:mt-6 inline-flex items-center gap-2 text-base font-semibold text-brand-900 group-hover:gap-3 transition-all">
-                  View product
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </a>
-        );
-      })
+      productCategories.map((product, index) => (
+        <a
+          href={product.href}
+          aria-label={product.name}
+          class="group block min-h-[100svh] border-b border-ink-hairline last:border-b-0 bg-surface-2 p-3 sm:p-4 lg:p-5"
+        >
+          <div class="flex h-full min-h-[calc(100svh-1.5rem)] sm:min-h-[calc(100svh-2rem)] lg:min-h-[calc(100svh-2.5rem)] items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
+            <img
+              src={product.image}
+              alt={product.name}
+              class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        </a>
+      ))
     }
   </section>
 </BaseLayout>
-
-<style>
-  .product-split__title {
-    font-size: clamp(1.75rem, 2.6vw, 2.75rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    font-weight: 600;
-  }
-
-  .product-split__desc {
-    font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
-    line-height: 1.7;
-  }
-</style>
