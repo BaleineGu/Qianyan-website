@@ -4,10 +4,6 @@ import { productCategories } from '@/data/site';
 
 const expandableSideImages = [
   {
-    src: '/images/products/expandable-gallery/interior-01.png',
-    alt: 'Expandable container home living and kitchen interior',
-  },
-  {
     src: '/images/products/expandable-gallery/interior-02.png',
     alt: 'Expandable container home dining and kitchen interior',
   },
@@ -50,16 +46,14 @@ const expandableSideImages = [
                     loading="eager"
                   />
                 </div>
-                <div class="grid grid-rows-2 gap-3 sm:gap-4 min-h-[42svh] lg:min-h-0">
+                <div class="flex min-h-[42svh] lg:min-h-0 items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline p-2">
                   {expandableSideImages.map((side) => (
-                    <div class="flex items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline p-2">
-                      <img
-                        src={side.src}
-                        alt={side.alt}
-                        class="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
-                    </div>
+                    <img
+                      src={side.src}
+                      alt={side.alt}
+                      class="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                      loading="lazy"
+                    />
                   ))}
                 </div>
               </div>
