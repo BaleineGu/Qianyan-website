@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { productCategories } from '@/data/site';
+
+const expandableSideImages = [
+  {
+    src: '/images/products/expandable-gallery/interior-01.png',
+    alt: 'Expandable container home living and kitchen interior',
+  },
+  {
+    src: '/images/products/expandable-gallery/interior-02.png',
+    alt: 'Expandable container home dining and kitchen interior',
+  },
+];
 ---
 
 <BaseLayout title="Products" description="Explore our full modular housing product lineup.">
@@ -21,22 +32,50 @@ import { productCategories } from '@/data/site';
 
   <section class="bg-surface-1" data-header-theme="light" aria-label="Product lineup">
     {
-      productCategories.map((product, index) => (
-        <a
-          href={product.href}
-          aria-label={product.name}
-          class="group block min-h-[100svh] border-b border-ink-hairline last:border-b-0 bg-surface-2 p-3 sm:p-4 lg:p-5"
-        >
-          <div class="flex h-full min-h-[calc(100svh-1.5rem)] sm:min-h-[calc(100svh-2rem)] lg:min-h-[calc(100svh-2.5rem)] items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
-            <img
-              src={product.image}
-              alt={product.name}
-              class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-              loading={index === 0 ? 'eager' : 'lazy'}
-            />
-          </div>
-        </a>
-      ))
+      productCategories.map((product, index) => {
+        const withSideGallery = product.id === 'expandable';
+        return (
+          <a
+            href={product.href}
+            aria-label={product.name}
+            class="group block min-h-[100svh] border-b border-ink-hairline last:border-b-0 bg-surface-2 p-3 sm:p-4 lg:p-5"
+          >
+            {withSideGallery ? (
+              <div class="grid h-full min-h-[calc(100svh-1.5rem)] sm:min-h-[calc(100svh-2rem)] lg:min-h-[calc(100svh-2.5rem)] grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-3 sm:gap-4">
+                <div class="flex items-center justify-start overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline min-h-[42svh] lg:min-h-0">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain object-left transition-transform duration-700 group-hover:scale-[1.02]"
+                    loading="eager"
+                  />
+                </div>
+                <div class="grid grid-rows-2 gap-3 sm:gap-4 min-h-[42svh] lg:min-h-0">
+                  {expandableSideImages.map((side) => (
+                    <div class="flex items-center justify-center overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline p-2">
+                      <img
+                        src={side.src}
+                        alt={side.alt}
+                        class="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div class="flex h-full min-h-[calc(100svh-1.5rem)] sm:min-h-[calc(100svh-2rem)] lg:min-h-[calc(100svh-2.5rem)] items-center justify-start overflow-hidden rounded-helios-md bg-surface-3 border border-ink-hairline">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  class="max-w-full max-h-[min(88svh,100%)] w-auto h-auto object-contain object-left transition-transform duration-700 group-hover:scale-[1.02]"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            )}
+          </a>
+        );
+      })
     }
   </section>
 </BaseLayout>
