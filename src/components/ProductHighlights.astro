@@ -31,12 +31,12 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 ---
 
 <section
-  class="py-[calc(theme(spacing.section-sm)*0.828)] lg:py-[calc(theme(spacing.section-md)*0.828)] bg-surface-3"
+  class="py-8 sm:py-10 lg:py-12 bg-surface-3"
   data-header-theme="light"
   aria-label="Double-wing container house folding process"
 >
   <div class="w-[85%] max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-[912px] mx-auto mb-6 sm:mb-8">
+    <div class="text-center max-w-[912px] mx-auto mb-3 sm:mb-4">
       <h2 class="section-heading text-center uppercase tracking-[0.06em]">
         Double-Wing Container House Folding Process
       </h2>
@@ -66,7 +66,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
       <button
         id="folding-prev"
         type="button"
-        class="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        class="absolute left-1 sm:left-2 top-[42%] -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
         aria-label="Previous photo"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -76,7 +76,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
       <button
         id="folding-next"
         type="button"
-        class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
+        class="absolute right-1 sm:right-2 top-[42%] -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
         aria-label="Next photo"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -84,7 +84,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
         </svg>
       </button>
 
-      <div class="mt-5 flex justify-center items-center gap-3 sm:gap-4">
+      <div class="mt-3 flex justify-center items-center gap-3 sm:gap-4">
         {
           slides.map((_, index) => (
             <button
@@ -104,7 +104,7 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
       <p
         id="folding-caption"
-        class="mt-4 text-center text-[clamp(0.9375rem,1.2vw,1.125rem)] font-medium text-ink tracking-tight"
+        class="mt-2 text-center text-[clamp(0.9375rem,1.2vw,1.125rem)] font-medium text-ink tracking-tight"
         aria-live="polite"
       >
         {slides[0].caption}
