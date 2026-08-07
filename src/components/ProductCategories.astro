@@ -218,6 +218,32 @@ const tabLabels: Record<string, string> = {
                       </div>
                     </div>
                   </div>
+                ) : c.id === 'pools' ? (
+                  <div class="w-full h-full min-h-[200px] flex flex-col gap-2 sm:gap-3">
+                    <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
+                      {c.name}
+                    </h3>
+                    <div class="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
+                      <div class="col-start-1 row-start-1 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
+                        <img
+                          src="/images/products/pools-gallery/side-01.png"
+                          alt="Orange container swimming pool"
+                          class="w-full h-full object-cover object-center"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="col-start-2 row-start-1 flex items-center px-2 sm:px-3"></div>
+                      <div class="col-start-1 row-start-2 flex items-center px-2 sm:px-3"></div>
+                      <div class="col-start-2 row-start-2 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
+                        <img
+                          src="/images/products/pools-gallery/side-02.png"
+                          alt="Black container swimming pool"
+                          class="w-full h-full object-cover object-center"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 ) : (
                   <div class="product-panel__copy-inner w-full" data-fit-copy>
                     <h3 class="product-panel__title font-medium text-ink leading-tight mb-[0.55em]">
