@@ -70,7 +70,7 @@ const tabLabels: Record<string, string> = {
           >
             <a
               href={c.href}
-              class="group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2"
+              class="product-panel__card group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2"
             >
               <div class="product-panel__media relative isolate min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-3 min-w-0">
                 <img
@@ -284,6 +284,26 @@ const tabLabels: Record<string, string> = {
     font-size: 16px;
   }
 
+  .product-panels {
+    overflow: visible;
+  }
+
+  .product-panel__card {
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+    transform: translateY(0);
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .product-panel__card:hover {
+    box-shadow:
+      0 12px 28px rgb(0 0 0 / 0.12),
+      0 4px 10px rgb(0 0 0 / 0.06);
+    transform: translateY(-6px);
+  }
+
   .product-panel__image {
     transform: scale(1);
     transform-origin: center center;
@@ -296,8 +316,13 @@ const tabLabels: Record<string, string> = {
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .product-panel__card,
     .product-panel__image {
       transition: none;
+    }
+
+    .product-panel__card:hover {
+      transform: none;
     }
 
     .product-panel__media:hover .product-panel__image {
