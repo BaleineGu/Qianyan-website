@@ -26,8 +26,6 @@ const slides = [
     caption: 'Fully Expanded & Ready',
   },
 ];
-
-const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
 ---
 
 <section
@@ -42,188 +40,133 @@ const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
       </h2>
     </div>
 
-    <div id="folding-carousel" class="folding-carousel relative">
-      <div class="folding-viewport relative overflow-hidden">
-        <div id="folding-track" class="folding-track flex items-center will-change-transform">
-          {
-            trackSlides.map((slide, index) => (
-              <div class="folding-slide shrink-0" data-track-index={index}>
-                <div class="folding-slide__frame overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline">
-                  <img
-                    src={slide.image}
-                    alt={slide.alt}
-                    class="w-full h-full object-cover object-center"
-                    loading={index <= 1 ? 'eager' : 'lazy'}
-                    draggable="false"
-                  />
-                </div>
-              </div>
-            ))
-          }
-        </div>
-
-        <button
-          id="folding-prev"
-          type="button"
-          class="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
-          aria-label="Previous photo"
-        >
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </button>
-        <button
-          id="folding-next"
-          type="button"
-          class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-dark/85 text-ink-on-dark backdrop-blur-sm flex items-center justify-center hover:bg-surface-dark transition-colors"
-          aria-label="Next photo"
-        >
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
-      </div>
-
-      <div class="mt-3 flex justify-center items-center gap-3 sm:gap-4">
+    <div
+      id="folding-gallery"
+      class="folding-gallery grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(220px,280px)] gap-4 sm:gap-5 lg:gap-6 items-stretch"
+    >
+      <div class="folding-gallery__media min-w-0 overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2">
         {
-          slides.map((_, index) => (
-            <button
-              type="button"
+          slides.map((slide, index) => (
+            <img
+              src={slide.image}
+              alt={slide.alt}
               class:list={[
-                'folding-dot text-[18px] sm:text-[19px] font-medium transition-colors tabular-nums',
-                index === 0 ? 'is-active text-ink' : 'text-ink-faint',
+                'folding-gallery__image w-full h-full object-cover object-center',
+                index === 0 ? 'is-active' : 'hidden',
               ]}
-              data-index={index}
-              aria-label={`Go to photo ${index + 1}`}
-            >
-              {index + 1}.
-            </button>
+              data-folding-image={index}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              draggable="false"
+            />
           ))
         }
       </div>
 
-      <p
-        id="folding-caption"
-        class="mt-2 mb-0 text-center text-[clamp(1.125rem,1.4vw,1.3125rem)] font-medium text-ink tracking-tight"
-        aria-live="polite"
+      <nav
+        class="folding-gallery__nav flex flex-row lg:flex-col gap-2 sm:gap-2.5 overflow-x-auto lg:overflow-visible bg-surface-1 rounded-helios-md border border-ink-hairline p-3 sm:p-4"
+        aria-label="Folding process steps"
       >
-        {slides[0].caption}
-      </p>
+        {
+          slides.map((slide, index) => (
+            <button
+              type="button"
+              class:list={[
+                'folding-gallery__item group flex items-center gap-2.5 sm:gap-3 w-full text-left shrink-0 lg:shrink',
+                index === 0 && 'is-active',
+              ]}
+              data-folding-tab={index}
+              aria-pressed={index === 0 ? 'true' : 'false'}
+              aria-label={`Show step ${index + 1}: ${slide.caption}`}
+            >
+              <span class="folding-gallery__num shrink-0 inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-sm bg-surface-3 text-[13px] sm:text-sm font-medium text-ink tabular-nums">
+                {index + 1}.
+              </span>
+              <span class="folding-gallery__label text-[13px] sm:text-[15px] leading-snug text-ink-soft whitespace-nowrap lg:whitespace-normal">
+                {slide.caption}
+              </span>
+            </button>
+          ))
+        }
+      </nav>
     </div>
   </div>
 </section>
 
 <style>
-  .folding-viewport {
-    /* Side peek of adjacent slides */
-    padding-inline: 8%;
+  .folding-gallery__media {
+    aspect-ratio: 16 / 10;
+    position: relative;
   }
 
-  .folding-track {
-    gap: 0.85rem;
-    transition: none;
-  }
-
-  .folding-slide {
-    width: 100%;
-  }
-
-  /* Height shortened further (~23% total vs natural frames) */
-  .folding-slide__frame {
-    aspect-ratio: 16 / (9 * 0.77004);
-    opacity: 0.55;
-  }
-
-  @media (min-width: 640px) {
-    .folding-slide__frame {
-      aspect-ratio: 2 / (1 * 0.77004);
+  @media (min-width: 1024px) {
+    .folding-gallery__media {
+      aspect-ratio: auto;
+      min-height: 360px;
     }
   }
 
-  .folding-slide.is-active .folding-slide__frame {
-    opacity: 1;
+  .folding-gallery__image {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .folding-gallery__image.is-active {
+    display: block;
+  }
+
+  .folding-gallery__item {
+    padding: 0.55rem 0.65rem;
+    border: 1px dashed transparent;
+    border-radius: 4px;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .folding-gallery__item:hover .folding-gallery__label {
+    color: rgb(22 21 20);
+  }
+
+  .folding-gallery__item.is-active {
+    border-color: rgb(22 21 20 / 0.85);
+    background: rgb(255 255 255);
+  }
+
+  .folding-gallery__item.is-active .folding-gallery__label {
+    color: rgb(22 21 20);
+    font-weight: 500;
+  }
+
+  .folding-gallery__item.is-active .folding-gallery__num {
+    background: rgb(22 21 20);
+    color: rgb(255 255 255);
   }
 </style>
 
-<script define:vars={{ totalSlides: slides.length, captions: slides.map((s) => s.caption) }}>
-  const track = document.getElementById('folding-track');
-  const slideEls = Array.from(document.querySelectorAll('.folding-slide'));
-  const dots = Array.from(document.querySelectorAll('.folding-dot'));
-  const captionEl = document.getElementById('folding-caption');
-  let index = 1;
+<script>
+  const tabs = Array.from(document.querySelectorAll('[data-folding-tab]'));
+  const images = Array.from(document.querySelectorAll('[data-folding-image]'));
 
-  function gapPx() {
-    if (!track) return 14;
-    const styles = getComputedStyle(track);
-    return Number.parseFloat(styles.columnGap || styles.gap) || 14;
-  }
+  function activate(index) {
+    tabs.forEach((tab) => {
+      const active = Number(tab.getAttribute('data-folding-tab')) === index;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
 
-  function step() {
-    if (!slideEls[0]) return 0;
-    return slideEls[0].getBoundingClientRect().width + gapPx();
-  }
-
-  function realIndex() {
-    if (index === 0) return totalSlides - 1;
-    if (index === totalSlides + 1) return 0;
-    return index - 1;
-  }
-
-  function updateDots() {
-    const real = realIndex();
-    dots.forEach((dot, i) => {
-      const active = i === real;
-      dot.classList.toggle('is-active', active);
-      dot.classList.toggle('text-ink', active);
-      dot.classList.toggle('text-ink-faint', !active);
+    images.forEach((image) => {
+      const active = Number(image.getAttribute('data-folding-image')) === index;
+      image.classList.toggle('is-active', active);
+      image.classList.toggle('hidden', !active);
     });
   }
 
-  function updateCaption() {
-    if (!captionEl) return;
-    captionEl.textContent = captions[realIndex()] ?? '';
-  }
-
-  function updateActive() {
-    slideEls.forEach((el, i) => {
-      el.classList.toggle('is-active', i === index);
-    });
-  }
-
-  function setTransform() {
-    if (!track) return;
-    track.style.transition = 'none';
-    track.style.transform = `translate3d(${-index * step()}px, 0, 0)`;
-  }
-
-  function goTo(nextIndex) {
-    if (!track) return;
-    index = nextIndex;
-
-    if (index === 0) index = totalSlides;
-    else if (index === totalSlides + 1) index = 1;
-
-    updateActive();
-    updateDots();
-    updateCaption();
-    setTransform();
-  }
-
-  document.getElementById('folding-prev')?.addEventListener('click', () => goTo(index - 1));
-  document.getElementById('folding-next')?.addEventListener('click', () => goTo(index + 1));
-
-  dots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      const targetReal = Number(dot.dataset.index);
-      if (targetReal === realIndex()) return;
-      goTo(targetReal + 1);
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const index = Number(tab.getAttribute('data-folding-tab'));
+      if (Number.isNaN(index)) return;
+      activate(index);
     });
   });
-
-  window.addEventListener('resize', () => setTransform());
-
-  updateActive();
-  updateDots();
-  updateCaption();
-  setTransform();
 </script>
