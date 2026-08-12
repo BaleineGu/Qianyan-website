@@ -29,7 +29,7 @@ const slides = [
 ---
 
 <section
-  class="folding-section min-h-[80svh] h-[80svh] flex flex-col bg-surface-3"
+  class="folding-section min-h-[88svh] h-[88svh] flex flex-col bg-surface-3"
   data-header-theme="light"
   aria-label="Double-wing container house folding process"
 >
@@ -42,7 +42,7 @@ const slides = [
 
     <div
       id="folding-gallery"
-      class="folding-gallery flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(240px,300px)] gap-4 sm:gap-5 lg:gap-6 items-stretch"
+      class="folding-gallery flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(264px,330px)] gap-4 sm:gap-5 lg:gap-6 items-stretch"
     >
       <div class="folding-gallery__media min-w-0 min-h-[240px] overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2">
         {
@@ -95,19 +95,16 @@ const slides = [
 <style>
   .folding-gallery__media {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-    padding: clamp(1rem, 3vw, 2rem);
+    overflow: hidden;
   }
 
   .folding-gallery__image {
+    position: absolute;
+    inset: 0;
     display: none;
-    max-width: 85%;
-    max-height: 85%;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     object-position: center;
   }
