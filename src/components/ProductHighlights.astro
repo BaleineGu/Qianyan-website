@@ -59,7 +59,7 @@ const slides = [
         }
 
         <nav
-          class="folding-gallery__nav flex flex-row lg:flex-col lg:justify-between gap-2 sm:gap-3 overflow-x-auto lg:overflow-visible bg-surface-1 border border-ink-hairline p-3 sm:p-4 lg:p-5"
+          class="folding-gallery__nav flex flex-row lg:flex-col lg:justify-between gap-2 sm:gap-3 overflow-x-auto lg:overflow-visible p-3 sm:p-4 lg:p-5"
           aria-label="Folding process steps"
         >
           {
@@ -74,7 +74,7 @@ const slides = [
                 aria-pressed={index === 0 ? 'true' : 'false'}
                 aria-label={`Show step ${index + 1}: ${slide.caption}`}
               >
-                <span class="folding-gallery__num shrink-0 inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-sm bg-surface-3 text-[13px] sm:text-sm font-medium text-ink tabular-nums">
+                <span class="folding-gallery__num shrink-0 inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-sm bg-white/50 text-[13px] sm:text-sm font-medium text-ink tabular-nums">
                   {index + 1}.
                 </span>
                 <span class="folding-gallery__label text-[13px] sm:text-[15px] leading-snug text-ink-soft whitespace-nowrap lg:whitespace-normal">
@@ -117,7 +117,10 @@ const slides = [
     right: 0.75rem;
     bottom: 0.75rem;
     max-width: 100%;
-    border-radius: 12px;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(22, 21, 20, 0.1);
+    backdrop-filter: blur(12px);
   }
 
   @media (min-width: 1024px) {
@@ -132,12 +135,20 @@ const slides = [
   }
 
   .folding-gallery__item {
-    padding: 0.7rem 0.75rem;
-    border: 1px dashed transparent;
-    border-radius: 4px;
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    border-radius: 32px;
+    background-color: rgba(225, 220, 210, 0.64);
+    backdrop-filter: blur(8px);
     transition:
+      background-color 0.2s ease,
       border-color 0.2s ease,
-      background-color 0.2s ease;
+      opacity 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .folding-gallery__item:hover {
+    background-color: rgba(255, 255, 255, 0.72);
   }
 
   .folding-gallery__item:hover .folding-gallery__label {
@@ -145,8 +156,9 @@ const slides = [
   }
 
   .folding-gallery__item.is-active {
-    border-color: rgb(22 21 20 / 0.85);
-    background: rgb(255 255 255);
+    border-color: rgba(22, 21, 20, 0.28);
+    background-color: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
   }
 
   .folding-gallery__item.is-active .folding-gallery__label {
