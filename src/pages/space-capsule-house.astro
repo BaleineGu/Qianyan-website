@@ -2,6 +2,19 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
 import { capsuleBanner, capsuleModels, capsuleRoi } from '@/data/site';
+
+type RoiCell =
+  | { type: 'text'; item: (typeof capsuleRoi)[number] }
+  | { type: 'image'; index: number };
+
+const roiCells: RoiCell[] = [
+  { type: 'text', item: capsuleRoi[0] },
+  { type: 'image', index: 1 },
+  { type: 'text', item: capsuleRoi[1] },
+  { type: 'image', index: 2 },
+  { type: 'text', item: capsuleRoi[2] },
+  { type: 'image', index: 3 },
+];
 ---
 <BaseLayout title="Space Capsule House" description={capsuleBanner.description}>
   <PageBanner
@@ -9,19 +22,39 @@ import { capsuleBanner, capsuleModels, capsuleRoi } from '@/data/site';
     description={capsuleBanner.description}
     image="/images/hero/capsule-banner.png"
   />
-  <section class="py-16">
+
+  <section class="py-16 bg-surface-1" data-header-theme="light">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">B2B Investment & ROI Factors</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        {capsuleRoi.map((item) => (
-          <div class="border-t-2 border-brand-500 pt-6">
-            <h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3>
-            <p class="text-gray-600">{item.description}</p>
-          </div>
-        ))}
+      <div class="capsule-roi-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-ink-hairline overflow-hidden rounded-helios-md">
+        {
+          roiCells.map((cell) =>
+            cell.type === 'text' ? (
+              <div class="capsule-roi-cell capsule-roi-cell--text relative flex flex-col items-center justify-center text-center px-6 py-10 sm:py-12 min-h-[220px] sm:min-h-[260px] bg-surface-1">
+                <span class="capsule-roi-accent" aria-hidden="true" />
+                <p class="text-[11px] sm:text-xs tracking-[0.18em] uppercase text-ink-faint mb-3">
+                  Product Category
+                </p>
+                <h3 class="text-xl sm:text-2xl font-bold text-[#9a6b3f] mb-2 leading-tight">
+                  {cell.item.title}
+                </h3>
+                <p class="text-sm sm:text-base text-ink-soft max-w-[18rem] leading-relaxed">
+                  {cell.item.description}
+                </p>
+              </div>
+            ) : (
+              <div
+                class="capsule-roi-cell capsule-roi-cell--image relative min-h-[220px] sm:min-h-[260px] bg-surface-3"
+                data-image-slot={`capsule-roi-${cell.index}`}
+                aria-label={`Image placeholder ${cell.index}`}
+              />
+            )
+          )
+        }
       </div>
     </div>
   </section>
+
   <section class="py-16 bg-gray-50">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Product Specification Tiers</h2>
@@ -36,3 +69,39 @@ import { capsuleBanner, capsuleModels, capsuleRoi } from '@/data/site';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .capsule-roi-grid > .capsule-roi-cell {
+    border-bottom: 1px solid rgba(22, 21, 20, 0.12);
+  }
+
+  @media (min-width: 640px) {
+    .capsule-roi-grid > .capsule-roi-cell:nth-child(odd) {
+      border-right: 1px solid rgba(22, 21, 20, 0.12);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .capsule-roi-grid > .capsule-roi-cell {
+      border-right: 1px solid rgba(22, 21, 20, 0.12);
+    }
+
+    .capsule-roi-grid > .capsule-roi-cell:nth-child(3n) {
+      border-right: none;
+    }
+
+    .capsule-roi-grid > .capsule-roi-cell:nth-child(n + 4) {
+      border-bottom: none;
+    }
+  }
+
+  .capsule-roi-accent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 2.25rem;
+    transform: translateX(-50%);
+    background: #c45c4a;
+  }
+</style>
