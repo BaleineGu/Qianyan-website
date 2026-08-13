@@ -372,7 +372,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-c3.png',
     floorPlan: '/images/products/capsule-specs/floorplan-c3.png',
     configuration:
-      'Zinc-aluminum alloy exterior; fiberboard interior; 5+9+5 tempered glass; mechanical toilet; hand shower; manual windows and curtains.',
+      'Zinc-magnesium alloy exterior walls; flat interior ceiling; FRP outer roof; metal carved-plate outer base; 50 aluminum alloy; 5+9+5 glass; XPS insulation; wood veneer interior panels; mechanical toilet; hand shower; instant water heater; manual economy curtains.',
   },
   {
     model: 'T3',
@@ -383,7 +383,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-t3.png',
     floorPlan: '/images/products/capsule-specs/floorplan-t3.png',
     configuration:
-      'Aluminum panels; wood-fiber interior; 5+9+5 tempered glass; Midea 1.5P AC; Midea 40L water heater; mechanical toilet; hand shower; manual windows and curtains.',
+      'Aluminum exterior walls; flat interior ceiling; FRP outer roof; metal carved-plate outer base; 50 aluminum alloy; 5+9+5 glass; XPS insulation; bamboo-wood fiberboard interior; mechanical toilet; hand shower; 1.5P Midea AC; 60L Midea water heater; manual economy curtains.',
   },
   {
     model: 'T5',
@@ -394,7 +394,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-t5.png',
     floorPlan: '/images/products/capsule-specs/floorplan-t5.png',
     configuration:
-      'Aluminum panels; wood-fiber interior; 5+9+5 tempered glass; Midea 1.5P AC; Midea 40L water heater; mechanical toilet; hand shower; manual windows and curtains.',
+      'Aluminum exterior walls; flat interior ceiling; FRP outer roof; metal carved-plate outer base; 50 aluminum alloy; 5+9+5 glass; XPS insulation; bamboo-wood fiberboard interior; mechanical toilet; hand shower; 1.5P Midea AC; 60L Midea water heater; manual economy curtains.',
   },
   {
     model: 'T9',
@@ -405,7 +405,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-t9.png',
     floorPlan: '/images/products/capsule-specs/floorplan-t9.png',
     configuration:
-      'Aluminum panels; wood-fiber interior; 5+9+5 tempered glass; Midea 1.5P AC; Midea 40L water heater; mechanical toilet; hand shower; manual windows and curtains.',
+      'Aluminum exterior walls; flat interior ceiling; FRP outer roof; metal carved-plate outer base; 50 aluminum alloy; 5+9+5 glass; XPS insulation; bamboo-wood fiberboard interior; mechanical toilet; hand shower; 1.5P Midea AC; 60L Midea water heater; manual economy curtains.',
   },
   {
     model: 'X3',
@@ -416,7 +416,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-x3.png',
     floorPlan: '/images/products/capsule-specs/floorplan-x3.png',
     configuration:
-      'New exterior with curved glass; layered ceiling; 6+12+6 glass; Haier 1.5P AC; Haier 40L water heater; smart toilet; multi-function shower; projector included.',
+      'New exterior and coating; full aluminum panels; layered ceiling; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; projector; wood veneer or aluminum interior.',
   },
   {
     model: 'X5',
@@ -427,7 +427,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-x5.png',
     floorPlan: '/images/products/capsule-specs/floorplan-x5.png',
     configuration:
-      'New exterior with curved glass; layered ceiling; 6+12+6 glass; Haier 1.5P AC; Haier 40L water heater; smart toilet; multi-function shower; projector included.',
+      'New exterior and coating; full aluminum panels; layered ceiling; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; projector; wood veneer or aluminum interior.',
   },
   {
     model: 'X9',
@@ -438,7 +438,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-x9.png',
     floorPlan: '/images/products/capsule-specs/floorplan-x9.png',
     configuration:
-      'New exterior with curved glass; layered ceiling; 6+12+6 glass; Haier 1.5P AC; Haier 40L water heater; smart toilet; multi-function shower; projector included.',
+      'New exterior and coating; full aluminum panels; layered ceiling; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; projector; wood veneer or aluminum interior.',
   },
   {
     model: 'D9',
@@ -449,7 +449,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-d9.png',
     floorPlan: '/images/products/capsule-specs/floorplan-d9.png',
     configuration:
-      'White rectangular exterior; 2× Haier 1.5P AC; Haier 60L water heater; smart toilet; multi-function shower; projector included.',
+      'New exterior and coating; full aluminum panels; layered ceiling; 2× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; projector; wood veneer interior.',
   },
   {
     model: 'A1',
@@ -460,7 +460,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-a1.png',
     floorPlan: '/images/products/capsule-specs/floorplan-a1.png',
     configuration:
-      'Compact detachable-board type; wood interior finish; Haier AC; Haier water heater; smart bathroom fixtures.',
+      'Cabinet-ready capsule type; full aluminum panels; flat roof; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; wood veneer interior.',
   },
   {
     model: 'A3',
@@ -471,7 +471,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-a3.png',
     floorPlan: '/images/products/capsule-specs/floorplan-a3.png',
     configuration:
-      'Rounded minimalist design; flat roof; Haier 1.5P AC; Haier water heater; wood interior finish; smart bathroom fixtures.',
+      'New styling; full aluminum panels; flat roof; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; wood veneer interior.',
   },
   {
     model: 'A5',
@@ -482,7 +482,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-a5.png',
     floorPlan: '/images/products/capsule-specs/floorplan-a5.png',
     configuration:
-      'Rounded minimalist design; flat roof; Haier 1.5P AC; Haier water heater; wood interior finish; smart bathroom fixtures.',
+      'New styling; full aluminum panels; flat roof; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; wood veneer interior.',
   },
   {
     model: 'A9',
@@ -493,7 +493,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-a9.png',
     floorPlan: '/images/products/capsule-specs/floorplan-a9.png',
     configuration:
-      'Rounded minimalist design; flat roof; Haier 1.5P AC; Haier water heater; wood interior finish; smart bathroom fixtures.',
+      'New styling; full aluminum panels; flat roof; 1× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; wood veneer interior.',
   },
   {
     model: 'S6',
@@ -504,7 +504,7 @@ export const capsuleModels = [
     appearance: '/images/products/capsule-specs/appearance-s6.png',
     floorPlan: '/images/products/capsule-specs/floorplan-s6.png',
     configuration:
-      'A-frame / triangular design with upper and lower floors; 2× Haier 1.5P AC; Haier 60L water heater; smart bathroom fixtures.',
+      'Full aluminum panels; spiral staircase; XPS insulation; 2× Haier 1.5P AC; 60L Haier water heater; 6+12+6 glass; 55 aluminum alloy; smart toilet; multi-function shower; wood veneer interior.',
   },
 ];
 
