@@ -76,16 +76,48 @@ const roiCards = capsuleRoi.map((item, index) => {
     </div>
   </section>
 
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50" data-header-theme="light">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Product Specification Tiers</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        {capsuleModels.map((m) => (
-          <article class="bg-white border border-gray-200 p-8">
-            <h3 class="text-xl font-bold text-brand-900 mb-3">{m.name}</h3>
-            <p class="text-gray-600">{m.description}</p>
-          </article>
-        ))}
+      <div class="capsule-spec-wrap overflow-x-auto rounded-helios-md border border-ink-hairline bg-white">
+        <table class="capsule-spec-table w-full min-w-[960px] border-collapse text-sm text-ink">
+          <thead>
+            <tr class="bg-surface-3 text-left">
+              <th scope="col">Model</th>
+              <th scope="col">Appearance</th>
+              <th scope="col">Floor Plan</th>
+              <th scope="col">Product Dimensions</th>
+              <th scope="col">Configuration</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              capsuleModels.map((m) => (
+                <tr>
+                  <td class="capsule-spec-table__model text-center font-semibold">{m.model}</td>
+                  <td class="capsule-spec-table__media">
+                    {m.appearance ? (
+                      <img src={m.appearance} alt={`${m.model} appearance`} class="mx-auto max-h-36 w-auto object-contain" loading="lazy" />
+                    ) : (
+                      <div class="capsule-spec-placeholder" aria-label={`${m.model} appearance placeholder`} />
+                    )}
+                  </td>
+                  <td class="capsule-spec-table__media">
+                    {m.floorPlan ? (
+                      <img src={m.floorPlan} alt={`${m.model} floor plan`} class="mx-auto max-h-36 w-auto object-contain" loading="lazy" />
+                    ) : (
+                      <div class="capsule-spec-placeholder" aria-label={`${m.model} floor plan placeholder`} />
+                    )}
+                  </td>
+                  <td class="capsule-spec-table__dims whitespace-pre-line">
+                    {`Length: ${m.length}\nWidth: ${m.width}\nHeight: ${m.height}\nArea: ${m.area}`}
+                  </td>
+                  <td class="capsule-spec-table__config text-ink-soft leading-relaxed">{m.configuration}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -121,5 +153,38 @@ const roiCards = capsuleRoi.map((item, index) => {
     height: 2.25rem;
     transform: translateX(-50%);
     background: #c45c4a;
+  }
+
+  .capsule-spec-table th,
+  .capsule-spec-table td {
+    border: 1px solid rgba(22, 21, 20, 0.16);
+    padding: 0.75rem 0.85rem;
+    vertical-align: middle;
+  }
+
+  .capsule-spec-table th {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .capsule-spec-table__model {
+    width: 4.5rem;
+  }
+
+  .capsule-spec-table__media {
+    width: 12rem;
+    text-align: center;
+  }
+
+  .capsule-spec-table__dims {
+    width: 9.5rem;
+    white-space: pre-line;
+  }
+
+  .capsule-spec-placeholder {
+    width: 100%;
+    min-height: 5.5rem;
+    border-radius: 6px;
+    background: rgba(22, 21, 20, 0.04);
   }
 </style>
