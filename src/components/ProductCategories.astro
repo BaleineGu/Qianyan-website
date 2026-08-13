@@ -15,6 +15,14 @@ const tabLabels: Record<string, string> = {
   folding: 'Folding Houses',
   pools: 'Swimming Pools',
 };
+
+const tabIcons: Record<string, string> = {
+  expandable: '/images/products/tab-icons/expandable.png',
+  capsule: '/images/products/tab-icons/capsule.png',
+  'flat-pack': '/images/products/tab-icons/flat-pack.png',
+  folding: '/images/products/tab-icons/folding.png',
+  pools: '/images/products/tab-icons/pools.png',
+};
 ---
 
 <section
@@ -41,7 +49,7 @@ const tabLabels: Record<string, string> = {
             role="tab"
             id={`product-tab-${c.id}`}
             class:list={[
-              'product-tab w-full px-2 sm:px-3 py-2.5 sm:py-3 lg:py-3.5 rounded-helios-sm text-[clamp(0.8125rem,1.35vw,1.125rem)] font-medium transition-colors text-center leading-tight',
+              'product-tab w-full px-2 sm:px-3 py-2.5 sm:py-3 lg:py-3.5 rounded-helios-sm text-[clamp(0.8125rem,1.35vw,1.125rem)] font-medium transition-colors text-center leading-tight flex flex-col items-center justify-center gap-1.5 sm:gap-2',
               index === 0
                 ? 'bg-surface-dark text-ink-on-dark is-active'
                 : 'bg-surface-2 text-ink border border-ink-hairline hover:border-ink-faint',
@@ -51,7 +59,15 @@ const tabLabels: Record<string, string> = {
             data-product-tab={c.id}
             tabindex={index === 0 ? 0 : -1}
           >
-            {tabLabels[c.id] ?? c.name}
+            {tabIcons[c.id] && (
+              <img
+                src={tabIcons[c.id]}
+                alt=""
+                class="product-tab__icon w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                aria-hidden="true"
+              />
+            )}
+            <span>{tabLabels[c.id] ?? c.name}</span>
           </button>
         ))
       }
@@ -272,6 +288,15 @@ const tabLabels: Record<string, string> = {
 </section>
 
 <style>
+  .product-tab__icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .product-tab.is-active .product-tab__icon {
+    filter: invert(1);
+  }
+
   .product-panel__title {
     font-size: 1.45em;
   }
