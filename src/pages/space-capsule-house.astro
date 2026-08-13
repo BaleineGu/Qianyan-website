@@ -62,7 +62,7 @@ const roiCards = capsuleRoi.map((item, index) => {
                   <img
                     src={card.image}
                     alt={card.imageAlt}
-                    class="block w-full h-auto object-contain object-center"
+                    class="capsule-roi-media__img"
                     loading="lazy"
                   />
                 ) : (
@@ -191,6 +191,19 @@ const roiCards = capsuleRoi.map((item, index) => {
     height: 2.25rem;
     transform: translateX(-50%);
     background: #c45c4a;
+  }
+
+  /* Match media height to the rightmost diagram (1536×1024) */
+  .capsule-roi-media {
+    aspect-ratio: 1536 / 1024;
+  }
+
+  .capsule-roi-media__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .capsule-spec-table th,
