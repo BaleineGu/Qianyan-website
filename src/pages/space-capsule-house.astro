@@ -4,7 +4,11 @@ import PageBanner from '@/components/PageBanner.astro';
 import { capsuleBanner, capsuleModels, capsuleRoi } from '@/data/site';
 ---
 <BaseLayout title="Space Capsule House" description={capsuleBanner.description}>
-  <PageBanner heading={capsuleBanner.heading} description={capsuleBanner.description} />
+  <PageBanner
+    heading={capsuleBanner.heading}
+    description={capsuleBanner.description}
+    image="/images/hero/capsule-banner.png"
+  />
   <section class="py-16">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">B2B Investment & ROI Factors</h2>
