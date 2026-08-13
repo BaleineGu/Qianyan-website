@@ -38,8 +38,8 @@ const roiCards = capsuleRoi.map((item, index) => {
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">B2B Investment & ROI Factors</h2>
       <div class="capsule-roi-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-ink-hairline overflow-hidden rounded-helios-md">
         {
-          roiCards.map((card, index) => (
-            <article class="capsule-roi-card flex flex-col bg-surface-1 min-h-0">
+          roiCards.map((card, index) => {
+            const textBlock = (
               <div class="relative flex flex-col items-center justify-center text-center px-6 pt-10 pb-6 sm:pt-12 sm:pb-7">
                 <span class="capsule-roi-accent" aria-hidden="true" />
                 <p class="text-[11px] sm:text-xs tracking-[0.18em] uppercase text-ink-faint mb-3">
@@ -52,9 +52,11 @@ const roiCards = capsuleRoi.map((item, index) => {
                   {card.description}
                 </p>
               </div>
+            );
 
+            const mediaBlock = (
               <div
-                class="capsule-roi-media relative mt-auto bg-surface-3 overflow-hidden"
+                class="capsule-roi-media relative bg-surface-3 overflow-hidden"
                 data-image-slot={`capsule-roi-${index + 1}`}
                 aria-label={card.image ? card.imageAlt : `Image placeholder ${index + 1}`}
               >
@@ -69,8 +71,27 @@ const roiCards = capsuleRoi.map((item, index) => {
                   <div class="min-h-[200px] sm:min-h-[240px]" aria-hidden="true" />
                 )}
               </div>
-            </article>
-          ))
+            );
+
+            // Middle card: text above image; side cards: image above text
+            const textFirst = index === 1;
+
+            return (
+              <article class="capsule-roi-card flex flex-col bg-surface-1 min-h-0">
+                {textFirst ? (
+                  <>
+                    {textBlock}
+                    <div class="mt-auto">{mediaBlock}</div>
+                  </>
+                ) : (
+                  <>
+                    {mediaBlock}
+                    <div class="mt-auto">{textBlock}</div>
+                  </>
+                )}
+              </article>
+            );
+          })
         }
       </div>
     </div>
