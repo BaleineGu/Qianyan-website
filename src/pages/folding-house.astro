@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
 import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from '@/data/site';
 ---
-<BaseLayout title="Folding House" description={foldingBanner.description}>
+<BaseLayout title="Folding House" description={foldingBanner.description} immersiveBackground>
   <PageBanner
     heading={foldingBanner.heading}
     description={foldingBanner.description}

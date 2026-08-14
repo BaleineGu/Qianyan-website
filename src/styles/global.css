@@ -129,6 +129,9 @@
       main section.bg-surface-1,
       main section.bg-surface-2,
       main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black),
       main .product-tabs-section.bg-surface-1,
       main .layout-section.bg-surface-2,
       main .folding-section.bg-surface-3,
@@ -141,7 +144,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container,
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container,
@@ -162,7 +168,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container::before,
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container::before,
@@ -181,7 +190,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container,
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container,
@@ -215,7 +227,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container,
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container,
@@ -229,7 +244,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
     :is(
@@ -245,7 +263,8 @@
       h3,
       h4,
       h5,
-      h6
+      h6,
+      .text-brand-900
     ),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .section-heading,
   body.has-immersive-bg main .layout-section.bg-surface-2 > .section-container .section-heading,
@@ -259,7 +278,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
     :is(.text-ink, .text-body, .text-large, .text-body-lg, .label-small),
@@ -274,10 +296,13 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
-    :is(.text-ink-soft, .text-small),
+    :is(.text-ink-soft, .text-small, .text-gray-600, .text-gray-500, .text-gray-700),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .text-ink-soft,
   body.has-immersive-bg main .layout-section.bg-surface-2 > .section-container .text-ink-soft,
   body.has-immersive-bg footer.bg-surface-1 > .section-container :is(.text-ink-soft, .text-small),
@@ -288,7 +313,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
     :is(.text-ink-faint, .label-small),
@@ -299,7 +327,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
     a:not([class*='btn-']):not(.product-panel__card),
@@ -310,7 +341,10 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
     :is(
@@ -320,7 +354,11 @@
       .bg-white,
       .product-panel__card,
       article.group,
-      form.bg-surface-3
+      form.bg-surface-3,
+      .capsule-spec-wrap,
+      .capsule-roi-grid,
+      .pool-usecase-card,
+      tbody tr
     ),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card,
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab {
@@ -335,11 +373,14 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
-    :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3)
-    :is(.section-heading, h1, h2, h3, h4, h5, h6),
+    :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3, .capsule-spec-wrap, .capsule-roi-grid, .pool-usecase-card, tbody tr)
+    :is(.section-heading, h1, h2, h3, h4, h5, h6, .text-brand-900),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card :is(h2, h3),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab {
     color: inherit;
@@ -349,11 +390,14 @@
   body.has-immersive-bg :is(
       main section.bg-surface-1,
       main section.bg-surface-2,
-      main section.bg-surface-3
+      main section.bg-surface-3,
+      main section.bg-white,
+      main section.bg-gray-50,
+      main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
     )
     > .section-container
-    :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3)
-    .text-ink-soft,
+    :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3, .capsule-spec-wrap, .capsule-roi-grid, .pool-usecase-card, tbody tr)
+    :is(.text-ink-soft, .text-small, .text-gray-600, .text-gray-500, .text-gray-700),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card .text-ink-soft {
     color: var(--color-ink-soft);
   }
@@ -362,7 +406,10 @@
     body.has-immersive-bg :is(
         main section.bg-surface-1,
         main section.bg-surface-2,
-        main section.bg-surface-3
+        main section.bg-surface-3,
+        main section.bg-white,
+        main section.bg-gray-50,
+        main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
       )
       > .section-container,
     body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container,
