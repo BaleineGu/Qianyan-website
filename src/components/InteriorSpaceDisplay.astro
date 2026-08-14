@@ -1,0 +1,120 @@
+---
+interface InteriorPhoto {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  photos: InteriorPhoto[];
+}
+
+const { photos } = Astro.props;
+
+const midpoint = Math.ceil(photos.length / 2);
+const topRow = photos.slice(0, midpoint);
+const bottomRow = photos.slice(midpoint);
+---
+
+<section
+  class="py-section-sm lg:py-section-md bg-surface-2 overflow-hidden"
+  aria-labelledby="interior-space-heading"
+  data-header-theme="light"
+>
+  <div class="section-container mb-8 lg:mb-10">
+    <h2 id="interior-space-heading" class="section-heading text-center">
+      Interior space display
+    </h2>
+  </div>
+
+  <div class="interior-marquee-stack flex flex-col gap-4 sm:gap-5 lg:gap-6">
+    {
+      [
+        { row: topRow, direction: 'left' as const },
+        { row: bottomRow, direction: 'right' as const },
+      ].map(({ row, direction }) =>
+        row.length > 0 ? (
+          <div class="interior-marquee-viewport" data-direction={direction}>
+            <div class="interior-marquee-track" aria-hidden="false">
+              {
+                [...row, ...row].map((photo, index) => (
+                  <div class="interior-marquee-card">
+                    <img
+                      src={photo.src}
+                      alt={index < row.length ? photo.alt : ''}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      draggable="false"
+                    />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        ) : null,
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .interior-marquee-viewport {
+    overflow: hidden;
+    width: 100%;
+    --interior-card-w: clamp(220px, 28vw, 360px);
+    --interior-gap: clamp(0.5rem, 1.2vw, 1rem);
+    --interior-duration: 48s;
+  }
+
+  .interior-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: var(--interior-gap);
+    will-change: transform;
+  }
+
+  .interior-marquee-viewport[data-direction='left'] .interior-marquee-track {
+    animation: interior-scroll-left var(--interior-duration) linear infinite;
+  }
+
+  .interior-marquee-viewport[data-direction='right'] .interior-marquee-track {
+    animation: interior-scroll-right var(--interior-duration) linear infinite;
+  }
+
+  .interior-marquee-viewport:hover .interior-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .interior-marquee-card {
+    width: var(--interior-card-w);
+    aspect-ratio: 4 / 3;
+    flex: none;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    background: #ffffff;
+  }
+
+  @keyframes interior-scroll-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-50% - var(--interior-gap) / 2));
+    }
+  }
+
+  @keyframes interior-scroll-right {
+    from {
+      transform: translateX(calc(-50% - var(--interior-gap) / 2));
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .interior-marquee-track {
+      animation: none !important;
+    }
+  }
+</style>

@@ -178,6 +178,13 @@ export const containerLayoutSizes = [
   },
 ] as const;
 
+export const interiorSpacePhotos = containerLayoutSizes.flatMap((size) =>
+  (size.interiorPhotos ?? []).map((src, index) => ({
+    src,
+    alt: `${size.label} interior ${index + 1}`,
+  })),
+);
+
 export const trustItems: TrustItem[] = [
   {
     id: 'engineering',

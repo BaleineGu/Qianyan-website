@@ -54,56 +54,34 @@ const defaultId = sizes[0]?.id ?? '';
 
     <div class="layout-panels flex-1 min-h-0">
       {
-        sizes.map((size, index) => {
-          const photos = [
-            size.floorPlan
-              ? { src: size.floorPlan, alt: `${size.label} floor plan`, contain: true }
-              : null,
-            ...(size.interiorPhotos?.map((photo, i) => ({
-              src: photo,
-              alt: `${size.label} interior ${i + 1}`,
-              contain: false,
-            })) ?? []),
-          ].filter(Boolean) as { src: string; alt: string; contain: boolean }[];
-
-          while (photos.length < 4) {
-            photos.push({ src: '', alt: '', contain: false });
-          }
-
-          return (
-            <div
-              id={`layout-panel-${size.id}`}
-              role="tabpanel"
-              aria-labelledby={`layout-tab-${size.id}`}
-              class:list={['layout-panel h-full min-h-0', index !== 0 && 'hidden']}
-              data-layout-panel={size.id}
-              hidden={index !== 0}
-            >
-              <div class="grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3 h-full min-h-0 rounded-helios-md bg-surface-1 p-2 sm:p-3">
-                {photos.slice(0, 4).map((photo) =>
-                  photo.src ? (
-                    <div class="min-h-0 overflow-hidden bg-surface-2 rounded-helios-sm border border-ink-hairline">
-                      <img
-                        src={photo.src}
-                        alt={photo.alt}
-                        class:list={[
-                          'w-full h-full',
-                          photo.contain ? 'object-contain' : 'object-cover',
-                        ]}
-                        loading="lazy"
-                      />
-                    </div>
-                  ) : (
-                    <div
-                      class="min-h-0 bg-surface-2 border border-dashed border-ink-hairline rounded-helios-sm"
-                      aria-hidden="true"
-                    />
-                  ),
-                )}
-              </div>
+        sizes.map((size, index) => (
+          <div
+            id={`layout-panel-${size.id}`}
+            role="tabpanel"
+            aria-labelledby={`layout-tab-${size.id}`}
+            class:list={['layout-panel h-full min-h-0', index !== 0 && 'hidden']}
+            data-layout-panel={size.id}
+            hidden={index !== 0}
+          >
+            <div class="h-full min-h-0 rounded-helios-md bg-surface-1 p-2 sm:p-3">
+              {size.floorPlan ? (
+                <div class="h-full min-h-0 overflow-hidden bg-surface-2 rounded-helios-sm border border-ink-hairline">
+                  <img
+                    src={size.floorPlan}
+                    alt={`${size.label} floor plan`}
+                    class="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div
+                  class="h-full min-h-0 bg-surface-2 border border-dashed border-ink-hairline rounded-helios-sm"
+                  aria-hidden="true"
+                />
+              )}
             </div>
-          );
-        })
+          </div>
+        ))
       }
     </div>
   </div>
