@@ -26,43 +26,69 @@ const bottomRow = photos.slice(midpoint);
     </h2>
   </div>
 
-  <div class="interior-marquee-stack flex flex-col gap-4 sm:gap-5 lg:gap-6">
-    {
-      [
-        { row: topRow, direction: 'left' as const },
-        { row: bottomRow, direction: 'right' as const },
-      ].map(({ row, direction }) =>
-        row.length > 0 ? (
-          <div class="interior-marquee-viewport" data-direction={direction}>
-            <div class="interior-marquee-track" aria-hidden="false">
-              {
-                [...row, ...row].map((photo, index) => (
-                  <div class="interior-marquee-card">
-                    <img
-                      src={photo.src}
-                      alt={index < row.length ? photo.alt : ''}
-                      class="w-full h-full object-cover"
-                      loading="lazy"
-                      draggable="false"
-                    />
-                  </div>
-                ))
-              }
+  <div class="interior-carousel-shell relative section-container">
+    <button
+      type="button"
+      id="interior-prev"
+      class="interior-nav-btn interior-nav-btn--prev"
+      aria-label="Scroll interior photos left"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <div class="interior-marquee-stack flex flex-col gap-4 sm:gap-5 lg:gap-6 px-12 sm:px-14">
+      {
+        [
+          { row: topRow, trackId: 'interior-track-top' },
+          { row: bottomRow, trackId: 'interior-track-bottom' },
+        ].map(({ row, trackId }) =>
+          row.length > 0 ? (
+            <div class="interior-marquee-viewport">
+              <div id={trackId} class="interior-marquee-track">
+                {
+                  [...row, ...row].map((photo, index) => (
+                    <div class="interior-marquee-card">
+                      <img
+                        src={photo.src}
+                        alt={index < row.length ? photo.alt : ''}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        draggable="false"
+                      />
+                    </div>
+                  ))
+                }
+              </div>
             </div>
-          </div>
-        ) : null,
-      )
-    }
+          ) : null,
+        )
+      }
+    </div>
+
+    <button
+      type="button"
+      id="interior-next"
+      class="interior-nav-btn interior-nav-btn--next"
+      aria-label="Scroll interior photos right"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
   </div>
 </section>
 
 <style>
+  .interior-carousel-shell {
+    --interior-card-w: clamp(220px, 28vw, 360px);
+    --interior-gap: clamp(0.5rem, 1.2vw, 1rem);
+  }
+
   .interior-marquee-viewport {
     overflow: hidden;
     width: 100%;
-    --interior-card-w: clamp(220px, 28vw, 360px);
-    --interior-gap: clamp(0.5rem, 1.2vw, 1rem);
-    --interior-duration: 48s;
   }
 
   .interior-marquee-track {
@@ -70,18 +96,6 @@ const bottomRow = photos.slice(midpoint);
     width: max-content;
     gap: var(--interior-gap);
     will-change: transform;
-  }
-
-  .interior-marquee-viewport[data-direction='left'] .interior-marquee-track {
-    animation: interior-scroll-left var(--interior-duration) linear infinite;
-  }
-
-  .interior-marquee-viewport[data-direction='right'] .interior-marquee-track {
-    animation: interior-scroll-right var(--interior-duration) linear infinite;
-  }
-
-  .interior-marquee-viewport:hover .interior-marquee-track {
-    animation-play-state: paused;
   }
 
   .interior-marquee-card {
@@ -94,27 +108,132 @@ const bottomRow = photos.slice(midpoint);
     background: #ffffff;
   }
 
-  @keyframes interior-scroll-left {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-50% - var(--interior-gap) / 2));
-    }
+  .interior-nav-btn {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(22, 21, 20, 0.16);
+    background: #ffffff;
+    color: #161514;
+    box-shadow: 0 4px 16px rgba(22, 21, 20, 0.08);
+    transform: translateY(-50%);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
 
-  @keyframes interior-scroll-right {
-    from {
-      transform: translateX(calc(-50% - var(--interior-gap) / 2));
-    }
-    to {
-      transform: translateX(0);
-    }
+  .interior-nav-btn:hover {
+    background: #f7f6f4;
+    border-color: rgba(22, 21, 20, 0.28);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .interior-marquee-track {
-      animation: none !important;
-    }
+  .interior-nav-btn--prev {
+    left: 0;
+  }
+
+  .interior-nav-btn--next {
+    right: 0;
   }
 </style>
+
+<script>
+  const tracks = [
+    document.getElementById('interior-track-top'),
+    document.getElementById('interior-track-bottom'),
+  ].filter((track): track is HTMLElement => track instanceof HTMLElement);
+
+  if (tracks.length > 0) {
+    const states = tracks.map((track) => ({
+      track,
+      setCount: track.children.length / 2,
+      index: 0,
+    }));
+
+    const gap = (track: HTMLElement) => {
+      const style = getComputedStyle(track);
+      return parseFloat(style.columnGap || style.gap || '16') || 16;
+    };
+
+    const step = (track: HTMLElement) => {
+      const first = track.children[0] as HTMLElement | undefined;
+      return first ? first.offsetWidth + gap(track) : 300;
+    };
+
+    let animating = false;
+
+    const applyAll = (animate: boolean) => {
+      states.forEach(({ track, index }) => {
+        track.style.transition = animate ? 'transform 0.45s ease' : 'none';
+        track.style.transform = `translateX(${-index * step(track)}px)`;
+      });
+    };
+
+    const normalizeAll = () => {
+      states.forEach((state) => {
+        if (state.index >= state.setCount) {
+          state.index -= state.setCount;
+        }
+      });
+      applyAll(false);
+    };
+
+    const go = (dir: number) => {
+      if (animating) return;
+      animating = true;
+
+      if (dir < 0 && states.every((state) => state.index === 0)) {
+        states.forEach((state) => {
+          state.index = state.setCount;
+        });
+        applyAll(false);
+        void tracks[0]?.offsetWidth;
+      }
+
+      states.forEach((state) => {
+        state.index += dir;
+      });
+      applyAll(true);
+
+      window.setTimeout(() => {
+        normalizeAll();
+        animating = false;
+      }, 480);
+    };
+
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const stopAuto = () => {
+      if (timer) clearInterval(timer);
+      timer = null;
+    };
+
+    const startAuto = () => {
+      if (prefersReducedMotion) return;
+      stopAuto();
+      timer = setInterval(() => go(1), 3500);
+    };
+
+    document.getElementById('interior-prev')?.addEventListener('click', () => {
+      go(-1);
+      startAuto();
+    });
+
+    document.getElementById('interior-next')?.addEventListener('click', () => {
+      go(1);
+      startAuto();
+    });
+
+    const shell = document.querySelector('.interior-carousel-shell');
+    shell?.addEventListener('mouseenter', stopAuto);
+    shell?.addEventListener('mouseleave', startAuto);
+    window.addEventListener('resize', () => applyAll(false));
+
+    applyAll(false);
+    startAuto();
+  }
+</script>
