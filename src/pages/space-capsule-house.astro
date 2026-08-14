@@ -131,10 +131,13 @@ const roiCards = capsuleRoi.map((item, index) => {
             class="lightbox-trigger capsule-example-row__item"
             data-lightbox-group="capsule-example-row"
             data-src={item.image}
-            data-label={item.alt}
-            aria-label={`View ${item.alt} full size`}
+            data-label={item.caption}
+            aria-label={item.caption}
           >
             <img src={item.image} alt={item.alt} class="capsule-example-row__img" loading="lazy" />
+            <span class="capsule-example-row__overlay">
+              <span class="capsule-example-row__caption">{item.caption}</span>
+            </span>
           </button>
         ))
       }
@@ -290,6 +293,7 @@ const roiCards = capsuleRoi.map((item, index) => {
   }
 
   .capsule-example-row__item {
+    position: relative;
     display: block;
     width: 100%;
     padding: 0;
@@ -307,11 +311,46 @@ const roiCards = capsuleRoi.map((item, index) => {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: transform 0.35s ease;
+    transition: transform 0.45s ease;
   }
 
-  .capsule-example-row__item:hover .capsule-example-row__img {
-    transform: scale(1.03);
+  .capsule-example-row__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 1.5rem;
+    background: rgba(22, 21, 20, 0.58);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .capsule-example-row__caption {
+    max-width: 18rem;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    font-weight: 600;
+    text-align: center;
+    text-wrap: balance;
+    transform: translateY(8px);
+    transition: transform 0.3s ease;
+  }
+
+  .capsule-example-row__item:hover .capsule-example-row__img,
+  .capsule-example-row__item:focus-visible .capsule-example-row__img {
+    transform: scale(1.04);
+  }
+
+  .capsule-example-row__item:hover .capsule-example-row__overlay,
+  .capsule-example-row__item:focus-visible .capsule-example-row__overlay {
+    opacity: 1;
+  }
+
+  .capsule-example-row__item:hover .capsule-example-row__caption,
+  .capsule-example-row__item:focus-visible .capsule-example-row__caption {
+    transform: translateY(0);
   }
 
   .capsule-example-row__item:focus-visible {

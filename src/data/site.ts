@@ -375,14 +375,18 @@ export const capsuleExampleRow = [
   {
     image: '/images/products/capsule-gallery/row/01.png',
     alt: 'Capsule cabins on hillside with wooden path',
+    caption: 'Create a unique landscape experience for your homestay project',
   },
   {
     image: '/images/products/capsule-gallery/row/02.png',
     alt: 'Capsule pods overlooking forest hillside',
+    caption: 'Seamlessly blends into the mountain and forest landscape',
   },
   {
     image: '/images/products/capsule-gallery/row/03.png',
     alt: 'Capsule house glowing on lawn at night',
+    caption:
+      'An ideal choice for enhancing the appeal of scenic areas at night and increasing visitor retention rates',
   },
 ];
 
