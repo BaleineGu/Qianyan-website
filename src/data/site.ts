@@ -362,15 +362,45 @@ export const capsuleRoi = [
   },
 ];
 
-/** Real-world examples — images ready for additional project photos */
+/** Real-world examples */
 export const capsuleExamples = [
   {
-    image: '/images/products/capsule-gallery/interior-01.png',
-    alt: 'Space capsule living interior',
+    image: '/images/products/capsule-gallery/real-world-night.png',
+    alt: 'Space capsule house under starry night sky',
+  },
+];
+
+/** Mosaic gallery — six project photos in shuffled order */
+export const capsuleMosaicExamples = [
+  {
+    slot: 'a',
+    image: '/images/products/capsule-gallery/examples/05.png',
+    alt: 'Capsule cabins on hillside with wooden path',
   },
   {
-    image: '/images/products/capsule-gallery/interior-02.png',
-    alt: 'Space capsule bedroom and lounge',
+    slot: 'b',
+    image: '/images/products/capsule-gallery/examples/02.png',
+    alt: 'Capsule bedroom with panoramic garden view',
+  },
+  {
+    slot: 'c',
+    image: '/images/products/capsule-gallery/examples/04.png',
+    alt: 'Capsule bathroom with marble finish',
+  },
+  {
+    slot: 'd',
+    image: '/images/products/capsule-gallery/examples/06.png',
+    alt: 'Capsule pods overlooking forest hillside',
+  },
+  {
+    slot: 'e',
+    image: '/images/products/capsule-gallery/examples/03.png',
+    alt: 'Capsule hallway and vanity toward living area',
+  },
+  {
+    slot: 'f',
+    image: '/images/products/capsule-gallery/examples/01.png',
+    alt: 'Capsule house glowing on lawn at night',
   },
 ];
 
