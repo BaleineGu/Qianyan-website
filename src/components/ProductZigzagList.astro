@@ -1,0 +1,199 @@
+---
+import type { ProductCategory } from '@/types/halo';
+
+export interface ProductShowcaseItem extends ProductCategory {
+  highlight: string;
+  summary: string;
+  ctaLabel: string;
+}
+
+interface Props {
+  products: ProductShowcaseItem[];
+}
+
+const { products } = Astro.props;
+---
+
+<section
+  class="product-zigzag py-section-sm lg:py-section-md bg-surface-dark"
+  aria-label="Product lineup"
+  data-header-theme="dark"
+>
+  <div class="section-container product-zigzag__list">
+    {
+      products.map((product, index) => {
+        const reversed = index % 2 === 1;
+
+        return (
+          <article class:list={['product-zigzag__row', reversed && 'is-reversed']}>
+            <div class="product-zigzag__media">
+              <img
+                src={product.image}
+                alt={product.name}
+                class="product-zigzag__image"
+                loading={index < 2 ? 'eager' : 'lazy'}
+              />
+            </div>
+
+            <div class="product-zigzag__card">
+              <h2 class="product-zigzag__title">{product.name}</h2>
+              <div class="product-zigzag__divider" aria-hidden="true"></div>
+
+              <div class="product-zigzag__meta">
+                <p class="product-zigzag__highlight">{product.highlight}</p>
+                <p class="product-zigzag__summary">{product.summary}</p>
+              </div>
+
+              <a href={product.href} class="product-zigzag__cta">
+                {product.ctaLabel}
+              </a>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+  .product-zigzag__list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4rem, 8vw, 7rem);
+  }
+
+  .product-zigzag__row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+  }
+
+  .product-zigzag__row.is-reversed {
+    flex-direction: row-reverse;
+  }
+
+  .product-zigzag__media {
+    flex: 1 1 58%;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    max-height: clamp(280px, 42vw, 520px);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-surface-dark-raised);
+    border: 1px solid var(--color-ink-on-dark-hairline);
+  }
+
+  .product-zigzag__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .product-zigzag__card {
+    flex: 0 0 min(100%, 420px);
+    width: min(100%, 420px);
+    margin-left: clamp(-3rem, -6vw, -4.5rem);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: var(--color-surface-2);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-ink-hairline);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  }
+
+  .product-zigzag__row.is-reversed .product-zigzag__card {
+    margin-left: 0;
+    margin-right: clamp(-3rem, -6vw, -4.5rem);
+  }
+
+  .product-zigzag__title {
+    font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .product-zigzag__divider {
+    width: 100%;
+    height: 1px;
+    background: var(--color-ink-hairline);
+    margin-bottom: 1.25rem;
+  }
+
+  .product-zigzag__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    min-height: 5.5rem;
+  }
+
+  .product-zigzag__highlight {
+    font-family: 'Geist Mono', SFMono-Regular, Consolas, ui-monospace, monospace;
+    font-size: clamp(0.875rem, 1.4vw, 1rem);
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--color-accent-2);
+    letter-spacing: 0.02em;
+  }
+
+  .product-zigzag__summary {
+    font-size: clamp(0.875rem, 1.3vw, 1rem);
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+
+  .product-zigzag__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-dark);
+    color: var(--color-ink-on-dark);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .product-zigzag__cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 767px) {
+    .product-zigzag__row,
+    .product-zigzag__row.is-reversed {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .product-zigzag__media {
+      flex: none;
+      width: 100%;
+      max-height: none;
+      aspect-ratio: 16 / 10;
+    }
+
+    .product-zigzag__card,
+    .product-zigzag__row.is-reversed .product-zigzag__card {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .product-zigzag__meta {
+      min-height: 0;
+    }
+  }
+</style>
