@@ -115,6 +115,44 @@ export const productCategories: ProductCategory[] = [
   },
 ];
 
+export const productShowcaseItems = [
+  {
+    ...productCategories[0],
+    highlight: '10ft – 40ft · Double-wing expansion',
+    summary:
+      'Integrated space-expanding houses with foldable transport and customizable internal layouts for campsites and project sites.',
+    ctaLabel: 'Explore Expandable Homes',
+  },
+  {
+    ...productCategories[1],
+    highlight: '13 models · Panoramic glass & skylights',
+    summary:
+      'Factory-prefabricated capsule units with floor-to-ceiling windows, zero on-site construction waste, and fast installation.',
+    ctaLabel: 'Explore Space Capsules',
+  },
+  {
+    ...productCategories[2],
+    highlight: 'Modular panels · Rapid on-site assembly',
+    summary:
+      'Efficient flat-pack container houses for temporary offices, exhibitions, and emergency housing with strong insulation performance.',
+    ctaLabel: 'Explore Flat Pack Houses',
+  },
+  {
+    ...productCategories[3],
+    highlight: '3–5 min setup · No foundation required',
+    summary:
+      'Quick-deploy folding structures for disaster relief, military barracks, and remote sites with low transport and reuse costs.',
+    ctaLabel: 'Explore Folding Houses',
+  },
+  {
+    ...productCategories[4],
+    highlight: 'Relocatable · Above or semi-inground',
+    summary:
+      'Self-supporting steel-frame container pools for resorts and difficult terrains where traditional excavation is restricted.',
+    ctaLabel: 'Explore Container Pools',
+  },
+];
+
 export const containerLayoutSizes = [
   {
     id: '10ft',

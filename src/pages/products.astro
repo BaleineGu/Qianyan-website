@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { productCategories } from '@/data/site';
+import ProductZigzagList from '@/components/ProductZigzagList.astro';
+import ConversionCta from '@/components/ConversionCta.astro';
+import { productShowcaseItems } from '@/data/site';
 ---
 
 <BaseLayout title="Products" description="Explore our full modular housing product lineup.">
@@ -19,31 +21,7 @@ import { productCategories } from '@/data/site';
     </div>
   </section>
 
-  <section class="py-section-sm lg:py-section-md bg-surface-1" data-header-theme="light">
-    <div class="section-container">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {
-          productCategories.map((product) => (
-            <a
-              href={product.href}
-              class="group block overflow-hidden rounded-helios-md bg-surface-2 border border-ink-hairline transition-opacity duration-helios hover:opacity-95"
-            >
-              <div class="aspect-[16/9] overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-6 sm:p-8">
-                <h2 class="heading-h5 text-ink mb-3">{product.name}</h2>
-                <p class="text-body text-ink-soft">{product.description}</p>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <ProductZigzagList products={[...productShowcaseItems]} />
+
+  <ConversionCta title="Need specs, layouts, or a shipping estimate for your project site?" />
 </BaseLayout>
