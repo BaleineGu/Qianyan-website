@@ -128,7 +128,6 @@ export const containerLayoutSizes = [
     interiorPhotos: [
       '/images/layouts/10ft-interior-1.png',
       '/images/layouts/10ft-interior-2.png',
-      '/images/layouts/10ft-interior-3.png',
     ],
   },
   {
@@ -172,18 +171,35 @@ export const containerLayoutSizes = [
     floorPlan: '/images/layouts/40ft-floorplan.png',
     interiorPhotos: [
       '/images/layouts/40ft-interior-1.png',
-      '/images/layouts/40ft-interior-2.png',
       '/images/layouts/40ft-interior-3.png',
     ],
   },
 ] as const;
 
-export const interiorSpacePhotos = containerLayoutSizes.flatMap((size) =>
-  (size.interiorPhotos ?? []).map((src, index) => ({
-    src,
-    alt: `${size.label} interior ${index + 1}`,
-  })),
-);
+export const interiorSpaceExtraPhotos = [
+  {
+    src: '/images/interior-space/canteen-meeting-hall.png',
+    alt: 'Modular container canteen and meeting hall interior',
+  },
+  {
+    src: '/images/interior-space/capsule-bedroom-projector.png',
+    alt: 'Space capsule bedroom with ceiling projector',
+  },
+  {
+    src: '/images/interior-space/capsule-bedroom-window.png',
+    alt: 'Space capsule bedroom with panoramic window view',
+  },
+] as const;
+
+export const interiorSpacePhotos = [
+  ...containerLayoutSizes.flatMap((size) =>
+    (size.interiorPhotos ?? []).map((src, index) => ({
+      src,
+      alt: `${size.label} interior ${index + 1}`,
+    })),
+  ),
+  ...interiorSpaceExtraPhotos,
+];
 
 export const trustItems: TrustItem[] = [
   {
