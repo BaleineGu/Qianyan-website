@@ -362,6 +362,18 @@ export const capsuleRoi = [
   },
 ];
 
+/** Real-world examples — images ready for additional project photos */
+export const capsuleExamples = [
+  {
+    image: '/images/products/capsule-gallery/interior-01.png',
+    alt: 'Space capsule living interior',
+  },
+  {
+    image: '/images/products/capsule-gallery/interior-02.png',
+    alt: 'Space capsule bedroom and lounge',
+  },
+];
+
 export const capsuleModels = [
   {
     model: 'C3',

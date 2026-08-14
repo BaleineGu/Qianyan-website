@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import { capsuleBanner, capsuleModels, capsuleRoi } from '@/data/site';
+import { capsuleBanner, capsuleExamples, capsuleModels, capsuleRoi } from '@/data/site';
 
 const roiCards = capsuleRoi.map((item, index) => {
   const images = [
@@ -92,6 +92,35 @@ const roiCards = capsuleRoi.map((item, index) => {
               </article>
             );
           })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white" data-header-theme="light">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Real-world examples</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+        {
+          capsuleExamples.map((item) => (
+            <button
+              type="button"
+              class="lightbox-trigger block w-full text-left"
+              data-lightbox-group="capsule-examples"
+              data-src={item.image}
+              data-label={item.alt}
+              aria-label={`View ${item.alt} full size`}
+            >
+              <span class="block w-full aspect-[16/10] overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-3">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full h-full object-cover hover:opacity-90 transition-opacity cursor-zoom-in"
+                  loading="lazy"
+                />
+              </span>
+            </button>
+          ))
         }
       </div>
     </div>
