@@ -370,6 +370,22 @@ export const capsuleExamples = [
   },
 ];
 
+/** Three equal project photos above the spec table */
+export const capsuleExampleRow = [
+  {
+    image: '/images/products/capsule-gallery/row/01.png',
+    alt: 'Capsule cabins on hillside with wooden path',
+  },
+  {
+    image: '/images/products/capsule-gallery/row/02.png',
+    alt: 'Capsule pods overlooking forest hillside',
+  },
+  {
+    image: '/images/products/capsule-gallery/row/03.png',
+    alt: 'Capsule house glowing on lawn at night',
+  },
+];
+
 export const capsuleModels = [
   {
     model: 'C3',
