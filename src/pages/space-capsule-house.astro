@@ -218,6 +218,81 @@ const roiCards = capsuleRoi.map((item, index) => {
     </div>
   </section>
 
+  <section class="py-8 bg-surface-2 border-t border-ink-hairline" data-header-theme="light">
+    <div class="section-container">
+      <form id="capsule-quote-form" class="flex flex-col gap-3">
+        <div class="flex flex-col lg:flex-row lg:items-end gap-3 lg:gap-3">
+          <div class="lg:w-40 shrink-0 lg:pb-0.5">
+            <h2 class="text-lg sm:text-xl font-extrabold text-brand-900 leading-tight">Get a Free Quote</h2>
+            <p class="text-xs text-ink-faint mt-0.5">Reply within 24h</p>
+          </div>
+          <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+            <input
+              id="cqf-name"
+              name="name"
+              type="text"
+              required
+              placeholder="Full Name *"
+              aria-label="Full Name"
+              class="border border-ink-hairline rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="cqf-email"
+              name="email"
+              type="email"
+              required
+              placeholder="Email *"
+              aria-label="Email"
+              class="border border-ink-hairline rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="cqf-phone"
+              name="phone"
+              type="tel"
+              placeholder="Phone / WhatsApp"
+              aria-label="Phone / WhatsApp"
+              class="border border-ink-hairline rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="cqf-qty"
+              name="quantity"
+              type="number"
+              min="1"
+              placeholder="Quantity"
+              aria-label="Quantity"
+              class="border border-ink-hairline rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+            <input
+              id="cqf-country"
+              name="country"
+              type="text"
+              placeholder="Destination Country"
+              aria-label="Destination Country"
+              class="border border-ink-hairline rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            />
+          </div>
+          <button
+            type="submit"
+            class="shrink-0 bg-brand-900 hover:bg-brand-800 text-white font-bold px-5 py-2 rounded transition-colors text-sm tracking-wide whitespace-nowrap"
+          >
+            Send Request
+          </button>
+        </div>
+        <input
+          id="cqf-message"
+          name="message"
+          type="text"
+          placeholder="Additional requirements (optional)"
+          aria-label="Additional requirements"
+          class="border border-ink-hairline rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white w-full"
+        />
+        <p id="cqf-success" class="hidden text-center text-green-600 font-semibold text-sm">
+          Thank you! We'll get back to you within 24 hours.
+        </p>
+      </form>
+    </div>
+  </section>
+
   <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 hidden items-center justify-center" role="dialog" aria-modal="true">
     <button id="lightbox-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-gray-300" aria-label="Close">&times;</button>
     <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl leading-none hover:text-gray-300 px-2" aria-label="Previous">&#8249;</button>
@@ -340,7 +415,7 @@ const roiCards = capsuleRoi.map((item, index) => {
     justify-content: center;
     padding: clamp(0.65rem, 2.2vw, 1.15rem) clamp(0.75rem, 2.5vw, 1.35rem);
     color: #fff;
-    font-size: clamp(0.72rem, 1.35vw, 0.95rem);
+    font-size: clamp(1.08rem, 2.025vw, 1.425rem);
     line-height: 1.4;
     font-weight: 600;
     text-align: center;
@@ -466,5 +541,15 @@ const roiCards = capsuleRoi.map((item, index) => {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') openLightbox(current - 1);
     if (e.key === 'ArrowRight') openLightbox(current + 1);
+  });
+
+  const quoteForm = document.getElementById('capsule-quote-form') as HTMLFormElement | null;
+  const quoteSuccess = document.getElementById('cqf-success') as HTMLParagraphElement | null;
+  quoteForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    quoteForm.querySelectorAll('input,button[type=submit]').forEach((el) => {
+      (el as HTMLInputElement).disabled = true;
+    });
+    quoteSuccess?.classList.remove('hidden');
   });
 </script>
