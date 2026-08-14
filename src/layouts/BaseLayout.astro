@@ -10,9 +10,10 @@ interface Props {
   title?: string;
   description?: string;
   overlayHeader?: boolean;
+  immersiveBackground?: boolean;
 }
 
-const { title, description, overlayHeader = false } = Astro.props;
+const { title, description, overlayHeader = false, immersiveBackground = false } = Astro.props;
 const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 const pageDescription = description ?? siteConfig.description;
 ---
@@ -46,7 +47,8 @@ const pageDescription = description ?? siteConfig.description;
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col bg-surface-1 text-ink antialiased">
+  <body class:list={['site-body min-h-screen flex flex-col text-ink antialiased', immersiveBackground && 'has-immersive-bg']}>
+    {immersiveBackground ? <div class="site-immersive-bg" aria-hidden="true"></div> : null}
     <Header overlay={overlayHeader} />
     <main class="flex-1"><slot /></main>
     <Footer />
