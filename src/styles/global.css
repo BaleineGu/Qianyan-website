@@ -31,10 +31,13 @@
     --radius-lg: 32px;
     --radius-xl: 40px;
     --site-immersive-bg-image: url('/images/backgrounds/immersive-wood.png');
-    --immersive-glass-bg: rgb(130 130 130 / 0.34);
-    --immersive-glass-border: rgb(255 255 255 / 0.22);
-    --immersive-glass-highlight: rgb(255 255 255 / 0.08);
-    --immersive-glass-shadow: 0 18px 44px rgb(0 0 0 / 0.24);
+    --immersive-glass-bg: rgb(55 55 55 / 0.58);
+    --immersive-glass-border: rgb(255 255 255 / 0.24);
+    --immersive-glass-highlight: rgb(255 255 255 / 0.12);
+    --immersive-glass-shadow: 0 18px 44px rgb(0 0 0 / 0.28);
+    --immersive-glass-text: #f7f5f0;
+    --immersive-glass-text-soft: rgb(247 245 240 / 0.78);
+    --immersive-glass-text-faint: rgb(247 245 240 / 0.58);
   }
 
   html {
@@ -209,6 +212,152 @@
     margin-top: clamp(0.75rem, 2vw, 1.25rem);
   }
 
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container,
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container,
+  body.has-immersive-bg main .layout-section.bg-surface-2 > .section-container,
+  body.has-immersive-bg main .folding-section.bg-surface-3 > .immersive-panel,
+  body.has-immersive-bg footer.bg-surface-1 > .section-container,
+  body.has-immersive-bg .immersive-panel {
+    color: var(--immersive-glass-text);
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(
+      .section-heading,
+      .heading-h1,
+      .heading-h2,
+      .heading-h3,
+      .heading-h4,
+      .heading-h5,
+      .heading-h6,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6
+    ),
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .section-heading,
+  body.has-immersive-bg main .layout-section.bg-surface-2 > .section-container .section-heading,
+  body.has-immersive-bg main .folding-section.bg-surface-3 > .immersive-panel .section-heading,
+  body.has-immersive-bg footer.bg-surface-1 > .section-container :is(h1, h2, h3, h4, h5, h6),
+  body.has-immersive-bg .immersive-panel :is(.section-heading, h1, h2, h3, h4, h5, h6) {
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.42);
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(.text-ink, .text-body, .text-large, .text-body-lg, .label-small),
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container :is(.text-ink, .text-body),
+  body.has-immersive-bg main .layout-section.bg-surface-2 > .section-container :is(.text-ink, .text-body),
+  body.has-immersive-bg main .folding-section.bg-surface-3 > .immersive-panel :is(.text-ink, .text-body),
+  body.has-immersive-bg footer.bg-surface-1 > .section-container :is(.text-ink, .text-body, .text-body-lg),
+  body.has-immersive-bg .immersive-panel :is(.text-ink, .text-body, .text-large) {
+    color: var(--immersive-glass-text);
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(.text-ink-soft, .text-small),
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .text-ink-soft,
+  body.has-immersive-bg main .layout-section.bg-surface-2 > .section-container .text-ink-soft,
+  body.has-immersive-bg footer.bg-surface-1 > .section-container :is(.text-ink-soft, .text-small),
+  body.has-immersive-bg .immersive-panel :is(.text-ink-soft, .text-small) {
+    color: var(--immersive-glass-text-soft);
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(.text-ink-faint, .label-small),
+  body.has-immersive-bg footer.bg-surface-1 > .section-container :is(.text-ink-faint, .label-small) {
+    color: var(--immersive-glass-text-faint);
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    a:not([class*='btn-']):not(.product-panel__card),
+  body.has-immersive-bg footer.bg-surface-1 > .section-container a:not([class*='btn-']) {
+    color: #ffffff;
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(
+      .bg-surface-1,
+      .bg-surface-2,
+      .bg-surface-3,
+      .bg-white,
+      .product-panel__card,
+      article.group,
+      form.bg-surface-3
+    ),
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card,
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab {
+    color: var(--color-ink);
+  }
+
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab.text-ink-on-dark,
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab.is-active {
+    color: var(--color-ink-on-dark);
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3)
+    :is(.section-heading, h1, h2, h3, h4, h5, h6),
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card :is(h2, h3),
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab {
+    color: inherit;
+    text-shadow: none;
+  }
+
+  body.has-immersive-bg :is(
+      main section.bg-surface-1,
+      main section.bg-surface-2,
+      main section.bg-surface-3
+    )
+    > .section-container
+    :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3)
+    .text-ink-soft,
+  body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card .text-ink-soft {
+    color: var(--color-ink-soft);
+  }
+
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     body.has-immersive-bg :is(
         main section.bg-surface-1,
@@ -221,7 +370,7 @@
     body.has-immersive-bg main .folding-section.bg-surface-3 > .immersive-panel,
     body.has-immersive-bg footer.bg-surface-1 > .section-container,
     body.has-immersive-bg .immersive-panel {
-      background: rgb(130 130 130 / 0.82);
+      background: rgb(55 55 55 / 0.88);
     }
   }
 
