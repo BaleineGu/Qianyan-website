@@ -31,9 +31,6 @@
     --radius-lg: 32px;
     --radius-xl: 40px;
     --site-immersive-bg-image: url('/images/backgrounds/immersive-wood.png');
-    --surface-1-alpha: rgb(247 245 240 / 0.9);
-    --surface-2-alpha: rgb(255 255 255 / 0.92);
-    --surface-3-alpha: rgb(225 220 210 / 0.9);
   }
 
   html {
@@ -58,12 +55,13 @@
 
   body.site-body.has-immersive-bg {
     background-color: transparent;
+    isolation: isolate;
   }
 
   body.has-immersive-bg .site-immersive-bg {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
     background-color: #0a0a0a;
     background-image: var(--site-immersive-bg-image);
@@ -73,25 +71,32 @@
     background-attachment: fixed;
   }
 
-  .site-immersive-bg::after {
+  body.has-immersive-bg .site-immersive-bg::after {
     content: '';
     position: absolute;
     inset: 0;
+    pointer-events: none;
     background: radial-gradient(
       ellipse at center,
-      rgb(0 0 0 / 0.08) 0%,
-      rgb(0 0 0 / 0.28) 100%
+      rgb(0 0 0 / 0.04) 0%,
+      rgb(0 0 0 / 0.18) 100%
     );
   }
 
+  body.has-immersive-bg .site-page-shell {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+  }
+
   @media (max-width: 1023px) {
-    .site-immersive-bg {
+    body.has-immersive-bg .site-immersive-bg {
       background-attachment: scroll;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .site-immersive-bg {
+    body.has-immersive-bg .site-immersive-bg {
       background-attachment: scroll;
     }
   }
@@ -104,20 +109,6 @@
   h6 {
     font-weight: 500;
     color: inherit;
-  }
-}
-
-@layer utilities {
-  body.has-immersive-bg .bg-surface-1 {
-    background-color: var(--surface-1-alpha) !important;
-  }
-
-  body.has-immersive-bg .bg-surface-2 {
-    background-color: var(--surface-2-alpha) !important;
-  }
-
-  body.has-immersive-bg .bg-surface-3 {
-    background-color: var(--surface-3-alpha) !important;
   }
 }
 
@@ -281,18 +272,6 @@
     color: var(--color-ink);
   }
 
-  body.has-immersive-bg .surface-light {
-    background-color: var(--surface-1-alpha);
-  }
-
-  body.has-immersive-bg .surface-raised {
-    background-color: var(--surface-2-alpha);
-  }
-
-  body.has-immersive-bg .surface-warm {
-    background-color: var(--surface-3-alpha);
-  }
-
   .surface-dark {
     background-color: var(--color-surface-dark);
     color: var(--color-ink-on-dark);
@@ -302,10 +281,6 @@
     border-radius: var(--radius-md);
     background-color: var(--color-surface-2);
     overflow: hidden;
-  }
-
-  body.has-immersive-bg .card-helios {
-    background-color: var(--surface-2-alpha);
   }
 
   .photo-card {

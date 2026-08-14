@@ -49,10 +49,12 @@ const pageDescription = description ?? siteConfig.description;
   </head>
   <body class:list={['site-body min-h-screen flex flex-col text-ink antialiased', immersiveBackground && 'has-immersive-bg']}>
     {immersiveBackground ? <div class="site-immersive-bg" aria-hidden="true"></div> : null}
-    <Header overlay={overlayHeader} />
-    <main class="flex-1"><slot /></main>
-    <Footer />
-    <InquiryModal />
-    <BackToTop />
+    <div class="site-page-shell flex flex-col flex-1 min-h-screen">
+      <Header overlay={overlayHeader} />
+      <main class="flex-1"><slot /></main>
+      <Footer />
+      <InquiryModal />
+      <BackToTop />
+    </div>
   </body>
 </html>
