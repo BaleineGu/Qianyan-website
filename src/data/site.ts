@@ -375,18 +375,20 @@ export const capsuleExampleRow = [
   {
     image: '/images/products/capsule-gallery/row/01.png',
     alt: 'Capsule cabins on hillside with wooden path',
-    caption: 'Create a unique landscape experience for your homestay project',
+    caption:
+      'Create a unique viewing experience for your vacation rental project with panoramic floor-to-ceiling windows and a futuristic design, effectively boosting both the average rate per guest and occupancy rates',
   },
   {
     image: '/images/products/capsule-gallery/row/02.png',
     alt: 'Capsule pods overlooking forest hillside',
-    caption: 'Seamlessly blends into the mountain and forest landscape',
+    caption:
+      'Lightweight and non-invasive, the installation blends seamlessly into mountain and forest landscapes, transforming complex, hard-to-develop terrain into high-yield eco-accommodation assets',
   },
   {
     image: '/images/products/capsule-gallery/row/03.png',
     alt: 'Capsule house glowing on lawn at night',
     caption:
-      'An ideal choice for enhancing the appeal of scenic areas at night and increasing visitor retention rates',
+      'An integrated smart lighting and terrace system creates an unforgettable nighttime landscape, making it an ideal choice for enhancing the appeal of scenic areas at night and increasing visitor dwell time',
   },
 ];
 
