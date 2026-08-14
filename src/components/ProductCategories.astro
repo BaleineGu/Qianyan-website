@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import type { ProductCategory } from '@/types/halo';
 
 interface Props {
@@ -16,13 +18,14 @@ const tabLabels: Record<string, string> = {
   pools: 'Swimming Pools',
 };
 
-const tabIcons: Partial<Record<string, string>> = {
-  expandable: '/images/products/tab-icons/expandable.png',
-  capsule: '/images/products/tab-icons/capsule.png',
-  'flat-pack': '/images/products/tab-icons/flat-pack.png',
-  folding: '/images/products/tab-icons/folding.png',
-  pools: '/images/products/tab-icons/pools.png',
-};
+const tabIconIds = ['expandable', 'capsule', 'flat-pack', 'folding', 'pools'] as const;
+const tabIconSvg: Partial<Record<string, string>> = {};
+for (const id of tabIconIds) {
+  const file = path.join(process.cwd(), 'public/images/products/tab-icons', `${id}.svg`);
+  if (fs.existsSync(file)) {
+    tabIconSvg[id] = fs.readFileSync(file, 'utf8');
+  }
+}
 ---
 
 <section
@@ -59,15 +62,14 @@ const tabIcons: Partial<Record<string, string>> = {
             data-product-tab={c.id}
             tabindex={index === 0 ? 0 : -1}
           >
-            {tabIcons[c.id] ? (
-              <span class="product-tab__icon-wrap flex-1 min-h-0 w-full inline-flex items-center justify-center self-stretch">
-                <img
-                  src={tabIcons[c.id]}
-                  alt=""
-                  class="product-tab__icon w-[94%] h-[94%] max-w-none object-contain"
-                  aria-hidden="true"
-                />
-              </span>
+            {tabIconSvg[c.id] ? (
+              <span
+                class:list={[
+                  'product-tab__icon-wrap flex-1 min-h-0 w-full inline-flex items-center justify-center self-stretch',
+                  c.id === 'pools' && 'is-pools',
+                ]}
+                set:html={tabIconSvg[c.id]}
+              />
             ) : null}
             <span class="shrink-0">{tabLabels[c.id] ?? c.name}</span>
           </button>
@@ -292,25 +294,61 @@ const tabIcons: Partial<Record<string, string>> = {
 <style>
   .product-tab__icon-wrap {
     flex-shrink: 0;
-    transition:
-      background-color 0.2s ease,
-      border-color 0.2s ease;
+    color: inherit;
   }
 
-  .product-tab:not(.is-active) .product-tab__icon-wrap {
-    background-color: rgba(22, 21, 20, 0.06);
-    border-color: rgba(22, 21, 20, 0.12);
-  }
-
-  .product-tab__icon {
+  .product-tab__svg {
     display: block;
-    filter: none;
-    transition: filter 0.2s ease;
+    width: 94%;
+    height: 94%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: visible;
   }
 
-  /* Black icon art: keep dark on light tabs; invert to white on active dark tab */
-  .product-tab.is-active .product-tab__icon {
-    filter: invert(1);
+  .product-tab__icon-wrap.is-pools .product-tab__svg {
+    width: 118%;
+    height: 118%;
+    transform: scale(1.32);
+    transform-origin: center center;
+  }
+
+  .product-tab__svg path {
+    fill: currentColor;
+    fill-opacity: 0;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: var(--path-len, 1200);
+    stroke-dashoffset: var(--path-len, 1200);
+  }
+
+  .product-tab__svg.is-drawn path {
+    animation: product-tab-draw 1.15s ease forwards;
+  }
+
+  @keyframes product-tab-draw {
+    0% {
+      stroke-dashoffset: var(--path-len, 1200);
+      fill-opacity: 0;
+    }
+    70% {
+      stroke-dashoffset: 0;
+      fill-opacity: 0;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      fill-opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-tab__svg path {
+      fill-opacity: 1;
+      stroke-dashoffset: 0;
+      animation: none !important;
+    }
   }
 
   .product-panel__title {
@@ -444,6 +482,28 @@ const tabIcons: Partial<Record<string, string>> = {
     requestAnimationFrame(() => fitCopy());
   }
 
+  function prepareIconPaths() {
+    document.querySelectorAll('.product-tab__svg').forEach((svg) => {
+      svg.querySelectorAll('path').forEach((path) => {
+        try {
+          const len = Math.ceil(path.getTotalLength());
+          path.style.setProperty('--path-len', String(len));
+        } catch {
+          path.style.setProperty('--path-len', '1600');
+        }
+      });
+    });
+  }
+
+  function drawIcon(tab) {
+    const svg = tab.querySelector('.product-tab__svg');
+    if (!svg) return;
+    svg.classList.remove('is-drawn');
+    // restart CSS animation
+    void svg.offsetWidth;
+    svg.classList.add('is-drawn');
+  }
+
   function activate(id) {
     tabs.forEach((tab) => {
       const active = tab.getAttribute('data-product-tab') === id;
@@ -456,6 +516,7 @@ const tabIcons: Partial<Record<string, string>> = {
       tab.classList.toggle('border-ink-hairline', !active);
       tab.setAttribute('aria-selected', active ? 'true' : 'false');
       tab.setAttribute('tabindex', active ? '0' : '-1');
+      if (active) drawIcon(tab);
     });
 
     panels.forEach((panel) => {
@@ -473,8 +534,11 @@ const tabIcons: Partial<Record<string, string>> = {
       const id = tab.getAttribute('data-product-tab');
       if (id) activate(id);
     });
+    tab.addEventListener('mouseenter', () => drawIcon(tab));
   });
 
+  prepareIconPaths();
+  tabs.forEach((tab) => drawIcon(tab));
   if (defaultId) activate(defaultId);
 
   if (masterImage) {
