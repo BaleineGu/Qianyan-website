@@ -80,16 +80,16 @@ const post = haloPost
     </section>
 
     {'cover' in post && post.cover && (
-      <div class="section-container max-w-4xl -mt-8">
+      <div class="section-container max-w-4xl -mt-8 immersive-panel !py-0 overflow-hidden">
         <img
           src={post.cover}
           alt=""
-          class="w-full rounded-2xl shadow-lg aspect-[16/9] object-cover"
+          class="w-full rounded-helios-md aspect-[16/9] object-cover"
         />
       </div>
     )}
 
-    <section class="py-16">
+    <section class="py-16 bg-surface-1" data-header-theme="light">
       <div class="section-container max-w-3xl">
         <div class="prose prose-lg text-gray-600 leading-relaxed whitespace-pre-line">
           {post.body}
