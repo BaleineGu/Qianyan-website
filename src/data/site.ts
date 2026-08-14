@@ -370,40 +370,6 @@ export const capsuleExamples = [
   },
 ];
 
-/** Mosaic gallery — six project photos in shuffled order */
-export const capsuleMosaicExamples = [
-  {
-    slot: 'a',
-    image: '/images/products/capsule-gallery/examples/05.png',
-    alt: 'Capsule cabins on hillside with wooden path',
-  },
-  {
-    slot: 'b',
-    image: '/images/products/capsule-gallery/examples/02.png',
-    alt: 'Capsule bedroom with panoramic garden view',
-  },
-  {
-    slot: 'c',
-    image: '/images/products/capsule-gallery/examples/04.png',
-    alt: 'Capsule bathroom with marble finish',
-  },
-  {
-    slot: 'd',
-    image: '/images/products/capsule-gallery/examples/06.png',
-    alt: 'Capsule pods overlooking forest hillside',
-  },
-  {
-    slot: 'e',
-    image: '/images/products/capsule-gallery/examples/03.png',
-    alt: 'Capsule hallway and vanity toward living area',
-  },
-  {
-    slot: 'f',
-    image: '/images/products/capsule-gallery/examples/01.png',
-    alt: 'Capsule house glowing on lawn at night',
-  },
-];
-
 export const capsuleModels = [
   {
     model: 'C3',

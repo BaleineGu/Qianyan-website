@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import { capsuleBanner, capsuleExamples, capsuleModels, capsuleMosaicExamples, capsuleRoi } from '@/data/site';
+import { capsuleBanner, capsuleExamples, capsuleModels, capsuleRoi } from '@/data/site';
 
 const roiCards = capsuleRoi.map((item, index) => {
   const images = [
@@ -120,25 +120,6 @@ const roiCards = capsuleRoi.map((item, index) => {
         </button>
       )
     }
-  </section>
-
-  <section class="capsule-mosaic" data-header-theme="light" aria-label="Real-world project gallery">
-    <div class="capsule-mosaic__grid">
-      {
-        capsuleMosaicExamples.map((item) => (
-          <button
-            type="button"
-            class={`lightbox-trigger capsule-mosaic__cell capsule-mosaic__cell--${item.slot}`}
-            data-lightbox-group="capsule-mosaic"
-            data-src={item.image}
-            data-label={item.alt}
-            aria-label={`View ${item.alt} full size`}
-          >
-            <img src={item.image} alt={item.alt} class="capsule-mosaic__img" loading="lazy" />
-          </button>
-        ))
-      }
-    </div>
   </section>
 
   <section class="py-16 bg-gray-50" data-header-theme="light">
@@ -269,98 +250,6 @@ const roiCards = capsuleRoi.map((item, index) => {
     height: 100%;
     object-fit: cover;
     object-position: center;
-  }
-
-  /* Full-bleed mosaic placeholders (reference layout) */
-  .capsule-mosaic {
-    width: 100%;
-    background: #f3f1ee;
-  }
-
-  .capsule-mosaic__grid {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: minmax(200px, 28vw) minmax(140px, 16vw) minmax(140px, 16vw);
-    grid-template-areas:
-      'a a a b b b'
-      'e e c c d d'
-      'e e f f f f';
-    gap: 0;
-  }
-
-  @media (max-width: 767px) {
-    .capsule-mosaic__grid {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: minmax(160px, 36vw) minmax(120px, 28vw) minmax(120px, 28vw);
-      grid-template-areas:
-        'a b'
-        'e c'
-        'e f';
-    }
-
-    .capsule-mosaic__cell--d {
-      display: none;
-    }
-  }
-
-  .capsule-mosaic__cell {
-    min-height: 120px;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    overflow: hidden;
-    cursor: zoom-in;
-    background: #e8e4de;
-  }
-
-  .capsule-mosaic__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.35s ease;
-  }
-
-  .capsule-mosaic__cell:hover .capsule-mosaic__img {
-    transform: scale(1.03);
-  }
-
-  .capsule-mosaic__cell:focus-visible {
-    outline: 2px solid #9a6b3f;
-    outline-offset: -2px;
-    z-index: 1;
-  }
-
-  .capsule-mosaic__cell--a {
-    grid-area: a;
-    background: #eceae6;
-  }
-
-  .capsule-mosaic__cell--b {
-    grid-area: b;
-    background: #e4e0da;
-  }
-
-  .capsule-mosaic__cell--c {
-    grid-area: c;
-    background: #f0ebe6;
-  }
-
-  .capsule-mosaic__cell--d {
-    grid-area: d;
-    background: #e9e5df;
-  }
-
-  .capsule-mosaic__cell--e {
-    grid-area: e;
-    background: #ded9d2;
-  }
-
-  .capsule-mosaic__cell--f {
-    grid-area: f;
-    background: #e6e2dc;
   }
 
   .capsule-spec-table th,
