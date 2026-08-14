@@ -45,7 +45,7 @@ const tabIcons: Partial<Record<string, string>> = {
             role="tab"
             id={`product-tab-${c.id}`}
             class:list={[
-              'product-tab w-full px-2 sm:px-3 py-2.5 sm:py-3 lg:py-3.5 rounded-helios-sm text-[clamp(0.8125rem,1.35vw,1.125rem)] font-medium transition-colors text-center leading-tight flex flex-col items-center justify-center gap-1.5 sm:gap-2',
+              'product-tab w-full aspect-square px-2 sm:px-3 py-2.5 sm:py-3 rounded-helios-sm text-[clamp(0.8125rem,1.35vw,1.125rem)] font-medium transition-colors text-center leading-tight flex flex-col items-center justify-center gap-2 sm:gap-2.5',
               index === 0
                 ? 'bg-surface-dark text-ink-on-dark is-active'
                 : 'bg-surface-2 text-ink border border-ink-hairline hover:border-ink-faint',
@@ -56,11 +56,11 @@ const tabIcons: Partial<Record<string, string>> = {
             tabindex={index === 0 ? 0 : -1}
           >
             {tabIcons[c.id] ? (
-              <span class="product-tab__icon-wrap inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/12 border border-white/20">
+              <span class="product-tab__icon-wrap inline-flex items-center justify-center">
                 <img
                   src={tabIcons[c.id]}
                   alt=""
-                  class="product-tab__icon w-7 h-7 sm:w-8 sm:h-8 object-contain"
+                  class="product-tab__icon w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain"
                   aria-hidden="true"
                 />
               </span>
