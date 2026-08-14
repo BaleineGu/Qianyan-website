@@ -2,8 +2,10 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { whatsappUrl } from '@/data/site';
 
-const parallaxSlides = [
+const mosaicSlides = [
   {
+    label: '01',
+    title: 'Integrated Manufacturing',
     src: '/images/about/parallax-1.png',
     alt: 'Integrated House Manufacturing Base exterior',
     paragraphs: [
@@ -12,6 +14,8 @@ const parallaxSlides = [
     ],
   },
   {
+    label: '02',
+    title: 'Container Production',
     src: '/images/about/parallax-2.png',
     alt: 'Container houses lined up inside the factory',
     paragraphs: [
@@ -19,12 +23,23 @@ const parallaxSlides = [
     ],
   },
   {
+    label: '03',
+    title: 'Structural Craftsmanship',
     src: '/images/about/parallax-3.png',
     alt: 'Steel frames for modular container houses',
     paragraphs: [
       'Manufacturing craftsmanship determines quality. The structure utilizes galvanized square tubing throughout; even critical connection points feature specialized galvanized hinges, ensuring exceptional stability, smooth operation, and fatigue resistance. To further enhance corrosion and rust resistance, the entire welded frame is finished with an electrostatic powder coating—a process that ensures strong adhesion and results in a highly durable, robust protective layer.',
     ],
   },
+];
+
+const mosaicTiles = [
+  { kind: 'text' as const, variant: 'muted' as const, ...mosaicSlides[0] },
+  { kind: 'media' as const, src: mosaicSlides[0].src, alt: mosaicSlides[0].alt },
+  { kind: 'media' as const, src: mosaicSlides[1].src, alt: mosaicSlides[1].alt },
+  { kind: 'text' as const, variant: 'accent' as const, ...mosaicSlides[1] },
+  { kind: 'text' as const, variant: 'light' as const, ...mosaicSlides[2] },
+  { kind: 'media' as const, src: mosaicSlides[2].src, alt: mosaicSlides[2].alt },
 ];
 ---
 <BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
@@ -44,36 +59,42 @@ const parallaxSlides = [
   </section>
 
   <section
-    class="about-stack bg-surface-1 px-2 sm:px-3 lg:px-4"
+    class="about-mosaic bg-surface-1"
     data-header-theme="light"
     aria-label="Factory gallery"
   >
-    {
-      parallaxSlides.map((item, index) => (
-        <article
-          class="about-stack__card sticky top-2 sm:top-3 lg:top-4 grid h-[calc(100svh-1rem)] sm:h-[calc(100svh-1.5rem)] lg:h-[calc(100svh-2rem)] min-h-[600px] grid-rows-[58%_42%] overflow-hidden rounded-helios-lg bg-surface-2 lg:grid-cols-[2fr_1fr] lg:grid-rows-1"
-          data-stack-card
-          style={`z-index: ${index + 1}`}
-        >
-          <div class="about-stack__media relative min-h-0 overflow-hidden rounded-helios-md bg-surface-3 m-2 sm:m-3 lg:m-4">
-            <img
-              src={item.src}
-              alt={item.alt}
-              class="absolute inset-0 h-full w-full object-cover object-center"
-              loading={index === 0 ? 'eager' : 'lazy'}
-            />
-          </div>
-
-          <div class="about-stack__copy relative flex min-h-0 items-center bg-surface-2 px-6 py-7 sm:px-10 lg:px-[clamp(2rem,4vw,5rem)] lg:py-16">
-            <div class="max-h-full space-y-4 overflow-y-auto text-[clamp(0.9375rem,1.15vw,1.0625rem)] leading-[1.75] text-ink-soft">
-              {item.paragraphs.map((p) => (
-                <p>{p}</p>
-              ))}
-            </div>
-          </div>
-        </article>
-      ))
-    }
+    <div class="about-mosaic__grid">
+      {
+        mosaicTiles.map((tile, index) =>
+          tile.kind === 'text' ? (
+            <article
+              class:list={[
+                'about-mosaic__cell about-mosaic__cell--text',
+                tile.variant === 'muted' && 'is-muted',
+                tile.variant === 'accent' && 'is-accent',
+                tile.variant === 'light' && 'is-light',
+              ]}
+            >
+              <p class="about-mosaic__label">{tile.label}</p>
+              <h2 class="about-mosaic__title">{tile.title}</h2>
+              <div class="about-mosaic__copy">
+                {tile.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
+            </article>
+          ) : (
+            <figure class="about-mosaic__cell about-mosaic__cell--media">
+              <img
+                src={tile.src}
+                alt={tile.alt}
+                loading={index === 1 ? 'eager' : 'lazy'}
+              />
+            </figure>
+          ),
+        )
+      }
+    </div>
   </section>
 
   <section class="py-20 bg-surface-1" data-header-theme="light">
@@ -119,81 +140,96 @@ const parallaxSlides = [
 </BaseLayout>
 
 <style>
-  .about-stack__card {
-    transform-origin: center top;
-    will-change: transform, filter, border-radius;
-    box-shadow:
-      0 18px 48px rgb(22 21 20 / 0.12),
-      0 2px 0 rgb(22 21 20 / 0.04);
-    transition:
-      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 500ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  .about-mosaic__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
   }
 
-  .about-stack__media {
-    isolation: isolate;
+  .about-mosaic__cell {
+    min-height: clamp(320px, 42vw, 540px);
+    overflow: hidden;
   }
 
-  .about-stack__media img {
-    transform: scale(1.04);
-    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  .about-mosaic__cell--text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2rem, 5vw, 4.5rem);
   }
 
-  .about-stack__card.is-current .about-stack__media img {
-    transform: scale(1);
+  .about-mosaic__cell--text.is-muted {
+    background: var(--color-surface-3);
+    color: var(--color-ink);
   }
 
-  @media (max-width: 1023px) {
-    .about-stack__card {
-      min-height: calc(100svh - 1rem);
+  .about-mosaic__cell--text.is-accent {
+    background: var(--color-surface-dark);
+    color: var(--color-ink-on-dark);
+  }
+
+  .about-mosaic__cell--text.is-light {
+    background: var(--color-surface-2);
+    color: var(--color-ink);
+  }
+
+  .about-mosaic__label {
+    margin-bottom: 1rem;
+    font-family: 'Geist Mono', SFMono-Regular, Consolas, ui-monospace, monospace;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .about-mosaic__title {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.375rem, 2.4vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  .about-mosaic__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 38rem;
+    font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+    line-height: 1.75;
+  }
+
+  .about-mosaic__cell--text.is-muted .about-mosaic__copy,
+  .about-mosaic__cell--text.is-light .about-mosaic__copy {
+    color: var(--color-ink-soft);
+  }
+
+  .about-mosaic__cell--text.is-accent .about-mosaic__copy {
+    color: var(--color-ink-on-dark-soft);
+  }
+
+  .about-mosaic__cell--media {
+    margin: 0;
+    background: var(--color-surface-dark);
+  }
+
+  .about-mosaic__cell--media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (max-width: 767px) {
+    .about-mosaic__grid {
+      grid-template-columns: 1fr;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .about-stack__card,
-    .about-stack__media img {
-      transform: none !important;
-      filter: none !important;
-      transition: none;
+    .about-mosaic__cell {
+      min-height: clamp(280px, 72vw, 420px);
     }
   }
 </style>
-
-<script>
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-stack-card]'));
-  let ticking = false;
-
-  function updateStack() {
-    const viewportHeight = window.innerHeight || 1;
-
-    cards.forEach((card, index) => {
-      const nextCard = cards[index + 1];
-      const nextTop = nextCard?.getBoundingClientRect().top ?? viewportHeight;
-      const coverProgress = Math.max(0, Math.min(1, (viewportHeight - nextTop) / viewportHeight));
-
-      card.classList.toggle('is-current', nextTop > viewportHeight * 0.5);
-
-      if (!reduceMotion) {
-        const scale = 1 - coverProgress * 0.045;
-        const brightness = 1 - coverProgress * 0.16;
-        card.style.transform = `scale(${scale.toFixed(4)})`;
-        card.style.filter = `brightness(${brightness.toFixed(3)})`;
-      }
-    });
-  }
-
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      updateStack();
-      ticking = false;
-    });
-  }
-
-  updateStack();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-</script>
