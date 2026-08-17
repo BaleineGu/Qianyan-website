@@ -42,21 +42,23 @@ const slides = [
 
     <div id="folding-gallery" class="folding-gallery flex-1 min-h-0 min-w-0">
       <div class="folding-gallery__media min-w-0 min-h-[240px] overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-3">
-        {
-          slides.map((slide, index) => (
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              class:list={[
-                'folding-gallery__image',
-                index === 0 ? 'is-active' : 'hidden',
-              ]}
-              data-folding-image={index}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              draggable="false"
-            />
-          ))
-        }
+        <div class="folding-gallery__stage">
+          {
+            slides.map((slide, index) => (
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                class:list={[
+                  'folding-gallery__image',
+                  index === 0 ? 'is-active' : 'hidden',
+                ]}
+                data-folding-image={index}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                draggable="false"
+              />
+            ))
+          }
+        </div>
 
         <nav
           class="folding-gallery__nav flex flex-row lg:flex-col lg:justify-between gap-2 overflow-x-auto lg:overflow-visible"
@@ -90,19 +92,32 @@ const slides = [
 </section>
 
 <style>
+  .folding-gallery {
+    min-height: 0;
+  }
+
   .folding-gallery__media {
     position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     overflow: hidden;
+  }
+
+  .folding-gallery__stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 240px;
   }
 
   .folding-gallery__image {
     position: absolute;
     inset: 0;
     display: none;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     object-position: left center;
   }
 
@@ -125,18 +140,24 @@ const slides = [
   }
 
   @media (min-width: 1024px) {
-    .folding-gallery__image {
-      right: 13.5rem;
+    .folding-gallery__media {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .folding-gallery__stage {
+      min-height: 0;
     }
 
     .folding-gallery__nav {
-      top: 1.25rem;
-      right: 1rem;
-      bottom: 1.25rem;
-      left: auto;
+      position: relative;
+      inset: auto;
+      flex: 0 0 auto;
+      align-self: stretch;
       width: max-content;
-      max-width: 11.75rem;
-      padding: 0.6rem;
+      max-width: 13.5rem;
+      margin: 0.75rem 0.75rem 0.75rem 0;
+      padding: 0.75rem;
     }
   }
 
@@ -166,9 +187,13 @@ const slides = [
   }
 
   @media (min-width: 1024px) {
+    .folding-gallery__item {
+      width: 100%;
+    }
+
     .folding-gallery__label {
       white-space: normal;
-      max-width: 7.25rem;
+      max-width: none;
     }
   }
 
