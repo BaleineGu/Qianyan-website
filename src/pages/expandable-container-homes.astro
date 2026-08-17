@@ -10,10 +10,13 @@ import {
   expandableSpecs,
 } from '@/data/site';
 
-const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
-  src: `/images/products/actual/${String(i + 1).padStart(2, '0')}.png`,
-  label: `Actual product photo ${i + 1}`,
+const actualProductPhotos = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((n) => ({
+  src: `/images/products/actual/${String(n).padStart(2, '0')}.png`,
+  label: `Actual product photo ${n}`,
 }));
+const actualMidpoint = Math.ceil(actualProductPhotos.length / 2);
+const actualTopRow = actualProductPhotos.slice(0, actualMidpoint);
+const actualBottomRow = actualProductPhotos.slice(actualMidpoint);
 ---
 <BaseLayout title="Expandable Container Homes" description={expandableBanner.description} immersiveBackground>
   <PageBanner
@@ -31,38 +34,51 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
   <section class="py-16 bg-white">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Actual Product Photos</h2>
-      <div class="relative">
+      <div class="actual-carousel-shell relative">
         <button
           id="actual-prev"
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -ml-2 sm:ml-0"
+          class="actual-nav-btn actual-nav-btn--prev"
           aria-label="Previous photos"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         </button>
-        <div class="overflow-hidden px-1">
-          <div id="actual-track" class="flex gap-4 will-change-transform">
-            {actualProductPhotos.map(({ src, label }) => (
-              <button
-                type="button"
-                class="lightbox-trigger flex-shrink-0 w-[260px] sm:w-[300px]"
-                data-lightbox-group="actual"
-                data-src={src}
-                data-label={label}
-                aria-label={`View ${label} full screen`}
-              >
-                <img
-                  src={src}
-                  alt={label}
-                  class="w-full h-[180px] sm:h-[200px] object-cover rounded-lg border border-gray-200 hover:opacity-90 transition-opacity cursor-zoom-in"
-                  loading="lazy"
-                />
-              </button>
-            ))}
-          </div>
+        <div class="actual-marquee-stack flex flex-col gap-4 px-12 sm:px-14">
+          {
+            [
+              { row: actualTopRow, trackId: 'actual-track-top' },
+              { row: actualBottomRow, trackId: 'actual-track-bottom' },
+            ].map(({ row, trackId }) => (
+              <div class="actual-marquee-viewport overflow-hidden">
+                <div id={trackId} class="actual-marquee-track flex w-max gap-4 will-change-transform">
+                  {
+                    [...row, ...row].map(({ src, label }, index) => (
+                      <button
+                        type="button"
+                        class="lightbox-trigger actual-marquee-card flex-shrink-0"
+                        data-lightbox-group="actual"
+                        data-src={src}
+                        data-label={label}
+                        aria-label={index < row.length ? `View ${label} full screen` : undefined}
+                        tabindex={index < row.length ? 0 : -1}
+                      >
+                        <img
+                          src={src}
+                          alt={index < row.length ? label : ''}
+                          class="w-full h-full object-cover cursor-zoom-in"
+                          loading="lazy"
+                          draggable="false"
+                        />
+                      </button>
+                    ))
+                  }
+                </div>
+              </div>
+            ))
+          }
         </div>
         <button
           id="actual-next"
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -mr-2 sm:mr-0"
+          class="actual-nav-btn actual-nav-btn--next"
           aria-label="Next photos"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -70,6 +86,56 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
       </div>
     </div>
   </section>
+
+  <style>
+    .actual-carousel-shell {
+      --actual-card-w: clamp(220px, 28vw, 300px);
+    }
+
+    .actual-marquee-card {
+      width: var(--actual-card-w);
+      height: 180px;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      border: 1px solid rgb(229 231 235);
+      background: #fff;
+    }
+
+    @media (min-width: 640px) {
+      .actual-marquee-card {
+        height: 200px;
+      }
+    }
+
+    .actual-nav-btn {
+      position: absolute;
+      top: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      border: 1px solid rgb(209 213 219);
+      background: #ffffff;
+      color: #161514;
+      box-shadow: 0 4px 16px rgba(22, 21, 20, 0.08);
+      transform: translateY(-50%);
+    }
+
+    .actual-nav-btn:hover {
+      background: #f9fafb;
+    }
+
+    .actual-nav-btn--prev {
+      left: 0;
+    }
+
+    .actual-nav-btn--next {
+      right: 0;
+    }
+  </style>
 
   <section class="py-16 bg-gray-50">
     <div class="section-container">
@@ -230,15 +296,6 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
     });
   }
 
-  // Clone carousel slides first so lightbox binds to originals + clones once
-  const track = document.getElementById('actual-track') as HTMLDivElement | null;
-  let setCount = 0;
-  if (track) {
-    const originals = Array.from(track.children);
-    setCount = originals.length;
-    originals.forEach((node) => track.appendChild(node.cloneNode(true)));
-  }
-
   document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach(bindLightbox);
   document.getElementById('lightbox-close')!.addEventListener('click', closeLightbox);
   document.getElementById('lightbox-prev')!.addEventListener('click', () => openLightbox(current - 1));
@@ -252,44 +309,61 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
     }
   });
 
-  // Infinite loop carousel for Actual Product Photos (CSS transform)
-  if (track && setCount > 0) {
-    const gap = () => {
+  const tracks = [
+    document.getElementById('actual-track-top'),
+    document.getElementById('actual-track-bottom'),
+  ].filter((track): track is HTMLElement => track instanceof HTMLElement);
+
+  if (tracks.length > 0) {
+    const states = tracks.map((track) => ({
+      track,
+      setCount: track.children.length / 2,
+      index: 0,
+    }));
+
+    const gap = (track: HTMLElement) => {
       const style = getComputedStyle(track);
       return parseFloat(style.columnGap || style.gap || '16') || 16;
     };
-    const step = () => {
+    const step = (track: HTMLElement) => {
       const first = track.children[0] as HTMLElement | undefined;
-      return first ? first.offsetWidth + gap() : 300;
+      return first ? first.offsetWidth + gap(track) : 300;
     };
-    let index = 0;
+
     let animating = false;
 
-    const apply = (animate: boolean) => {
-      track.style.transition = animate ? 'transform 0.45s ease' : 'none';
-      track.style.transform = `translateX(${-index * step()}px)`;
+    const applyAll = (animate: boolean) => {
+      states.forEach(({ track, index }) => {
+        track.style.transition = animate ? 'transform 0.45s ease' : 'none';
+        track.style.transform = `translateX(${-index * step(track)}px)`;
+      });
     };
 
-    const normalize = () => {
-      if (index >= setCount) {
-        index -= setCount;
-        apply(false);
-      }
+    const normalizeAll = () => {
+      states.forEach((state) => {
+        if (state.index >= state.setCount) {
+          state.index -= state.setCount;
+        }
+      });
+      applyAll(false);
     };
 
     const go = (dir: number) => {
       if (animating) return;
       animating = true;
-      // Jump into the cloned half before animating left from the first slide
-      if (dir < 0 && index === 0) {
-        index = setCount;
-        apply(false);
-        void track.offsetWidth;
+      if (dir < 0 && states.every((state) => state.index === 0)) {
+        states.forEach((state) => {
+          state.index = state.setCount;
+        });
+        applyAll(false);
+        void tracks[0]?.offsetWidth;
       }
-      index += dir;
-      apply(true);
+      states.forEach((state) => {
+        state.index += dir;
+      });
+      applyAll(true);
       window.setTimeout(() => {
-        normalize();
+        normalizeAll();
         animating = false;
       }, 480);
     };
@@ -313,11 +387,11 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
       startAuto();
     });
 
-    const shell = track.parentElement;
+    const shell = document.querySelector('.actual-carousel-shell');
     shell?.addEventListener('mouseenter', stopAuto);
     shell?.addEventListener('mouseleave', startAuto);
-    window.addEventListener('resize', () => apply(false));
-    apply(false);
+    window.addEventListener('resize', () => applyAll(false));
+    applyAll(false);
     startAuto();
   }
 
