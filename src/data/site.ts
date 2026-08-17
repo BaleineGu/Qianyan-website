@@ -13,8 +13,8 @@ export const siteConfig = {
   description:
     'Factory-direct expandable container homes, space capsule houses, flat pack buildings, folding houses, and container swimming pools with export-ready delivery support.',
   email: 'sales@qianyanjinshu.com',
-  phone: '+86 138 0000 0000',
-  whatsapp: '8613800000000',
+  phone: '+8619061988976',
+  whatsapp: '8619061988976',
   logo: '/images/brand/logo-icon-white.png',
 };
 
