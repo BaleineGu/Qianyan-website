@@ -26,40 +26,6 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
       <AdvantagePhotoStack />
     </div>
   </section>
-  <section class="py-16 bg-gray-50">
-    <div class="section-container">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Double-Wing Expandable House Selection Matrix</h2>
-      <div class="overflow-x-auto border border-gray-200">
-        <table class="w-full min-w-[1080px] text-left text-sm">
-          <thead class="bg-brand-900 text-white"><tr>{expandableSpecHeaders.map((h) => <th class="px-4 py-3 whitespace-nowrap">{h}</th>)}</tr></thead>
-          <tbody>
-            <tr class="bg-white border-b border-gray-200">
-              <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">Photo</td>
-              {[
-                { src: '/images/products/expandable-10ft.png', label: '10ft Double-Wing' },
-                { src: '/images/products/expandable-20ft.png', label: '20ft Double-Wing' },
-                { src: '/images/products/expandable-20ft-720.png', label: '20ft 720 Twin Wings' },
-                { src: '/images/products/expandable-30ft.png', label: '30ft Double-Wing' },
-                { src: '/images/products/expandable-40ft.png', label: '40ft Double-Wing' },
-              ].map(({ src, label }) => (
-                <td class="px-4 py-3">
-                  <button class="lightbox-trigger block w-full" data-lightbox-group="specs" data-src={src} data-label={label} aria-label={`View ${label} full screen`}>
-                    <img src={src} alt={label} class="w-full max-w-[220px] h-[140px] object-cover rounded hover:opacity-90 transition-opacity cursor-zoom-in" loading="lazy" />
-                  </button>
-                </td>
-              ))}
-            </tr>
-            {expandableSpecs.map((row, i) => (
-              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">{row.label}</td>
-                {row.values.map((v) => <td class="px-4 py-3 text-gray-600">{v}</td>)}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
 
   <!-- Actual Product Photos Carousel -->
   <section class="py-16 bg-white">
@@ -101,6 +67,41 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gray-50">
+    <div class="section-container">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Double-Wing Expandable House Selection Matrix</h2>
+      <div class="overflow-x-auto border border-gray-200">
+        <table class="w-full min-w-[1080px] text-left text-sm">
+          <thead class="bg-brand-900 text-white"><tr>{expandableSpecHeaders.map((h) => <th class="px-4 py-3 whitespace-nowrap">{h}</th>)}</tr></thead>
+          <tbody>
+            <tr class="bg-white border-b border-gray-200">
+              <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">Photo</td>
+              {[
+                { src: '/images/products/expandable-10ft.png', label: '10ft Double-Wing' },
+                { src: '/images/products/expandable-20ft.png', label: '20ft Double-Wing' },
+                { src: '/images/products/expandable-20ft-720.png', label: '20ft 720 Twin Wings' },
+                { src: '/images/products/expandable-30ft.png', label: '30ft Double-Wing' },
+                { src: '/images/products/expandable-40ft.png', label: '40ft Double-Wing' },
+              ].map(({ src, label }) => (
+                <td class="px-4 py-3">
+                  <button class="lightbox-trigger block w-full" data-lightbox-group="specs" data-src={src} data-label={label} aria-label={`View ${label} full screen`}>
+                    <img src={src} alt={label} class="w-full max-w-[220px] h-[140px] object-cover rounded hover:opacity-90 transition-opacity cursor-zoom-in" loading="lazy" />
+                  </button>
+                </td>
+              ))}
+            </tr>
+            {expandableSpecs.map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-4 py-3 font-medium text-brand-900 whitespace-nowrap">{row.label}</td>
+                {row.values.map((v) => <td class="px-4 py-3 text-gray-600">{v}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
