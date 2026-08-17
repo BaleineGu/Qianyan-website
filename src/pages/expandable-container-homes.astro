@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
+import AdvantagePhotoStack from '@/components/AdvantagePhotoStack.astro';
 import {
   expandableBanner,
   expandableEngineering,
@@ -21,13 +22,8 @@ const actualProductPhotos = Array.from({ length: 13 }, (_, i) => ({
     image="/images/hero/expandable-banner.png"
   />
   <section class="py-16">
-    <div class="section-container max-w-4xl">
-      <h2 class="text-2xl font-extrabold text-brand-900 mb-4">Product Advantages</h2>
-      <ul class="list-disc pl-5 space-y-2 text-gray-600">
-        <li>Fast onsite setup with limited crew</li>
-        <li>Expandable living area from a compact shipping footprint</li>
-        <li>Factory customization for bedrooms, bathrooms, and finishes</li>
-      </ul>
+    <div class="section-container">
+      <AdvantagePhotoStack />
     </div>
   </section>
   <section class="py-16 bg-gray-50">

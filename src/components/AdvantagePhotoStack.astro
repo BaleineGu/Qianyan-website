@@ -1,0 +1,200 @@
+---
+interface AdvantagePhoto {
+  src: string;
+  caption: string;
+}
+
+const photos: AdvantagePhoto[] = [
+  {
+    src: '/images/products/expandable-advantages/01.png',
+    caption: 'Exquisite attention to detail and customization',
+  },
+  {
+    src: '/images/products/expandable-advantages/02.png',
+    caption: 'High-end visual texture and aesthetic appeal',
+  },
+  {
+    src: '/images/products/expandable-advantages/03.png',
+    caption: 'Balancing spectacular views with privacy',
+  },
+  {
+    src: '/images/products/expandable-advantages/04.png',
+    caption: 'High-level security protection',
+  },
+  {
+    src: '/images/products/expandable-advantages/05.png',
+    caption: 'The robust manufacturing capabilities of the source factory',
+  },
+  {
+    src: '/images/products/expandable-advantages/06.png',
+    caption: 'One-stop whole-house customization and pre-installation',
+  },
+];
+---
+
+<div class="advantage-stack" data-advantage-stack>
+  {
+    photos.map((photo) => (
+      <figure class="advantage-stack__card" tabindex="0">
+        <img src={photo.src} alt={photo.caption} class="advantage-stack__image" loading="lazy" />
+        <figcaption class="advantage-stack__caption">{photo.caption}</figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .advantage-stack {
+    position: relative;
+    width: 100%;
+    min-height: 34rem;
+    height: clamp(34rem, 58vw, 42rem);
+  }
+
+  .advantage-stack__card {
+    position: absolute;
+    width: min(42%, 22rem);
+    margin: 0;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+    cursor: pointer;
+    transform-origin: center center;
+    transition:
+      transform 0.28s ease,
+      box-shadow 0.28s ease,
+      z-index 0s;
+  }
+
+  .advantage-stack__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .advantage-stack__caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0.85rem 1rem;
+    margin: 0;
+    color: #fff;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    font-weight: 500;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+    background: linear-gradient(to top, rgba(16, 15, 14, 0.82) 0%, rgba(16, 15, 14, 0.08) 100%);
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease;
+    pointer-events: none;
+  }
+
+  .advantage-stack__card.is-front,
+  .advantage-stack__card:hover,
+  .advantage-stack__card:focus-visible {
+    z-index: 40 !important;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.42);
+  }
+
+  .advantage-stack__card.is-front .advantage-stack__caption,
+  .advantage-stack__card:hover .advantage-stack__caption,
+  .advantage-stack__card:focus-visible .advantage-stack__caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 767px) {
+    .advantage-stack {
+      min-height: 46rem;
+      height: 46rem;
+    }
+
+    .advantage-stack__card {
+      width: min(58%, 18rem);
+    }
+  }
+</style>
+
+<script>
+  const stack = document.querySelector('[data-advantage-stack]');
+  if (stack) {
+    const cards = Array.from(stack.querySelectorAll<HTMLElement>('.advantage-stack__card'));
+
+    const desktopSlots = [
+      { left: 2, top: 6, rotate: -9 },
+      { left: 30, top: 2, rotate: 7 },
+      { left: 56, top: 10, rotate: -5 },
+      { left: 6, top: 46, rotate: 8 },
+      { left: 34, top: 42, rotate: -11 },
+      { left: 58, top: 48, rotate: 5 },
+    ];
+
+    const mobileSlots = [
+      { left: 4, top: 2, rotate: -7 },
+      { left: 40, top: 8, rotate: 6 },
+      { left: 8, top: 30, rotate: 8 },
+      { left: 42, top: 36, rotate: -8 },
+      { left: 6, top: 58, rotate: 5 },
+      { left: 40, top: 64, rotate: -6 },
+    ];
+
+    const shuffle = <T,>(items: T[]) => {
+      const next = items.slice();
+      for (let i = next.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [next[i], next[j]] = [next[j], next[i]];
+      }
+      return next;
+    };
+
+    const jitter = (min: number, max: number) => min + Math.random() * (max - min);
+
+    const order = shuffle(cards);
+    const slotIndexes = shuffle([0, 1, 2, 3, 4, 5]);
+    const rotates = order.map(() => jitter(-3, 3));
+    const leftJitter = order.map(() => jitter(-1.2, 1.2));
+    const topJitter = order.map(() => jitter(-1.5, 1.5));
+
+    const layout = () => {
+      const slots = window.innerWidth < 768 ? mobileSlots : desktopSlots;
+
+      order.forEach((card, index) => {
+        const slot = slots[slotIndexes[index]];
+        const rotate = slot.rotate + rotates[index];
+        card.style.left = `${slot.left + leftJitter[index]}%`;
+        card.style.top = `${slot.top + topJitter[index]}%`;
+        card.style.zIndex = String(index + 1);
+        card.dataset.rotate = String(rotate);
+        card.style.transform = `rotate(${rotate}deg)`;
+        card.classList.remove('is-front');
+      });
+    };
+
+    const bringFront = (card: HTMLElement) => {
+      cards.forEach((item) => item.classList.remove('is-front'));
+      card.classList.add('is-front');
+      const rotate = Number(card.dataset.rotate || 0);
+      card.style.transform = `rotate(${rotate * 0.25}deg) scale(1.06)`;
+    };
+
+    const restore = (card: HTMLElement) => {
+      card.classList.remove('is-front');
+      const rotate = Number(card.dataset.rotate || 0);
+      card.style.transform = `rotate(${rotate}deg)`;
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('mouseenter', () => bringFront(card));
+      card.addEventListener('mouseleave', () => restore(card));
+      card.addEventListener('focus', () => bringFront(card));
+      card.addEventListener('blur', () => restore(card));
+    });
+
+    layout();
+    window.addEventListener('resize', layout);
+  }
+</script>
