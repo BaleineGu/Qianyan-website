@@ -215,7 +215,7 @@ const bottomRow = photos.slice(midpoint);
     const startAuto = () => {
       if (prefersReducedMotion) return;
       stopAuto();
-      timer = setInterval(() => go(1), 3500);
+      timer = setInterval(() => go(1), 2000);
     };
 
     document.getElementById('interior-prev')?.addEventListener('click', () => {
