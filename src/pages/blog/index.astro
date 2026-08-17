@@ -44,10 +44,16 @@ const displayPosts =
 ---
 
 <BaseLayout title="Blog" description="Insights, updates, and engineering stories from HeBei Telaosi Integrated House Co.LTD." immersiveBackground>
-  <section class="bg-brand-900 text-white py-20">
-    <div class="section-container text-center">
+  <section class="relative bg-surface-dark text-white overflow-hidden" data-header-theme="dark">
+    <img
+      src="/images/hero/blog-banner.png"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.42);"></div>
+    <div class="relative section-container text-center py-20 lg:py-28">
       <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Blog</h1>
-      <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
         Insights and stories from our engineering team.
       </p>
     </div>

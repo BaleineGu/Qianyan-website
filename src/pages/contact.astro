@@ -3,8 +3,14 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig, whatsappUrl } from '@/data/site';
 ---
 <BaseLayout title="Contact Us" description="Request a factory quote, WhatsApp consultation, or catalog for your modular housing project." immersiveBackground>
-  <section class="bg-surface-dark text-ink-on-dark py-section-sm lg:py-section-md" data-header-theme="dark">
-    <div class="section-container text-center max-w-[680px]">
+  <section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
+    <img
+      src="/images/hero/contact-banner.png"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.28);"></div>
+    <div class="relative section-container text-center max-w-[680px] py-section-sm lg:py-section-md">
       <h1 class="heading-h1 mb-4">Contact export sales</h1>
       <p class="text-large text-ink-on-dark-soft">Request a factory quote, WhatsApp consultation, or catalog for your modular housing project.</p>
     </div>
