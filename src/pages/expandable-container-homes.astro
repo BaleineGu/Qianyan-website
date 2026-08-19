@@ -17,9 +17,19 @@ const actualProductPhotos = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((n) => 
   src: `/images/products/actual/${String(n).padStart(2, '0')}.png`,
   label: `Actual product photo ${n}`,
 }));
-const actualMidpoint = Math.ceil(actualProductPhotos.length / 2);
-const actualTopRow = actualProductPhotos.slice(0, actualMidpoint);
-const actualBottomRow = actualProductPhotos.slice(actualMidpoint);
+
+const interiorRow = [
+  { src: '/images/layouts/10ft-interior-1.png', label: '10FT interior 1' },
+  { src: '/images/layouts/20ft-interior-1.png', label: '20FT interior 1' },
+  { src: '/images/layouts/20ft-interior-3.png', label: '20FT interior 3' },
+  { src: '/images/layouts/30ft-interior-2.png', label: '30FT interior 2' },
+  { src: '/images/layouts/40ft-interior-1.png', label: '40FT interior 1' },
+  { src: '/images/interior-space/canteen-meeting-hall.png', label: 'Container canteen interior' },
+  { src: '/images/interior-space/capsule-bedroom-window.png', label: 'Capsule bedroom interior' },
+];
+
+const actualTopRow = actualProductPhotos;
+const actualBottomRow = interiorRow;
 ---
 <BaseLayout title="Expandable Container Homes" description={expandableBanner.description} immersiveBackground>
   <PageBanner
