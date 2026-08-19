@@ -325,10 +325,29 @@ for (const id of tabIconIds) {
     stroke-dashoffset: var(--path-len, 1200);
   }
 
-  /* expandable / pools SVGs use 1024 viewBox — match stroke weight of ~230px icons */
-  .product-tab__icon-wrap.is-expandable .product-tab__svg path,
+  /* expandable / pools: 1024 viewBox + thin traced paths — bold stroke-only */
+  .product-tab__icon-wrap.is-expandable .product-tab__svg path {
+    stroke-width: 14;
+  }
+
   .product-tab__icon-wrap.is-pools .product-tab__svg path {
-    stroke-width: 7.75;
+    stroke-width: 10.5;
+  }
+
+  .product-tab__icon-wrap.is-expandable .product-tab__svg.is-drawn path,
+  .product-tab__icon-wrap.is-pools .product-tab__svg.is-drawn path {
+    animation: product-tab-draw-bold-stroke 1.15s ease forwards;
+  }
+
+  @keyframes product-tab-draw-bold-stroke {
+    0% {
+      stroke-dashoffset: var(--path-len, 1200);
+      fill-opacity: 0;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      fill-opacity: 0;
+    }
   }
 
   .product-tab__svg.is-drawn path {
@@ -355,6 +374,11 @@ for (const id of tabIconIds) {
       fill-opacity: 1;
       stroke-dashoffset: 0;
       animation: none !important;
+    }
+
+    .product-tab__icon-wrap.is-expandable .product-tab__svg path,
+    .product-tab__icon-wrap.is-pools .product-tab__svg path {
+      fill-opacity: 0;
     }
   }
 
