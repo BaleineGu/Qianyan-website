@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroCarousel from '@/components/HeroCarousel.astro';
 import ProductCategories from '@/components/ProductCategories.astro';
 import InteriorSpaceDisplay from '@/components/InteriorSpaceDisplay.astro';
+import ManufacturingProcess from '@/components/ManufacturingProcess.astro';
 import CertificateMarquee from '@/components/CertificateMarquee.astro';
 import CompanyProfileBanner from '@/components/CompanyProfileBanner.astro';
 import LatestBlogPosts from '@/components/LatestBlogPosts.astro';
@@ -17,6 +18,7 @@ import {
   <HeroCarousel slides={heroSlides} />
   <ProductCategories categories={productCategories} />
   <InteriorSpaceDisplay photos={[...interiorSpacePhotos]} />
+  <ManufacturingProcess />
   <CompanyProfileBanner />
   <CertificateMarquee />
   <LatestBlogPosts />
