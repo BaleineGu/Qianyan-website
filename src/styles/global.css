@@ -336,6 +336,7 @@
       .bg-surface-3,
       .bg-white,
       .product-panel__card,
+      .product-zigzag__card,
       article.group,
       form.bg-surface-3,
       .capsule-spec-wrap,
@@ -360,7 +361,7 @@
       main section.bg-white,
       main section.bg-gray-50,
       main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
-    ) > .section-container :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3, .capsule-spec-wrap, .capsule-roi-grid, .pool-usecase-card, tbody tr) :is(.section-heading, h1, h2, h3, h4, h5, h6, .text-brand-900),
+    ) > .section-container :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, .product-zigzag__card, article.group, form.bg-surface-3, .capsule-spec-wrap, .capsule-roi-grid, .pool-usecase-card, tbody tr) :is(.section-heading, h1, h2, h3, h4, h5, h6, .text-brand-900),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card :is(h2, h3),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-tab {
     color: inherit;
@@ -374,7 +375,7 @@
       main section.bg-white,
       main section.bg-gray-50,
       main section:where(.py-16, .py-20, .py-8):has(> .section-container):not(.relative):not(.bg-surface-dark):not(.bg-brand-900):not(.bg-black)
-    ) > .section-container :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, article.group, form.bg-surface-3, .capsule-spec-wrap, .capsule-roi-grid, .pool-usecase-card, tbody tr) :is(.text-ink-soft, .text-small, .text-gray-600, .text-gray-500, .text-gray-700),
+    ) > .section-container :is(.bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-white, .product-panel__card, .product-zigzag__card, article.group, form.bg-surface-3, .capsule-spec-wrap, .capsule-roi-grid, .pool-usecase-card, tbody tr) :is(.text-ink-soft, .text-small, .text-gray-600, .text-gray-500, .text-gray-700),
   body.has-immersive-bg main .product-tabs-section.bg-surface-1 > .section-container .product-panel__card .text-ink-soft {
     color: var(--color-ink-soft);
   }

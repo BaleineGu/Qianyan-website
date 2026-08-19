@@ -15,9 +15,9 @@ const { products } = Astro.props;
 ---
 
 <section
-  class="product-zigzag py-section-sm lg:py-section-md bg-surface-dark"
+  class="product-zigzag py-section-sm lg:py-section-md bg-surface-1"
   aria-label="Product lineup"
-  data-header-theme="dark"
+  data-header-theme="light"
 >
   <div class="section-container product-zigzag__list">
     {
@@ -35,7 +35,7 @@ const { products } = Astro.props;
               />
             </div>
 
-            <div class="product-zigzag__card">
+            <div class="product-zigzag__card bg-surface-2">
               <h2 class="product-zigzag__title">{product.name}</h2>
               <div class="product-zigzag__divider" aria-hidden="true"></div>
 
@@ -96,7 +96,6 @@ const { products } = Astro.props;
     width: min(100%, 420px);
     margin-left: clamp(-3rem, -6vw, -4.5rem);
     padding: clamp(1.5rem, 3vw, 2.5rem);
-    background: var(--color-surface-2);
     border-radius: var(--radius-md);
     border: 1px solid var(--color-ink-hairline);
     position: relative;

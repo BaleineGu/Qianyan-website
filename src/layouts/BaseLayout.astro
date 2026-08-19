@@ -3,7 +3,7 @@ import { siteConfig } from '@/data/site';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import InquiryModal from '@/components/InquiryModal.astro';
-import BackToTop from '@/components/BackToTop.astro';
+import FloatingActions from '@/components/FloatingActions.astro';
 import '@/styles/global.css';
 
 interface Props {
@@ -54,7 +54,7 @@ const pageDescription = description ?? siteConfig.description;
       <main class="flex-1"><slot /></main>
       <Footer />
       <InquiryModal />
-      <BackToTop />
+      <FloatingActions />
     </div>
   </body>
 </html>
