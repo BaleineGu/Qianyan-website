@@ -11,13 +11,12 @@ import ConversionCta from '@/components/ConversionCta.astro';
 import {
   heroSlides,
   productCategories,
-  interiorSpacePhotos,
 } from '@/data/site';
 ---
 <BaseLayout overlayHeader immersiveBackground>
   <HeroCarousel slides={heroSlides} />
   <ProductCategories categories={productCategories} />
-  <InteriorSpaceDisplay photos={[...interiorSpacePhotos]} />
+  <InteriorSpaceDisplay />
   <ManufacturingProcess />
   <CompanyProfileBanner />
   <CertificateMarquee />
