@@ -22,7 +22,7 @@ const bottomRow = photos.slice(midpoint);
 >
   <div class="section-container mb-8 lg:mb-10 immersive-panel">
     <h2 id="interior-space-heading" class="section-heading text-center">
-      Interior space display
+      RANGE OF APPLICATIONS
     </h2>
   </div>
 
@@ -77,6 +77,20 @@ const bottomRow = photos.slice(midpoint);
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
       </svg>
     </button>
+  </div>
+
+  <div class="section-container mt-10 lg:mt-14 immersive-panel">
+    <div class="applications-grid">
+      <div class="applications-grid__item">
+        <img src="/images/applications/camp-site.png" alt="Container camp site in mountainous terrain" loading="lazy" />
+      </div>
+      <div class="applications-grid__item">
+        <img src="/images/applications/modern-home.png" alt="Modern container home with deck" loading="lazy" />
+      </div>
+      <div class="applications-grid__item">
+        <img src="/images/applications/hillside-capsule.png" alt="Hillside capsule container house" loading="lazy" />
+      </div>
+    </div>
   </div>
 </section>
 
@@ -137,6 +151,27 @@ const bottomRow = photos.slice(midpoint);
 
   .interior-nav-btn--next {
     right: 0;
+  }
+
+  .applications-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .applications-grid__item {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    background: #ffffff;
+  }
+
+  .applications-grid__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 </style>
 
