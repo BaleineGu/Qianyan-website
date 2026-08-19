@@ -66,6 +66,7 @@ for (const id of tabIconIds) {
               <span
                 class:list={[
                   'product-tab__icon-wrap flex-1 min-h-0 w-full inline-flex items-center justify-center self-stretch',
+                  c.id === 'expandable' && 'is-expandable',
                   c.id === 'pools' && 'is-pools',
                 ]}
                 set:html={tabIconSvg[c.id]}
@@ -322,6 +323,12 @@ for (const id of tabIconIds) {
     stroke-linejoin: round;
     stroke-dasharray: var(--path-len, 1200);
     stroke-dashoffset: var(--path-len, 1200);
+  }
+
+  /* expandable / pools SVGs use 1024 viewBox — match stroke weight of ~230px icons */
+  .product-tab__icon-wrap.is-expandable .product-tab__svg path,
+  .product-tab__icon-wrap.is-pools .product-tab__svg path {
+    stroke-width: 7.75;
   }
 
   .product-tab__svg.is-drawn path {
