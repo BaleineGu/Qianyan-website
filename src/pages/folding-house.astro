@@ -2,6 +2,19 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
 import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from '@/data/site';
+
+const foldingActualPhotos = [
+  { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1' },
+  { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2' },
+  { src: '/images/products/folding-actual/03.png', label: 'Actual product photo 3' },
+  { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4' },
+  { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5' },
+  { src: '/images/products/folding-actual/06.png', label: 'Actual product photo 6' },
+  { src: '/images/products/folding-actual/07.png', label: 'Actual product photo 7' },
+];
+
+const foldingGridTop = foldingActualPhotos.slice(0, 4);
+const foldingGridBottom = foldingActualPhotos.slice(4, 7);
 ---
 <BaseLayout title="Folding House" description={foldingBanner.description} immersiveBackground>
   <PageBanner
@@ -40,53 +53,105 @@ import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from
   <section class="py-16 bg-white">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Actual product photo</h2>
-      <div class="relative">
-        <button
-          id="folding-actual-prev"
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -ml-2 sm:ml-0"
-          aria-label="Previous photos"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        </button>
-        <div class="overflow-hidden px-1">
-          <div id="folding-actual-track" class="flex gap-4 will-change-transform">
-            {[
-              { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1' },
-              { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2' },
-              { src: '/images/products/folding-actual/03.png', label: 'Actual product photo 3' },
-              { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4' },
-              { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5' },
-              { src: '/images/products/folding-actual/06.png', label: 'Actual product photo 6' },
-              { src: '/images/products/folding-actual/07.png', label: 'Actual product photo 7' },
-            ].map(({ src, label }) => (
+      <div class="folding-photo-grid">
+        <div class="folding-photo-grid__row folding-photo-grid__row--top">
+          {
+            foldingGridTop.map(({ src, label }) => (
               <button
                 type="button"
-                class="lightbox-trigger flex-shrink-0 w-[240px] sm:w-[280px]"
+                class="lightbox-trigger folding-photo-grid__item"
                 data-lightbox-group="folding-actual"
                 data-src={src}
                 data-label={label}
                 aria-label={`View ${label} full screen`}
               >
-                <img
-                  src={src}
-                  alt={label}
-                  class="w-full h-[180px] sm:h-[200px] object-cover rounded-lg border border-gray-200 hover:opacity-90 transition-opacity cursor-zoom-in"
-                  loading="lazy"
-                />
+                <img src={src} alt={label} class="folding-photo-grid__image" loading="lazy" />
               </button>
-            ))}
-          </div>
+            ))
+          }
         </div>
-        <button
-          id="folding-actual-next"
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-300 text-brand-900 shadow hover:bg-gray-50 flex items-center justify-center -mr-2 sm:mr-0"
-          aria-label="Next photos"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </button>
+        <div class="folding-photo-grid__row folding-photo-grid__row--bottom">
+          {
+            foldingGridBottom.map(({ src, label }) => (
+              <button
+                type="button"
+                class="lightbox-trigger folding-photo-grid__item"
+                data-lightbox-group="folding-actual"
+                data-src={src}
+                data-label={label}
+                aria-label={`View ${label} full screen`}
+              >
+                <img src={src} alt={label} class="folding-photo-grid__image" loading="lazy" />
+              </button>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
+
+  <style>
+    .folding-photo-grid {
+      --folding-grid-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+      display: flex;
+      flex-direction: column;
+      gap: var(--folding-grid-gap);
+    }
+
+    .folding-photo-grid__row--top {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--folding-grid-gap);
+    }
+
+    .folding-photo-grid__row--bottom {
+      display: flex;
+      justify-content: center;
+      gap: var(--folding-grid-gap);
+    }
+
+    .folding-photo-grid__row--bottom .folding-photo-grid__item {
+      width: calc((100% - (var(--folding-grid-gap) * 3)) / 4);
+    }
+
+    .folding-photo-grid__item {
+      margin: 0;
+      padding: 0;
+      border: 1px solid rgb(229 231 235);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      background: #fff;
+      cursor: zoom-in;
+    }
+
+    .folding-photo-grid__image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    @media (max-width: 767px) {
+      .folding-photo-grid__row--top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .folding-photo-grid__row--bottom {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .folding-photo-grid__row--bottom .folding-photo-grid__item {
+        width: auto;
+      }
+
+      .folding-photo-grid__row--bottom .folding-photo-grid__item:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc(50% - (var(--folding-grid-gap) / 2));
+      }
+    }
+  </style>
   <section class="py-16 bg-white">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Product Specifications</h2>
@@ -236,15 +301,6 @@ import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from
     });
   }
 
-  // Clone slides first so lightbox binds to originals + clones once
-  const track = document.getElementById('folding-actual-track') as HTMLDivElement | null;
-  let setCount = 0;
-  if (track) {
-    const originals = Array.from(track.children);
-    setCount = originals.length;
-    originals.forEach((node) => track.appendChild(node.cloneNode(true)));
-  }
-
   document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach(bindLightbox);
   document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
   document.getElementById('lightbox-prev')?.addEventListener('click', () => openLightbox(current - 1));
@@ -257,73 +313,6 @@ import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from
     if (e.key === 'ArrowRight') openLightbox(current + 1);
   });
 
-  // Infinite loop carousel (CSS transform — same as Expandable Actual Product Photos)
-  if (track && setCount > 0) {
-    const gap = () => {
-      const style = getComputedStyle(track);
-      return parseFloat(style.columnGap || style.gap || '16') || 16;
-    };
-    const step = () => {
-      const first = track.children[0] as HTMLElement | undefined;
-      return first ? first.offsetWidth + gap() : 300;
-    };
-    let index = 0;
-    let animating = false;
-
-    const apply = (animate: boolean) => {
-      track.style.transition = animate ? 'transform 0.45s ease' : 'none';
-      track.style.transform = `translateX(${-index * step()}px)`;
-    };
-
-    const normalize = () => {
-      if (index >= setCount) {
-        index -= setCount;
-        apply(false);
-      }
-    };
-
-    const go = (dir: number) => {
-      if (animating) return;
-      animating = true;
-      if (dir < 0 && index === 0) {
-        index = setCount;
-        apply(false);
-        void track.offsetWidth;
-      }
-      index += dir;
-      apply(true);
-      window.setTimeout(() => {
-        normalize();
-        animating = false;
-      }, 480);
-    };
-
-    let timer: ReturnType<typeof setInterval> | null = null;
-    const stopAuto = () => {
-      if (timer) clearInterval(timer);
-      timer = null;
-    };
-    const startAuto = () => {
-      stopAuto();
-      timer = setInterval(() => go(1), 2000);
-    };
-
-    document.getElementById('folding-actual-prev')?.addEventListener('click', () => {
-      go(-1);
-      startAuto();
-    });
-    document.getElementById('folding-actual-next')?.addEventListener('click', () => {
-      go(1);
-      startAuto();
-    });
-
-    const shell = track.parentElement;
-    shell?.addEventListener('mouseenter', stopAuto);
-    shell?.addEventListener('mouseleave', startAuto);
-    window.addEventListener('resize', () => apply(false));
-    apply(false);
-    startAuto();
-  }
 
   const form = document.getElementById('folding-quote-form') as HTMLFormElement | null;
   const success = document.getElementById('fqf-success') as HTMLParagraphElement | null;
