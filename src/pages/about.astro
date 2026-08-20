@@ -59,8 +59,8 @@ const mosaicTiles = [
   </section>
 
   <section
-    class="about-mosaic bg-surface-1"
-    data-header-theme="light"
+    class="about-mosaic"
+    data-header-theme="dark"
     aria-label="Factory gallery"
   >
     <div class="about-mosaic__grid">
@@ -75,12 +75,14 @@ const mosaicTiles = [
                 tile.variant === 'light' && 'is-light',
               ]}
             >
-              <p class="about-mosaic__label">{tile.label}</p>
-              <h2 class="about-mosaic__title">{tile.title}</h2>
-              <div class="about-mosaic__copy">
-                {tile.paragraphs.map((paragraph) => (
-                  <p>{paragraph}</p>
-                ))}
+              <div class="about-mosaic__text-content">
+                <p class="about-mosaic__label">{tile.label}</p>
+                <h2 class="about-mosaic__title">{tile.title}</h2>
+                <div class="about-mosaic__copy">
+                  {tile.paragraphs.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
               </div>
             </article>
           ) : (
@@ -140,6 +142,10 @@ const mosaicTiles = [
 </BaseLayout>
 
 <style>
+  .about-mosaic {
+    background: transparent;
+  }
+
   .about-mosaic__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -156,21 +162,12 @@ const mosaicTiles = [
     flex-direction: column;
     justify-content: center;
     padding: clamp(2rem, 5vw, 4.5rem);
+    background: transparent;
   }
 
-  .about-mosaic__cell--text.is-muted {
-    background: var(--color-surface-3);
-    color: var(--color-ink);
-  }
-
-  .about-mosaic__cell--text.is-accent {
-    background: var(--color-surface-dark);
-    color: var(--color-ink-on-dark);
-  }
-
-  .about-mosaic__cell--text.is-light {
-    background: var(--color-surface-2);
-    color: var(--color-ink);
+  .about-mosaic__text-content {
+    color: #ffffff;
+    mix-blend-mode: difference;
   }
 
   .about-mosaic__label {
@@ -180,7 +177,7 @@ const mosaicTiles = [
     line-height: 1.2;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    opacity: 0.72;
+    opacity: 0.88;
   }
 
   .about-mosaic__title {
@@ -198,15 +195,7 @@ const mosaicTiles = [
     max-width: 38rem;
     font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
     line-height: 1.75;
-  }
-
-  .about-mosaic__cell--text.is-muted .about-mosaic__copy,
-  .about-mosaic__cell--text.is-light .about-mosaic__copy {
-    color: var(--color-ink-soft);
-  }
-
-  .about-mosaic__cell--text.is-accent .about-mosaic__copy {
-    color: var(--color-ink-on-dark-soft);
+    opacity: 0.92;
   }
 
   .about-mosaic__cell--media {
