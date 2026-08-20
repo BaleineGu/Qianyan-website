@@ -17,7 +17,7 @@
       <div class="applications-grid__item">
         <img src="/images/applications/modern-home.png" alt="Modern container home with deck" loading="lazy" />
       </div>
-      <div class="applications-grid__item">
+      <div class="applications-grid__item is-capsule">
         <img src="/images/applications/hillside-capsule.png" alt="Hillside capsule container house" loading="lazy" />
       </div>
     </div>
@@ -44,5 +44,10 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  .applications-grid__item.is-capsule img {
+    object-fit: cover;
+    object-position: 62% 40%;
   }
 </style>
