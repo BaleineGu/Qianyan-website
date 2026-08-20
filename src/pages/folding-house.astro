@@ -4,14 +4,14 @@ import PageBanner from '@/components/PageBanner.astro';
 import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from '@/data/site';
 
 const foldingActualPhotos = [
-  { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1', layout: 'pair' },
-  { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2', layout: 'pair' },
-  { src: '/images/products/folding-actual/03.png', label: 'Actual product photo 3', layout: 'third' },
-  { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4', layout: 'third' },
-  { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5', layout: 'third' },
-  { src: '/images/products/folding-actual/06.png', label: 'Actual product photo 6', layout: 'narrow' },
-  { src: '/images/products/folding-actual/07.png', label: 'Actual product photo 7', layout: 'wide' },
-] as const;
+  { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1' },
+  { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2' },
+  { src: '/images/products/folding-actual/03.png', label: 'Actual product photo 3' },
+  { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4' },
+  { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5' },
+  { src: '/images/products/folding-actual/06.png', label: 'Actual product photo 6' },
+  { src: '/images/products/folding-actual/07.png', label: 'Actual product photo 7' },
+];
 ---
 <BaseLayout title="Folding House" description={foldingBanner.description} immersiveBackground>
   <PageBanner
@@ -50,18 +50,18 @@ const foldingActualPhotos = [
   <section class="py-16 bg-white">
     <div class="section-container">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Actual product photo</h2>
-      <div class="folding-bento">
+      <div class="folding-masonry">
         {
-          foldingActualPhotos.map(({ src, label, layout }) => (
+          foldingActualPhotos.map(({ src, label }) => (
             <button
               type="button"
-              class={`lightbox-trigger folding-bento__item folding-bento__item--${layout}`}
+              class="lightbox-trigger folding-masonry__item"
               data-lightbox-group="folding-actual"
               data-src={src}
               data-label={label}
               aria-label={`View ${label} full screen`}
             >
-              <img src={src} alt={label} class="folding-bento__image" loading="lazy" />
+              <img src={src} alt={label} class="folding-masonry__image" loading="lazy" />
             </button>
           ))
         }
@@ -70,61 +70,41 @@ const foldingActualPhotos = [
   </section>
 
   <style>
-    .folding-bento {
-      --folding-bento-gap: clamp(0.75rem, 1.5vw, 1.125rem);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--folding-bento-gap);
-      align-items: start;
+    .folding-masonry {
+      --folding-masonry-gap: clamp(0.75rem, 1.5vw, 1.125rem);
+      columns: 1;
+      column-gap: var(--folding-masonry-gap);
     }
 
-    .folding-bento__item {
-      margin: 0;
+    .folding-masonry__item {
+      display: block;
+      width: 100%;
+      margin: 0 0 var(--folding-masonry-gap);
       padding: 0;
       border: 1px solid rgb(229 231 235);
       border-radius: 12px;
       overflow: hidden;
-      background: #f3f4f6;
+      background: transparent;
+      break-inside: avoid;
+      page-break-inside: avoid;
       cursor: zoom-in;
     }
 
-    .folding-bento__image {
+    .folding-masonry__image {
       display: block;
       width: 100%;
       height: auto;
-      object-fit: contain;
-      object-position: center;
     }
 
-    @media (min-width: 768px) {
-      .folding-bento {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+    @media (min-width: 640px) {
+      .folding-masonry {
+        columns: 2;
       }
+    }
 
-      .folding-bento__item--pair {
-        grid-column: span 3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: clamp(180px, 22vw, 240px);
-      }
-
-      .folding-bento__item--pair .folding-bento__image {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .folding-bento__item--third {
-        grid-column: span 2;
-      }
-
-      .folding-bento__item--narrow {
-        grid-column: span 2;
-      }
-
-      .folding-bento__item--wide {
-        grid-column: span 4;
+    @media (min-width: 1024px) {
+      .folding-masonry {
+        columns: 3;
       }
     }
   </style>
