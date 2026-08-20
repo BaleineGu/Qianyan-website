@@ -24,12 +24,12 @@ const interiorRow = [
   { src: '/images/layouts/20ft-interior-3.png', label: '20FT interior 3' },
   { src: '/images/layouts/30ft-interior-2.png', label: '30FT interior 2' },
   { src: '/images/layouts/40ft-interior-1.png', label: '40FT interior 1' },
-  { src: '/images/interior-space/canteen-meeting-hall.png', label: 'Container canteen interior' },
-  { src: '/images/interior-space/capsule-bedroom-window.png', label: 'Capsule bedroom interior' },
 ];
 
-const actualTopRow = actualProductPhotos;
-const actualBottomRow = interiorRow;
+// Move one exterior photo from top row into the bottom carousel
+const movedToBottom = actualProductPhotos[5]; // actual product photo 7
+const actualTopRow = actualProductPhotos.filter((photo) => photo.src !== movedToBottom.src);
+const actualBottomRow = [...interiorRow, movedToBottom];
 ---
 <BaseLayout title="Expandable Container Homes" description={expandableBanner.description} immersiveBackground>
   <PageBanner
