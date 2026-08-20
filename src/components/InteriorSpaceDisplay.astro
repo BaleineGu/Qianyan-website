@@ -37,6 +37,7 @@
     border-radius: 16px;
     border: 1px solid rgba(22, 21, 20, 0.12);
     background: #ffffff;
+    cursor: pointer;
   }
 
   .applications-grid__item img {
@@ -44,6 +45,21 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    opacity: 0.62;
+    filter: brightness(0.72);
+    transition: opacity 280ms ease, filter 280ms ease;
+  }
+
+  .applications-grid__item:hover img,
+  .applications-grid__item:focus-within img {
+    opacity: 1;
+    filter: brightness(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .applications-grid__item img {
+      transition: none;
+    }
   }
 
   .applications-grid__item.is-capsule img {
