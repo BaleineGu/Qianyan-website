@@ -4,8 +4,8 @@ import PageBanner from '@/components/PageBanner.astro';
 import { foldingBanner, foldingBenefits, foldingSpecHeaders, foldingSpecs } from '@/data/site';
 
 const foldingActualPhotos = [
-  { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1', layout: 'wide' },
-  { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2', layout: 'narrow' },
+  { src: '/images/products/folding-actual/01.png', label: 'Actual product photo 1', layout: 'pair' },
+  { src: '/images/products/folding-actual/02.png', label: 'Actual product photo 2', layout: 'pair' },
   { src: '/images/products/folding-actual/03.png', label: 'Actual product photo 3', layout: 'third' },
   { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4', layout: 'third' },
   { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5', layout: 'third' },
@@ -98,16 +98,33 @@ const foldingActualPhotos = [
 
     @media (min-width: 768px) {
       .folding-bento {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
       }
 
-      .folding-bento__item--wide {
+      .folding-bento__item--pair {
+        grid-column: span 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: clamp(180px, 22vw, 240px);
+      }
+
+      .folding-bento__item--pair .folding-bento__image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .folding-bento__item--third {
         grid-column: span 2;
       }
 
-      .folding-bento__item--narrow,
-      .folding-bento__item--third {
-        grid-column: span 1;
+      .folding-bento__item--narrow {
+        grid-column: span 2;
+      }
+
+      .folding-bento__item--wide {
+        grid-column: span 4;
       }
     }
   </style>
