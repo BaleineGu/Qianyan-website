@@ -59,7 +59,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .applications-grid__item img {
+    .applications-grid__item img,
+    .applications-grid__label {
       transition: none;
     }
   }
@@ -87,5 +88,12 @@
     text-wrap: balance;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
     pointer-events: none;
+    opacity: 1;
+    transition: opacity 280ms ease;
+  }
+
+  .applications-grid__item:hover .applications-grid__label,
+  .applications-grid__item:focus-within .applications-grid__label {
+    opacity: 0;
   }
 </style>
