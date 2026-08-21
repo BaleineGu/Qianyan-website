@@ -78,7 +78,7 @@ export default {
         'helios-full': '1080px',
       },
       maxWidth: {
-        content: '1376px',
+        content: '1460px',
         canvas: '1440px',
         nav: '1028px',
       },

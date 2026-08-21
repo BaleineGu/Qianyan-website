@@ -11,18 +11,30 @@
       RANGE OF APPLICATIONS
     </h2>
     <div class="applications-grid">
-      <div class="applications-grid__item">
+      <a
+        class="applications-grid__item"
+        href="/flat-pack-container-house"
+        aria-label="Flat Pack Container House"
+      >
         <img src="/images/applications/camp-site.png" alt="Container camp site in mountainous terrain" loading="lazy" />
         <p class="applications-grid__label">Engineering and temporary rescue</p>
-      </div>
-      <div class="applications-grid__item">
+      </a>
+      <a
+        class="applications-grid__item"
+        href="/expandable-container-homes"
+        aria-label="Expandable container homes"
+      >
         <img src="/images/applications/modern-home.png" alt="Modern container home with deck" loading="lazy" />
         <p class="applications-grid__label">Private residence</p>
-      </div>
-      <div class="applications-grid__item is-capsule">
+      </a>
+      <a
+        class="applications-grid__item is-capsule"
+        href="/space-capsule-house"
+        aria-label="Space capsule house"
+      >
         <img src="/images/applications/hillside-capsule.png" alt="Hillside capsule container house" loading="lazy" />
         <p class="applications-grid__label">High-end accommodation within the scenic area</p>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -36,12 +48,20 @@
 
   .applications-grid__item {
     position: relative;
+    display: block;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: 16px;
     border: 1px solid rgba(22, 21, 20, 0.12);
     background: #ffffff;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .applications-grid__item:focus-visible {
+    outline: 2px solid rgba(247, 245, 240, 0.85);
+    outline-offset: 3px;
   }
 
   .applications-grid__item img {
