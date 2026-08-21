@@ -242,4 +242,14 @@ import {
     form.querySelectorAll('input,button[type=submit]').forEach((el) => ((el as HTMLInputElement).disabled = true));
     success?.classList.remove('hidden');
   });
+
+  const transportForm = document.getElementById('transport-quote-form') as HTMLFormElement | null;
+  const transportSuccess = document.getElementById('tqf-success') as HTMLParagraphElement | null;
+  transportForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    transportForm
+      .querySelectorAll('input,select,textarea,button[type=submit]')
+      .forEach((el) => ((el as HTMLInputElement).disabled = true));
+    transportSuccess?.classList.remove('hidden');
+  });
 </script>

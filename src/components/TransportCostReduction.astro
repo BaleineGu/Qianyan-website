@@ -10,30 +10,199 @@
     <h2 id="transport-cost-heading" class="section-heading text-center mb-6 lg:mb-8">
       Reduction of transportation costs
     </h2>
-    <div class="transport-video-wrap rounded-helios-md overflow-hidden border border-ink-hairline">
-      <video
-        class="w-full h-auto block"
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="metadata"
-      >
-        <source src="/images/features/reduction-of-transportation-costs.mp4" type="video/mp4" />
-      </video>
+
+    <div class="transport-split">
+      <div class="transport-split__video">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+        >
+          <source src="/images/features/reduction-of-transportation-costs.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="transport-split__quote">
+        <h3 class="transport-split__quote-title">Get a Free Quote</h3>
+        <form id="transport-quote-form" class="transport-split__form">
+          <div class="transport-split__field">
+            <label for="tqf-name">Full Name <span class="text-red-500">*</span></label>
+            <input id="tqf-name" name="name" type="text" required placeholder="John Smith" />
+          </div>
+          <div class="transport-split__field">
+            <label for="tqf-email">Email <span class="text-red-500">*</span></label>
+            <input id="tqf-email" name="email" type="email" required placeholder="you@company.com" />
+          </div>
+          <div class="transport-split__field">
+            <label for="tqf-phone">Phone / WhatsApp</label>
+            <input id="tqf-phone" name="phone" type="tel" placeholder="+1 234 567 8900" />
+          </div>
+          <div class="transport-split__field">
+            <label for="tqf-model">Product Model</label>
+            <select id="tqf-model" name="model">
+              <option value="">-- Select Model --</option>
+              <option>Flat Pack Container House</option>
+              <option>20ft Flat Pack</option>
+              <option>40ft Flat Pack</option>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div class="transport-split__field">
+            <label for="tqf-qty">Quantity</label>
+            <input id="tqf-qty" name="quantity" type="number" min="1" placeholder="e.g. 5" />
+          </div>
+          <div class="transport-split__field">
+            <label for="tqf-country">Destination Country</label>
+            <input id="tqf-country" name="country" type="text" placeholder="e.g. United States" />
+          </div>
+          <div class="transport-split__field transport-split__field--full">
+            <label for="tqf-message">Additional Requirements</label>
+            <textarea
+              id="tqf-message"
+              name="message"
+              rows="4"
+              placeholder="Describe customization needs, delivery timeline, use case, etc."
+            ></textarea>
+          </div>
+          <div class="transport-split__field transport-split__field--full">
+            <button type="submit">Send Quote Request</button>
+            <p id="tqf-success" class="transport-split__success hidden">
+              Thank you! We'll get back to you within 24 hours.
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .transport-video-wrap {
-    background: #000;
-    aspect-ratio: 16 / 9;
+  .transport-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    align-items: stretch;
   }
 
-  .transport-video-wrap video {
+  .transport-split__video {
+    width: 100%;
+    max-width: 28rem;
+    margin-inline: auto;
+    aspect-ratio: 6 / 9;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    background: #000;
+  }
+
+  .transport-split__video video {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .transport-split__quote {
+    background: #ffffff;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    border-radius: 16px;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .transport-split__quote-title {
+    margin: 0 0 1.25rem;
+    text-align: center;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .transport-split__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem 1rem;
+  }
+
+  .transport-split__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .transport-split__field label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .transport-split__field input,
+  .transport-split__field select,
+  .transport-split__field textarea {
+    border: 1px solid rgb(209 213 219);
+    border-radius: 0.375rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    background: #fff;
+    color: var(--color-ink);
+  }
+
+  .transport-split__field input:focus,
+  .transport-split__field select:focus,
+  .transport-split__field textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(22, 21, 20, 0.18);
+  }
+
+  .transport-split__field textarea {
+    resize: none;
+  }
+
+  .transport-split__field button {
+    width: 100%;
+    border: 0;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    background: #161514;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+
+  .transport-split__field button:hover {
+    background: #2a2826;
+  }
+
+  .transport-split__success {
+    margin: 0.75rem 0 0;
+    text-align: center;
+    color: #16a34a;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 640px) {
+    .transport-split__form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .transport-split__field--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .transport-split {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+    }
+
+    .transport-split__video {
+      margin-inline: 0;
+      max-width: none;
+    }
   }
 </style>
