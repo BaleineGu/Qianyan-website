@@ -1,0 +1,97 @@
+---
+/**
+ * Empty 2×2 feature grid (crosshair dividers).
+ * Fill icon / title / body slots yourself later.
+ */
+const slots = [1, 2, 3, 4] as const;
+---
+
+<section
+  class="py-section-sm lg:py-section-md bg-surface-1"
+  aria-label="Feature highlights"
+  data-header-theme="light"
+>
+  <div class="section-container immersive-panel">
+    <div class="feature-cross-grid">
+      {
+        slots.map((n) => (
+          <article class="feature-cross-grid__cell">
+            <div class="feature-cross-grid__icon" aria-hidden="true" data-slot={`icon-${n}`}></div>
+            <h3 class="feature-cross-grid__title" data-slot={`title-${n}`}></h3>
+            <p class="feature-cross-grid__body" data-slot={`body-${n}`}></p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-cross-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .feature-cross-grid__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    min-height: clamp(10rem, 22vw, 14rem);
+  }
+
+  .feature-cross-grid__icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: none;
+    border: 1px dashed rgba(247, 245, 240, 0.35);
+    border-radius: 4px;
+    background: transparent;
+  }
+
+  .feature-cross-grid__title {
+    margin: 0;
+    min-height: 1.5rem;
+    width: 55%;
+    border-bottom: 1px dashed rgba(247, 245, 240, 0.28);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: inherit;
+  }
+
+  .feature-cross-grid__body {
+    margin: 0;
+    min-height: 3.5rem;
+    width: 100%;
+    border: 1px dashed rgba(247, 245, 240, 0.22);
+    border-radius: 4px;
+    font-size: clamp(0.875rem, 1.1vw, 0.95rem);
+    line-height: 1.7;
+    color: inherit;
+    opacity: 0.85;
+  }
+
+  @media (min-width: 768px) {
+    .feature-cross-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .feature-cross-grid__cell:nth-child(1),
+    .feature-cross-grid__cell:nth-child(2) {
+      border-bottom: 1px solid rgba(247, 245, 240, 0.18);
+    }
+
+    .feature-cross-grid__cell:nth-child(odd) {
+      border-right: 1px solid rgba(247, 245, 240, 0.18);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .feature-cross-grid__cell + .feature-cross-grid__cell {
+      border-top: 1px solid rgba(247, 245, 240, 0.18);
+    }
+  }
+</style>
