@@ -33,20 +33,27 @@ const foldingGridBottom = foldingActualPhotos.slice(4, 7);
           </div>
         ))}
       </div>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        {[
-          { src: '/images/products/folding-advantages/01.png', label: 'Folded panel' },
-          { src: '/images/products/folding-advantages/02.png', label: 'Unfolding structure' },
-          { src: '/images/products/folding-advantages/03.png', label: 'Expanding main body' },
-          { src: '/images/products/folding-advantages/04.png', label: 'Final assembled house' },
-        ].map((item) => (
-          <img
-            src={item.src}
-            alt={item.label}
-            class="w-full aspect-square object-contain rounded-lg border border-gray-200 bg-white"
-            loading="lazy"
-          />
-        ))}
+      <div class="folding-advantage-split">
+        <div class="folding-advantage-split__video">
+          <video autoplay loop muted playsinline preload="metadata" aria-label="Folding house assembly process">
+            <source src="/images/features/folding-assembly.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="folding-advantage-split__grid">
+          {[
+            { src: '/images/products/folding-advantages/01.png', label: 'Folded panel' },
+            { src: '/images/products/folding-advantages/02.png', label: 'Unfolding structure' },
+            { src: '/images/products/folding-advantages/03.png', label: 'Expanding main body' },
+            { src: '/images/products/folding-advantages/04.png', label: 'Final assembled house' },
+          ].map((item) => (
+            <img
+              src={item.src}
+              alt={item.label}
+              class="folding-advantage-split__image"
+              loading="lazy"
+            />
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -91,6 +98,58 @@ const foldingGridBottom = foldingActualPhotos.slice(4, 7);
   </section>
 
   <style>
+    .folding-advantage-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1rem, 2vw, 1.5rem);
+      align-items: stretch;
+    }
+
+    .folding-advantage-split__video {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      border: 1px solid rgb(229 231 235);
+      background: #000;
+    }
+
+    .folding-advantage-split__video video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .folding-advantage-split__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    }
+
+    .folding-advantage-split__image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      border: 1px solid rgb(229 231 235);
+      background: #fff;
+    }
+
+    @media (min-width: 1024px) {
+      .folding-advantage-split {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        align-items: center;
+      }
+
+      .folding-advantage-split__video {
+        height: 100%;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+      }
+    }
+
     .folding-photo-grid {
       --folding-grid-gap: clamp(0.75rem, 1.5vw, 1.25rem);
       display: flex;
