@@ -1,11 +1,4 @@
 ---
-const steps = [
-  'Closed Compact Container',
-  'Both wings open upwards',
-  'The inner double wings lay down flat',
-  'Interior Alignment & Installation',
-  'Fully Expanded & Ready',
-] as const;
 ---
 
 <section
@@ -14,156 +7,37 @@ const steps = [
   aria-labelledby="folding-steps-heading"
 >
   <div class="section-container immersive-panel">
-    <div class="text-center max-w-[912px] mx-auto mb-4 sm:mb-5">
+    <div class="text-center max-w-[912px] mx-auto mb-6 lg:mb-8">
       <h2 id="folding-steps-heading" class="section-heading text-center uppercase tracking-[0.06em]">
         Steps for Folding the Wing-Expandable Container House
       </h2>
     </div>
 
-    <div class="folding-gallery">
-      <div class="folding-gallery__media">
-        <div class="folding-gallery__stage">
-          <video
-            class="folding-gallery__video"
-            autoplay
-            loop
-            muted
-            playsinline
-            preload="metadata"
-            aria-label="Wing-expandable container house folding process"
-          >
-            <source src="/images/features/expandable-folding-process.mp4" type="video/mp4" />
-          </video>
-        </div>
-
-        <ol class="folding-gallery__nav" aria-label="Folding process steps">
-          {
-            steps.map((caption, index) => (
-              <li class="folding-gallery__item">
-                <span class="folding-gallery__num" aria-hidden="true">{index + 1}.</span>
-                <span class="folding-gallery__label">{caption}</span>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
+    <div class="folding-video-wrap rounded-helios-md overflow-hidden border border-ink-hairline">
+      <video
+        class="w-full h-auto block"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="metadata"
+        aria-label="Steps for folding the wing-expandable container house"
+      >
+        <source src="/images/features/expandable-folding-process.mp4" type="video/mp4" />
+      </video>
     </div>
   </div>
 </section>
 
 <style>
-  /* ~1/4 prior footprint: half content width × proportional height */
-  .folding-gallery {
-    width: 100%;
-    max-width: min(100%, 730px);
-    margin-inline: auto;
-  }
-
-  .folding-gallery__media {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid rgba(22, 21, 20, 0.12);
-    background: #0a0a0a;
-  }
-
-  .folding-gallery__stage {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    min-width: 0;
+  .folding-video-wrap {
     background: #000;
+    aspect-ratio: 16 / 9;
   }
 
-  .folding-gallery__video {
-    display: block;
+  .folding-video-wrap video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  .folding-gallery__nav {
-    list-style: none;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    gap: 0.35rem;
-    overflow-x: auto;
-    padding: 0.45rem 0.5rem;
-    background-color: rgba(255, 255, 255, 0.28);
-    border-top: 1px solid rgba(22, 21, 20, 0.1);
-    backdrop-filter: blur(12px);
-  }
-
-  .folding-gallery__item {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    width: max-content;
-    max-width: 100%;
-    margin: 0;
-    padding: 0.3rem 0.5rem;
-    border: 1px solid rgba(22, 21, 20, 0.12);
-    border-radius: 24px;
-    background-color: rgba(225, 220, 210, 0.64);
-    backdrop-filter: blur(8px);
-  }
-
-  .folding-gallery__num {
-    flex: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 2px;
-    font-size: 11px;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    background-color: rgba(255, 255, 255, 0.72);
-    color: #6b6966;
-  }
-
-  .folding-gallery__label {
-    font-size: 11px;
-    line-height: 1.3;
-    color: #6b6966;
-    white-space: nowrap;
-  }
-
-  @media (min-width: 1024px) {
-    .folding-gallery__media {
-      flex-direction: row;
-      align-items: stretch;
-    }
-
-    .folding-gallery__stage {
-      flex: 1 1 auto;
-      min-height: 0;
-    }
-
-    .folding-gallery__nav {
-      flex: 0 0 auto;
-      flex-direction: column;
-      justify-content: space-between;
-      align-self: stretch;
-      width: max-content;
-      max-width: 9.5rem;
-      overflow: visible;
-      margin: 0.45rem 0.45rem 0.45rem 0;
-      padding: 0.45rem;
-      border-top: 0;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.28);
-      border: 1px solid rgba(22, 21, 20, 0.1);
-    }
-
-    .folding-gallery__item {
-      width: 100%;
-    }
-
-    .folding-gallery__label {
-      white-space: normal;
-    }
   }
 </style>
