@@ -1,5 +1,6 @@
 ---
 import { fetchPublishedPosts } from '@/lib/halo';
+import { fallbackBlogPosts } from '@/data/blog-fallback';
 
 interface DisplayPost {
   slug: string;
@@ -11,33 +12,6 @@ interface DisplayPost {
 
 const posts = await fetchPublishedPosts();
 
-const fallbackPosts: DisplayPost[] = [
-  {
-    slug: 'future-of-edge-computing',
-    title: 'The Future of Edge Computing in Industrial Settings',
-    excerpt:
-      'How distributed compute architectures are transforming factory floors and remote operations.',
-    cover: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
-    date: '2026-06-15',
-  },
-  {
-    slug: 'sustainable-manufacturing',
-    title: 'Sustainable Manufacturing: A Practical Guide',
-    excerpt:
-      'Real-world strategies for reducing energy consumption without sacrificing throughput.',
-    cover: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80',
-    date: '2026-05-28',
-  },
-  {
-    slug: 'iot-security-best-practices',
-    title: 'IoT Security Best Practices for 2026',
-    excerpt:
-      'Essential security measures every industrial IoT deployment should implement from day one.',
-    cover: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
-    date: '2026-05-10',
-  },
-];
-
 const displayPosts: DisplayPost[] =
   posts.length > 0
     ? posts.slice(0, 3).map((post) => ({
@@ -47,7 +21,13 @@ const displayPosts: DisplayPost[] =
         cover: post.spec.cover || '',
         date: post.spec.publishTime?.split('T')[0] || '',
       }))
-    : fallbackPosts.slice(0, 3);
+    : fallbackBlogPosts.slice(0, 3).map(({ slug, title, excerpt, cover, date }) => ({
+        slug,
+        title,
+        excerpt,
+        cover,
+        date,
+      }));
 ---
 
 <section class="py-section-sm lg:py-section-md bg-surface-1" data-header-theme="light" aria-label="Latest blog posts">

@@ -1,17 +1,17 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { fetchPublishedPosts, fetchPostBySlug } from '@/lib/halo';
+import {
+  fallbackBlogPosts,
+  fallbackBlogSlugs,
+  type BlogContentBlock,
+} from '@/data/blog-fallback';
 
 export async function getStaticPaths() {
   const posts = await fetchPublishedPosts();
 
   if (posts.length === 0) {
-    const fallbackSlugs = [
-      'future-of-edge-computing',
-      'sustainable-manufacturing',
-      'iot-security-best-practices',
-    ];
-    return fallbackSlugs.map((slug) => ({ params: { slug } }));
+    return fallbackBlogSlugs.map((slug) => ({ params: { slug } }));
   }
 
   return posts.map((post) => ({
@@ -21,66 +21,57 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const haloPost = await fetchPostBySlug(slug!);
+const fallback = fallbackBlogPosts.find((post) => post.slug === slug);
 
-const fallbackContent: Record<
-  string,
-  { title: string; date: string; excerpt: string; body: string }
-> = {
-  'future-of-edge-computing': {
-    title: 'The Future of Edge Computing in Industrial Settings',
-    date: '2026-06-15',
-    excerpt:
-      'How distributed compute architectures are transforming factory floors and remote operations.',
-    body: 'Edge computing is no longer a buzzword — it is the backbone of modern industrial operations. By processing data closer to the source, teams reduce latency, improve reliability, and gain real-time insights that were previously impossible.\n\nAt HeBei Telaosi Integrated House Co.LTD, our NovaCore X1 platform brings enterprise-grade edge compute to environments that demand 99.99% availability. From predictive maintenance to autonomous quality control, the applications are limitless.',
-  },
-  'sustainable-manufacturing': {
-    title: 'Sustainable Manufacturing: A Practical Guide',
-    date: '2026-05-28',
-    excerpt:
-      'Real-world strategies for reducing energy consumption without sacrificing throughput.',
-    body: 'Sustainability and productivity are not opposing forces. With the right instrumentation and intelligent power management, manufacturers can cut energy costs by up to 30% while maintaining or even improving output.\n\nOur NovaGrid system enables real-time energy monitoring and automated load balancing, helping facilities meet both operational and environmental targets.',
-  },
-  'iot-security-best-practices': {
-    title: 'IoT Security Best Practices for 2026',
-    date: '2026-05-10',
-    excerpt:
-      'Essential security measures every industrial IoT deployment should implement from day one.',
-    body: 'As IoT deployments scale, so does the attack surface. A defense-in-depth strategy — combining network segmentation, encrypted communication, and regular firmware updates — is essential for any industrial deployment.\n\nNovaLink ships with hardware-backed encryption and supports zero-trust network policies out of the box.',
-  },
-};
-
-const post = haloPost
+const post: {
+  title: string;
+  date: string;
+  excerpt: string;
+  cover: string;
+  blocks: BlogContentBlock[];
+} = haloPost
   ? {
       title: haloPost.spec.title,
       date: haloPost.spec.publishTime?.split('T')[0] || '',
       excerpt: haloPost.spec.excerpt || '',
       cover: haloPost.spec.cover || '',
-      body: '',
+      blocks: [],
     }
-  : fallbackContent[slug!] ?? {
-      title: 'Post Not Found',
-      date: '',
-      excerpt: '',
-      body: 'This post could not be found.',
-    };
+  : fallback
+    ? {
+        title: fallback.title,
+        date: fallback.date,
+        excerpt: fallback.excerpt,
+        cover: fallback.cover,
+        blocks: fallback.blocks,
+      }
+    : {
+        title: 'Post Not Found',
+        date: '',
+        excerpt: '',
+        cover: '',
+        blocks: [{ type: 'text', text: 'This post could not be found.' }],
+      };
 ---
 
 <BaseLayout title={post.title} description={post.excerpt} immersiveBackground>
-  <article>
-    <section class="bg-brand-900 text-white py-20">
-      <div class="section-container max-w-3xl">
-        {post.date && (
-          <time class="text-sm text-brand-500 font-medium" datetime={post.date}>
-            {post.date}
-          </time>
-        )}
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4">{post.title}</h1>
-        {post.excerpt && <p class="text-lg text-gray-300">{post.excerpt}</p>}
+  <article class="blog-article">
+    <section class="blog-article__hero py-20" data-header-theme="light">
+      <div class="section-container">
+        <div class="blog-article__contrast">
+          {post.date && (
+            <time class="blog-article__date" datetime={post.date}>
+              {post.date}
+            </time>
+          )}
+          <h1 class="blog-article__title">{post.title}</h1>
+          {post.excerpt && <p class="blog-article__excerpt">{post.excerpt}</p>}
+        </div>
       </div>
     </section>
 
-    {'cover' in post && post.cover && (
-      <div class="section-container max-w-4xl -mt-8 immersive-panel !py-0 overflow-hidden">
+    {post.cover && (
+      <div class="section-container -mt-8 immersive-panel !py-0 overflow-hidden">
         <img
           src={post.cover}
           alt=""
@@ -89,15 +80,28 @@ const post = haloPost
       </div>
     )}
 
-    <section class="py-16 bg-surface-1" data-header-theme="light">
-      <div class="section-container max-w-3xl">
-        <div class="prose prose-lg text-gray-600 leading-relaxed whitespace-pre-line">
-          {post.body}
+    <section class="blog-article__body py-16" data-header-theme="light">
+      <div class="section-container">
+        <div class="blog-article-body">
+          {
+            post.blocks.map((block) =>
+              block.type === 'image' ? (
+                <figure class="blog-article-body__figure">
+                  <img
+                    src={block.src}
+                    alt={block.alt || ''}
+                    class="blog-article-body__image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ) : (
+                <p class="blog-article-body__text">{block.text}</p>
+              ),
+            )
+          }
         </div>
-        <a
-          href="/blog"
-          class="inline-flex items-center gap-2 mt-10 text-brand-600 font-semibold hover:text-brand-700 transition-colors"
-        >
+        <a href="/blog" class="blog-article__back">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
             ></path>
@@ -108,3 +112,78 @@ const post = haloPost
     </section>
   </article>
 </BaseLayout>
+
+<style>
+  .blog-article__hero,
+  .blog-article__body {
+    background: transparent;
+  }
+
+  .blog-article__contrast,
+  .blog-article-body__text,
+  .blog-article__back {
+    color: #ffffff;
+    mix-blend-mode: difference;
+  }
+
+  .blog-article__date {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.88;
+  }
+
+  .blog-article__title {
+    margin: 0.75rem 0 1rem;
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    line-height: 1.15;
+    font-weight: 800;
+  }
+
+  .blog-article__excerpt {
+    margin: 0;
+    max-width: 56rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+
+  .blog-article-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  .blog-article-body__text {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+
+  .blog-article-body__figure {
+    margin: 0.35rem 0 0.75rem;
+    isolation: isolate;
+  }
+
+  .blog-article-body__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #fff;
+  }
+
+  .blog-article__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .blog-article__back:hover {
+    opacity: 0.8;
+  }
+</style>
