@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { fetchPublishedPosts, fetchPostBySlug } from '@/lib/halo';
+import {
+  fetchPublishedPosts,
+  fetchPostBySlug,
+  getHaloPostExcerpt,
+  resolveHaloAssetUrl,
+  resolveHaloContentUrls,
+} from '@/lib/halo';
 import {
   fallbackBlogPosts,
   fallbackBlogSlugs,
@@ -28,13 +34,15 @@ const post: {
   date: string;
   excerpt: string;
   cover: string;
+  html: string;
   blocks: BlogContentBlock[];
 } = haloPost
   ? {
       title: haloPost.spec.title,
       date: haloPost.spec.publishTime?.split('T')[0] || '',
-      excerpt: haloPost.spec.excerpt || '',
-      cover: haloPost.spec.cover || '',
+      excerpt: getHaloPostExcerpt(haloPost),
+      cover: resolveHaloAssetUrl(haloPost.spec.cover),
+      html: resolveHaloContentUrls(haloPost.content?.content),
       blocks: [],
     }
   : fallback
@@ -43,6 +51,7 @@ const post: {
         date: fallback.date,
         excerpt: fallback.excerpt,
         cover: fallback.cover,
+        html: '',
         blocks: fallback.blocks,
       }
     : {
@@ -50,6 +59,7 @@ const post: {
         date: '',
         excerpt: '',
         cover: '',
+        html: '',
         blocks: [{ type: 'text', text: 'This post could not be found.' }],
       };
 ---
@@ -84,20 +94,24 @@ const post: {
       <div class="section-container">
         <div class="blog-article-body">
           {
-            post.blocks.map((block) =>
-              block.type === 'image' ? (
-                <figure class="blog-article-body__figure">
-                  <img
-                    src={block.src}
-                    alt={block.alt || ''}
-                    class="blog-article-body__image"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ) : (
-                <p class="blog-article-body__text">{block.text}</p>
-              ),
+            post.html ? (
+              <div class="halo-rich-content" set:html={post.html} />
+            ) : (
+              post.blocks.map((block) =>
+                block.type === 'image' ? (
+                  <figure class="blog-article-body__figure">
+                    <img
+                      src={block.src}
+                      alt={block.alt || ''}
+                      class="blog-article-body__image"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </figure>
+                ) : (
+                  <p class="blog-article-body__text">{block.text}</p>
+                ),
+              )
             )
           }
         </div>
@@ -158,6 +172,73 @@ const post: {
     margin: 0;
     font-size: 1.125rem;
     line-height: 1.8;
+  }
+
+  .halo-rich-content {
+    color: #ffffff;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    mix-blend-mode: difference;
+  }
+
+  .halo-rich-content :global(h2),
+  .halo-rich-content :global(h3),
+  .halo-rich-content :global(h4) {
+    margin: 2rem 0 0.75rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  .halo-rich-content :global(h2) {
+    font-size: 1.75rem;
+  }
+
+  .halo-rich-content :global(h3) {
+    font-size: 1.4rem;
+  }
+
+  .halo-rich-content :global(p),
+  .halo-rich-content :global(ul),
+  .halo-rich-content :global(ol),
+  .halo-rich-content :global(blockquote),
+  .halo-rich-content :global(pre),
+  .halo-rich-content :global(table),
+  .halo-rich-content :global(figure) {
+    margin: 0 0 1.15rem;
+  }
+
+  .halo-rich-content :global(ul),
+  .halo-rich-content :global(ol) {
+    padding-left: 1.6rem;
+  }
+
+  .halo-rich-content :global(ul) {
+    list-style: disc;
+  }
+
+  .halo-rich-content :global(ol) {
+    list-style: decimal;
+  }
+
+  .halo-rich-content :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .halo-rich-content :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
+    border-radius: 0.75rem;
+    background: #fff;
+    mix-blend-mode: normal;
+  }
+
+  .halo-rich-content :global(pre),
+  .halo-rich-content :global(table) {
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   .blog-article-body__figure {

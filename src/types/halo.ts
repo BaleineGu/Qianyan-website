@@ -24,13 +24,21 @@ export interface HaloPost {
   spec: {
     title: string;
     slug: string;
-    excerpt?: string;
+    excerpt?: {
+      autoGenerate: boolean;
+      raw?: string;
+    };
     cover?: string;
     publishTime?: string;
     visible?: string;
   };
   status?: {
     permalink?: string;
+    excerpt?: string;
+  };
+  content?: {
+    raw?: string;
+    content?: string;
   };
 }
 

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { fetchPublishedPosts } from '@/lib/halo';
+import { fetchPublishedPosts, getHaloPostExcerpt, resolveHaloAssetUrl } from '@/lib/halo';
 import { fallbackBlogPosts } from '@/data/blog-fallback';
 
 const posts = await fetchPublishedPosts();
@@ -10,8 +10,8 @@ const displayPosts =
     ? posts.map((post) => ({
         slug: post.spec.slug,
         title: post.spec.title,
-        excerpt: post.spec.excerpt || '',
-        cover: post.spec.cover || '',
+        excerpt: getHaloPostExcerpt(post),
+        cover: resolveHaloAssetUrl(post.spec.cover),
         date: post.spec.publishTime?.split('T')[0] || '',
       }))
     : fallbackBlogPosts.map(({ slug, title, excerpt, cover, date }) => ({
