@@ -584,3 +584,24 @@
     background-color: var(--color-surface-dark);
   }
 }
+
+/* Homepage: fixed 70px gap between modules */
+body.is-home-page main > section:first-child {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.is-home-page main > section:nth-child(2) {
+  padding-top: 70px !important;
+  padding-bottom: 35px !important;
+}
+
+body.is-home-page main > section:nth-child(n + 3) {
+  padding-top: 35px !important;
+  padding-bottom: 35px !important;
+}
+
+body.is-home-page main > .product-tabs-section > .section-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
