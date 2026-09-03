@@ -1,6 +1,4 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
 import type { ProductCategory } from '@/types/halo';
 
 interface Props {
@@ -8,284 +6,51 @@ interface Props {
 }
 
 const { categories } = Astro.props;
-const defaultId = categories[0]?.id ?? '';
 
-const tabLabels: Record<string, string> = {
-  expandable: 'Expandable Homes',
-  capsule: 'Space Capsule',
+const categoryLabels: Record<string, string> = {
+  expandable: 'Expandable',
+  capsule: 'Capsule',
   'flat-pack': 'Flat Pack',
-  folding: 'Folding Houses',
-  pools: 'Swimming Pools',
+  folding: 'Folding',
+  pools: 'Pool',
 };
-
-const tabIconIds = ['expandable', 'capsule', 'flat-pack', 'folding', 'pools'] as const;
-const tabIconSvg: Partial<Record<string, string>> = {};
-for (const id of tabIconIds) {
-  const file = path.join(process.cwd(), 'public/images/products/tab-icons', `${id}.svg`);
-  if (fs.existsSync(file)) {
-    tabIconSvg[id] = fs.readFileSync(file, 'utf8');
-  }
-}
 ---
 
 <section
   class="product-tabs-section bg-surface-1"
   data-header-theme="light"
-  data-header-hide="true"
+  aria-labelledby="product-category-heading"
 >
   <div class="section-container py-6 sm:py-8 lg:py-10">
-    <div class="text-center max-w-[680px] mx-auto mb-3 sm:mb-4">
-      <h2 class="section-heading text-center">
+    <div class="text-center max-w-[680px] mx-auto mb-6 sm:mb-8">
+      <h2 id="product-category-heading" class="section-heading text-center">
         Product Category
       </h2>
     </div>
 
-    <div
-      class="product-tabs grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-2.5 mb-3 sm:mb-4"
-      role="tablist"
-      aria-label="Product categories"
-    >
+    <div class="product-showcase">
       {
         categories.map((c, index) => (
-          <button
-            type="button"
-            role="tab"
-            id={`product-tab-${c.id}`}
-            class:list={[
-              'product-tab w-full aspect-square px-1.5 sm:px-2 py-1.5 sm:py-2 rounded-helios-sm text-[clamp(0.7rem,1.1vw,0.9375rem)] font-medium transition-colors text-center leading-tight flex flex-col items-center justify-end gap-1 sm:gap-1.5',
-              index === 0
-                ? 'bg-surface-dark text-ink-on-dark is-active'
-                : 'bg-surface-2 text-ink border border-ink-hairline hover:border-ink-faint',
-            ]}
-            aria-selected={index === 0 ? 'true' : 'false'}
-            aria-controls={`product-panel-${c.id}`}
-            data-product-tab={c.id}
-            tabindex={index === 0 ? 0 : -1}
-          >
-            {tabIconSvg[c.id] ? (
-              <span
-                class:list={[
-                  'product-tab__icon-wrap flex-1 min-h-0 w-full inline-flex items-center justify-center self-stretch',
-                  c.id === 'expandable' && 'is-expandable',
-                  c.id === 'pools' && 'is-pools',
-                ]}
-                set:html={tabIconSvg[c.id]}
-              />
-            ) : null}
-            <span class="shrink-0">{tabLabels[c.id] ?? c.name}</span>
-          </button>
-        ))
-      }
-    </div>
-
-    <div id="product-panels" class="product-panels relative">
-      {
-        categories.map((c, index) => (
-          <div
-            id={`product-panel-${c.id}`}
-            role="tabpanel"
-            aria-labelledby={`product-tab-${c.id}`}
-            class:list={['product-panel h-full', index !== 0 && 'hidden']}
-            data-product-panel={c.id}
-            hidden={index !== 0}
-          >
-            <a
-              href={c.href}
-              class="product-panel__card group grid grid-cols-1 md:grid-cols-[55fr_45fr] md:h-full overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2"
-            >
-              <div class="product-panel__media relative isolate min-h-[220px] aspect-[16/10] md:aspect-auto md:min-h-0 md:h-full overflow-hidden bg-surface-3 min-w-0">
-                <img
-                  src={c.image}
-                  alt=""
-                  class="product-panel__image absolute inset-0 w-full h-full object-cover object-center"
-                  data-master-image={index === 0 ? 'true' : undefined}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
+          <a href={c.href} class="product-showcase__card group">
+            <img
+              src={c.image}
+              alt=""
+              class="product-showcase__image"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <div class="product-showcase__overlay" aria-hidden="true" />
+            <div class="product-showcase__meta">
+              <div class="product-showcase__info">
+                <span class="product-showcase__label">{categoryLabels[c.id] ?? 'Product'}</span>
+                <h3 class="product-showcase__title">{c.name}</h3>
               </div>
-              <div class="product-panel__copy relative z-10 isolate min-w-0 min-h-0 md:h-full bg-surface-1 px-5 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7 flex flex-col justify-center overflow-hidden">
-                {c.id === 'expandable' ? (
-                  <div class="w-full h-full min-h-[200px] flex flex-col gap-2 sm:gap-3">
-                    <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
-                      {c.name}
-                    </h3>
-                    <div class="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
-                      <div class="col-start-1 row-start-1 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/expandable-gallery/home-side-01.png"
-                          alt="Expandable home bedroom interior"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div class="col-start-2 row-start-1 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          A wide range of sizes, layouts, and interior styles are available for you to mix and match.
-                        </p>
-                      </div>
-                      <div class="col-start-1 row-start-2 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          Sturdy and durable, with a lifespan of decades, providing you with the most solid shelter.
-                        </p>
-                      </div>
-                      <div class="col-start-2 row-start-2 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/expandable-gallery/home-side-02.png"
-                          alt="Expandable home modular room interior"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : c.id === 'capsule' ? (
-                  <div class="w-full h-full min-h-[200px] flex flex-col gap-2 sm:gap-3">
-                    <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
-                      {c.name}
-                    </h3>
-                    <div class="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
-                      <div class="col-start-1 row-start-1 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/capsule-gallery/interior-02.png"
-                          alt="Space capsule glass cabin interior"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div class="col-start-2 row-start-1 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          270° panoramic view—embrace the stars and the sea.
-                        </p>
-                      </div>
-                      <div class="col-start-1 row-start-2 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          Smart, fully finished delivery—enjoy a luxurious lifestyle from day one.
-                        </p>
-                      </div>
-                      <div class="col-start-2 row-start-2 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/capsule-gallery/interior-01.png"
-                          alt="Space capsule living lounge interior"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : c.id === 'flat-pack' ? (
-                  <div class="w-full h-full min-h-[200px] flex flex-col gap-2 sm:gap-3">
-                    <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
-                      {c.name}
-                    </h3>
-                    <div class="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
-                      <div class="col-start-1 row-start-1 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/flatpack-gallery/side-01.png"
-                          alt="Flat pack container camp housing"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div class="col-start-2 row-start-1 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          One-stop engineering camp solutions
-                        </p>
-                      </div>
-                      <div class="col-start-1 row-start-2 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          Versatile commercial space—ready for immediate use.
-                        </p>
-                      </div>
-                      <div class="col-start-2 row-start-2 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/flatpack-gallery/side-02.png"
-                          alt="Flat pack container retail shop"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : c.id === 'folding' ? (
-                  <div class="w-full h-full min-h-[200px] flex flex-col gap-2 sm:gap-3">
-                    <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
-                      {c.name}
-                    </h3>
-                    <div class="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
-                      <div class="col-start-1 row-start-1 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/folding-gallery/side-01.png"
-                          alt="Folding house unit crane lift"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div class="col-start-2 row-start-1 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          Ultra-compact folding, significantly reduced shipping costs.
-                        </p>
-                      </div>
-                      <div class="col-start-1 row-start-2 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          Precision-crafted for visible sturdiness and safety.
-                        </p>
-                      </div>
-                      <div class="col-start-2 row-start-2 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/folding-gallery/side-02.png"
-                          alt="Folding house steel frame structure"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : c.id === 'pools' ? (
-                  <div class="w-full h-full min-h-[200px] flex flex-col gap-2 sm:gap-3">
-                    <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
-                      {c.name}
-                    </h3>
-                    <div class="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
-                      <div class="col-start-1 row-start-1 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/pools-gallery/side-01.png"
-                          alt="Orange container swimming pool"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div class="col-start-2 row-start-1 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          Say goodbye to complex construction and instantly embrace cool comfort.
-                        </p>
-                      </div>
-                      <div class="col-start-1 row-start-2 flex items-center px-2 sm:px-3">
-                        <p class="text-[clamp(0.8125rem,1.15vw,1.0625rem)] leading-relaxed text-ink-soft">
-                          All-in-one smart integration for hassle-free maintenance.
-                        </p>
-                      </div>
-                      <div class="col-start-2 row-start-2 overflow-hidden rounded-helios-sm border border-ink-hairline bg-surface-3">
-                        <img
-                          src="/images/products/pools-gallery/side-02.png"
-                          alt="Black container swimming pool"
-                          class="w-full h-full object-cover object-center"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div class="product-panel__copy-inner w-full" data-fit-copy>
-                    <h3 class="product-panel__title font-medium text-ink leading-tight mb-[0.55em]">
-                      {c.name}
-                    </h3>
-                    <p class="product-panel__body leading-[1.65] text-ink-soft">
-                      {c.description}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </a>
-          </div>
+              <span class="product-showcase__cta">
+                See Project
+                <span class="product-showcase__cta-plus" aria-hidden="true">+</span>
+              </span>
+            </div>
+          </a>
         ))
       }
     </div>
@@ -293,291 +58,139 @@ for (const id of tabIconIds) {
 </section>
 
 <style>
-  .product-tab__icon-wrap {
-    flex-shrink: 0;
-    color: inherit;
+  .product-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
   }
 
-  .product-tab__svg {
+  .product-showcase__card {
+    position: relative;
     display: block;
-    width: 94%;
-    height: 94%;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: visible;
+    aspect-ratio: 16 / 9;
+    min-height: clamp(16rem, 42vw, 28rem);
+    overflow: hidden;
+    border-radius: 0;
+    text-decoration: none;
+    color: inherit;
+    background: #111;
   }
 
-  .product-tab__icon-wrap.is-pools .product-tab__svg {
-    width: 118%;
-    height: 118%;
-    transform: scale(1.32);
-    transform-origin: center center;
+  .product-showcase__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 700ms ease;
   }
 
-  .product-tab__svg path {
-    fill: currentColor;
-    fill-opacity: 0;
-    stroke: currentColor;
-    stroke-width: 1.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: var(--path-len, 1200);
-    stroke-dashoffset: var(--path-len, 1200);
+  .product-showcase__card:hover .product-showcase__image {
+    transform: scale(1.04);
   }
 
-  /* expandable / pools: 1024 viewBox + thin traced paths — bold stroke-only */
-  .product-tab__icon-wrap.is-expandable .product-tab__svg path {
-    stroke-width: 14;
+  .product-showcase__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.28) 0%, transparent 45%);
+    pointer-events: none;
   }
 
-  .product-tab__icon-wrap.is-pools .product-tab__svg path {
-    stroke-width: 10.5;
+  .product-showcase__meta {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0;
   }
 
-  .product-tab__icon-wrap.is-expandable .product-tab__svg.is-drawn path,
-  .product-tab__icon-wrap.is-pools .product-tab__svg.is-drawn path {
-    animation: product-tab-draw-bold-stroke 1.15s ease forwards;
+  .product-showcase__info {
+    max-width: min(72%, 36rem);
+    padding: clamp(1rem, 2.2vw, 1.75rem) clamp(1.1rem, 2.4vw, 2rem);
+    background: #ffffff;
   }
 
-  @keyframes product-tab-draw-bold-stroke {
-    0% {
-      stroke-dashoffset: var(--path-len, 1200);
-      fill-opacity: 0;
-    }
-    100% {
-      stroke-dashoffset: 0;
-      fill-opacity: 0;
-    }
+  .product-showcase__label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+    font-weight: 500;
   }
 
-  .product-tab__svg.is-drawn path {
-    animation: product-tab-draw 1.15s ease forwards;
+  .product-showcase__title {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.1vw, 1.65rem);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #111111;
   }
 
-  @keyframes product-tab-draw {
-    0% {
-      stroke-dashoffset: var(--path-len, 1200);
-      fill-opacity: 0;
-    }
-    70% {
-      stroke-dashoffset: 0;
-      fill-opacity: 0;
-    }
-    100% {
-      stroke-dashoffset: 0;
-      fill-opacity: 1;
-    }
+  .product-showcase__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: none;
+    padding: clamp(0.85rem, 1.6vw, 1.2rem) clamp(1rem, 2vw, 1.5rem);
+    background: #ffffff;
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #9a9a9a;
+    white-space: nowrap;
+    transition: color 200ms ease;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .product-tab__svg path {
-      fill-opacity: 1;
-      stroke-dashoffset: 0;
-      animation: none !important;
-    }
-
-    .product-tab__icon-wrap.is-expandable .product-tab__svg path,
-    .product-tab__icon-wrap.is-pools .product-tab__svg path {
-      fill-opacity: 0;
-    }
+  .product-showcase__card:hover .product-showcase__cta {
+    color: #111111;
   }
 
-  .product-panel__title {
-    font-size: 1.45em;
-  }
-
-  .product-panel__body {
-    font-size: 1em;
-  }
-
-  .product-panel__copy-inner {
-    font-size: 16px;
-  }
-
-  .product-panels {
-    overflow: visible;
-  }
-
-  .product-panel__card {
-    box-shadow:
-      0 10px 28px rgb(0 0 0 / 0.12),
-      0 4px 12px rgb(0 0 0 / 0.08);
-    transform: translateY(0);
-    transition:
-      transform 0.35s ease,
-      box-shadow 0.35s ease;
-    will-change: transform, box-shadow;
-  }
-
-  .product-panel__card:hover {
-    box-shadow:
-      0 28px 56px rgb(0 0 0 / 0.24),
-      0 12px 24px rgb(0 0 0 / 0.16),
-      0 4px 10px rgb(0 0 0 / 0.1);
-    transform: translateY(-8px);
-  }
-
-  .product-panel__image {
-    transform: scale(1);
-    transform-origin: center center;
-    transition: transform 0.45s ease-out;
-    will-change: transform;
-  }
-
-  .product-panel__media:hover .product-panel__image {
-    transform: scale(1.2);
+  .product-showcase__cta-plus {
+    font-size: 1.05em;
+    line-height: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .product-panel__card,
-    .product-panel__image {
+    .product-showcase__image,
+    .product-showcase__cta {
       transition: none;
     }
 
-    .product-panel__card:hover {
+    .product-showcase__card:hover .product-showcase__image {
       transform: none;
     }
+  }
 
-    .product-panel__media:hover .product-panel__image {
-      transform: none;
+  @media (max-width: 640px) {
+    .product-showcase__card {
+      aspect-ratio: 4 / 5;
+      min-height: 22rem;
+    }
+
+    .product-showcase__meta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .product-showcase__info {
+      max-width: none;
+    }
+
+    .product-showcase__cta {
+      justify-content: space-between;
     }
   }
 </style>
-
-<script define:vars={{ defaultId }}>
-  const tabs = Array.from(document.querySelectorAll('[data-product-tab]'));
-  const panels = Array.from(document.querySelectorAll('[data-product-panel]'));
-  const panelsRoot = document.getElementById('product-panels');
-  const masterImage = document.querySelector('[data-master-image="true"]');
-
-  function syncPanelHeight() {
-    if (!panelsRoot || !masterImage) return;
-
-    if (window.innerWidth < 768) {
-      panelsRoot.style.height = '';
-      return;
-    }
-
-    const naturalW = masterImage.naturalWidth;
-    const naturalH = masterImage.naturalHeight;
-    if (!naturalW || !naturalH) return;
-
-    const totalWidth = panelsRoot.getBoundingClientRect().width;
-    const imageWidth = totalWidth * 0.55;
-    const height = Math.round(imageWidth * (naturalH / naturalW));
-    panelsRoot.style.height = `${height}px`;
-  }
-
-  function fitCopy(root = document) {
-    const boxes = root.querySelectorAll('.product-panel__copy');
-    boxes.forEach((copy) => {
-      const panel = copy.closest('[data-product-panel]');
-      if (panel?.classList.contains('hidden') || panel?.hasAttribute('hidden')) return;
-
-      const inner = copy.querySelector('[data-fit-copy]');
-      if (!(inner instanceof HTMLElement) || !(copy instanceof HTMLElement)) return;
-
-      if (window.innerWidth < 768) {
-        inner.style.fontSize = '';
-        return;
-      }
-
-      const available = (() => {
-        const styles = getComputedStyle(copy);
-        const padY = Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom);
-        return Math.max(0, copy.clientHeight - padY);
-      })();
-      if (available < 40) return;
-
-      let low = 11;
-      let high = 30;
-      let best = low;
-
-      for (let i = 0; i < 16; i += 1) {
-        const mid = (low + high) / 2;
-        inner.style.fontSize = `${mid}px`;
-        if (inner.scrollHeight <= available) {
-          best = mid;
-          low = mid;
-        } else {
-          high = mid;
-        }
-      }
-
-      inner.style.fontSize = `${best.toFixed(2)}px`;
-    });
-  }
-
-  function layout() {
-    syncPanelHeight();
-    requestAnimationFrame(() => fitCopy());
-  }
-
-  function prepareIconPaths() {
-    document.querySelectorAll('.product-tab__svg').forEach((svg) => {
-      svg.querySelectorAll('path').forEach((path) => {
-        try {
-          const len = Math.ceil(path.getTotalLength());
-          path.style.setProperty('--path-len', String(len));
-        } catch {
-          path.style.setProperty('--path-len', '1600');
-        }
-      });
-    });
-  }
-
-  function drawIcon(tab) {
-    const svg = tab.querySelector('.product-tab__svg');
-    if (!svg) return;
-    svg.classList.remove('is-drawn');
-    // restart CSS animation
-    void svg.offsetWidth;
-    svg.classList.add('is-drawn');
-  }
-
-  function activate(id) {
-    tabs.forEach((tab) => {
-      const active = tab.getAttribute('data-product-tab') === id;
-      tab.classList.toggle('is-active', active);
-      tab.classList.toggle('bg-surface-dark', active);
-      tab.classList.toggle('text-ink-on-dark', active);
-      tab.classList.toggle('bg-surface-2', !active);
-      tab.classList.toggle('text-ink', !active);
-      tab.classList.toggle('border', !active);
-      tab.classList.toggle('border-ink-hairline', !active);
-      tab.setAttribute('aria-selected', active ? 'true' : 'false');
-      tab.setAttribute('tabindex', active ? '0' : '-1');
-      if (active) drawIcon(tab);
-    });
-
-    panels.forEach((panel) => {
-      const active = panel.getAttribute('data-product-panel') === id;
-      panel.classList.toggle('hidden', !active);
-      if (active) panel.removeAttribute('hidden');
-      else panel.setAttribute('hidden', '');
-    });
-
-    requestAnimationFrame(() => fitCopy());
-  }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const id = tab.getAttribute('data-product-tab');
-      if (id) activate(id);
-    });
-    tab.addEventListener('mouseenter', () => drawIcon(tab));
-  });
-
-  prepareIconPaths();
-  tabs.forEach((tab) => drawIcon(tab));
-  if (defaultId) activate(defaultId);
-
-  if (masterImage) {
-    if (masterImage.complete) layout();
-    else masterImage.addEventListener('load', layout);
-  } else {
-    layout();
-  }
-
-  window.addEventListener('resize', layout);
-</script>
