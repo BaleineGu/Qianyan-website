@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroCarousel from '@/components/HeroCarousel.astro';
 import ProductCategories from '@/components/ProductCategories.astro';
@@ -14,7 +14,7 @@ import {
   productCategories,
 } from '@/data/site';
 ---
-<BaseLayout overlayHeader immersiveBackground homePage>
+<BaseLayout overlayHeader homePage>
   <HeroCarousel slides={heroSlides} />
   <ProductCategories categories={productCategories} />
   <InteriorSpaceDisplay />

@@ -18,9 +18,10 @@ const {
   title,
   description,
   overlayHeader = false,
-  immersiveBackground = false,
+  immersiveBackground: _immersiveBackground = false,
   homePage = false,
 } = Astro.props;
+const immersiveBackground = false;
 const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 const pageDescription = description ?? siteConfig.description;
 ---

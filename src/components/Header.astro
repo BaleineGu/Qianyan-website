@@ -22,6 +22,14 @@ function isLinkActive(href: string) {
         id="site-header-row"
         class="site-header__row absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8 origin-center"
       >
+        <div class="site-header__contact hidden sm:flex absolute left-4 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 flex-col justify-center gap-0.5 z-10">
+          <a href={`tel:${siteConfig.phone}`} class="site-header__contact-link">
+            {siteConfig.phone}
+          </a>
+          <a href={`mailto:${siteConfig.email}`} class="site-header__contact-link">
+            {siteConfig.email}
+          </a>
+        </div>
         <div class="site-header__cluster flex items-center gap-6 sm:gap-8 lg:gap-10 w-max max-w-full">
           <a href="/" class="flex items-center gap-2 sm:gap-3 shrink-0">
             <img
@@ -124,6 +132,20 @@ function isLinkActive(href: string) {
 {!overlay && <div id="site-header-spacer" class="h-[44px] sm:h-[56px] lg:h-[65px]" aria-hidden="true" />}
 
 <style>
+  .site-header__contact-link {
+    font-size: clamp(0.65rem, 0.95vw, 0.8rem);
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .site-header__contact-link:hover {
+    opacity: 0.75;
+  }
+
   .site-header__shell {
     border-radius: 0;
     backdrop-filter: blur(18px) saturate(1.35);
@@ -143,7 +165,8 @@ function isLinkActive(href: string) {
   }
 
   .site-header[data-theme='dark'] .site-header__brand,
-  .site-header[data-theme='dark'] .site-header__icon {
+  .site-header[data-theme='dark'] .site-header__icon,
+  .site-header[data-theme='dark'] .site-header__contact-link {
     color: white;
   }
 
@@ -215,7 +238,8 @@ function isLinkActive(href: string) {
   }
 
   .site-header[data-theme='light'] .site-header__brand,
-  .site-header[data-theme='light'] .site-header__icon {
+  .site-header[data-theme='light'] .site-header__icon,
+  .site-header[data-theme='light'] .site-header__contact-link {
     color: rgb(15 23 42);
   }
 

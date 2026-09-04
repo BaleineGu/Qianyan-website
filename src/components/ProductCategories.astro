@@ -7,12 +7,57 @@ interface Props {
 
 const { categories } = Astro.props;
 
-const categoryLabels: Record<string, string> = {
-  expandable: 'Expandable',
-  capsule: 'Capsule',
-  'flat-pack': 'Flat Pack',
-  folding: 'Folding',
-  pools: 'Pool',
+const sideContent: Record<
+  string,
+  {
+    topImage: string;
+    topAlt: string;
+    topText: string;
+    bottomText: string;
+    bottomImage: string;
+    bottomAlt: string;
+  }
+> = {
+  expandable: {
+    topImage: '/images/products/expandable-gallery/home-side-01.png',
+    topAlt: 'Expandable home bedroom interior',
+    topText: 'A wide range of sizes, layouts, and interior styles are available for you to mix and match.',
+    bottomText: 'Sturdy and durable, with a lifespan of decades, providing you with the most solid shelter.',
+    bottomImage: '/images/products/expandable-gallery/home-side-02.png',
+    bottomAlt: 'Expandable home modular room interior',
+  },
+  capsule: {
+    topImage: '/images/products/capsule-gallery/interior-02.png',
+    topAlt: 'Space capsule glass cabin interior',
+    topText: '270° panoramic view—embrace the stars and the sea.',
+    bottomText: 'Smart, fully finished delivery—enjoy a luxurious lifestyle from day one.',
+    bottomImage: '/images/products/capsule-gallery/interior-01.png',
+    bottomAlt: 'Space capsule living lounge interior',
+  },
+  'flat-pack': {
+    topImage: '/images/products/flatpack-gallery/side-01.png',
+    topAlt: 'Flat pack container camp housing',
+    topText: 'One-stop engineering camp solutions',
+    bottomText: 'Versatile commercial space—ready for immediate use.',
+    bottomImage: '/images/products/flatpack-gallery/side-02.png',
+    bottomAlt: 'Flat pack container retail shop',
+  },
+  folding: {
+    topImage: '/images/products/folding-gallery/side-01.png',
+    topAlt: 'Folding house unit crane lift',
+    topText: 'Ultra-compact folding, significantly reduced shipping costs.',
+    bottomText: 'Precision-crafted for visible sturdiness and safety.',
+    bottomImage: '/images/products/folding-gallery/side-02.png',
+    bottomAlt: 'Folding house steel frame structure',
+  },
+  pools: {
+    topImage: '/images/products/pools-gallery/side-01.png',
+    topAlt: 'Orange container swimming pool',
+    topText: 'Say goodbye to complex construction and instantly embrace cool comfort.',
+    bottomText: 'All-in-one smart integration for hassle-free maintenance.',
+    bottomImage: '/images/products/pools-gallery/side-02.png',
+    bottomAlt: 'Black container swimming pool',
+  },
 };
 ---
 
@@ -21,176 +66,242 @@ const categoryLabels: Record<string, string> = {
   data-header-theme="light"
   aria-labelledby="product-category-heading"
 >
-  <div class="section-container py-6 sm:py-8 lg:py-10">
-    <div class="text-center max-w-[680px] mx-auto mb-6 sm:mb-8">
+  <div class="section-container pt-6 sm:pt-8 lg:pt-10 pb-4 sm:pb-5">
+    <div class="text-center max-w-[680px] mx-auto">
       <h2 id="product-category-heading" class="section-heading text-center">
         Product Category
       </h2>
     </div>
+  </div>
 
-    <div class="product-showcase">
-      {
-        categories.map((c, index) => (
-          <a href={c.href} class="product-showcase__card group">
-            <img
-              src={c.image}
-              alt=""
-              class="product-showcase__image"
-              loading={index === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-            <div class="product-showcase__overlay" aria-hidden="true" />
-            <div class="product-showcase__meta">
-              <div class="product-showcase__info">
-                <span class="product-showcase__label">{categoryLabels[c.id] ?? 'Product'}</span>
-                <h3 class="product-showcase__title">{c.name}</h3>
-              </div>
-              <span class="product-showcase__cta">
-                See Project
-                <span class="product-showcase__cta-plus" aria-hidden="true">+</span>
-              </span>
+  <div class="product-stack">
+    {
+      categories.map((c, index) => {
+        const side = sideContent[c.id];
+        return (
+          <a
+            href={c.href}
+            class="product-panel__card group border-y border-ink-hairline bg-surface-1"
+          >
+            <div class="product-panel__media bg-surface-3 min-w-0">
+              <img
+                src={c.image}
+                alt=""
+                class="product-panel__image"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </div>
+            <div class="product-panel__copy min-w-0 bg-surface-1">
+              {side ? (
+                <div class="product-panel__side">
+                  <h3 class="product-panel__title font-medium text-ink leading-tight shrink-0 text-[clamp(1.1rem,1.8vw,1.45rem)]">
+                    {c.name}
+                  </h3>
+                  <div class="product-panel__side-grid">
+                    <div class="product-panel__side-media">
+                      <img
+                        src={side.topImage}
+                        alt={side.topAlt}
+                        class="product-panel__side-image"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <div class="product-panel__side-text">
+                      <p>{side.topText}</p>
+                    </div>
+                    <div class="product-panel__side-text">
+                      <p>{side.bottomText}</p>
+                    </div>
+                    <div class="product-panel__side-media">
+                      <img
+                        src={side.bottomImage}
+                        alt={side.bottomAlt}
+                        class="product-panel__side-image"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div class="w-full">
+                  <h3 class="product-panel__title font-medium text-ink leading-tight mb-[0.55em] text-[clamp(1.1rem,1.8vw,1.45rem)]">
+                    {c.name}
+                  </h3>
+                  <p class="leading-[1.65] text-ink-soft text-[clamp(0.875rem,1.2vw,1.05rem)]">
+                    {c.description}
+                  </p>
+                </div>
+              )}
             </div>
           </a>
-        ))
-      }
-    </div>
+        );
+      })
+    }
   </div>
 </section>
 
 <style>
-  .product-showcase {
+  .product-stack {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.75rem, 1.5vw, 1.25rem);
-  }
-
-  .product-showcase__card {
-    position: relative;
-    display: block;
-    aspect-ratio: 16 / 9;
-    min-height: clamp(16rem, 42vw, 28rem);
-    overflow: hidden;
-    border-radius: 0;
-    text-decoration: none;
-    color: inherit;
-    background: #111;
-  }
-
-  .product-showcase__image {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 700ms ease;
+    gap: 0;
   }
 
-  .product-showcase__card:hover .product-showcase__image {
-    transform: scale(1.04);
+  .product-panel__card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease;
   }
 
-  .product-showcase__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.28) 0%, transparent 45%);
-    pointer-events: none;
+  .product-panel__card + .product-panel__card {
+    border-top: 0;
   }
 
-  .product-showcase__meta {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0;
+  .product-panel__card:hover {
+    box-shadow:
+      0 18px 36px rgb(0 0 0 / 0.14),
+      0 6px 14px rgb(0 0 0 / 0.08);
+    transform: translateY(-2px);
+    z-index: 1;
   }
 
-  .product-showcase__info {
-    max-width: min(72%, 36rem);
-    padding: clamp(1rem, 2.2vw, 1.75rem) clamp(1.1rem, 2.4vw, 2rem);
-    background: #ffffff;
-  }
-
-  .product-showcase__label {
+  .product-panel__media {
     display: block;
-    margin-bottom: 0.45rem;
-    font-size: clamp(0.7rem, 1vw, 0.8rem);
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #9a9a9a;
-    font-weight: 500;
+    overflow: hidden;
+    width: 100%;
+    background: #eceae4;
   }
 
-  .product-showcase__title {
-    margin: 0;
-    font-size: clamp(1.05rem, 2.1vw, 1.65rem);
-    line-height: 1.15;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    font-weight: 800;
-    color: #111111;
+  .product-panel__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+    object-position: center left;
+    transition: transform 0.45s ease-out;
   }
 
-  .product-showcase__cta {
-    display: inline-flex;
+  .product-panel__card:hover .product-panel__image {
+    transform: scale(1.02);
+  }
+
+  .product-panel__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding: 0.85rem 1.25rem 1rem;
+    background: #f7f6f2;
+  }
+
+  .product-panel__side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .product-panel__side-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    /* Move side images toward text; do not rescale images */
+    row-gap: 0.25rem;
     align-items: center;
-    gap: 0.4rem;
-    flex: none;
-    padding: clamp(0.85rem, 1.6vw, 1.2rem) clamp(1rem, 2vw, 1.5rem);
-    background: #ffffff;
-    font-size: clamp(0.7rem, 1vw, 0.8rem);
-    line-height: 1.2;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: #9a9a9a;
-    white-space: nowrap;
-    transition: color 200ms ease;
   }
 
-  .product-showcase__card:hover .product-showcase__cta {
-    color: #111111;
+  .product-panel__side-media {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    background: #eceae4;
+    width: 100%;
   }
 
-  .product-showcase__cta-plus {
-    font-size: 1.05em;
-    line-height: 1;
+  .product-panel__side-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .product-panel__side-text {
+    display: flex;
+    align-items: center;
+    padding: 0 0.25rem;
+  }
+
+  .product-panel__side-text p {
+    margin: 0;
+    font-size: clamp(0.8125rem, 1.15vw, 1.0625rem);
+    line-height: 1.4;
+    color: rgba(22, 21, 20, 0.64);
+  }
+
+  /* Desktop: left image defines card height; right sits in same height (no red blank) */
+  @media (min-width: 768px) {
+    .product-panel__card {
+      display: block;
+    }
+
+    .product-panel__media {
+      width: 60%;
+    }
+
+    .product-panel__copy {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 40%;
+      padding: 0.45rem 1.35rem 0.45rem 1.1rem;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-panel__side {
+      height: 100%;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .product-panel__side-grid {
+      row-gap: 0.15rem;
+      align-content: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-panel__copy {
+      padding: 0.5rem 2rem 0.5rem 1.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .product-showcase__image,
-    .product-showcase__cta {
+    .product-panel__card,
+    .product-panel__image {
       transition: none;
     }
 
-    .product-showcase__card:hover .product-showcase__image {
+    .product-panel__card:hover {
       transform: none;
     }
-  }
 
-  @media (max-width: 640px) {
-    .product-showcase__card {
-      aspect-ratio: 4 / 5;
-      min-height: 22rem;
-    }
-
-    .product-showcase__meta {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .product-showcase__info {
-      max-width: none;
-    }
-
-    .product-showcase__cta {
-      justify-content: space-between;
+    .product-panel__card:hover .product-panel__image {
+      transform: none;
     }
   }
 </style>

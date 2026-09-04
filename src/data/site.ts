@@ -607,15 +607,15 @@ export const flatPackBanner = {
 
 export const flatPackAdvantages = [
   {
+    title: 'Modular Scalability',
+    description: 'It can be stacked in multiple layers, maximizing the saving of land area.',
+    image: '/images/products/flatpack-advantages/stacking.png',
+  },
+  {
     title: 'Freight Optimization',
     description:
       'Multiple flat-packed units can share one ISO container footprint, reducing ocean logistics cost.',
     image: '/images/products/flatpack-advantages/freight.png',
-  },
-  {
-    title: 'Modular Scalability',
-    description: 'It can be stacked in multiple layers, maximizing the saving of land area.',
-    image: '/images/products/flatpack-advantages/stacking.png',
   },
   {
     title: 'Flexible customization',

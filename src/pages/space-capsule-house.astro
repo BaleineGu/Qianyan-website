@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
 import { capsuleBanner, capsuleExampleRow, capsuleExamples, capsuleModels, capsuleRoi } from '@/data/site';
@@ -26,7 +26,7 @@ const roiCards = capsuleRoi.map((item, index) => {
   };
 });
 ---
-<BaseLayout title="Space Capsule House" description={capsuleBanner.description} immersiveBackground>
+<BaseLayout title="Space Capsule House" description={capsuleBanner.description}>
   <PageBanner
     heading={capsuleBanner.heading}
     description={capsuleBanner.description}

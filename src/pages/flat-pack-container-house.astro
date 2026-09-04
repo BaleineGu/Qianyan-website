@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
 import TransportCostReduction from '@/components/TransportCostReduction.astro';
@@ -10,7 +10,7 @@ import {
   flatPackStandardBox,
 } from '@/data/site';
 ---
-<BaseLayout title="Flat Pack Container House" description={flatPackBanner.description} immersiveBackground>
+<BaseLayout title="Flat Pack Container House" description={flatPackBanner.description}>
   <PageBanner
     heading={flatPackBanner.heading}
     description={flatPackBanner.description}
@@ -31,7 +31,7 @@ import {
               <img
                 src={item.image}
                 alt={item.title}
-                class="mt-4 w-full h-44 object-cover rounded-lg border border-gray-200"
+                class="mt-4 w-full h-auto object-contain rounded-lg border border-gray-200"
                 loading="lazy"
               />
             )}
@@ -73,8 +73,6 @@ import {
     </div>
   </section>
 
-  <TransportCostReduction />
-
   <section class="py-16 bg-white">
     <div class="section-container">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mb-4 text-center">Product Description</h2>
@@ -103,6 +101,8 @@ import {
       </div>
     </div>
   </section>
+
+  <TransportCostReduction />
 
   <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 hidden items-center justify-center" role="dialog" aria-modal="true">
     <button id="lightbox-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-gray-300" aria-label="Close">&times;</button>
