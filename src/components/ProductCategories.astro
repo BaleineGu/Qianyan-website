@@ -274,13 +274,38 @@ const sideContent: Record<
 
     .product-panel__side {
       height: 100%;
-      justify-content: center;
+      min-height: 0;
+      justify-content: flex-start;
       gap: 0.3rem;
     }
 
     .product-panel__side-grid {
-      row-gap: 0.15rem;
-      align-content: center;
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      row-gap: 0.35rem;
+      align-items: stretch;
+      align-content: stretch;
+    }
+
+    .product-panel__side-media {
+      min-height: 0;
+      height: 100%;
+      display: block;
+    }
+
+    .product-panel__side-grid > :nth-child(2),
+    .product-panel__side-grid > :nth-child(3) {
+      display: flex;
+      align-items: center;
+    }
+
+    .product-panel__side-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
 

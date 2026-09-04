@@ -22,6 +22,10 @@ npm install
 npm run dev
 ```
 
+`HALO_API_URL` is empty by default, so local development uses the built-in fallback posts and does
+not require a running Halo instance. Set it to your Halo URL only when you want to develop against
+CMS content.
+
 ```bash
 npm run build    # generates dist/
 npm run preview  # previews the static build

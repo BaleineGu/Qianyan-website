@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
 import AdvantagePhotoStack from '@/components/AdvantagePhotoStack.astro';
@@ -50,7 +50,7 @@ const actualBottomRow = [...interiorRow, movedToBottom];
   <!-- Actual Product Photos Carousel -->
   <section class="py-16 bg-white">
     <div class="section-container">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8 text-center">Actual Product Photos</h2>
+      <h2 class="text-[32px] font-extrabold text-brand-900 mb-8 text-center">Actual Product Photos</h2>
       <div class="actual-carousel-shell relative">
         <button
           id="actual-prev"
@@ -156,7 +156,7 @@ const actualBottomRow = [...interiorRow, movedToBottom];
 
   <section class="py-16 bg-gray-50">
     <div class="section-container">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Double-Wing Expandable House Selection Matrix</h2>
+      <h2 class="text-[32px] font-extrabold text-brand-900 mb-8 text-center">Double-Wing Expandable House Selection Matrix</h2>
       <div class="overflow-x-auto border border-gray-200">
         <table class="w-full min-w-[1080px] text-left text-sm">
           <thead class="bg-brand-900 text-white"><tr>{expandableSpecHeaders.map((h) => <th class="px-4 py-3 whitespace-nowrap">{h}</th>)}</tr></thead>
@@ -193,7 +193,7 @@ const actualBottomRow = [...interiorRow, movedToBottom];
   <section class="py-20 bg-gray-50">
     <div class="section-container max-w-3xl">
       <div class="text-center mb-10">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-3">Get a Free Quote</h2>
+        <h2 class="text-[32px] font-extrabold text-brand-900 mb-3">Get a Free Quote</h2>
         <p class="text-gray-500">Tell us your requirements and we'll respond within 24 hours with pricing and availability.</p>
       </div>
       <form id="quote-form" class="grid sm:grid-cols-2 gap-5">
@@ -245,7 +245,7 @@ const actualBottomRow = [...interiorRow, movedToBottom];
 
   <section class="py-16">
     <div class="section-container">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-8">Engineering Details & Customization</h2>
+      <h2 class="text-[32px] font-extrabold text-brand-900 mb-8">Engineering Details & Customization</h2>
       <div class="grid md:grid-cols-3 gap-8">
         {expandableEngineering.map((item) => (
           <div><h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3><p class="text-gray-600">{item.description}</p></div>

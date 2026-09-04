@@ -490,7 +490,7 @@
 
   /* Homepage / section titles — keep sizes consistent across modules */
   .section-heading {
-    font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+    font-size: 32px;
     line-height: 1.15;
     letter-spacing: -0.02em;
     font-weight: 500;
