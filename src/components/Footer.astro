@@ -1,19 +1,30 @@
 ---
 import { footerLinks, siteConfig, whatsappUrl } from '@/data/site';
+
+interface Props {
+  hideBrandMark?: boolean;
+  hideGetInTouch?: boolean;
+}
+
+const { hideBrandMark = false, hideGetInTouch = false } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <footer class="bg-surface-1 text-ink-soft rounded-t-helios-xl mt-0" data-header-theme="light">
-  <div class="section-container pt-10 pb-9 px-4 sm:px-8">
+  <div class="section-container pt-10 pb-9 px-4 sm:px-8 footer-inner">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <img
-            src={siteConfig.logo}
-            alt=""
-            class="h-10 w-auto brightness-0"
-            width="40"
-            height="40"
-          />
+          {
+            !hideBrandMark && (
+              <img
+                src={siteConfig.logo}
+                alt=""
+                class="h-10 w-auto brightness-0"
+                width="40"
+                height="40"
+              />
+            )
+          }
           <span class="text-body-lg font-medium text-ink tracking-tight">{siteConfig.name}</span>
         </div>
         <p class="text-small text-ink-soft leading-relaxed max-w-xs whitespace-pre-line">{siteConfig.tagline}</p>
@@ -68,11 +79,20 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="mt-10 pt-8 border-t border-ink-hairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div
+      class:list={[
+        'border-t border-ink-hairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4',
+        hideGetInTouch ? 'mt-6 pt-5' : 'mt-10 pt-8',
+      ]}
+    >
       <p class="text-small text-ink-faint">&copy; {year} {siteConfig.name}. All rights reserved.</p>
-      <a href="/contact" class="btn-secondary-light !h-10 !px-4 !text-body-sm">
-        Get in touch
-      </a>
+      {
+        !hideGetInTouch && (
+          <a href="/contact" class="btn-secondary-light !h-10 !px-4 !text-body-sm">
+            Get in touch
+          </a>
+        )
+      }
     </div>
   </div>
 </footer>

@@ -12,6 +12,8 @@ interface Props {
   overlayHeader?: boolean;
   immersiveBackground?: boolean;
   homePage?: boolean;
+  hideFooterBrandMark?: boolean;
+  hideFooterGetInTouch?: boolean;
 }
 
 const {
@@ -20,8 +22,11 @@ const {
   overlayHeader = false,
   immersiveBackground: _immersiveBackground = false,
   homePage = false,
+  hideFooterBrandMark = false,
+  hideFooterGetInTouch = false,
 } = Astro.props;
 const immersiveBackground = false;
+const productsPage = hideFooterBrandMark && hideFooterGetInTouch;
 const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 const pageDescription = description ?? siteConfig.description;
 ---
@@ -55,12 +60,12 @@ const pageDescription = description ?? siteConfig.description;
       }
     </style>
   </head>
-  <body class:list={['site-body min-h-screen flex flex-col text-ink antialiased', immersiveBackground && 'has-immersive-bg', homePage && 'is-home-page']}>
+  <body class:list={['site-body min-h-screen flex flex-col text-ink antialiased', immersiveBackground && 'has-immersive-bg', homePage && 'is-home-page', productsPage && 'is-products-page']}>
     {immersiveBackground ? <div class="site-immersive-bg" aria-hidden="true"></div> : null}
     <div class="site-page-shell flex flex-col flex-1 min-h-screen">
       <Header overlay={overlayHeader} />
       <main class="flex-1"><slot /></main>
-      <Footer />
+      <Footer hideBrandMark={hideFooterBrandMark} hideGetInTouch={hideFooterGetInTouch} />
       <InquiryModal />
       <FloatingActions />
     </div>

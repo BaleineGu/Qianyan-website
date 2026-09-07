@@ -605,3 +605,25 @@ body.is-home-page main > .product-tabs-section > .section-container {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* Products page: remove excess blank space under footer */
+body.is-products-page {
+  min-height: auto;
+}
+
+body.is-products-page .site-page-shell {
+  min-height: auto;
+}
+
+body.is-products-page main {
+  flex: 0 1 auto;
+}
+
+body.is-products-page footer {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+body.is-products-page footer .footer-inner {
+  padding-bottom: 1.25rem !important;
+}
