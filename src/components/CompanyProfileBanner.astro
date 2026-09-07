@@ -2,18 +2,41 @@
 const profileText =
   'Hebei Qianyan Metal Products Co., LTD is located in Fucheng County, Hengshui City, Hebei Province. It is a modern enterprise specializing in the design, research and development, production and export of integrated houses. Main products include double-wing expandable houses, folding houses and flat pack prefab houses. The products are widely used in engineering construction, temporary office setups, camp dormitories, tourism vacation projects and emergency rescue projects. Customized solutions are available according to project requirements.';
 
+const highlights = [
+  {
+    title: 'Modern Facility',
+    description: 'Large-scale modern facility for stable production',
+    icon: 'facility',
+  },
+  {
+    title: 'Experienced Team',
+    description: 'Professional team with rich industry experience',
+    icon: 'team',
+  },
+  {
+    title: 'Export Expertise',
+    description: 'Years of export experience to global markets',
+    icon: 'export',
+  },
+  {
+    title: 'Customer First',
+    description: 'Customer-first service from inquiry to after-sales',
+    icon: 'customer',
+  },
+] as const;
+
 const images = [
   {
     src: '/images/company/profile-1.png',
     alt: 'Integrated House Manufacturing Base factory entrance',
   },
   {
-    src: '/images/company/profile-2.gif',
-    alt: 'Two-story modular glass building assembly',
+    src: '/images/company/profile-2.png',
+    alt: 'Factory yard with modular glass building and warehouse',
   },
   {
-    src: '/images/company/profile-3.gif',
-    alt: 'Expandable modular house demonstration in factory',
+    src: '/images/company/profile-3.png',
+    alt: 'Factory workshop assembling modular container houses',
   },
 ];
 ---
@@ -32,6 +55,63 @@ const images = [
         <p class="text-[clamp(1rem,1.45vw,1.25rem)] text-ink-soft leading-[1.8]">
           {profileText}
         </p>
+
+        <ul class="profile-highlights" aria-label="Company strengths">
+          {
+            highlights.map((item) => (
+              <li class="profile-highlights__item">
+                <span class="profile-highlights__icon" aria-hidden="true">
+                  {item.icon === 'facility' && (
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10 40V14l10-6 8 5v3h10v24H10Z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linejoin="round"
+                      />
+                      <path d="M18 40V28h8v12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                      <path d="M14 20h4M14 25h4M28 22h4M28 27h4M28 32h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                  )}
+                  {item.icon === 'team' && (
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="24" cy="16" r="5" stroke="currentColor" stroke-width="1.8" />
+                      <path d="M12 36c0-5.5 5.4-10 12-10s12 4.5 12 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                      <circle cx="12" cy="18" r="3.5" stroke="currentColor" stroke-width="1.8" />
+                      <path d="M6 34c0-3.8 3-7 7-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                      <circle cx="36" cy="18" r="3.5" stroke="currentColor" stroke-width="1.8" />
+                      <path d="M42 34c0-3.8-3-7-7-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                  )}
+                  {item.icon === 'export' && (
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 38V12h16l4 4v22H14Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                      <path d="M30 12v4h4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                      <path d="M20 30v-6h3v6M25 30v-9h3v9M30 30v-4h3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M19 26l10-7 2 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  )}
+                  {item.icon === 'customer' && (
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M12 24c0-2 1.5-4 4-4h6l2 3 2-3h6c2.5 0 4 2 4 4v2c0 5-4 9-10 9h-4c-6 0-10-4-10-9v-2Z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linejoin="round"
+                      />
+                      <path d="M18 20c0-3 2.2-5.5 5-5.5h2c2.8 0 5 2.5 5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                      <path d="M14 28h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                  )}
+                </span>
+                <div class="profile-highlights__copy">
+                  <strong class="profile-highlights__title">{item.title}</strong>
+                  <p class="profile-highlights__desc">{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
       {/* 品字形：上 1，下 2 — 右半区 */}
@@ -64,3 +144,62 @@ const images = [
     </div>
   </div>
 </section>
+
+<style>
+  .profile-highlights {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.25rem;
+    border-top: 1px solid rgba(22, 21, 20, 0.1);
+  }
+
+  .profile-highlights__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .profile-highlights__icon {
+    display: inline-flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: #161514;
+  }
+
+  .profile-highlights__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .profile-highlights__copy {
+    min-width: 0;
+  }
+
+  .profile-highlights__title {
+    display: block;
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    font-weight: 700;
+    color: #161514;
+    line-height: 1.3;
+  }
+
+  .profile-highlights__desc {
+    margin: 0.2rem 0 0;
+    font-size: clamp(0.8rem, 1.05vw, 0.9rem);
+    line-height: 1.45;
+    color: rgba(22, 21, 20, 0.62);
+  }
+
+  @media (min-width: 1024px) {
+    .profile-highlights {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.15rem 1.5rem;
+      padding-top: 1rem;
+    }
+  }
+</style>

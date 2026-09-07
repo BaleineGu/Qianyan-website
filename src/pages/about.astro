@@ -4,7 +4,6 @@ import { whatsappUrl } from '@/data/site';
 
 const mosaicSlides = [
   {
-    label: '01',
     title: 'Integrated Manufacturing',
     src: '/images/about/parallax-1.png',
     alt: 'Integrated House Manufacturing Base exterior',
@@ -14,7 +13,6 @@ const mosaicSlides = [
     ],
   },
   {
-    label: '02',
     title: 'Container Production',
     src: '/images/about/parallax-2.png',
     alt: 'Container houses lined up inside the factory',
@@ -23,7 +21,6 @@ const mosaicSlides = [
     ],
   },
   {
-    label: '03',
     title: 'Structural Craftsmanship',
     src: '/images/about/parallax-3.png',
     alt: 'Steel frames for modular container houses',
@@ -76,7 +73,6 @@ const mosaicTiles = [
               ]}
             >
               <div class="about-mosaic__text-content">
-                <p class="about-mosaic__label">{tile.label}</p>
                 <h2 class="about-mosaic__title">{tile.title}</h2>
                 <div class="about-mosaic__copy">
                   {tile.paragraphs.map((paragraph) => (
@@ -168,16 +164,6 @@ const mosaicTiles = [
   .about-mosaic__text-content {
     color: #ffffff;
     mix-blend-mode: difference;
-  }
-
-  .about-mosaic__label {
-    margin-bottom: 1rem;
-    font-family: 'Geist Mono', SFMono-Regular, Consolas, ui-monospace, monospace;
-    font-size: 0.75rem;
-    line-height: 1.2;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    opacity: 0.88;
   }
 
   .about-mosaic__title {
