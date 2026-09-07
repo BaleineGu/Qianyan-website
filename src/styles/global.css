@@ -482,26 +482,28 @@
   }
 
   .heading-h2 {
-    font-size: clamp(32px, 4vw, 48px);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    font-weight: 500;
+    font-size: 35px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin-bottom: 60px !important;
   }
 
   /* Homepage / section titles — keep sizes consistent across modules */
   .section-heading {
-    font-size: 32px;
-    line-height: 1.15;
+    font-size: 35px;
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    font-weight: 500;
+    font-weight: 700;
+    margin-bottom: 60px !important;
     color: var(--color-ink, #161514);
   }
 
   .heading-h3 {
-    font-size: clamp(28px, 3vw, 40px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 600;
   }
 
   .heading-h4 {
