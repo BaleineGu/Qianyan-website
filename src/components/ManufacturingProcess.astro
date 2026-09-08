@@ -1,4 +1,11 @@
 ---
+const highlights = [
+  'Extremely high corrosion resistance',
+  'Long service life',
+  'Extremely low long-term maintenance costs.',
+  'High mechanical toughness',
+  'Comprehensive, all-around protection',
+];
 ---
 
 <section
@@ -7,33 +14,169 @@
   data-header-theme="light"
 >
   <div class="section-container immersive-panel">
-    <h2 id="manufacturing-heading" class="section-heading text-center mb-6 lg:mb-8">
+    <h2 id="manufacturing-heading" class="section-heading text-center">
       Manufacturing Process of Container Houses
     </h2>
-    <div class="manufacturing-video-wrap rounded-helios-md overflow-hidden border border-ink-hairline">
-      <video
-        class="w-full h-auto block"
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="metadata"
-      >
-        <source src="/images/features/manufacturing-process.mp4" type="video/mp4" />
-      </video>
+
+    <div class="manufacturing-split">
+      <div class="manufacturing-split__media">
+        <img
+          src="/images/features/manufacturing-steel-tubes.png"
+          alt="Stacked galvanized rectangular steel tubes in the factory"
+          class="manufacturing-split__image"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div class="manufacturing-split__aside">
+        <ul class="manufacturing-split__points" aria-label="Material advantages">
+          {
+            highlights.map((text) => (
+              <li class="manufacturing-split__point">
+                <span class="manufacturing-split__bullet" aria-hidden="true" />
+                <p>{text}</p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="manufacturing-video-wrap rounded-helios-md overflow-hidden border border-ink-hairline">
+          <video
+            class="w-full h-auto block"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+          >
+            <source src="/images/features/manufacturing-process.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  .manufacturing-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    align-items: stretch;
+  }
+
+  .manufacturing-split__media {
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    background: #eceae4;
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .manufacturing-split__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .manufacturing-split__aside {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    min-width: 0;
+  }
+
+  .manufacturing-split__points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem 1.75rem;
+  }
+
+  .manufacturing-split__point {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .manufacturing-split__bullet {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: 0.65em;
+    border-radius: 999px;
+    background: #161514;
+    flex-shrink: 0;
+  }
+
+  .manufacturing-split__point p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: rgba(22, 21, 20, 0.82);
+  }
+
   .manufacturing-video-wrap {
     background: #000;
     aspect-ratio: 16 / 9;
+    width: 100%;
+    flex-shrink: 0;
   }
 
   .manufacturing-video-wrap video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @media (min-width: 640px) {
+    .manufacturing-split__points {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .manufacturing-split {
+      /* Left portrait image + right text/video column, matching screenshot */
+      grid-template-columns: minmax(220px, 0.38fr) minmax(0, 0.62fr);
+      gap: clamp(1.5rem, 3vw, 2.75rem);
+      align-items: stretch;
+    }
+
+    .manufacturing-split__media {
+      width: 100%;
+      max-width: none;
+      margin-inline: 0;
+      height: 100%;
+      aspect-ratio: auto;
+      min-height: 420px;
+    }
+
+    .manufacturing-split__aside {
+      justify-content: space-between;
+      gap: clamp(1.5rem, 2.5vw, 2rem);
+    }
+
+    .manufacturing-split__points {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+      row-gap: 1rem;
+      flex: 0 0 auto;
+    }
+
+    .manufacturing-video-wrap {
+      width: 100%;
+      max-width: none;
+    }
   }
 </style>
