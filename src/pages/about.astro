@@ -40,58 +40,64 @@ const mosaicTiles = [
 ];
 ---
 <BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
-  <section class="relative bg-black text-white overflow-hidden" data-header-theme="dark">
-    <img
-      src="/images/backgrounds/about-hero.png"
-      alt=""
-      class="block w-full h-auto"
-    />
-    <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="section-container text-center max-w-3xl py-10 sm:py-14">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">QIANYAN Metal Manufacturer of Container Houses</h1>
-        <p class="text-lg text-gray-300">We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services.</p>
+  <section class="about-hero-section bg-surface-1" data-header-theme="dark">
+    <div class="section-container py-6 sm:py-8 lg:py-10">
+      <div class="about-hero relative overflow-hidden rounded-[12px] text-white">
+        <img
+          src="/images/backgrounds/about-hero.png"
+          alt=""
+          class="block w-full h-auto"
+        />
+        <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
+        <div class="absolute inset-0 flex items-center justify-center px-6 sm:px-8">
+          <div class="text-center max-w-3xl py-10 sm:py-14">
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">QIANYAN Metal Manufacturer of Container Houses</h1>
+            <p class="text-lg text-gray-300">We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section
-    class="about-mosaic"
+    class="about-mosaic bg-surface-1"
     data-header-theme="dark"
     aria-label="Factory gallery"
   >
-    <div class="about-mosaic__grid">
-      {
-        mosaicTiles.map((tile, index) =>
-          tile.kind === 'text' ? (
-            <article
-              class:list={[
-                'about-mosaic__cell about-mosaic__cell--text',
-                tile.variant === 'muted' && 'is-muted',
-                tile.variant === 'accent' && 'is-accent',
-                tile.variant === 'light' && 'is-light',
-              ]}
-            >
-              <div class="about-mosaic__text-content">
-                <h2 class="about-mosaic__title">{tile.title}</h2>
-                <div class="about-mosaic__copy">
-                  {tile.paragraphs.map((paragraph) => (
-                    <p>{paragraph}</p>
-                  ))}
+    <div class="section-container pb-6 sm:pb-8 lg:pb-10">
+      <div class="about-mosaic__grid">
+        {
+          mosaicTiles.map((tile, index) =>
+            tile.kind === 'text' ? (
+              <article
+                class:list={[
+                  'about-mosaic__cell about-mosaic__cell--text',
+                  tile.variant === 'muted' && 'is-muted',
+                  tile.variant === 'accent' && 'is-accent',
+                  tile.variant === 'light' && 'is-light',
+                ]}
+              >
+                <div class="about-mosaic__text-content">
+                  <h2 class="about-mosaic__title">{tile.title}</h2>
+                  <div class="about-mosaic__copy">
+                    {tile.paragraphs.map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </article>
-          ) : (
-            <figure class="about-mosaic__cell about-mosaic__cell--media">
-              <img
-                src={tile.src}
-                alt={tile.alt}
-                loading={index === 1 ? 'eager' : 'lazy'}
-              />
-            </figure>
-          ),
-        )
-      }
+              </article>
+            ) : (
+              <figure class="about-mosaic__cell about-mosaic__cell--media">
+                <img
+                  src={tile.src}
+                  alt={tile.alt}
+                  loading={index === 1 ? 'eager' : 'lazy'}
+                />
+              </figure>
+            ),
+          )
+        }
+      </div>
     </div>
   </section>
 
@@ -103,29 +109,31 @@ const mosaicTiles = [
       </div>
     </div>
 
-    <div
-      class="about-quality-grid grid grid-cols-3 grid-rows-2 w-full h-[min(100svh,920px)] min-h-[420px] gap-2 sm:gap-3 lg:gap-4 px-2 sm:px-3 lg:px-4"
-      aria-label="Manufacturing quality gallery"
-    >
-      {
-        [
-          { src: '/images/about/quality/grid-1.png', alt: 'Factory exterior warehouse' },
-          { src: '/images/about/quality/grid-2.png', alt: 'Workers welding steel frames' },
-          { src: '/images/about/quality/grid-3.png', alt: 'Modular units on factory floor' },
-          { src: '/images/about/quality/grid-4.png', alt: 'Production hall with overhead crane' },
-          { src: '/images/about/quality/grid-5.png', alt: 'Finished cabinetry ready for shipment' },
-          { src: '/images/about/quality/grid-6.png', alt: 'Workers assembling modular wall panels' },
-        ].map((item) => (
-          <div class="relative overflow-hidden rounded-helios-sm bg-surface-3">
-            <img
-              src={item.src}
-              alt={item.alt}
-              class="absolute inset-0 h-full w-full object-cover object-center"
-              loading="lazy"
-            />
-          </div>
-        ))
-      }
+    <div class="section-container">
+      <div
+        class="about-quality-grid grid grid-cols-3 grid-rows-2 w-full h-[min(100svh,920px)] min-h-[420px] gap-2 sm:gap-3 lg:gap-4"
+        aria-label="Manufacturing quality gallery"
+      >
+        {
+          [
+            { src: '/images/about/quality/grid-1.png', alt: 'Factory exterior warehouse' },
+            { src: '/images/about/quality/grid-2.png', alt: 'Workers welding steel frames' },
+            { src: '/images/about/quality/grid-3.png', alt: 'Modular units on factory floor' },
+            { src: '/images/about/quality/grid-4.png', alt: 'Production hall with overhead crane' },
+            { src: '/images/about/quality/grid-5.png', alt: 'Finished cabinetry ready for shipment' },
+            { src: '/images/about/quality/grid-6.png', alt: 'Workers assembling modular wall panels' },
+          ].map((item) => (
+            <div class="relative overflow-hidden rounded-helios-sm bg-surface-3">
+              <img
+                src={item.src}
+                alt={item.alt}
+                class="absolute inset-0 h-full w-full object-cover object-center"
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
     </div>
 
     <div class="section-container max-w-3xl mt-10 sm:mt-12">
@@ -145,25 +153,27 @@ const mosaicTiles = [
   .about-mosaic__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
+    gap: clamp(0.65rem, 1.4vw, 1.15rem);
+    overflow: hidden;
+    border-radius: 12px;
   }
 
   .about-mosaic__cell {
-    min-height: clamp(320px, 42vw, 540px);
+    min-height: clamp(280px, 36vw, 480px);
     overflow: hidden;
+    border-radius: 12px;
   }
 
   .about-mosaic__cell--text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(2rem, 5vw, 4.5rem);
-    background: transparent;
+    padding: clamp(1.5rem, 3.5vw, 2.75rem);
+    background: #161514;
   }
 
   .about-mosaic__text-content {
     color: #ffffff;
-    mix-blend-mode: difference;
   }
 
   .about-mosaic__title {
@@ -204,7 +214,8 @@ const mosaicTiles = [
     }
 
     .about-mosaic__cell {
-      min-height: clamp(280px, 72vw, 420px);
+      min-height: clamp(240px, 68vw, 380px);
     }
   }
 </style>
+

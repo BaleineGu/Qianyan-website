@@ -13,15 +13,19 @@ const {
   imageClass = '',
 } = Astro.props;
 ---
-<section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
-  <img
-    src={image}
-    alt=""
-    class:list={['absolute inset-0 w-full h-full object-cover', imageClass]}
-  />
-  <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
-  <div class="relative section-container py-24 lg:py-32 max-w-[912px]">
-    <h1 class="heading-h1 mb-5">{heading}</h1>
-    <p class="text-large text-ink-on-dark-soft">{description}</p>
+<section class="page-banner-section bg-surface-1" data-header-theme="dark">
+  <div class="section-container py-6 sm:py-8 lg:py-10">
+    <div class="page-banner relative overflow-hidden rounded-[12px] text-ink-on-dark">
+      <img
+        src={image}
+        alt=""
+        class:list={['absolute inset-0 w-full h-full object-cover', imageClass]}
+      />
+      <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
+      <div class="relative max-w-[912px] px-6 sm:px-8 lg:px-10 py-20 sm:py-24 lg:py-28">
+        <h1 class="heading-h1 mb-5">{heading}</h1>
+        <p class="text-large text-ink-on-dark-soft">{description}</p>
+      </div>
+    </div>
   </div>
 </section>

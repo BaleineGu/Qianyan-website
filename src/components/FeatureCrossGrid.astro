@@ -5,8 +5,6 @@ const panels = [
     items: [
       { label: 'Company Registration Date', value: '2015-03-16' },
       { label: 'Building Area (㎡)', value: '4000' },
-      { label: 'Years of Export Experience', value: '11' },
-      { label: 'Years of Industry Experience', value: '11' },
     ],
     icon: 'overview',
   },
@@ -14,15 +12,13 @@ const panels = [
     title: 'Production Capacity',
     items: [
       { label: 'Production Lines', value: '40' },
-      { label: 'Production Equipment', value: '58' },
-      { label: 'Annual Total Output (Units)', value: '900,000' },
+      { label: 'Annual Total Output (Units)', value: '90,000' },
     ],
     icon: 'production',
   },
   {
     title: 'Trade Background',
     items: [
-      { label: 'Main Market', value: 'Domestic Market (100%)' },
       { label: 'Main Customer Type', value: 'Brand business, Retailer, Engineer, Wholesaler, Manufacturer, For private use' },
       { label: 'Supply Chain Partners', value: '15' },
     ],
@@ -33,7 +29,6 @@ const panels = [
     items: [
       { label: 'Customization Options', value: 'Sample processing, graphic processing, customized on demand' },
       { label: 'R&D Engineers', value: '1' },
-      { label: 'R&D Engineer Education Level', value: '1 graduate' },
     ],
     icon: 'rd',
   },
@@ -117,67 +112,75 @@ const panels = [
   }
 
   .feature-cross-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0;
     min-width: 0;
-    background: #ffffff;
-    border: 1px solid rgba(22, 21, 20, 0.12);
-    border-radius: 12px;
-    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
   }
 
   .feature-cross-grid__cell {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(0.85rem, 1.8vw, 1.35rem);
-    padding: clamp(1.5rem, 3.5vw, 2.5rem);
-    min-height: clamp(18rem, 36vw, 26rem);
-    text-align: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    padding: 0 0 clamp(1.15rem, 2.2vw, 1.5rem);
+    margin: 0 0 clamp(1.15rem, 2.2vw, 1.5rem);
+    min-height: 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(22, 21, 20, 0.12);
+  }
+
+  .feature-cross-grid__cell:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
   }
 
   .feature-cross-grid__icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: clamp(7.5rem, 28vw, 13.75rem);
-    height: clamp(7.5rem, 28vw, 13.75rem);
+    width: 2.25rem;
+    height: 2.25rem;
     flex: none;
     color: inherit;
   }
 
   .feature-cross-grid__icon svg {
-    width: clamp(5rem, 18vw, 8.75rem);
-    height: clamp(5rem, 18vw, 8.75rem);
+    width: 100%;
+    height: 100%;
   }
 
   .feature-cross-grid__title {
     margin: 0;
     font-size: 16.8px;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.3;
     color: inherit;
   }
 
   .feature-cross-grid__list {
-    margin: 0;
+    margin: 0.35rem 0 0;
     width: 100%;
     flex: 1 1 auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1rem, 2vw, 1.75rem) clamp(1rem, 2.2vw, 1.75rem);
-    align-content: center;
+    gap: 0.85rem 1.15rem;
+    align-content: start;
   }
 
   .feature-cross-grid__item {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
+    align-items: flex-start;
+    gap: 0.2rem;
     min-width: 0;
-    text-align: center;
+    text-align: left;
   }
 
   .feature-cross-grid__item dt {
@@ -210,21 +213,6 @@ const panels = [
     object-position: center;
   }
 
-  @media (min-width: 768px) {
-    .feature-cross-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .feature-cross-grid__cell:nth-child(1),
-    .feature-cross-grid__cell:nth-child(2) {
-      border-bottom: 1px solid rgba(22, 21, 20, 0.12);
-    }
-
-    .feature-cross-grid__cell:nth-child(odd) {
-      border-right: 1px solid rgba(22, 21, 20, 0.12);
-    }
-  }
-
   @media (min-width: 1024px) {
     .feature-cross-layout {
       grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
@@ -236,10 +224,6 @@ const panels = [
   }
 
   @media (max-width: 767px) {
-    .feature-cross-grid__cell + .feature-cross-grid__cell {
-      border-top: 1px solid rgba(22, 21, 20, 0.12);
-    }
-
     .feature-cross-grid__list {
       grid-template-columns: 1fr;
     }

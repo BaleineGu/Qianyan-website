@@ -13,18 +13,22 @@ import { productShowcaseItems } from '@/data/site';
 >
   <div class="products-fixed-bg" aria-hidden="true"></div>
 
-  <section class="products-hero relative z-[1] overflow-hidden" data-header-theme="light">
-    <img
-      src="/images/backgrounds/products-hero.png"
-      alt=""
-      class="products-hero__bg"
-    />
-    <div class="products-hero__veil" aria-hidden="true"></div>
-    <div class="relative section-container text-center max-w-[680px] py-section-sm lg:py-section-md">
-      <h1 class="heading-h1 mb-4 text-ink">Our products</h1>
-      <p class="text-large text-ink-soft">
-        Factory-direct modular solutions for campsites, hospitality, and project sites.
-      </p>
+  <section class="products-hero relative z-[1]" data-header-theme="light">
+    <div class="section-container py-6 sm:py-8 lg:py-10">
+      <div class="products-hero__frame relative overflow-hidden rounded-[12px]">
+        <img
+          src="/images/backgrounds/products-hero.png"
+          alt=""
+          class="products-hero__bg"
+        />
+        <div class="products-hero__veil" aria-hidden="true"></div>
+        <div class="relative text-center max-w-[680px] mx-auto px-6 sm:px-8 py-section-sm lg:py-section-md">
+          <h1 class="heading-h1 mb-4 text-ink">Our products</h1>
+          <p class="text-large text-ink-soft">
+            Factory-direct modular solutions for campsites, hospitality, and project sites.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -50,8 +54,12 @@ import { productShowcaseItems } from '@/data/site';
   }
 
   .products-hero {
-    background: #ffffff;
+    background: transparent;
     color: #161514;
+  }
+
+  .products-hero__frame {
+    background: #ffffff;
   }
 
   .products-hero__bg {
