@@ -51,7 +51,7 @@ const panels = [
     </h2>
   </div>
 
-  <div class="feature-cross-layout">
+  <div class="feature-cross-layout section-container pb-8 sm:pb-10 lg:pb-12">
     <div class="feature-cross-grid">
       {
         panels.map((panel) => (
@@ -111,11 +111,9 @@ const panels = [
   .feature-cross-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: clamp(0.65rem, 1.4vw, 1.15rem);
     width: 100%;
     align-items: stretch;
-    border-top: 1px solid rgba(22, 21, 20, 0.12);
-    border-bottom: 1px solid rgba(22, 21, 20, 0.12);
   }
 
   .feature-cross-grid {
@@ -124,6 +122,9 @@ const panels = [
     gap: 0;
     min-width: 0;
     background: #ffffff;
+    border: 1px solid rgba(22, 21, 20, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   .feature-cross-grid__cell {
@@ -196,7 +197,7 @@ const panels = [
   .feature-cross-media {
     margin: 0;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 12px;
     min-height: 16rem;
     background: #111;
   }
@@ -231,7 +232,6 @@ const panels = [
 
     .feature-cross-media {
       min-height: 100%;
-      border-left: 1px solid rgba(22, 21, 20, 0.12);
     }
   }
 

@@ -103,44 +103,48 @@ const roiCards = capsuleRoi.map((item, index) => {
     </div>
     {
       capsuleExamples[0] && (
-        <button
-          type="button"
-          class="lightbox-trigger capsule-examples-bleed block w-full text-left"
-          data-lightbox-group="capsule-examples"
-          data-src={capsuleExamples[0].image}
-          data-label={capsuleExamples[0].alt}
-          aria-label={`View ${capsuleExamples[0].alt} full size`}
-        >
-          <img
-            src={capsuleExamples[0].image}
-            alt={capsuleExamples[0].alt}
-            class="block w-full h-auto object-cover cursor-zoom-in"
-            loading="lazy"
-          />
-        </button>
+        <div class="section-container">
+          <button
+            type="button"
+            class="lightbox-trigger block w-full text-left overflow-hidden rounded-helios-md"
+            data-lightbox-group="capsule-examples"
+            data-src={capsuleExamples[0].image}
+            data-label={capsuleExamples[0].alt}
+            aria-label={`View ${capsuleExamples[0].alt} full size`}
+          >
+            <img
+              src={capsuleExamples[0].image}
+              alt={capsuleExamples[0].alt}
+              class="block w-full h-auto object-cover cursor-zoom-in"
+              loading="lazy"
+            />
+          </button>
+        </div>
       )
     }
   </section>
 
-  <section class="capsule-example-row" data-header-theme="light" aria-label="Real-world project photos">
-    <div class="capsule-example-row__grid">
-      {
-        capsuleExampleRow.map((item) => (
-          <button
-            type="button"
-            class="lightbox-trigger capsule-example-row__item"
-            data-lightbox-group="capsule-example-row"
-            data-src={item.image}
-            data-label={item.caption}
-            aria-label={item.caption}
-          >
-            <img src={item.image} alt={item.alt} class="capsule-example-row__img" loading="lazy" />
-            <span class="capsule-example-row__overlay">
-              <span class="capsule-example-row__caption">{item.caption}</span>
-            </span>
-          </button>
-        ))
-      }
+  <section class="capsule-example-row py-8 sm:py-10" data-header-theme="light" aria-label="Real-world project photos">
+    <div class="section-container">
+      <div class="capsule-example-row__grid">
+        {
+          capsuleExampleRow.map((item) => (
+            <button
+              type="button"
+              class="lightbox-trigger capsule-example-row__item"
+              data-lightbox-group="capsule-example-row"
+              data-src={item.image}
+              data-label={item.caption}
+              aria-label={item.caption}
+            >
+              <img src={item.image} alt={item.alt} class="capsule-example-row__img" loading="lazy" />
+              <span class="capsule-example-row__overlay">
+                <span class="capsule-example-row__caption">{item.caption}</span>
+              </span>
+            </button>
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -357,7 +361,7 @@ const roiCards = capsuleRoi.map((item, index) => {
   .capsule-example-row__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: clamp(0.65rem, 1.4vw, 1.15rem);
     width: 100%;
   }
 
@@ -375,6 +379,7 @@ const roiCards = capsuleRoi.map((item, index) => {
     margin: 0;
     border: 0;
     overflow: hidden;
+    border-radius: 12px;
     background: #e8e4de;
     cursor: zoom-in;
     aspect-ratio: 1 / 1;
