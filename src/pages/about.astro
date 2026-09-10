@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageBanner from '@/components/PageBanner.astro';
 import { whatsappUrl } from '@/data/site';
 
 const mosaicSlides = [
@@ -40,6 +41,13 @@ const mosaicTiles = [
 ];
 ---
 <BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
+  <PageBanner
+    heading="QIANYAN Metal Manufacturer of Container Houses"
+    description="We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services."
+    image="/images/backgrounds/about-hero.png"
+    imageClass="object-center"
+    descriptionAs="h2"
+  />
   <section
     class="about-mosaic bg-surface-1"
     data-header-theme="light"

@@ -5,12 +5,15 @@ interface Props {
   image?: string;
   /** Tailwind classes for the background image (e.g. object-position) */
   imageClass?: string;
+  /** Render supporting copy as h2 when the page needs that hierarchy */
+  descriptionAs?: 'p' | 'h2';
 }
 const {
   heading,
   description,
   image = '/images/hero/slide-1.png',
   imageClass = '',
+  descriptionAs = 'p',
 } = Astro.props;
 ---
 <section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
@@ -22,6 +25,19 @@ const {
   <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
   <div class="relative section-container py-24 lg:py-32 max-w-[912px]">
     <h1 class="heading-h1 mb-5">{heading}</h1>
-    <p class="text-large text-ink-on-dark-soft">{description}</p>
+    {descriptionAs === 'h2' ? (
+      <h2 class="page-banner__subheading text-large text-ink-on-dark-soft font-normal !mb-0">
+        {description}
+      </h2>
+    ) : (
+      <p class="text-large text-ink-on-dark-soft">{description}</p>
+    )}
   </div>
 </section>
+
+<style>
+  .page-banner__subheading {
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+</style>
