@@ -3,20 +3,16 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig, whatsappUrl } from '@/data/site';
 ---
 <BaseLayout title="Contact Us" description="Request a factory quote, WhatsApp consultation, or catalog for your modular housing project.">
-  <section class="bg-surface-1" data-header-theme="dark">
-    <div class="section-container py-6 sm:py-8 lg:py-10">
-      <div class="relative overflow-hidden rounded-[12px] text-ink-on-dark">
-        <img
-          src="/images/hero/contact-banner.png"
-          alt=""
-          class="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.28);"></div>
-        <div class="relative text-center max-w-[680px] mx-auto px-6 sm:px-8 py-section-sm lg:py-section-md">
-          <h1 class="heading-h1 mb-4">Contact export sales</h1>
-          <p class="text-large text-ink-on-dark-soft">Request a factory quote, WhatsApp consultation, or catalog for your modular housing project.</p>
-        </div>
-      </div>
+  <section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
+    <img
+      src="/images/hero/contact-banner.png"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.28);"></div>
+    <div class="relative section-container text-center max-w-[680px] py-section-sm lg:py-section-md">
+      <h1 class="heading-h1 mb-4">Contact export sales</h1>
+      <p class="text-large text-ink-on-dark-soft">Request a factory quote, WhatsApp consultation, or catalog for your modular housing project.</p>
     </div>
   </section>
   <section class="py-section-sm lg:py-section-md bg-surface-1" data-header-theme="light">
@@ -33,7 +29,7 @@ import { siteConfig, whatsappUrl } from '@/data/site';
           <a href={`tel:${siteConfig.phone}`} class="text-large font-medium text-ink hover:opacity-70">{siteConfig.phone}</a>
         </div>
         <div class="flex flex-wrap gap-3">
-          <button type="button" data-inquiry-open class="btn-primary !bg-ink !text-ink-on-dark">Get a factory quote</button>
+          <button type="button" data-inquiry-open class="btn-primary">Get a factory quote</button>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary-light">Chat on WhatsApp</a>
         </div>
       </div>
@@ -66,7 +62,7 @@ import { siteConfig, whatsappUrl } from '@/data/site';
           <label for="message" class="block text-small font-medium text-ink mb-1">Project details</label>
           <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-helios-sm border border-ink-hairline bg-surface-2 outline-none focus:ring-2 focus:ring-accent-1 resize-none"></textarea>
         </div>
-        <button type="submit" class="btn-primary w-full !bg-ink !text-ink-on-dark">Submit inquiry</button>
+        <button type="submit" class="btn-primary w-full">Submit inquiry</button>
         <p id="form-status" class="text-small text-center hidden"></p>
       </form>
     </div>

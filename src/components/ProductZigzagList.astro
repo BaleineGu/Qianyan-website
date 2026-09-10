@@ -109,8 +109,8 @@ const { products } = Astro.props;
   }
 
   .product-zigzag__title {
-    font-size: clamp(1.375rem, 2.2vw, 1.75rem);
-    line-height: 1.2;
+    font-size: 26px;
+    line-height: 1.25;
     letter-spacing: -0.02em;
     font-weight: 500;
     color: var(--color-ink);
@@ -135,7 +135,7 @@ const { products } = Astro.props;
 
   .product-zigzag__highlight {
     font-family: 'Geist Mono', SFMono-Regular, Consolas, ui-monospace, monospace;
-    font-size: clamp(0.875rem, 1.4vw, 1rem);
+    font-size: 20px;
     line-height: 1.4;
     font-weight: 500;
     color: var(--color-accent-2);
@@ -143,7 +143,7 @@ const { products } = Astro.props;
   }
 
   .product-zigzag__summary {
-    font-size: clamp(0.875rem, 1.3vw, 1rem);
+    font-size: 20px;
     line-height: 1.55;
     color: var(--color-ink-soft);
   }
@@ -154,19 +154,21 @@ const { products } = Astro.props;
     justify-content: center;
     width: 100%;
     min-height: 48px;
-    padding: 12px 20px;
-    border-radius: var(--radius-lg);
-    background: var(--color-surface-dark);
-    color: var(--color-ink-on-dark);
-    font-size: 16px;
+    padding: 12px 28px;
+    border: 0;
+    border-radius: 9999px;
+    background: #e1dcd2;
+    color: #161514;
+    font-size: 20px;
     font-weight: 500;
-    line-height: 24px;
-    transition: opacity 200ms ease, transform 200ms ease;
+    line-height: 1.5;
+    box-shadow: none;
+    transition: opacity 200ms ease, background-color 200ms ease;
   }
 
   .product-zigzag__cta:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    opacity: 0.88;
+    background: #d6d0c4;
   }
 
   @media (max-width: 767px) {

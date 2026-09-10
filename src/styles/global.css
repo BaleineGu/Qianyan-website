@@ -24,7 +24,7 @@
     --color-overlay-glass-light: rgba(225, 220, 210, 0.64);
     --color-accent-1: #f2da4a;
     --color-accent-2: #d9b800;
-    --color-button-primary-fill: #f7f5f0;
+    --color-button-primary-fill: #e1dcd2;
     --color-button-primary-ink: #161514;
     --radius-sm: 16px;
     --radius-md: 24px;
@@ -53,8 +53,8 @@
     background-color: var(--color-surface-1);
     color: var(--color-ink);
     font-family: Switzer, Inter, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 1.5;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
@@ -115,6 +115,32 @@
   h6 {
     font-weight: 500;
     color: inherit;
+  }
+
+  h1 {
+    font-size: 42px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-size: 26px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  p,
+  strong,
+  dt,
+  dd {
+    font-size: 20px;
+    line-height: 1.5;
   }
 }
 
@@ -412,78 +438,47 @@
     }
   }
 
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 48px;
-    padding: 12px 20px;
-    border-radius: var(--radius-lg);
-    background-color: var(--color-button-primary-fill);
-    color: var(--color-button-primary-ink);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    transition: background-color 200ms ease, color 200ms ease, opacity 200ms ease;
-  }
-
-  .btn-primary:hover {
-    opacity: 0.92;
-  }
-
+  .btn-primary,
   .btn-outline,
-  .btn-secondary-dark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 48px;
-    padding: 12px 20px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-ink-on-dark-hairline);
-    background-color: var(--color-overlay-glass);
-    color: var(--color-ink-on-dark);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    backdrop-filter: blur(8px);
-    transition: background-color 200ms ease, opacity 200ms ease;
-  }
-
-  .btn-outline:hover,
-  .btn-secondary-dark:hover {
-    background-color: rgba(255, 255, 255, 0.18);
-  }
-
+  .btn-secondary-dark,
   .btn-secondary-light {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
-    padding: 12px 20px;
-    border-radius: var(--radius-lg);
-    background-color: var(--color-overlay-glass-light);
-    color: var(--color-ink);
-    font-size: 16px;
+    min-height: 48px;
+    height: auto;
+    padding: 12px 28px;
+    border: 0;
+    border-radius: 9999px;
+    background-color: var(--color-button-primary-fill);
+    color: var(--color-button-primary-ink);
+    font-size: 20px;
     font-weight: 500;
-    line-height: 24px;
-    backdrop-filter: blur(8px);
-    transition: background-color 200ms ease, opacity 200ms ease;
+    line-height: 1.5;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: opacity 200ms ease, background-color 200ms ease;
   }
 
+  .btn-primary:hover,
+  .btn-outline:hover,
+  .btn-secondary-dark:hover,
   .btn-secondary-light:hover {
-    opacity: 0.9;
+    opacity: 0.88;
+    background-color: #d6d0c4;
   }
 
   .heading-h1 {
-    font-size: clamp(36px, 5vw, 60px);
-    line-height: 1.05;
+    font-size: 42px;
+    line-height: 1.2;
     letter-spacing: -0.03em;
     font-weight: 500;
   }
 
   .heading-h2 {
-    font-size: 35px;
-    line-height: 1.2;
+    font-size: 26px;
+    line-height: 1.25;
     letter-spacing: -0.02em;
     font-weight: 700;
     margin-bottom: 60px !important;
@@ -491,8 +486,8 @@
 
   /* Homepage / section titles — keep sizes consistent across modules */
   .section-heading {
-    font-size: 35px;
-    line-height: 1.2;
+    font-size: 26px;
+    line-height: 1.25;
     letter-spacing: -0.02em;
     font-weight: 700;
     margin-bottom: 60px !important;
@@ -507,35 +502,35 @@
   }
 
   .heading-h4 {
-    font-size: clamp(24px, 2.5vw, 32px);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
     font-weight: 500;
   }
 
   .heading-h5 {
-    font-size: 28px;
-    line-height: 32px;
-    letter-spacing: -0.5px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
     font-weight: 500;
   }
 
   .heading-h6 {
-    font-size: 24px;
-    line-height: 28px;
-    letter-spacing: -0.25px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
     font-weight: 500;
   }
 
   .text-large {
     font-size: 20px;
-    line-height: 28px;
+    line-height: 1.5;
     font-weight: 400;
   }
 
   .text-body {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 1.5;
     font-weight: 400;
   }
 
@@ -628,4 +623,31 @@ body.is-products-page footer {
 
 body.is-products-page footer .footer-inner {
   padding-bottom: 1.25rem !important;
+}
+
+/* Site-wide content typography (beats Tailwind arbitrary text-* on semantic tags) */
+main :is(h1),
+.heading-h1 {
+  font-size: 42px !important;
+  line-height: 1.2 !important;
+}
+
+main :is(h2),
+.heading-h2,
+.section-heading {
+  font-size: 26px !important;
+  line-height: 1.25 !important;
+}
+
+main :is(h3),
+.heading-h3 {
+  font-size: 20px !important;
+  line-height: 1.35 !important;
+}
+
+main :is(p, strong, dt, dd),
+.text-body,
+.text-large {
+  font-size: 20px !important;
+  line-height: 1.5 !important;
 }

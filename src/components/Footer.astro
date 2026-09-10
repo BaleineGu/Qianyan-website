@@ -27,10 +27,10 @@ const year = new Date().getFullYear();
           }
           <span class="text-body-lg font-medium text-ink tracking-tight">{siteConfig.name}</span>
         </div>
-        <p class="text-small text-ink-soft leading-relaxed max-w-xs whitespace-pre-line">{siteConfig.tagline}</p>
+        <p class="text-[20px] leading-[1.5] text-ink-soft max-w-xs whitespace-pre-line">{siteConfig.tagline}</p>
       </div>
       <div>
-        <h3 class="label-small text-ink-faint mb-4">Products</h3>
+        <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Products</h3>
         <ul class="space-y-3">
           {footerLinks.products.map((l) => (
             <li>
@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
         </ul>
       </div>
       <div>
-        <h3 class="label-small text-ink-faint mb-4">Support</h3>
+        <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Support</h3>
         <ul class="space-y-3">
           {footerLinks.support.map((l) => (
             <li>
@@ -59,7 +59,7 @@ const year = new Date().getFullYear();
         </ul>
       </div>
       <div>
-        <h3 class="label-small text-ink-faint mb-4">Contact</h3>
+        <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Contact</h3>
         <ul class="space-y-3">
           {footerLinks.contact.map((l) => (
             <li>
@@ -69,10 +69,10 @@ const year = new Date().getFullYear();
             </li>
           ))}
         </ul>
-        <div class="mt-5 text-small text-ink-soft space-y-1">
+        <div class="mt-5 text-[20px] leading-[1.5] text-ink-soft space-y-1">
           <p>{siteConfig.email}</p>
           <p>{siteConfig.phone}</p>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-ink font-medium hover:opacity-70">
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-[20px] leading-[1.5] text-ink font-medium hover:opacity-70">
             WhatsApp sales
           </a>
         </div>
@@ -88,7 +88,7 @@ const year = new Date().getFullYear();
       <p class="text-small text-ink-faint">&copy; {year} {siteConfig.name}. All rights reserved.</p>
       {
         !hideGetInTouch && (
-          <a href="/contact" class="btn-secondary-light !h-10 !px-4 !text-body-sm">
+          <a href="/contact" class="btn-secondary-light">
             Get in touch
           </a>
         )

@@ -429,6 +429,10 @@ export const capsuleExamples = [
     image: '/images/products/capsule-gallery/real-world-night.png',
     alt: 'Space capsule house under starry night sky',
   },
+  {
+    image: '/images/products/capsule-gallery/real-world-hillside.png',
+    alt: 'Space capsule house on forested hillside',
+  },
 ];
 
 /** Three equal project photos above the spec table */
