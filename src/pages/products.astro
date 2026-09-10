@@ -9,7 +9,6 @@ import { productShowcaseItems } from '@/data/site';
   title="Products"
   description="Explore our full modular housing product lineup."
   hideFooterBrandMark
-  hideFooterGetInTouch
 >
   <section class="products-hero relative overflow-hidden" data-header-theme="dark">
     <img
@@ -30,7 +29,10 @@ import { productShowcaseItems } from '@/data/site';
 
   <div class="products-page-content">
     <ProductZigzagList products={[...productShowcaseItems]} />
-    <ConversionCta title="Need specs, layouts, or a shipping estimate for your project site?" />
+    <ConversionCta
+      title="Need specs, layouts, or a shipping estimate for your project site?"
+      includeSiteLinks
+    />
   </div>
 </BaseLayout>
 

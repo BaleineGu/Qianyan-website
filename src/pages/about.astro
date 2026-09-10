@@ -1,7 +1,6 @@
 ﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import { whatsappUrl } from '@/data/site';
 
 const mosaicSlides = [
   {
@@ -40,7 +39,11 @@ const mosaicTiles = [
   { kind: 'media' as const, src: mosaicSlides[2].src, alt: mosaicSlides[2].alt },
 ];
 ---
-<BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
+<BaseLayout
+  title="About Us"
+  description="Factory-direct prefab modular housing for international B2B buyers."
+  showFooterContactBand
+>
   <PageBanner
     heading="QIANYAN Metal Manufacturer of Container Houses"
     description="We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services."
@@ -91,7 +94,7 @@ const mosaicTiles = [
   </section>
 
   <section class="py-20 bg-surface-1" data-header-theme="light">
-    <div class="section-container max-w-3xl space-y-8 mb-10 sm:mb-12">
+    <div class="section-container max-w-3xl space-y-8 mb-10 sm:mb-12 text-center">
       <div>
         <h2 class="text-2xl font-extrabold text-brand-900 mb-3">Trusted quality</h2>
         <p class="text-lg text-gray-600 leading-relaxed">We help developers, contractors, dealers, and hospitality investors source durable modular housing with clear specifications, customization options, and export-ready delivery support.</p>
@@ -124,17 +127,49 @@ const mosaicTiles = [
         }
       </div>
     </div>
+  </section>
 
-    <div class="section-container max-w-3xl mt-10 sm:mt-12">
-      <div class="flex flex-wrap gap-4">
-        <button type="button" data-inquiry-open class="btn-primary">Get a Factory Quote</button>
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary-light">Chat on WhatsApp</a>
-      </div>
-    </div>
+  <section
+    class="about-footer-bridge"
+    data-header-theme="dark"
+    aria-hidden="true"
+  >
+    <img
+      src="/images/backgrounds/about-hero.png"
+      alt=""
+      class="about-footer-bridge__bg"
+      width="1920"
+      height="640"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="about-footer-bridge__veil"></div>
   </section>
 </BaseLayout>
 
 <style>
+  .about-footer-bridge {
+    position: relative;
+    overflow: hidden;
+    height: clamp(140px, 20vw, 220px);
+    background: #161514;
+  }
+
+  .about-footer-bridge__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .about-footer-bridge__veil {
+    position: absolute;
+    inset: 0;
+    background: rgba(22, 21, 20, 0.42);
+  }
+
   .about-mosaic {
     background: transparent;
   }

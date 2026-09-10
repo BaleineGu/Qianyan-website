@@ -189,60 +189,6 @@ const actualBottomRow = [...interiorRow, movedToBottom];
     </div>
   </section>
 
-  <!-- Quote Request Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="section-container max-w-3xl">
-      <div class="text-center mb-10">
-        <h2 class="section-heading text-brand-900 mb-3">Get a Free Quote</h2>
-        <p class="text-gray-500">Tell us your requirements and we'll respond within 24 hours with pricing and availability.</p>
-      </div>
-      <form id="quote-form" class="grid sm:grid-cols-2 gap-5">
-        <div class="flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-name">Full Name <span class="text-red-500">*</span></label>
-          <input id="qf-name" name="name" type="text" required placeholder="John Smith" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-email">Email <span class="text-red-500">*</span></label>
-          <input id="qf-email" name="email" type="email" required placeholder="you@company.com" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-phone">Phone / WhatsApp</label>
-          <input id="qf-phone" name="phone" type="tel" placeholder="+1 234 567 8900" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-model">Product Model</label>
-          <select id="qf-model" name="model" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
-            <option value="">-- Select Model --</option>
-            <option>10ft Double-Wing</option>
-            <option>20ft Double-Wing</option>
-            <option>20ft 720 Twin Wings</option>
-            <option>30ft Double-Wing</option>
-            <option>40ft Double-Wing</option>
-            <option>Other / Not sure</option>
-          </select>
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-qty">Quantity</label>
-          <input id="qf-qty" name="quantity" type="number" min="1" placeholder="e.g. 5" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-country">Destination Country</label>
-          <input id="qf-country" name="country" type="text" placeholder="e.g. United States" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-        <div class="sm:col-span-2 flex flex-col gap-1">
-          <label class="text-sm font-semibold text-brand-900" for="qf-message">Additional Requirements</label>
-          <textarea id="qf-message" name="message" rows="4" placeholder="Describe customization needs, delivery timeline, use case, etc." class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea>
-        </div>
-        <div class="sm:col-span-2">
-          <button type="submit" class="btn-primary w-full">
-            Send Quote Request
-          </button>
-          <p id="qf-success" class="hidden text-center text-green-600 font-semibold mt-4">Thank you! We'll get back to you within 24 hours.</p>
-        </div>
-      </form>
-    </div>
-  </section>
-
   <section class="py-16">
     <div class="section-container">
       <h2 class="section-heading text-brand-900 mb-8">Engineering Details & Customization</h2>
@@ -253,15 +199,73 @@ const actualBottomRow = [...interiorRow, movedToBottom];
       </div>
     </div>
   </section>
+
   <section class="py-16 bg-gray-50">
-    <div class="section-container max-w-4xl space-y-4">
-      <h2 class="text-2xl font-extrabold text-brand-900 mb-6">FAQ</h2>
-      {expandableFaqs.map((item) => (
-        <details class="border border-gray-200 bg-white">
-          <summary class="px-5 py-4 font-bold text-brand-900 cursor-pointer">{item.q}</summary>
-          <p class="px-5 pb-4 text-gray-600 border-t border-gray-100 pt-3">{item.a}</p>
-        </details>
-      ))}
+    <div class="section-container">
+      <div class="expandable-faq-quote grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-start">
+        <div class="expandable-faq-quote__faq min-w-0">
+          <h2 class="text-2xl font-extrabold text-brand-900 mb-6">FAQ</h2>
+          <div class="space-y-4">
+            {expandableFaqs.map((item) => (
+              <details class="border border-gray-200 bg-white">
+                <summary class="px-5 py-4 font-bold text-brand-900 cursor-pointer">{item.q}</summary>
+                <p class="px-5 pb-4 text-gray-600 border-t border-gray-100 pt-3">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        <div class="expandable-faq-quote__form min-w-0 bg-white border border-gray-200 p-5 sm:p-6 lg:p-7">
+          <h2 class="text-2xl font-extrabold text-brand-900 mb-2">Get a Free Quote</h2>
+          <p class="text-gray-500 text-sm mb-6">
+            Tell us your requirements and we'll respond within 24 hours with pricing and availability.
+          </p>
+          <form id="quote-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-name">Full Name <span class="text-red-500">*</span></label>
+              <input id="qf-name" name="name" type="text" required placeholder="John Smith" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-email">Email <span class="text-red-500">*</span></label>
+              <input id="qf-email" name="email" type="email" required placeholder="you@company.com" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-phone">Phone / WhatsApp</label>
+              <input id="qf-phone" name="phone" type="tel" placeholder="+1 234 567 8900" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-model">Product Model</label>
+              <select id="qf-model" name="model" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                <option value="">-- Select Model --</option>
+                <option>10ft Double-Wing</option>
+                <option>20ft Double-Wing</option>
+                <option>20ft 720 Twin Wings</option>
+                <option>30ft Double-Wing</option>
+                <option>40ft Double-Wing</option>
+                <option>Other / Not sure</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-qty">Quantity</label>
+              <input id="qf-qty" name="quantity" type="number" min="1" placeholder="e.g. 5" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-country">Destination Country</label>
+              <input id="qf-country" name="country" type="text" placeholder="e.g. United States" class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            </div>
+            <div class="sm:col-span-2 flex flex-col gap-1">
+              <label class="text-sm font-semibold text-brand-900" for="qf-message">Additional Requirements</label>
+              <textarea id="qf-message" name="message" rows="4" placeholder="Describe customization needs, delivery timeline, use case, etc." class="border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea>
+            </div>
+            <div class="sm:col-span-2">
+              <button type="submit" class="btn-primary w-full">
+                Send Quote Request
+              </button>
+              <p id="qf-success" class="hidden text-center text-green-600 font-semibold mt-4">Thank you! We'll get back to you within 24 hours.</p>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
