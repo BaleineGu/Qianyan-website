@@ -40,27 +40,12 @@ const mosaicTiles = [
 ];
 ---
 <BaseLayout title="About Us" description="Factory-direct prefab modular housing for international B2B buyers.">
-  <section class="relative bg-black text-white overflow-hidden" data-header-theme="dark">
-    <img
-      src="/images/backgrounds/about-hero.png"
-      alt=""
-      class="block w-full h-auto"
-    />
-    <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="section-container text-center max-w-3xl py-10 sm:py-14">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">QIANYAN Metal Manufacturer of Container Houses</h1>
-        <p class="text-lg text-gray-300">We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services.</p>
-      </div>
-    </div>
-  </section>
-
   <section
     class="about-mosaic bg-surface-1"
     data-header-theme="light"
     aria-label="Factory gallery"
   >
-    <div class="section-container pb-6 sm:pb-8 lg:pb-10">
+    <div class="section-container pt-6 sm:pt-8 lg:pt-10 pb-6 sm:pb-8 lg:pb-10">
       <div class="about-mosaic__grid">
         {
           mosaicTiles.map((tile, index) =>
