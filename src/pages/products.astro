@@ -10,9 +10,9 @@ import { productShowcaseItems } from '@/data/site';
   description="Explore our full modular housing product lineup."
   hideFooterBrandMark
 >
-  <section class="products-hero relative overflow-hidden" data-header-theme="dark">
+  <section class="products-hero page-hero-uniform relative overflow-hidden" data-header-theme="dark">
     <img
-      src="/images/backgrounds/products-hero.png"
+      src="/images/hero/expandable-banner.png"
       alt=""
       class="products-hero__bg"
       width="1024"
@@ -39,12 +39,11 @@ import { productShowcaseItems } from '@/data/site';
     color: #f7f5f0;
   }
 
-  /* Height follows banner intrinsic aspect (1024×341 ≈ 3:1) */
   .products-hero__bg {
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1024 / 341;
+    height: 100%;
     object-fit: cover;
     object-position: center;
     image-rendering: -webkit-optimize-contrast;
@@ -63,13 +62,13 @@ import { productShowcaseItems } from '@/data/site';
   }
 
   .products-hero__content {
-    position: absolute;
-    inset: 0;
+    position: relative;
     z-index: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-block: clamp(1rem, 3vw, 2.5rem);
+    padding-block: 1.5rem;
   }
 </style>

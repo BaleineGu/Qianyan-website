@@ -660,3 +660,18 @@ main :is(strong, dt, dd),
   font-size: 20px !important;
   line-height: 1.5 !important;
 }
+
+/* Shared page-header height — Expandable Container Homes standard */
+.page-hero-uniform {
+  display: flex;
+  align-items: center;
+  min-height: 22rem;
+  height: 22rem;
+}
+
+@media (min-width: 1024px) {
+  .page-hero-uniform {
+    min-height: 28rem;
+    height: 28rem;
+  }
+}

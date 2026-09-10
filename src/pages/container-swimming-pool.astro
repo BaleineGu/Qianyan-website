@@ -7,8 +7,9 @@ import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
   <PageBanner
     heading={poolBanner.heading}
     description={poolBanner.description}
-    image="/images/hero/pool-banner.png"
+    image="/images/hero/expandable-banner.png"
     imageClass="object-center"
+    uniformHeight
   />
   <section class="py-16 bg-gray-50">
     <div class="section-container">
@@ -77,10 +78,10 @@ import { poolBanner, poolConfigHeaders, poolConfigRows } from '@/data/site';
       <h2 class="section-heading text-brand-900 mb-10 text-center">Actual photos of the factory swimming pool</h2>
       <div class="pool-factory-stack grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto md:pb-12">
         {[
-          { src: '/images/products/pool-factory/01.png', label: 'Factory pool â€?orange panel finish' },
-          { src: '/images/products/pool-factory/02.png', label: 'Factory pool â€?black container with viewing window' },
-          { src: '/images/products/pool-factory/03.png', label: 'Factory pool â€?interior liner view' },
-          { src: '/images/products/pool-factory/04.png', label: 'Factory pool â€?black slat exterior' },
+          { src: '/images/products/pool-factory/01.png', label: 'Factory pool - orange panel finish' },
+          { src: '/images/products/pool-factory/02.png', label: 'Factory pool - black container with viewing window' },
+          { src: '/images/products/pool-factory/03.png', label: 'Factory pool - interior liner view' },
+          { src: '/images/products/pool-factory/04.png', label: 'Factory pool - black slat exterior' },
         ].map((item, i) => (
           <article
             class:list={[

@@ -7,6 +7,8 @@ interface Props {
   imageClass?: string;
   /** Render supporting copy as h2 when the page needs that hierarchy */
   descriptionAs?: 'p' | 'h2';
+  /** Lock banner height to Expandable product-page standard */
+  uniformHeight?: boolean;
 }
 const {
   heading,
@@ -14,16 +16,28 @@ const {
   image = '/images/hero/slide-1.png',
   imageClass = '',
   descriptionAs = 'p',
+  uniformHeight = false,
 } = Astro.props;
 ---
-<section class="relative bg-surface-dark text-ink-on-dark overflow-hidden" data-header-theme="dark">
+<section
+  class:list={[
+    'page-banner relative bg-surface-dark text-ink-on-dark overflow-hidden',
+    uniformHeight && 'page-hero-uniform',
+  ]}
+  data-header-theme="dark"
+>
   <img
     src={image}
     alt=""
     class:list={['absolute inset-0 w-full h-full object-cover', imageClass]}
   />
   <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
-  <div class="relative section-container py-24 lg:py-32 max-w-[912px]">
+  <div
+    class:list={[
+      'relative section-container max-w-[912px]',
+      uniformHeight ? 'page-banner__content' : 'py-24 lg:py-32',
+    ]}
+  >
     <h1 class="heading-h1 mb-5">{heading}</h1>
     {descriptionAs === 'h2' ? (
       <h2 class="page-banner__subheading text-large text-ink-on-dark-soft font-normal !mb-0">
@@ -39,5 +53,10 @@ const {
   .page-banner__subheading {
     line-height: 1.6;
     letter-spacing: 0;
+  }
+
+  .page-banner__content {
+    width: 100%;
+    padding-block: 1.5rem;
   }
 </style>
