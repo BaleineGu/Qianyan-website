@@ -13,7 +13,6 @@ interface Props {
   immersiveBackground?: boolean;
   homePage?: boolean;
   hideFooterBrandMark?: boolean;
-  showFooterContactBand?: boolean;
 }
 
 const {
@@ -23,7 +22,6 @@ const {
   immersiveBackground: _immersiveBackground = false,
   homePage = false,
   hideFooterBrandMark = false,
-  showFooterContactBand = false,
 } = Astro.props;
 const immersiveBackground = false;
 const productsPage = hideFooterBrandMark;
@@ -65,11 +63,7 @@ const pageDescription = description ?? siteConfig.description;
     <div class="site-page-shell flex flex-col flex-1 min-h-screen">
       <Header overlay={overlayHeader} />
       <main class="flex-1"><slot /></main>
-      <Footer
-        hideBrandMark={hideFooterBrandMark}
-        showContactBand={showFooterContactBand}
-        copyrightOnly={homePage || productsPage}
-      />
+      <Footer hideBrandMark={hideFooterBrandMark} />
       <InquiryModal />
       <FloatingActions />
     </div>

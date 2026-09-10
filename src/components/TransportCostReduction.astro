@@ -78,17 +78,17 @@
 
 <style>
   .transport-split {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: clamp(1.25rem, 2.5vw, 2rem);
     align-items: stretch;
   }
 
   .transport-split__video {
-    width: 100%;
-    max-width: 28rem;
+    width: min(100%, 22rem);
+    aspect-ratio: 2 / 3;
+    height: auto;
     margin-inline: auto;
-    aspect-ratio: 6 / 9;
     overflow: hidden;
     border-radius: 16px;
     border: 1px solid rgba(22, 21, 20, 0.12);
@@ -107,6 +107,7 @@
     border: 1px solid rgba(22, 21, 20, 0.12);
     border-radius: 16px;
     padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    flex: 1 1 auto;
   }
 
   .transport-split__quote-title {
@@ -198,13 +199,49 @@
 
   @media (min-width: 1024px) {
     .transport-split {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      align-items: center;
+      flex-direction: row;
+      align-items: stretch;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
     }
 
     .transport-split__video {
       margin-inline: 0;
+      flex: 0 0 auto;
+      align-self: stretch;
+      aspect-ratio: 2 / 3;
       max-width: none;
+    }
+
+    .transport-split__quote {
+      flex: 1 1 auto;
+      min-width: 0;
     }
   }
 </style>
+
+<script>
+  function syncTransportVideoHeight() {
+    const video = document.querySelector('.transport-split__video');
+    const quote = document.querySelector('.transport-split__quote');
+    if (!(video instanceof HTMLElement) || !(quote instanceof HTMLElement)) return;
+
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+      const quoteHeight = quote.getBoundingClientRect().height;
+      video.style.height = `${quoteHeight}px`;
+      video.style.width = `${(quoteHeight * 2) / 3}px`;
+    } else {
+      video.style.removeProperty('height');
+      video.style.removeProperty('width');
+    }
+  }
+
+  const run = () => requestAnimationFrame(syncTransportVideoHeight);
+  run();
+  window.addEventListener('resize', run);
+  document.fonts?.ready?.then(run);
+
+  const quote = document.querySelector('.transport-split__quote');
+  if (quote && 'ResizeObserver' in window) {
+    new ResizeObserver(run).observe(quote);
+  }
+</script>

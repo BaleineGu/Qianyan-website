@@ -1,129 +1,78 @@
 ---
-import { footerLinks, siteConfig, whatsappUrl } from '@/data/site';
-import FooterContactBand from '@/components/FooterContactBand.astro';
+import { footerLinks, siteConfig } from '@/data/site';
 
 interface Props {
   hideBrandMark?: boolean;
-  showContactBand?: boolean;
-  /** Homepage: links live in ConversionCta; footer keeps copyright only. */
-  copyrightOnly?: boolean;
 }
 
-const { hideBrandMark = false, showContactBand = false, copyrightOnly = false } = Astro.props;
+const { hideBrandMark = false } = Astro.props;
 const year = new Date().getFullYear();
 ---
-<footer
-  class:list={[
-    'site-footer mt-0',
-    showContactBand ? 'site-footer--with-contact-band bg-surface-dark' : 'bg-surface-1 text-ink-soft',
-  ]}
-  data-header-theme={showContactBand ? 'dark' : 'light'}
->
-  <div
-    class:list={[
-      'section-container px-4 sm:px-8 footer-inner',
-      showContactBand ? 'pb-9' : copyrightOnly ? 'pt-5 pb-6' : 'pt-10 pb-9',
-    ]}
-  >
-    {
-      showContactBand ? (
-        <div class="site-footer__contact-overlap">
-          <FooterContactBand hideBrandMark={hideBrandMark} />
+<footer class="bg-surface-1 text-ink-soft rounded-t-helios-xl mt-0" data-header-theme="light">
+  <div class="section-container pt-10 pb-9 px-4 sm:px-8 footer-inner">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          {
+            !hideBrandMark && (
+              <img
+                src={siteConfig.logo}
+                alt=""
+                class="h-10 w-auto brightness-0"
+                width="40"
+                height="40"
+              />
+            )
+          }
+          <span class="text-body-lg font-medium text-ink tracking-tight">{siteConfig.name}</span>
         </div>
-      ) : copyrightOnly ? (
-        <div>
-          <p class="text-small text-ink-faint">&copy; {year} {siteConfig.name}. All rights reserved.</p>
-        </div>
-      ) : (
-        <>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div>
-              <div class="flex items-center gap-3 mb-4">
-                {
-                  !hideBrandMark && (
-                    <img
-                      src={siteConfig.logo}
-                      alt=""
-                      class="h-10 w-auto brightness-0"
-                      width="40"
-                      height="40"
-                    />
-                  )
-                }
-                <span class="text-body-lg font-medium text-ink tracking-tight">{siteConfig.name}</span>
-              </div>
-              <p class="text-[16px] leading-[1.5] text-ink-soft max-w-xs whitespace-pre-line">{siteConfig.tagline}</p>
-            </div>
-            <div>
-              <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Products</h3>
-              <ul class="space-y-3">
-                {footerLinks.products.map((l) => (
-                  <li>
-                    <a href={l.href} class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios">
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Support</h3>
-              <ul class="space-y-3">
-                {footerLinks.support.map((l) => (
-                  <li>
-                    <a
-                      href={l.href}
-                      class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios"
-                      target={l.href.startsWith('http') ? '_blank' : undefined}
-                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Contact</h3>
-              <ul class="space-y-3">
-                {footerLinks.contact.map((l) => (
-                  <li>
-                    <a href={l.href} class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios">
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div class="mt-5 text-[16px] leading-[1.5] text-ink-soft space-y-1">
-                <p>{siteConfig.email}</p>
-                <p>{siteConfig.phone}</p>
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-[20px] leading-[1.5] text-ink font-medium hover:opacity-70">
-                  WhatsApp sales
-                </a>
-              </div>
-            </div>
-          </div>
+        <p class="text-[16px] leading-[1.5] text-ink-soft max-w-xs whitespace-pre-line">{siteConfig.tagline}</p>
+      </div>
+      <div>
+        <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Products</h3>
+        <ul class="space-y-3">
+          {footerLinks.products.map((l) => (
+            <li>
+              <a href={l.href} class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Support</h3>
+        <ul class="space-y-3">
+          {footerLinks.support.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios"
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-[20px] leading-[1.35] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-4">Contact</h3>
+        <ul class="space-y-3">
+          {footerLinks.contact.map((l) => (
+            <li>
+              <a href={l.href} class="text-body-lg font-medium text-ink hover:opacity-70 transition-opacity duration-helios">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
 
-          <div class="border-t border-ink-hairline mt-6 pt-5">
-            <p class="text-small text-ink-faint">&copy; {year} {siteConfig.name}. All rights reserved.</p>
-          </div>
-        </>
-      )
-    }
+    <div class="border-t border-ink-hairline mt-6 pt-5">
+      <p class="text-small text-ink-faint">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+    </div>
   </div>
 </footer>
-
-<style>
-  .site-footer--with-contact-band {
-    position: relative;
-    z-index: 1;
-    overflow: visible;
-  }
-
-  .site-footer__contact-overlap {
-    margin-top: calc(-1 * clamp(4.5rem, 9vw, 6.5rem));
-    margin-bottom: 0;
-    position: relative;
-    z-index: 2;
-  }
-</style>

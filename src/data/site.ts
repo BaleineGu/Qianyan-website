@@ -15,6 +15,8 @@ export const siteConfig = {
   email: 'sales@qianyanjinshu.com',
   phone: '+8619061988976',
   whatsapp: '8619061988976',
+  whatsappDisplay: '+8619061988976',
+  wechat: '19061988976',
   logo: '/images/brand/logo-icon-white.png',
 };
 

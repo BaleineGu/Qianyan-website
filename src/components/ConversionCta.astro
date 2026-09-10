@@ -1,15 +1,12 @@
 ---
-import { footerLinks, siteConfig, whatsappUrl } from '@/data/site';
+import { siteConfig, whatsappUrl } from '@/data/site';
 
 interface Props {
   title?: string;
-  /** Embed site footer links under the title (homepage CTA). */
-  includeSiteLinks?: boolean;
 }
 
 const {
   title = 'Need specs, layouts, or a shipping estimate for your project site?',
-  includeSiteLinks = false,
 } = Astro.props;
 ---
 
@@ -17,82 +14,40 @@ const {
   class="conversion-cta py-6 sm:py-8 lg:py-10 bg-surface-dark text-ink-on-dark"
   data-header-theme="dark"
 >
-  <div
-    class:list={[
-      'section-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14',
-      'lg:items-center',
-    ]}
-  >
-    <div class:list={['conversion-cta__left', includeSiteLinks && 'conversion-cta__left--with-links']}>
+  <div class="section-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 lg:items-center">
+    <div class="conversion-cta__left max-w-[560px]">
       <h2 class="conversion-cta__title">
         {title}
       </h2>
 
-      {
-        includeSiteLinks && (
-          <div class="conversion-cta__site-links" aria-label="Site links">
-            <div class="conversion-cta__brand">
-              <div class="conversion-cta__brand-row">
-                <img
-                  src={siteConfig.logo}
-                  alt=""
-                  class="conversion-cta__logo"
-                  width="36"
-                  height="36"
-                />
-                <span class="conversion-cta__brand-name">{siteConfig.name}</span>
-              </div>
-              <p class="conversion-cta__tagline">{siteConfig.tagline}</p>
-            </div>
+      <div class="conversion-cta__invest">
+        <h3 class="conversion-cta__invest-title">Invest in the Future of Housing!</h3>
+        <p class="conversion-cta__invest-body">
+          Connect with us on WhatsApp for personalized assistance and explore innovative opportunities
+          tailored to your business needs.
+        </p>
 
-            <div>
-              <h3 class="conversion-cta__nav-title">Products</h3>
-              <ul class="conversion-cta__nav-list">
-                {footerLinks.products.map((l) => (
-                  <li>
-                    <a href={l.href}>{l.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 class="conversion-cta__nav-title">Support</h3>
-              <ul class="conversion-cta__nav-list">
-                {footerLinks.support.map((l) => (
-                  <li>
-                    <a
-                      href={l.href}
-                      target={l.href.startsWith('http') ? '_blank' : undefined}
-                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 class="conversion-cta__nav-title">Contact</h3>
-              <ul class="conversion-cta__nav-list">
-                {footerLinks.contact.map((l) => (
-                  <li>
-                    <a href={l.href}>{l.label}</a>
-                  </li>
-                ))}
-              </ul>
-              <div class="conversion-cta__contact-meta">
-                <p>{siteConfig.email}</p>
-                <p>{siteConfig.phone}</p>
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  WhatsApp sales
-                </a>
-              </div>
-            </div>
-          </div>
-        )
-      }
+        <ul class="conversion-cta__contacts" aria-label="Contact details">
+          <li>
+            <span class="conversion-cta__contact-label">Email</span>
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          </li>
+          <li>
+            <span class="conversion-cta__contact-label">Phone</span>
+            <a href={`tel:${siteConfig.phone}`}>{siteConfig.phone}</a>
+          </li>
+          <li>
+            <span class="conversion-cta__contact-label">WeChat</span>
+            <span>{siteConfig.wechat}</span>
+          </li>
+          <li>
+            <span class="conversion-cta__contact-label">WhatsApp</span>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              {siteConfig.whatsappDisplay}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="w-full bg-surface-2 text-ink rounded-helios-md p-5 sm:p-7 lg:p-8">
@@ -178,18 +133,12 @@ const {
   .conversion-cta__left {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
     min-width: 0;
-    height: 100%;
-  }
-
-  .conversion-cta__left--with-links {
-    justify-content: center;
   }
 
   .conversion-cta__title {
     margin: 0;
-    max-width: 34rem;
     font-size: clamp(1.75rem, 3.2vw, 3rem);
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -197,114 +146,58 @@ const {
     color: #f7f5f0;
   }
 
-  .conversion-cta__site-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem 1.1rem;
-    align-items: start;
-    width: 100%;
-  }
-
-  @media (min-width: 640px) {
-    .conversion-cta__site-links {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .conversion-cta__site-links {
-      grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-  }
-
-  .conversion-cta__site-links > * {
-    min-width: 0;
-  }
-
-  .conversion-cta__brand-row {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.45rem;
-    min-height: 1.75rem;
-  }
-
-  .conversion-cta__logo {
-    height: 2rem;
-    width: auto;
-    filter: brightness(0) invert(1);
-  }
-
-  .conversion-cta__brand-name {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.3;
+  .conversion-cta__invest-title {
+    margin: 0 0 0.65rem;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
     color: #ffffff;
   }
 
-  .conversion-cta__tagline {
-    margin: 0;
-    max-width: 14rem;
-    font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.78);
-    white-space: pre-line;
+  .conversion-cta__invest-body {
+    margin: 0 0 1.15rem;
+    max-width: 28rem;
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(247, 245, 240, 0.78);
   }
 
-  .conversion-cta__nav-title {
-    margin: 0 0 0.55rem;
-    min-height: 1.75rem;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  .conversion-cta__nav-list {
+  .conversion-cta__contacts {
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.55rem;
   }
 
-  .conversion-cta__nav-list a {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.35;
-    color: #ffffff;
-    text-decoration: none;
-  }
-
-  .conversion-cta__nav-list a:hover {
-    opacity: 0.78;
-  }
-
-  .conversion-cta__contact-meta {
-    margin-top: 0.7rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    font-size: 13px;
+  .conversion-cta__contacts li {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: baseline;
+    font-size: 16px;
     line-height: 1.45;
-    color: rgba(255, 255, 255, 0.82);
+    color: #ffffff;
   }
 
-  .conversion-cta__contact-meta a {
-    margin-top: 0.2rem;
-    font-size: 15px;
+  .conversion-cta__contact-label {
+    font-size: 13px;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 240, 0.55);
+  }
+
+  .conversion-cta__contacts a {
     color: #ffffff;
     text-decoration: none;
+    word-break: break-word;
   }
 
-  .conversion-cta__contact-meta a:hover {
-    opacity: 0.78;
+  .conversion-cta__contacts a:hover {
+    opacity: 0.8;
   }
 </style>
 
