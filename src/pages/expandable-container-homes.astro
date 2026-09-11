@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageBanner from '@/components/PageBanner.astro';
-import AdvantagePhotoStack from '@/components/AdvantagePhotoStack.astro';
 import ProductHighlights from '@/components/ProductHighlights.astro';
 import ContainerLayouts from '@/components/ContainerLayouts.astro';
 import {
@@ -13,23 +12,15 @@ import {
   containerLayoutSizes,
 } from '@/data/site';
 
-const actualProductPhotos = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((n) => ({
-  src: `/images/products/actual/${String(n).padStart(2, '0')}.png`,
+const actualTopRow = [1, 2, 3, 4, 5, 6].map((n) => ({
+  src: `/images/products/actual/top-${String(n).padStart(2, '0')}.png`,
   label: `Actual product photo ${n}`,
 }));
 
-const interiorRow = [
-  { src: '/images/layouts/10ft-interior-1.png', label: '10FT interior 1' },
-  { src: '/images/layouts/20ft-interior-1.png', label: '20FT interior 1' },
-  { src: '/images/layouts/20ft-interior-3.png', label: '20FT interior 3' },
-  { src: '/images/layouts/30ft-interior-2.png', label: '30FT interior 2' },
-  { src: '/images/layouts/40ft-interior-1.png', label: '40FT interior 1' },
-];
-
-// Move one exterior photo from top row into the bottom carousel
-const movedToBottom = actualProductPhotos[5]; // actual product photo 7
-const actualTopRow = actualProductPhotos.filter((photo) => photo.src !== movedToBottom.src);
-const actualBottomRow = [...interiorRow, movedToBottom];
+const actualBottomRow = [1, 2, 3, 4, 5, 6].map((n) => ({
+  src: `/images/products/actual/bottom-${String(n).padStart(2, '0')}.png`,
+  label: `Actual product interior ${n}`,
+}));
 ---
 <BaseLayout title="Expandable Container Homes" description={expandableBanner.description}>
   <PageBanner
@@ -38,11 +29,6 @@ const actualBottomRow = [...interiorRow, movedToBottom];
     image="/images/hero/expandable-banner.png"
     uniformHeight
   />
-  <section class="py-16">
-    <div class="section-container">
-      <AdvantagePhotoStack />
-    </div>
-  </section>
 
   <ProductHighlights />
 
@@ -192,7 +178,7 @@ const actualBottomRow = [...interiorRow, movedToBottom];
 
   <section class="py-16">
     <div class="section-container">
-      <h2 class="section-heading text-brand-900 mb-8">Engineering Details & Customization</h2>
+      <h2 class="section-heading text-brand-900 mb-8 text-center">Engineering Details & Customization</h2>
       <div class="grid md:grid-cols-3 gap-8">
         {expandableEngineering.map((item) => (
           <div><h3 class="text-lg font-bold text-brand-900 mb-2">{item.title}</h3><p class="text-gray-600">{item.description}</p></div>
@@ -390,31 +376,10 @@ const actualBottomRow = [...interiorRow, movedToBottom];
       }, 480);
     };
 
-    let timer: ReturnType<typeof setInterval> | null = null;
-    const stopAuto = () => {
-      if (timer) clearInterval(timer);
-      timer = null;
-    };
-    const startAuto = () => {
-      stopAuto();
-      timer = setInterval(() => go(1), 2000);
-    };
-
-    document.getElementById('actual-prev')?.addEventListener('click', () => {
-      go(-1);
-      startAuto();
-    });
-    document.getElementById('actual-next')?.addEventListener('click', () => {
-      go(1);
-      startAuto();
-    });
-
-    const shell = document.querySelector('.actual-carousel-shell');
-    shell?.addEventListener('mouseenter', stopAuto);
-    shell?.addEventListener('mouseleave', startAuto);
+    document.getElementById('actual-prev')?.addEventListener('click', () => go(-1));
+    document.getElementById('actual-next')?.addEventListener('click', () => go(1));
     window.addEventListener('resize', () => applyAll(false));
     applyAll(false);
-    startAuto();
   }
 
   // Quote form mock submit
