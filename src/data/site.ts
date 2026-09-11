@@ -648,8 +648,8 @@ export const flatPackAdvantageGallery = [
   {
     title: '',
     description: '',
-    image: '/images/products/flatpack-advantages/interior-03.png',
-    alt: 'Modular conference room interior',
+    image: '/images/products/flatpack-advantages/cases-02.png',
+    alt: 'Two-story modular housing at mountain site',
   },
   {
     title: '',
@@ -660,8 +660,8 @@ export const flatPackAdvantageGallery = [
   {
     title: '',
     description: '',
-    image: '/images/products/flatpack-advantages/cases-02.png',
-    alt: 'Two-story modular housing at mountain site',
+    image: '/images/products/flatpack-advantages/interior-03.png',
+    alt: 'Modular conference room interior',
   },
   {
     title: '',
