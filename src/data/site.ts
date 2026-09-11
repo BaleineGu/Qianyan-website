@@ -41,7 +41,7 @@ export const navLinks = [
     children: productNavLinks,
   },
   { label: 'BLOG', href: '/blog' },
-  { label: 'TOUCH', href: '/contact' },
+  { label: 'CONTACT', href: '/contact' },
 ] as const;
 
 export const heroSlides: HeroSlide[] = [

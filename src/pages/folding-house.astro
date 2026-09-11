@@ -10,11 +10,9 @@ const foldingActualPhotos = [
   { src: '/images/products/folding-actual/04.png', label: 'Actual product photo 4' },
   { src: '/images/products/folding-actual/05.png', label: 'Actual product photo 5' },
   { src: '/images/products/folding-actual/06.png', label: 'Actual product photo 6' },
-  { src: '/images/products/folding-actual/07.png', label: 'Actual product photo 7' },
 ];
 
-const foldingGridTop = foldingActualPhotos.slice(0, 4);
-const foldingGridBottom = foldingActualPhotos.slice(4, 7);
+const foldingVisibleCount = 4;
 ---
 <BaseLayout title="Folding House" description={foldingBanner.description}>
   <PageBanner
@@ -61,39 +59,54 @@ const foldingGridBottom = foldingActualPhotos.slice(4, 7);
   <section class="py-16 bg-white">
     <div class="section-container">
       <h2 class="section-heading text-brand-900 mb-8 text-center">Actual product photo</h2>
-      <div class="folding-photo-grid">
-        <div class="folding-photo-grid__row folding-photo-grid__row--top">
-          {
-            foldingGridTop.map(({ src, label }) => (
-              <button
-                type="button"
-                class="lightbox-trigger folding-photo-grid__item"
-                data-lightbox-group="folding-actual"
-                data-src={src}
-                data-label={label}
-                aria-label={`View ${label} full screen`}
-              >
-                <img src={src} alt={label} class="folding-photo-grid__image" loading="lazy" />
-              </button>
-            ))
-          }
+      <div
+        class="folding-photo-carousel"
+        data-folding-carousel
+        data-visible={foldingVisibleCount}
+        data-total={foldingActualPhotos.length}
+      >
+        <button
+          type="button"
+          class="folding-photo-carousel__nav folding-photo-carousel__nav--prev"
+          data-carousel-prev
+          aria-label="Previous photos"
+        >
+          ‹
+        </button>
+
+        <div class="folding-photo-carousel__viewport">
+          <div class="folding-photo-carousel__track" data-carousel-track>
+            {
+              foldingActualPhotos.map(({ src, label }, index) => (
+                <button
+                  type="button"
+                  class="lightbox-trigger folding-photo-carousel__item"
+                  data-lightbox-group="folding-actual"
+                  data-src={src}
+                  data-label={label}
+                  data-carousel-card
+                  aria-label={`View ${label} full screen`}
+                >
+                  <img
+                    src={src}
+                    alt={label}
+                    class="folding-photo-carousel__image"
+                    loading={index < foldingVisibleCount ? 'eager' : 'lazy'}
+                  />
+                </button>
+              ))
+            }
+          </div>
         </div>
-        <div class="folding-photo-grid__row folding-photo-grid__row--bottom">
-          {
-            foldingGridBottom.map(({ src, label }) => (
-              <button
-                type="button"
-                class="lightbox-trigger folding-photo-grid__item"
-                data-lightbox-group="folding-actual"
-                data-src={src}
-                data-label={label}
-                aria-label={`View ${label} full screen`}
-              >
-                <img src={src} alt={label} class="folding-photo-grid__image" loading="lazy" />
-              </button>
-            ))
-          }
-        </div>
+
+        <button
+          type="button"
+          class="folding-photo-carousel__nav folding-photo-carousel__nav--next"
+          data-carousel-next
+          aria-label="Next photos"
+        >
+          ›
+        </button>
       </div>
     </div>
   </section>
@@ -151,30 +164,30 @@ const foldingGridBottom = foldingActualPhotos.slice(4, 7);
       }
     }
 
-    .folding-photo-grid {
-      --folding-grid-gap: clamp(0.75rem, 1.5vw, 1.25rem);
-      display: flex;
-      flex-direction: column;
-      gap: var(--folding-grid-gap);
-    }
-
-    .folding-photo-grid__row--top {
+    .folding-photo-carousel {
+      --folding-carousel-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+      --folding-visible: 4;
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--folding-grid-gap);
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .folding-photo-grid__row--bottom {
+    .folding-photo-carousel__viewport {
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .folding-photo-carousel__track {
       display: flex;
-      justify-content: center;
-      gap: var(--folding-grid-gap);
+      gap: var(--folding-carousel-gap);
+      transition: transform 320ms ease;
+      will-change: transform;
     }
 
-    .folding-photo-grid__row--bottom .folding-photo-grid__item {
-      width: calc((100% - (var(--folding-grid-gap) * 3)) / 4);
-    }
-
-    .folding-photo-grid__item {
+    .folding-photo-carousel__item {
+      flex: 0 0 calc((100% - (var(--folding-carousel-gap) * (var(--folding-visible) - 1))) / var(--folding-visible));
       margin: 0;
       padding: 0;
       border: 1px solid rgb(229 231 235);
@@ -184,31 +197,38 @@ const foldingGridBottom = foldingActualPhotos.slice(4, 7);
       cursor: zoom-in;
     }
 
-    .folding-photo-grid__image {
+    .folding-photo-carousel__image {
       display: block;
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
     }
 
+    .folding-photo-carousel__nav {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 0;
+      border-radius: 9999px;
+      background: #e1dcd2;
+      color: #161514;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: opacity 200ms ease;
+    }
+
+    .folding-photo-carousel__nav:hover:not(:disabled) {
+      opacity: 0.85;
+    }
+
+    .folding-photo-carousel__nav:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
     @media (max-width: 767px) {
-      .folding-photo-grid__row--top {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .folding-photo-grid__row--bottom {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .folding-photo-grid__row--bottom .folding-photo-grid__item {
-        width: auto;
-      }
-
-      .folding-photo-grid__row--bottom .folding-photo-grid__item:last-child {
-        grid-column: 1 / -1;
-        justify-self: center;
-        width: calc(50% - (var(--folding-grid-gap) / 2));
+      .folding-photo-carousel {
+        --folding-visible: 2;
       }
     }
   </style>
@@ -373,6 +393,53 @@ const foldingGridBottom = foldingActualPhotos.slice(4, 7);
     if (e.key === 'ArrowRight') openLightbox(current + 1);
   });
 
+  function initFoldingPhotoCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>('[data-carousel-track]');
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-carousel-card]'));
+    const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    if (!track || !cards.length || !prev || !next) return;
+
+    const total = cards.length;
+    let index = 0;
+
+    const getVisible = () => (window.matchMedia('(max-width: 767px)').matches ? 2 : 4);
+
+    const update = () => {
+      const visible = getVisible();
+      const maxIndex = Math.max(0, total - visible);
+      if (index > maxIndex) index = maxIndex;
+
+      const viewport = track.parentElement;
+      if (!viewport) return;
+      const gap = Number.parseFloat(getComputedStyle(track).gap || '0') || 0;
+      const cardWidth = (viewport.clientWidth - gap * (visible - 1)) / visible;
+
+      cards.forEach((card) => {
+        card.style.flex = `0 0 ${cardWidth}px`;
+        card.style.width = `${cardWidth}px`;
+      });
+
+      track.style.transform = `translateX(-${index * (cardWidth + gap)}px)`;
+      prev.disabled = index <= 0;
+      next.disabled = index >= maxIndex;
+    };
+
+    prev.addEventListener('click', () => {
+      index = Math.max(0, index - 1);
+      update();
+    });
+    next.addEventListener('click', () => {
+      const visible = getVisible();
+      index = Math.min(Math.max(0, total - visible), index + 1);
+      update();
+    });
+
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-folding-carousel]').forEach(initFoldingPhotoCarousel);
 
   const form = document.getElementById('folding-quote-form') as HTMLFormElement | null;
   const success = document.getElementById('fqf-success') as HTMLParagraphElement | null;
