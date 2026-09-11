@@ -8,6 +8,7 @@ import type {
 
 export const siteConfig = {
   name: 'QIANYAN Metal',
+  documentTitle: 'Qianyan Metal | Powerful source direct supply | Expanding future house',
   shortName: 'QIANYAN',
   tagline: 'Connecting with the World\nMutual Benefit for All',
   description:
