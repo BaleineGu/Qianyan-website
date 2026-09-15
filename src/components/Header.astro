@@ -17,7 +17,7 @@ function isLinkActive(href: string) {
     id="site-header-shell"
     class="site-header__shell pointer-events-auto w-full border-b transition-[background-color,border-color,box-shadow] duration-300"
   >
-    <div class="site-header__scale-wrap relative w-full h-[44px] sm:h-[56px] lg:h-[65px] overflow-x-clip overflow-y-visible">
+    <div class="site-header__scale-wrap relative w-full h-[56px] lg:h-[65px] overflow-x-clip overflow-y-visible">
       <div
         id="site-header-row"
         class="site-header__row absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8 origin-center"
@@ -92,42 +92,68 @@ function isLinkActive(href: string) {
             })}
           </nav>
         </div>
-        <button id="mobile-menu-btn" class="site-header__icon xl:hidden absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 p-2 rounded-lg shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <button id="mobile-menu-btn" class="site-header__icon xl:hidden absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 grid h-11 w-11 place-items-center rounded-full shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="menu-open-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          <svg class="menu-close-icon hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6L6 18"></path></svg>
         </button>
       </div>
     </div>
-      <nav id="mobile-menu" class="site-header__mobile hidden xl:hidden pb-4 border-t px-4 sm:px-6 lg:px-8" aria-label="Mobile navigation">
-        <div class="flex flex-col gap-1 pt-3">
+      <nav id="mobile-menu" class="site-header__mobile hidden xl:hidden border-t px-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6" aria-label="Mobile navigation">
+        <div class="flex flex-col gap-1 py-3">
           {navLinks.map((link) => {
             const children = 'children' in link ? link.children : undefined;
             if (children) {
               return (
                 <div class="flex flex-col">
-                  <a href={link.href} class="site-header__mobile-link px-3 py-2.5 rounded-lg text-[18px] font-medium">{link.label}</a>
-                  <div class="ml-3 border-l site-header__mobile-divider pl-2 flex flex-col">
+                  <a href={link.href} class="site-header__mobile-link px-3 py-3 rounded-xl text-[17px] font-semibold">{link.label}</a>
+                  <div class="ml-3 mb-1 border-l site-header__mobile-divider pl-2 flex flex-col">
                     {children.map((child) => (
-                      <a href={child.href} class="site-header__mobile-link px-3 py-2 rounded-lg text-[16px]">{child.label}</a>
+                      <a href={child.href} class="site-header__mobile-link px-3 py-2.5 rounded-xl text-[15px]">{child.label}</a>
                     ))}
                   </div>
                 </div>
               );
             }
             return (
-              <a href={link.href} class="site-header__mobile-link px-3 py-2.5 rounded-lg text-[18px] font-medium">{link.label}</a>
+              <a href={link.href} class="site-header__mobile-link px-3 py-3 rounded-xl text-[17px] font-semibold">{link.label}</a>
             );
           })}
         </div>
       </nav>
   </div>
 </header>
-{!overlay && <div id="site-header-spacer" class="h-[44px] sm:h-[56px] lg:h-[65px]" aria-hidden="true" />}
+{!overlay && <div id="site-header-spacer" class="h-[56px] lg:h-[65px]" aria-hidden="true" />}
 
 <style>
   .site-header__shell {
     border-radius: 0;
     backdrop-filter: blur(18px) saturate(1.35);
     -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  }
+
+  .site-header__mobile {
+    max-height: calc(100svh - 56px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  @media (max-width: 1279px) {
+    .site-header[data-menu-open='true'] .site-header__shell {
+      background-color: rgb(22 21 20 / 0.96);
+    }
+
+    .site-header[data-menu-open='true'] .site-header__mobile {
+      background-color: rgb(22 21 20 / 0.96);
+      border-color: rgb(255 255 255 / 0.12);
+    }
+
+    .site-header[data-menu-open='true'] :is(.site-header__brand, .site-header__icon, .site-header__mobile-link) {
+      color: white;
+    }
+
+    .site-header[data-menu-open='true'] .site-header__logo {
+      filter: none;
+    }
   }
 
   .site-header[data-theme='dark'] .site-header__shell {
@@ -285,7 +311,25 @@ function isLinkActive(href: string) {
 
   btn?.addEventListener('click', () => {
     if (!menu || !btn) return;
-    btn.setAttribute('aria-expanded', String(menu.classList.toggle('hidden') === false));
+    const isOpen = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    header?.setAttribute('data-menu-open', String(isOpen));
+    btn.querySelector('.menu-open-icon')?.classList.toggle('hidden', isOpen);
+    btn.querySelector('.menu-close-icon')?.classList.toggle('hidden', !isOpen);
+    document.documentElement.classList.toggle('mobile-menu-open', isOpen);
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      btn?.setAttribute('aria-expanded', 'false');
+      btn?.setAttribute('aria-label', 'Open menu');
+      header?.setAttribute('data-menu-open', 'false');
+      btn?.querySelector('.menu-open-icon')?.classList.remove('hidden');
+      btn?.querySelector('.menu-close-icon')?.classList.add('hidden');
+      document.documentElement.classList.remove('mobile-menu-open');
+    });
   });
 
   window.addEventListener('resize', () => {
@@ -293,6 +337,8 @@ function isLinkActive(href: string) {
     if (window.innerWidth >= 1280 && !menu.classList.contains('hidden')) {
       menu.classList.add('hidden');
       btn.setAttribute('aria-expanded', 'false');
+      header?.setAttribute('data-menu-open', 'false');
+      document.documentElement.classList.remove('mobile-menu-open');
     }
   });
 
