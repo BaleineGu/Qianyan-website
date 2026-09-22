@@ -50,7 +50,7 @@ const visibleCount = 3;
             >
               <img
                 src={c.image}
-                alt=""
+                alt={c.imageAlt ?? c.name}
                 class="product-carousel__image"
                 loading={index < visibleCount ? 'eager' : 'lazy'}
                 decoding="async"

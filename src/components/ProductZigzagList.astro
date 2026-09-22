@@ -29,7 +29,7 @@ const { products } = Astro.props;
             <div class="product-zigzag__media">
               <img
                 src={product.image}
-                alt={product.name}
+                alt={product.imageAlt ?? product.name}
                 class="product-zigzag__image"
                 loading={index < 2 ? 'eager' : 'lazy'}
               />

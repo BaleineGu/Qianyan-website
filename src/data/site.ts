@@ -89,7 +89,8 @@ export const productCategories: ProductCategory[] = [
     name: 'Space Capsule Houses',
     description:
       'Designed with large floor-to-ceiling windows and skylights, maximizing the connection with nature and significantly increasing the property\'s social media appeal. Adhering to sustainable building standards, the factory-prefabricated modular process generates zero construction waste on-site. The temporary installation footprint requires minimal ground prep. The assembly process is super simple and efficient, protecting the local ecology and making it ideal for environmentally sensitive destinations.',
-    image: '/images/products/space-capsule-house.png',
+    image: '/images/products/modern-modular-resort-cabin.webp',
+    imageAlt: 'Modern modular Capsule House with panoramic windows',
     href: '/space-capsule-house',
   },
   {
