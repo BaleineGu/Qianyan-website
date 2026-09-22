@@ -12,15 +12,49 @@ import {
   productCategories,
 } from '@/data/site';
 
-const homeProductCategories = productCategories.map((category) =>
-  category.id === 'pools'
-    ? {
-        ...category,
-        image: '/images/products/homepage-container-swimming-pool.webp',
-        imageAlt: 'Container swimming pool with wooden deck for backyard outdoor use',
-      }
-    : category,
-);
+const homeProductCategories = productCategories.map((category) => {
+  if (category.id === 'expandable') {
+    return {
+      ...category,
+      image: '/images/products/homepage-expandable-container-home.webp',
+      imageAlt: 'Expandable container homes with modern modular design and large glass doors',
+    };
+  }
+
+  if (category.id === 'capsule') {
+    return {
+      ...category,
+      image: '/images/products/homepage-capsule-house.webp',
+      imageAlt: 'Capsule House with panoramic glass windows and modern modular design',
+    };
+  }
+
+  if (category.id === 'flat-pack') {
+    return {
+      ...category,
+      image: '/images/products/homepage-flat-pack-container-house.webp',
+      imageAlt: 'Portable prefab container house with window and entrance door',
+    };
+  }
+
+  if (category.id === 'folding') {
+    return {
+      ...category,
+      image: '/images/products/homepage-folding-house.webp',
+      imageAlt: 'Foldable housing for temporary living and office use',
+    };
+  }
+
+  if (category.id === 'pools') {
+    return {
+      ...category,
+      image: '/images/products/homepage-container-swimming-pool.webp',
+      imageAlt: 'Container swimming pool with wooden deck for backyard outdoor use',
+    };
+  }
+
+  return category;
+});
 ---
 <BaseLayout overlayHeader homePage>
   <HeroCarousel slides={heroSlides} />
