@@ -26,6 +26,7 @@ const { slides } = Astro.props;
               alt=""
               class="absolute inset-0 w-full h-full object-cover object-center"
               loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'auto'}
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/20 sm:bg-[rgba(22,21,20,0.32)]" />
             <div class="relative z-10 w-full section-container pb-28 pt-24 sm:py-24">
