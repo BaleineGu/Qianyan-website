@@ -129,6 +129,8 @@ export const productShowcaseItems = [
   },
   {
     ...productCategories[1],
+    image: '/images/products/space-capsule-house.png',
+    imageAlt: undefined,
     highlight: '13 models · Panoramic glass & skylights',
     summary:
       'Factory-prefabricated capsule units with floor-to-ceiling windows, zero on-site construction waste, and fast installation.',
