@@ -11,10 +11,20 @@ import {
   heroSlides,
   productCategories,
 } from '@/data/site';
+
+const homeProductCategories = productCategories.map((category) =>
+  category.id === 'pools'
+    ? {
+        ...category,
+        image: '/images/products/homepage-container-swimming-pool.webp',
+        imageAlt: 'Container swimming pool with wooden deck for backyard outdoor use',
+      }
+    : category,
+);
 ---
 <BaseLayout overlayHeader homePage>
   <HeroCarousel slides={heroSlides} />
-  <ProductCategories categories={productCategories} />
+  <ProductCategories categories={homeProductCategories} />
   <FeatureCrossGrid />
   <CompanyProfileBanner />
   <CertificateMarquee />
