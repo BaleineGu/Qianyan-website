@@ -51,7 +51,8 @@ export const heroSlides: HeroSlide[] = [
     title: 'Global Provider of Premium Modular Container Solutions',
     subtitle:
       'We primarily deal in expandable container houses, space capsule houses, flat-pack container houses, foldable houses, and container swimming pools.',
-    image: '/images/hero/slide-1.png',
+    image: '/images/hero/homepage-hero-prefab-lakeside.webp',
+    imageAlt: 'Modern prefab container house for residential living and vacation accommodation by a lakeside forest',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
@@ -60,7 +61,8 @@ export const heroSlides: HeroSlide[] = [
     title: 'Sustainable Structures, Endless Possibilities',
     subtitle:
       'Transform your commercial vision into reality. Our eco-friendly modular solutions minimize construction time and maximize ROI for forward-thinking developers',
-    image: '/images/hero/slide-2.png',
+    image: '/images/hero/homepage-hero-capsule-resort.webp',
+    imageAlt: 'Capsule House resort in snowy mountain landscape with panoramic glass windows',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },
@@ -69,7 +71,8 @@ export const heroSlides: HeroSlide[] = [
     title: 'Build Anywhere. Live Unbound. Custom Container Solutions',
     subtitle:
       'From eco-friendly modular homes to luxury backyard pools. We design, build, and ship globally to match your vision.',
-    image: '/images/hero/slide-3.png',
+    image: '/images/hero/homepage-hero-container-pool.webp',
+    imageAlt: 'Container swimming pool with glass viewing window in modern backyard',
     primaryCta: { label: 'Get a Factory Quote', action: 'inquiry' },
     secondaryCta: { label: 'Chat on WhatsApp', action: 'whatsapp', href: whatsappUrl },
   },

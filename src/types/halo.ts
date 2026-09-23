@@ -47,6 +47,7 @@ export interface HeroSlide {
   title: string;
   subtitle: string;
   image: string;
+  imageAlt?: string;
   primaryCta: { label: string; action: 'inquiry' | 'link'; href?: string };
   secondaryCta: { label: string; action: 'whatsapp' | 'link'; href?: string };
 }
