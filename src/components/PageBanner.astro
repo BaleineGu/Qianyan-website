@@ -3,6 +3,8 @@ interface Props {
   heading: string;
   description: string;
   image?: string;
+  /** Smaller crop used below the tablet breakpoint */
+  mobileImage?: string;
   /** Tailwind classes for the background image (e.g. object-position) */
   imageClass?: string;
   /** Render supporting copy as h2 when the page needs that hierarchy */
@@ -16,6 +18,7 @@ const {
   heading,
   description,
   image = '/images/hero/slide-1.png',
+  mobileImage,
   imageClass = '',
   descriptionAs = 'p',
   uniformHeight = false,
@@ -29,13 +32,17 @@ const {
   ]}
   data-header-theme="dark"
 >
-  <img
-    src={image}
-    alt=""
-    loading={priority ? 'eager' : undefined}
-    fetchpriority={priority ? 'high' : undefined}
-    class:list={['absolute inset-0 w-full h-full object-cover', imageClass]}
-  />
+  <picture class="absolute inset-0 block h-full w-full">
+    {mobileImage && <source media="(max-width: 767px)" srcset={mobileImage} />}
+    <img
+      src={image}
+      alt=""
+      loading={priority ? 'eager' : undefined}
+      decoding="async"
+      fetchpriority={priority ? 'high' : undefined}
+      class:list={['h-full w-full object-cover', imageClass]}
+    />
+  </picture>
   <div class="absolute inset-0" style="background: rgba(22, 21, 20, 0.48);"></div>
   <div
     class:list={[

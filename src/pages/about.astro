@@ -5,7 +5,8 @@ import PageBanner from '@/components/PageBanner.astro';
 const mosaicSlides = [
   {
     title: 'Integrated Manufacturing',
-    src: '/images/about/parallax-1.png',
+    src: '/images/about/parallax-1.webp',
+    mobileSrc: '/images/about/parallax-1-mobile.webp',
     alt: 'Qianyan manufacturing base warehouse complex',
     paragraphs: [
       'Our products are widely used in various fields such as engineering construction, temporary office setups, camp dormitories, tourism vacation. We can provide customized solutions according to customer needs. Adhering to the principle of "Quality First, Customer Supreme", we strictly control the production process to ensure that our products are safe, environmentally friendly, and durable.',
@@ -14,7 +15,8 @@ const mosaicSlides = [
   },
   {
     title: 'Container Production',
-    src: '/images/about/parallax-2.png',
+    src: '/images/about/parallax-2.webp',
+    mobileSrc: '/images/about/parallax-2-mobile.webp',
     alt: 'Container houses lined up inside the factory',
     paragraphs: [
       'Welcome to our core production base for container homes. These products embody our commitment to quality and design; their modern style and exceptional flexibility perfectly align with contemporary trends, while enabling both standardized manufacturing and personalized customization. Backed by rigorous craftsmanship and efficient processes, we are dedicated to delivering high-quality, mobile housing solutions with rapid turnaround times.',
@@ -22,7 +24,8 @@ const mosaicSlides = [
   },
   {
     title: 'Structural Craftsmanship',
-    src: '/images/about/parallax-3.png',
+    src: '/images/about/parallax-3.webp',
+    mobileSrc: '/images/about/parallax-3-mobile.webp',
     alt: 'Steel frames for modular container houses',
     paragraphs: [
       'Manufacturing craftsmanship determines quality. The structure utilizes galvanized square tubing throughout; even critical connection points feature specialized galvanized hinges, ensuring exceptional stability, smooth operation, and fatigue resistance. To further enhance corrosion and rust resistance, the entire welded frame is finished with an electrostatic powder coating—a process that ensures strong adhesion and results in a highly durable, robust protective layer.',
@@ -32,11 +35,11 @@ const mosaicSlides = [
 
 const mosaicTiles = [
   { kind: 'text' as const, variant: 'muted' as const, ...mosaicSlides[0] },
-  { kind: 'media' as const, src: mosaicSlides[0].src, alt: mosaicSlides[0].alt },
-  { kind: 'media' as const, src: mosaicSlides[1].src, alt: mosaicSlides[1].alt },
+  { kind: 'media' as const, src: mosaicSlides[0].src, mobileSrc: mosaicSlides[0].mobileSrc, alt: mosaicSlides[0].alt },
+  { kind: 'media' as const, src: mosaicSlides[1].src, mobileSrc: mosaicSlides[1].mobileSrc, alt: mosaicSlides[1].alt },
   { kind: 'text' as const, variant: 'accent' as const, ...mosaicSlides[1] },
   { kind: 'text' as const, variant: 'light' as const, ...mosaicSlides[2] },
-  { kind: 'media' as const, src: mosaicSlides[2].src, alt: mosaicSlides[2].alt },
+  { kind: 'media' as const, src: mosaicSlides[2].src, mobileSrc: mosaicSlides[2].mobileSrc, alt: mosaicSlides[2].alt },
 ];
 ---
 <BaseLayout
@@ -46,7 +49,8 @@ const mosaicTiles = [
   <PageBanner
     heading="QIANYAN Metal Manufacturer of Container Houses"
     description="We specialize in the production of expandable container homes, flat-pack container houses, folding houses, space capsule houses, and container swimming pools, and we offer customization services."
-    image="/images/backgrounds/products-page-hero.png"
+    image="/images/backgrounds/products-page-hero.webp"
+    mobileImage="/images/backgrounds/products-page-hero.webp"
     imageClass="object-center"
     descriptionAs="h2"
     uniformHeight
@@ -60,7 +64,7 @@ const mosaicTiles = [
     <div class="section-container pt-6 sm:pt-8 lg:pt-10 pb-6 sm:pb-8 lg:pb-10">
       <div class="about-mosaic__grid">
         {
-          mosaicTiles.map((tile, index) =>
+          mosaicTiles.map((tile) =>
             tile.kind === 'text' ? (
               <article
                 class:list={[
@@ -81,11 +85,15 @@ const mosaicTiles = [
               </article>
             ) : (
               <figure class="about-mosaic__cell about-mosaic__cell--media">
-                <img
-                  src={tile.src}
-                  alt={tile.alt}
-                  loading={index === 1 ? 'eager' : 'lazy'}
-                />
+                <picture>
+                  <source media="(max-width: 767px)" srcset={tile.mobileSrc} />
+                  <img
+                    src={tile.src}
+                    alt={tile.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
               </figure>
             ),
           )
@@ -135,12 +143,19 @@ const mosaicTiles = [
             },
           ].map((item) => (
             <div class="relative overflow-hidden rounded-helios-sm bg-surface-3">
-              <img
-                src={item.src}
-                alt={item.alt}
-                class="absolute inset-0 h-full w-full object-cover object-center"
-                loading="lazy"
-              />
+              <picture class="absolute inset-0 block h-full w-full">
+                <source
+                  media="(max-width: 767px)"
+                  srcset={item.src.replace(/\.webp$/, '-mobile.webp')}
+                />
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  class="h-full w-full object-cover object-center"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
           ))
         }
@@ -203,6 +218,7 @@ const mosaicTiles = [
     background: var(--color-surface-dark);
   }
 
+  .about-mosaic__cell--media picture,
   .about-mosaic__cell--media img {
     display: block;
     width: 100%;
