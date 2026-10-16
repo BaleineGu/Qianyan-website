@@ -1,0 +1,16 @@
+---
+description: Automatically commit and push completed website optimization work
+alwaysApply: true
+---
+
+# Commit and push completed optimizations
+
+After a requested website optimization is implemented and relevant verification passes:
+
+- Stage only files related to the current optimization task.
+- Create a concise Conventional Commit describing the optimization.
+- Fetch the remote and confirm the push is a safe fast-forward.
+- Push the current branch to its configured upstream automatically.
+- Report the commit SHA and push result.
+
+Do not commit or push when verification fails, unrelated changes cannot be separated safely, the branch has diverged, no upstream exists, authentication fails, or the user explicitly asks not to commit or push. Preserve all unrelated user changes.
