@@ -39,6 +39,8 @@ const images = [
     alt: 'Modular prefab house manufacturing factory workshop and production facility',
   },
 ];
+
+const mobileImage = (src: string) => src.replace(/\.webp$/, '-mobile.webp');
 ---
 
 <section class="py-section-sm lg:py-section-md bg-surface-1" aria-label="Company profile" data-header-theme="light">
@@ -117,28 +119,46 @@ const images = [
       {/* 品字形：上 1，下 2 — 右半区 */}
       <div class="order-1 lg:order-2 min-w-0 w-full grid grid-cols-2 gap-3 sm:gap-4">
         <div class="col-span-2 overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[16/9]">
-          <img
-            src={images[0].src}
-            alt={images[0].alt}
-            class="w-full h-full object-cover object-center"
-            loading="lazy"
-          />
+          <picture class="block w-full h-full">
+            <source media="(max-width: 767px)" srcset={mobileImage(images[0].src)} />
+            <img
+              src={images[0].src}
+              alt={images[0].alt}
+              class="w-full h-full object-cover object-center"
+              width="1357"
+              height="761"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
         <div class="overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[4/3]">
-          <img
-            src={images[1].src}
-            alt={images[1].alt}
-            class="w-full h-full object-cover object-center"
-            loading="lazy"
-          />
+          <picture class="block w-full h-full">
+            <source media="(max-width: 767px)" srcset={mobileImage(images[1].src)} />
+            <img
+              src={images[1].src}
+              alt={images[1].alt}
+              class="w-full h-full object-cover object-center"
+              width="657"
+              height="493"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
         <div class="overflow-hidden rounded-helios-md border border-ink-hairline bg-surface-2 aspect-[4/3]">
-          <img
-            src={images[2].src}
-            alt={images[2].alt}
-            class="w-full h-full object-cover object-center"
-            loading="lazy"
-          />
+          <picture class="block w-full h-full">
+            <source media="(max-width: 767px)" srcset={mobileImage(images[2].src)} />
+            <img
+              src={images[2].src}
+              alt={images[2].alt}
+              class="w-full h-full object-cover object-center"
+              width="657"
+              height="493"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       </div>
     </div>

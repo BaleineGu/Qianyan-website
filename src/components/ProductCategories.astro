@@ -12,8 +12,10 @@ const orderedCategories = [...categories].sort((a, b) => {
   const priority = ['expandable', 'capsule', 'flat-pack', 'folding', 'pools'];
   return priority.indexOf(a.id) - priority.indexOf(b.id);
 });
-
-const visibleCount = 3;
+const optimizedCategories = orderedCategories.map((category) => ({
+  ...category,
+  mobileImage: category.image.replace(/\.webp$/, '-mobile.webp'),
+}));
 ---
 
 <section
@@ -42,19 +44,24 @@ const visibleCount = 3;
     <div class="product-carousel__viewport">
       <div class="product-carousel__track" data-carousel-track>
         {
-          orderedCategories.map((c, index) => (
+          optimizedCategories.map((c) => (
             <a
               href={c.href}
               class="product-carousel__card group"
               data-carousel-card
             >
-              <img
-                src={c.image}
-                alt={c.imageAlt ?? c.name}
-                class="product-carousel__image"
-                loading={index < visibleCount ? 'eager' : 'lazy'}
-                decoding="async"
-              />
+              <picture class="product-carousel__picture">
+                <source media="(max-width: 767px)" srcset={c.mobileImage} />
+                <img
+                  src={c.image}
+                  alt={c.imageAlt ?? c.name}
+                  class="product-carousel__image"
+                  width="828"
+                  height="620"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               <h3 class="product-carousel__title">{c.name}</h3>
             </a>
           ))
@@ -117,6 +124,12 @@ const visibleCount = 3;
     object-fit: cover;
     object-position: center;
     transition: transform 0.45s ease-out;
+  }
+
+  .product-carousel__picture {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .product-carousel__card:hover .product-carousel__image {

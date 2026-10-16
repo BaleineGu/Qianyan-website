@@ -437,14 +437,13 @@ function isLinkActive(href: string) {
     });
   }
 
-  fitHeaderScale();
-  updateHeaderTheme();
+  window.addEventListener('load', () => scheduleHeaderUpdate(window.innerWidth >= 1280), { once: true });
   window.addEventListener('scroll', () => scheduleHeaderUpdate(), { passive: true });
   window.addEventListener('resize', () => scheduleHeaderUpdate(true));
 
   if (typeof ResizeObserver !== 'undefined' && shell) {
     new ResizeObserver(() => {
-      fitHeaderScale();
+      if (window.innerWidth >= 1280) fitHeaderScale();
     }).observe(shell);
   }
 </script>
